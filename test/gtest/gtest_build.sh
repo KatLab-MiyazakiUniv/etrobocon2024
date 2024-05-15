@@ -25,9 +25,9 @@ mkdir -p build/etrobocon2024/logfiles
 mkdir -p build/etrobocon2024/scripts
 mkdir -p build/etrobocon2024/datafiles
 cd build
-cp ../scripts/*.sh etrobocon2024/scripts/
-cp ../datafiles/*.csv etrobocon2024/datafiles/
-chmod 777 ./etrobocon2024/scripts/*.sh
+# cp ../scripts/*.sh etrobocon2024/scripts/
+# cp ../datafiles/*.csv etrobocon2024/datafiles/
+# chmod 777 ./etrobocon2024/scripts/*.sh
 
 cmake -DCMAKE_BUILD_TYPE=Coverage ..
 cmake --build .
@@ -35,4 +35,4 @@ export GTEST_COLOR=1
 ctest -VV
 
 rm -rf etrobocon2024/
-rm response.txt
+# rm response.txt
