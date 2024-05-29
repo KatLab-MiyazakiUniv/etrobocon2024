@@ -35,7 +35,7 @@ void EtRobocon2024::start()
   // bool isLeftEdge = false;
 
   //   // 強制終了(CTRL+C)のシグナルを登録する
-  signal(SIGINT, sigint);
+  // signal(SIGINT, sigint);
 
   //   // キャリブレーションする
 
@@ -49,31 +49,31 @@ void EtRobocon2024::start()
 
   int pwm = 50;
   controller.setRightMotorPwm(pwm);
-  sleep(3);
+  // sleep(3000);
 
   pwm = -30;
   controller.setRightMotorPwm(pwm);
-  sleep(3);
+  // sleep(3);
 
   pwm = 50;
   controller.setLeftMotorPwm(pwm);
-  sleep(3);
+  // sleep(3);
 
   pwm = -30;
   controller.setLeftMotorPwm(pwm);
-  sleep(3);
+  // sleep(3);
 
   pwm = -150;
   controller.resetMotorPwm();
   controller.setLeftMotorPwm(pwm);
-  sleep(3);
+  // sleep(3);
 
   controller.stopMotor();
-  sleep(3);
+  // sleep(3);
 
   pwm = 50;
   controller.setArmMotorPwm(pwm);
-  sleep(3);
+  // sleep(3);
 
   controller.stopArmMotor();
 }
