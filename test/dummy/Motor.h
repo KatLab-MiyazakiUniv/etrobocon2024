@@ -39,7 +39,7 @@ namespace ev3api {
     /**
      * 停止する
      */
-    void stop(){};
+    void stop() {};
 
     void reset();
 

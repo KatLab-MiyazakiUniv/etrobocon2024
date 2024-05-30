@@ -16,7 +16,7 @@ bool eqRgb(rgb_raw_t rgb1, rgb_raw_t rgb2)
 
 namespace etrobocon2024_test {
 
-  //RGB値取得テスト
+  // RGB値取得テスト
   TEST(RawColorTest, getRawColor)
   {
     Measurer measurer;
@@ -33,7 +33,7 @@ namespace etrobocon2024_test {
                 || eqRgb(actual, expected6));
   }
 
-  //明度取得テスト
+  // 明度取得テスト
   TEST(BrightnessTest, getBrightness)
   {
     Measurer measurer;
@@ -49,7 +49,7 @@ namespace etrobocon2024_test {
                 || actual == expected4 || actual == expected5 || actual == expected6);
   }
 
-  //左モーター角位置取得テスト
+  // 左モーター角位置取得テスト
   TEST(leftCountTest, getLeftCount)
   {
     Measurer measurer;
@@ -59,7 +59,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //右モーター角位置取得テスト
+  // 右モーター角位置取得テスト
   TEST(rightCountTest, getRightCount)
   {
     Measurer measurer;
@@ -69,7 +69,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //アームモーター角位置取得テスト
+  // アームモーター角位置取得テスト
   TEST(measurerTest, getArmMotorCount)
   {
     Measurer measurer;
@@ -79,85 +79,91 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //左側ボタン押下時、実機内部で左側ボタン押下時の処理を行うケースのテスト
+  // 左側ボタン押下時、実機内部で左側ボタン押下時の処理を行うケースのテスト
   TEST(leftButtonTestTrue, getLeftButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::left); //実機のボタン押下状態を「左」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::left);  // 実機のボタン押下状態を「左」に設定
     bool expected = true;
     bool actual = measurer.getLeftButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //左側以外のボタン押下時（本テストでは右側)、実機内部で左側ボタン押下時の処理を行うケースのテスト
+  // 左側以外のボタン押下時（本テストでは右側)、実機内部で左側ボタン押下時の処理を行うケースのテスト
   TEST(leftButtonTestFalse, getLeftButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::right);  // 実機のボタン押下状態を「右」に設定
     bool expected = false;
     bool actual = measurer.getLeftButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //右側ボタン押下時、実機内部で右側ボタン押下時の処理を行うケースのテスト
+  // 右側ボタン押下時、実機内部で右側ボタン押下時の処理を行うケースのテスト
   TEST(rightButtonTestTrue, getRightButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::right);  // 実機のボタン押下状態を「右」に設定
     bool expected = true;
     bool actual = measurer.getRightButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //右側以外のボタン押下時（本テストでは中央)、実機内部で右側ボタン押下時の処理を行うケースのテスト
+  // 右側以外のボタン押下時（本テストでは中央)、実機内部で右側ボタン押下時の処理を行うケースのテスト
   TEST(rightButtonTestFalse, getRightButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::enter); //実機のボタン押下状態を「中央」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::enter);  // 実機のボタン押下状態を「中央」に設定
     bool expected = false;
     bool actual = measurer.getRightButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //中央ボタン押下時、実機内部で中央ボタン押下時の処理を行うケースのテスト
+  // 中央ボタン押下時、実機内部で中央ボタン押下時の処理を行うケースのテスト
   TEST(enterButtonTestTrue, getEnterButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::enter); //実機のボタン押下状態を「中央」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::enter);  // 実機のボタン押下状態を「中央」に設定
     bool expected = true;
     bool actual = measurer.getEnterButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //中央以外のボタン押下時（本テストでは右)、実機内部で中央ボタン押下時の処理を行うケースのテスト
+  // 中央以外のボタン押下時（本テストでは右)、実機内部で中央ボタン押下時の処理を行うケースのテスト
   TEST(enterButtonTestFalse, getEnterButton)
   {
     Measurer measurer;
-    DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::right);  // 実機のボタン押下状態を「右」に設定
     bool expected = false;
     bool actual = measurer.getEnterButton();
 
     EXPECT_EQ(expected, actual);
   }
 
-  //超音波センサからの距離取得テスト
+  // 超音波センサからの距離取得テスト
   TEST(forwardDistanceTest, getForwardDistance)
   {
     Measurer measurer;
-    int expected = 99; //参照: SonarSensor.cpp　
+    int expected = 99;  // 参照: SonarSensor.cpp　
     int actual = measurer.getForwardDistance();
 
     EXPECT_EQ(expected, actual);
   }
 
-// SPIKEの電圧取得テスト
-TEST(voltageTest, getVoltage)
-{
+  // SPIKEの電圧取得テスト
+  TEST(voltageTest, getVoltage)
+  {
     Measurer measurer;
     int expected_min = 4;
     int expected_max = 7;
@@ -165,8 +171,6 @@ TEST(voltageTest, getVoltage)
 
     EXPECT_GE(actual, expected_min);  // 4以上であることを確認
     EXPECT_LE(actual, expected_max);  // 7以下であることを確認
-}
-
-
+  }
 
 }  // namespace etrobocon2024_test

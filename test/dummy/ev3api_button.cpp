@@ -10,9 +10,8 @@
 
 bool ev3_button_is_pressed(button_t button)
 {
-
   DummyRobot::ButtonState currentButtonState = DummyRobot::getButtonState();
-  
+
   //   std::cout << "Current ButtonState: ";
   //   switch (currentButtonState) {
   //       case DummyRobot::ButtonState::left:
