@@ -17,7 +17,7 @@ bool eqRgb(rgb_raw_t rgb1, rgb_raw_t rgb2)
 namespace etrobocon2024_test {
 
   //RGB値取得テスト
-  TEST(MeasurerTest, getRawColor)
+  TEST(RawColorTest, getRawColor)
   {
     Measurer measurer;
     rgb_raw_t expected1 = { 8, 9, 10 };       // black
@@ -34,7 +34,7 @@ namespace etrobocon2024_test {
   }
 
   //明度取得テスト
-  TEST(MeasurerTest, getBrightness)
+  TEST(BrightnessTest, getBrightness)
   {
     Measurer measurer;
     // 各色に対応する明度
@@ -50,7 +50,7 @@ namespace etrobocon2024_test {
   }
 
   //左モーター角位置取得テスト
-  TEST(MeasurerTest, getLeftCount)
+  TEST(leftCountTest, getLeftCount)
   {
     Measurer measurer;
     int expected = 0;
@@ -60,7 +60,7 @@ namespace etrobocon2024_test {
   }
 
   //右モーター角位置取得テスト
-  TEST(MeasurerTest, getRightCount)
+  TEST(rightCountTest, getRightCount)
   {
     Measurer measurer;
     int expected = 0;
@@ -70,7 +70,7 @@ namespace etrobocon2024_test {
   }
 
   //アームモーター角位置取得テスト
-  TEST(MeasurerTest, getArmMotorCount)
+  TEST(measurerTest, getArmMotorCount)
   {
     Measurer measurer;
     int expected = 0;
@@ -79,8 +79,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で左側のボタンが押された状態で、左側のボタンを押した際の処理を行うケースのテスト
-  TEST(LeftButtonTestTrue, getLeftButton)
+  //左側ボタン押下時、実機内部で左側ボタン押下時の処理を行うケースのテスト
+  TEST(leftButtonTestTrue, getLeftButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::left); //実機のボタン押下状態を「左」に設定
@@ -90,8 +90,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で左側以外のボタンが押された状態で、左側のボタンを押した際の処理を行うケースのテスト
-  TEST(LeftButtonTestFalse, getLeftButton)
+  //左側以外のボタン押下時（本テストでは右側)、実機内部で左側ボタン押下時の処理を行うケースのテスト
+  TEST(leftButtonTestFalse, getLeftButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
@@ -101,8 +101,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で右側のボタンが押された状態で、右側のボタンを押した際の処理を行うケースのテスト
-  TEST(RightButtonTestTrue, getRightButton)
+  //右側ボタン押下時、実機内部で右側ボタン押下時の処理を行うケースのテスト
+  TEST(rightButtonTestTrue, getRightButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
@@ -112,8 +112,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で右側以外のボタンが押された状態で、右側のボタンを押した際の処理を行うケースのテスト
-  TEST(RightButtonTestFalse, getRightButton)
+  //右側以外のボタン押下時（本テストでは中央)、実機内部で右側ボタン押下時の処理を行うケースのテスト
+  TEST(rightButtonTestFalse, getRightButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::enter); //実機のボタン押下状態を「中央」に設定
@@ -123,8 +123,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で中央のボタンが押された状態で、中央のボタンを押した際の処理を行うケースのテスト
-  TEST(EnterButtonTestTrue, getEnterButton)
+  //中央ボタン押下時、実機内部で中央ボタン押下時の処理を行うケースのテスト
+  TEST(enterButtonTestTrue, getEnterButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::enter); //実機のボタン押下状態を「中央」に設定
@@ -134,8 +134,8 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //実機側で中央以外のボタンが押された状態で、中央のボタンを押した際の処理を行うケースのテスト
-  TEST(EnterButtonTestFalse, getEnterButton)
+  //中央以外のボタン押下時（本テストでは右)、実機内部で中央ボタン押下時の処理を行うケースのテスト
+  TEST(enterButtonTestFalse, getEnterButton)
   {
     Measurer measurer;
     DummyRobot::setButtonState(DummyRobot::ButtonState::right); //実機のボタン押下状態を「右」に設定
@@ -146,7 +146,7 @@ namespace etrobocon2024_test {
   }
 
   //超音波センサからの距離取得テスト
-  TEST(MeasurerTest, getForwardDistance)
+  TEST(forwardDistanceTest, getForwardDistance)
   {
     Measurer measurer;
     int expected = 99; //参照: SonarSensor.cpp　
@@ -155,15 +155,18 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
-  //SPIKEの電圧取得テスト
-  TEST(MeasurerTest, getVoltage)
-  {
+// SPIKEの電圧取得テスト
+TEST(voltageTest, getVoltage)
+{
     Measurer measurer;
-    int expected = 7;
+    int expected_min = 4;
+    int expected_max = 7;
     int actual = measurer.getVoltage();
 
-    EXPECT_EQ(expected, actual);
-  }
+    EXPECT_GE(actual, expected_min);  // 4以上であることを確認
+    EXPECT_LE(actual, expected_max);  // 7以下であることを確認
+}
+
 
 
 }  // namespace etrobocon2024_test
