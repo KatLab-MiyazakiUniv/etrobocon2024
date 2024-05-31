@@ -36,12 +36,6 @@ void Controller::stopMotor()
   rightWheel.stop();
 }
 
-// タイヤのモータのPWM値をリセットする
-void Controller::resetMotorPwm()
-{
-  leftWheel.reset();
-}
-
 // アームのモータにPWM値をセット
 void Controller::setArmMotorPwm(const int pwm)
 {

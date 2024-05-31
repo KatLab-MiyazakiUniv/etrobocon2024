@@ -29,11 +29,6 @@ class Controller {
   void stopMotor();
 
   /**
-   * タイヤのモータのPWM値をリセットする
-   */
-  void resetMotorPwm();
-
-  /**
    * アームのモータにPWM値をセット
    * @param pwm PWM値
    */
