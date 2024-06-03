@@ -14,6 +14,9 @@ class Controller {
   static const int MOTOR_PWM_MAX = 100;
   static const int MOTOR_PWM_MIN = -100;
 
+  /**
+   * コンストラクタ
+   */
   Controller();
 
   /**

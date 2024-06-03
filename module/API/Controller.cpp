@@ -7,6 +7,7 @@
 
 Controller::Controller() : rightWheel(PORT_B), leftWheel(PORT_C), armMotor(PORT_A) {}
 
+// モータに設定するPWM値の制限
 int Controller::limitPwmValue(const int value)
 {
   if(value > MOTOR_PWM_MAX) {
