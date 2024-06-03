@@ -11,7 +11,7 @@ Timer::Timer() {}
 // 自タスクスリープ（デフォルトは10ミリ秒）
 void Timer::sleep(int milliSec)
 {
-  // clock->sleep()はマイクロ秒指定なので，単位を合わせて呼び出す
+  // clock.sleep()はマイクロ秒指定なので，単位を合わせて呼び出す
   clock.sleep(milliSec * 1000);
 }
 
