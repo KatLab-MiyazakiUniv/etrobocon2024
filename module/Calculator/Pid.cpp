@@ -7,7 +7,7 @@
 #include "Pid.h"
 
 PidGain::PidGain(double _kp, double _ki, double _kd)
-  // 2024.06.04 CHIHAYATAKU: pidゲインが負の値にならないようにする
+  // pidゲインが負の値にならないようにする
   : kp(_kp < 0 ? 0 : _kp), ki(_ki < 0 ? 0 : _ki), kd(_kd < 0 ? 0 : _kd)
 {
 }
@@ -19,7 +19,7 @@ Pid::Pid(double _kp, double _ki, double _kd, double _targetValue)
 
 void Pid::setPidGain(double _kp, double _ki, double _kd)
 {
-  // 2024.06.04 CHIHAYATAKU: pidゲインが負の値にならないようにする
+  // pidゲインが負の値にならないようにする
   pidGain.kp = _kp < 0 ? 0 : _kp;
   pidGain.ki = _ki < 0 ? 0 : _ki;
   pidGain.kd = _kd < 0 ? 0 : _kd;

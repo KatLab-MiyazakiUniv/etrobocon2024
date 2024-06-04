@@ -59,12 +59,18 @@ namespace etrobocon2024_test {
     double targetValue = 70;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 20;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
-    double d = (currentDeviation - prevDeviation) * kd / DELTA;
-    double expected = p + i + d;
+    // 計算過程
+    // 1. 前回の誤差
+    // prevDeviation = 0
+    // 2. 現在の誤差
+    // currentDeviation = (70 - 20) = 50
+    // 3. 誤差の微分を計算
+    // derivative = (50 - 0) / 0.01 = 5000
+    // 4. 誤差の積分を計算
+    // integral = 0 + (50 + 0) * 0.01 / 2 = 0.25
+    // 5. PID制御を計算
+    // expected = 0.6 * 50 + 0.02 * 0.25 + 0.03 * 5000 = 180.005
+    double expected = 180.005;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 
@@ -77,12 +83,10 @@ namespace etrobocon2024_test {
     double targetValue = 0;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 40;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
-    double d = (currentDeviation - prevDeviation) * kd / DELTA;
-    double expected = p + i + d;
+    // 計算過程
+    // 1. PID制御を計算
+    // expected = 0 * currentDeviation + 0 * integral + 0 * derivative = 0
+    double expected = 0;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 
@@ -108,12 +112,18 @@ namespace etrobocon2024_test {
     double targetValue = 70;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 55;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
-    double d = (currentDeviation - prevDeviation) * kd / DELTA;
-    double expected = p + i + d;
+    // 計算過程
+    // 1. 前回の誤差
+    // prevDeviation = 0
+    // 2. 現在の誤差
+    // currentDeviation = (70 - 55) = 15
+    // 3. 誤差の微分を計算
+    // derivative = (15 - 0) / 0.03 = 500
+    // 4. 誤差の積分を計算
+    // integral = 0 + (15 + 0) * 0.03 / 2 = 0.225
+    // 5. PID制御を計算
+    // expected = 0.6 * 15 + 0.02 * 0.225 + 0.03 * 500 = 24.0045
+    double expected = 24.0045;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -127,12 +137,18 @@ namespace etrobocon2024_test {
     double targetValue = 70;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 55;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
-    double d = (currentDeviation - prevDeviation) * kd / DELTA;
-    double expected = p + i + d;
+    // 計算過程
+    // 1. 前回の誤差
+    // prevDeviation = 0
+    // 2. 現在の誤差
+    // currentDeviation = (70 - 55) = 15
+    // 3. 誤差の微分を計算
+    // derivative = (15 - 0) / (-0.03) = -500
+    // 4. 誤差の積分を計算
+    // integral = 0 + (15 + 0) * (-0.03) / 2 = -0.225
+    // 5. PID制御を計算
+    // expected = 0.6 * 15 + 0.02 * (-0.225) + 0.03 * (-500) = -6.0045
+    double expected = -6.0045;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -148,12 +164,18 @@ namespace etrobocon2024_test {
     double targetValue = 70;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 55;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = (currentDeviation + prevDeviation) * kdELTA / 2 * ki;
-    double d = (currentDeviation - prevDeviation) * kd / kdELTA;
-    double expected = p + i + d;
+    // 計算過程
+    // 1. 前回の誤差
+    // prevDeviation = 0
+    // 2. 現在の誤差
+    // currentDeviation = (70 - 55) = 15
+    // 3. 誤差の微分を計算
+    // derivative = (15 - 0) / 0.01 = 1500
+    // 4. 誤差の積分を計算
+    // integral = 0 + (15 + 0) * 0.01 / 2 = 0.075
+    // 5. PID制御を計算
+    // expected = 0.6 * 15 + 0.02 * 0.075 + 0.03 * 1500 = 54.0015
+    double expected = 54.0015;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -168,27 +190,35 @@ namespace etrobocon2024_test {
     double targetValue = 70;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 60;
-    double prevDeviation = 0;
-    double currentDiviation = (targetValue - currentValue);          // 現在の偏差
-    double p = currentDiviation * kp;                                // P制御
-    double i = (currentDiviation + prevDeviation) * DELTA / 2 * ki;  // I制御(誤差の累積は0)
-    double d = (currentDiviation - prevDeviation) * kd / DELTA;      // D制御(前回の誤差は0)
-    double expected = p + i + d;
+    // 計算過程
+    // 1. 前回の誤差
+    // prevDeviation = 0
+    // 2. 現在の誤差
+    // currentDeviation = (70 - 60) = 10
+    // 3. 誤差の微分を計算
+    // derivative = (10 - 0) / 0.01 = 1000
+    // 4. 誤差の積分を計算
+    // integral = 0 + (10 + 0) * 0.01 / 2 = 0.05
+    // 5. PID制御を計算
+    // expected = 0.6 * 10 + 0.05 * 0.05 + 0.01 * 1000 = 16.0025
+    double expected = 16.0025;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
-
-    double integral = (currentDiviation + prevDeviation) * DELTA / 2;  // 誤差の累積
-    prevDeviation += currentDiviation;                                 // 前回の誤差の更新
+    // 6. 前回の誤差の更新
+    //  prevDeviation = 0 + 10 = 10
     kp = 0.1;
     ki = 0.2;
     kd = 0.3;
     actualPid.setPidGain(kp, ki, kd);  // PIDゲインの更新
     currentValue = 100;
-    currentDiviation = (targetValue - currentValue);
-    integral += (currentDiviation + prevDeviation) * DELTA / 2;
-    p = currentDiviation * kp;
-    i = integral * ki;
-    d = (currentDiviation - prevDeviation) / DELTA * kd;
-    expected = p + i + d;
+    // 7. 現在の誤差
+    // currentDeviation = (70 - 100) = -30
+    // 8. 誤差の微分を計算
+    // derivative = (-30 - 10) / 0.01 = -4000
+    // 9. 誤差の積分を計算
+    // integral = 0.05 + (-30 + 10) * 0.01 / 2 = -0.05
+    // 10. PID制御を計算
+    // expected = 0.1 * (-30) + 0.2 * (-0.05) + 0.3 * (-4000) = -1203.01
+    expected = -1203.01;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 
