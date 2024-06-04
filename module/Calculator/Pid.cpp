@@ -6,7 +6,11 @@
 
 #include "Pid.h"
 
-PidGain::PidGain(double _kp, double _ki, double _kd) : kp(_kp), ki(_ki), kd(_kd) {}
+PidGain::PidGain(double _kp, double _ki, double _kd)
+  // 2024.06.04 CHIHAYATAKU: pidゲインが負の値にならないようにする
+  : kp(_kp < 0 ? 0 : _kp), ki(_ki < 0 ? 0 : _ki), kd(_kd < 0 ? 0 : _kd)
+{
+}
 
 Pid::Pid(double _kp, double _ki, double _kd, double _targetValue)
   : pidGain(_kp, _ki, _kd), prevDeviation(0.0), integral(0.0), targetValue(_targetValue)
@@ -15,9 +19,10 @@ Pid::Pid(double _kp, double _ki, double _kd, double _targetValue)
 
 void Pid::setPidGain(double _kp, double _ki, double _kd)
 {
-  pidGain.kp = _kp;
-  pidGain.ki = _ki;
-  pidGain.kd = _kd;
+  // 2024.06.04 CHIHAYATAKU: pidゲインが負の値にならないようにする
+  pidGain.kp = _kp < 0 ? 0 : _kp;
+  pidGain.ki = _ki < 0 ? 0 : _ki;
+  pidGain.kd = _kd < 0 ? 0 : _kd;
 }
 
 double Pid::calculatePid(double currentValue, double delta)
@@ -28,7 +33,7 @@ double Pid::calculatePid(double currentValue, double delta)
   // 現在の目標値との偏差を求める
   double currentDeviation = targetValue - currentValue;
   // 積分の処理を行う
-  integral += currentDeviation * delta;
+  integral += (currentDeviation + prevDeviation) * delta / 2;
   // 微分の処理を行う
   double derivative = (currentDeviation - prevDeviation) / delta;
   // 前回の偏差を更新する

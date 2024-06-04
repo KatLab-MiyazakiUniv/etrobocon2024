@@ -8,37 +8,46 @@
 #include <gtest/gtest.h>
 
 namespace etrobocon2024_test {
-  TEST(PidGainTest, gain)
+  TEST(PidGainTest, pidGain)
   {
     double kp = 0.1;
     double ki = 0.03;
     double kd = 0.612;
     PidGain actualPidGain(kp, ki, kd);
-    EXPECT_DOUBLE_EQ(kp, actualPidGain.kp);
-    EXPECT_DOUBLE_EQ(ki, actualPidGain.ki);
-    EXPECT_DOUBLE_EQ(kd, actualPidGain.kd);
+    double expected_kp = kp;
+    double expected_ki = ki;
+    double expected_kd = kd;
+    EXPECT_DOUBLE_EQ(expected_kp, actualPidGain.kp);
+    EXPECT_DOUBLE_EQ(expected_ki, actualPidGain.ki);
+    EXPECT_DOUBLE_EQ(expected_kd, actualPidGain.kd);
   }
 
-  TEST(PidGainTest, gainZero)
+  TEST(PidGainTest, pidGainZero)
   {
     double kp = 0.0;
     double ki = 0.0;
     double kd = 0.0;
     PidGain actualPidGain(kp, ki, kd);
-    EXPECT_DOUBLE_EQ(kp, actualPidGain.kp);
-    EXPECT_DOUBLE_EQ(ki, actualPidGain.ki);
-    EXPECT_DOUBLE_EQ(kd, actualPidGain.kd);
+    double expected_kp = kp;
+    double expected_ki = ki;
+    double expected_kd = kd;
+    EXPECT_DOUBLE_EQ(expected_kp, actualPidGain.kp);
+    EXPECT_DOUBLE_EQ(expected_ki, actualPidGain.ki);
+    EXPECT_DOUBLE_EQ(expected_kd, actualPidGain.kd);
   }
 
-  TEST(PidGainTest, gainMinus)
+  TEST(PidGainTest, pidGainMinus)
   {
     double kp = -0.5;
     double ki = -0.2;
     double kd = -0.3;
     PidGain actualPidGain(kp, ki, kd);
-    EXPECT_DOUBLE_EQ(kp, actualPidGain.kp);
-    EXPECT_DOUBLE_EQ(ki, actualPidGain.ki);
-    EXPECT_DOUBLE_EQ(kd, actualPidGain.kd);
+    double expected_kp = 0;
+    double expected_ki = 0;
+    double expected_kd = 0;
+    EXPECT_DOUBLE_EQ(expected_kp, actualPidGain.kp);
+    EXPECT_DOUBLE_EQ(expected_ki, actualPidGain.ki);
+    EXPECT_DOUBLE_EQ(expected_kd, actualPidGain.kd);
   }
 
   TEST(PidTest, calculatePid)
@@ -53,7 +62,7 @@ namespace etrobocon2024_test {
     double prevDeviation = 0;
     double currentDeviation = (targetValue - currentValue);
     double p = currentDeviation * kp;
-    double i = currentDeviation * DELTA * ki;
+    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
     double d = (currentDeviation - prevDeviation) * kd / DELTA;
     double expected = p + i + d;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
@@ -71,7 +80,7 @@ namespace etrobocon2024_test {
     double prevDeviation = 0;
     double currentDeviation = (targetValue - currentValue);
     double p = currentDeviation * kp;
-    double i = currentDeviation * DELTA * ki;
+    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
     double d = (currentDeviation - prevDeviation) * kd / DELTA;
     double expected = p + i + d;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
@@ -86,12 +95,7 @@ namespace etrobocon2024_test {
     double targetValue = 100;
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 0;
-    double prevDeviation = 0;
-    double currentDeviation = (targetValue - currentValue);
-    double p = currentDeviation * kp;
-    double i = currentDeviation * DELTA * ki;
-    double d = (currentDeviation - prevDeviation) * kd / DELTA;
-    double expected = p + i + d;
+    double expected = 0;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 
@@ -107,7 +111,7 @@ namespace etrobocon2024_test {
     double prevDeviation = 0;
     double currentDeviation = (targetValue - currentValue);
     double p = currentDeviation * kp;
-    double i = currentDeviation * DELTA * ki;
+    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
     double d = (currentDeviation - prevDeviation) * kd / DELTA;
     double expected = p + i + d;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
@@ -126,7 +130,7 @@ namespace etrobocon2024_test {
     double prevDeviation = 0;
     double currentDeviation = (targetValue - currentValue);
     double p = currentDeviation * kp;
-    double i = currentDeviation * DELTA * ki;
+    double i = (currentDeviation + prevDeviation) * DELTA / 2 * ki;
     double d = (currentDeviation - prevDeviation) * kd / DELTA;
     double expected = p + i + d;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
@@ -147,7 +151,7 @@ namespace etrobocon2024_test {
     double prevDeviation = 0;
     double currentDeviation = (targetValue - currentValue);
     double p = currentDeviation * kp;
-    double i = currentDeviation * kdELTA * ki;
+    double i = (currentDeviation + prevDeviation) * kdELTA / 2 * ki;
     double d = (currentDeviation - prevDeviation) * kd / kdELTA;
     double expected = p + i + d;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
@@ -165,22 +169,22 @@ namespace etrobocon2024_test {
     Pid actualPid(kp, ki, kd, targetValue);
     double currentValue = 60;
     double prevDeviation = 0;
-    double currentDiviation = (targetValue - currentValue);      // 現在の偏差
-    double p = currentDiviation * kp;                            // P制御
-    double i = currentDiviation * DELTA * ki;                    // I制御(誤差の累積は0)
-    double d = (currentDiviation - prevDeviation) * kd / DELTA;  // D制御(前回の誤差は0)
+    double currentDiviation = (targetValue - currentValue);          // 現在の偏差
+    double p = currentDiviation * kp;                                // P制御
+    double i = (currentDiviation + prevDeviation) * DELTA / 2 * ki;  // I制御(誤差の累積は0)
+    double d = (currentDiviation - prevDeviation) * kd / DELTA;      // D制御(前回の誤差は0)
     double expected = p + i + d;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
 
-    double integral = currentDiviation * DELTA;  // 誤差の累積
-    prevDeviation += currentDiviation;           // 前回の誤差の更新
+    double integral = (currentDiviation + prevDeviation) * DELTA / 2;  // 誤差の累積
+    prevDeviation += currentDiviation;                                 // 前回の誤差の更新
     kp = 0.1;
     ki = 0.2;
     kd = 0.3;
     actualPid.setPidGain(kp, ki, kd);  // PIDゲインの更新
     currentValue = 100;
     currentDiviation = (targetValue - currentValue);
-    integral += currentDiviation * DELTA;
+    integral += (currentDiviation + prevDeviation) * DELTA / 2;
     p = currentDiviation * kp;
     i = integral * ki;
     d = (currentDiviation - prevDeviation) / DELTA * kd;
