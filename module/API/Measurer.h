@@ -1,6 +1,6 @@
 /**
  * @file Measurer.h
- * @brief 計測に用いる関数をまとめたラッパークラス
+ * @brief　計測に用いる関数をまとめたラッパークラス
  * @author keiya121
  */
 
@@ -16,67 +16,67 @@
 class Measurer {
  public:
   /**
-   * コンストラクタ
+   * @brief　コンストラクタ
    */
   Measurer();
 
   /**
-   * 明るさを取得
+   * @brief　明るさを取得
    * @return 反射光の強さ(0-100)
    */
   int getBrightness();
 
   /**
-   * RGB値を取得
+   * @brief　RGB値を取得
    * @return RGB値
    */
   rgb_raw_t getRawColor();
 
   /**
-   * 左モータ角位置取得
+   * @brief　左モータ角位置取得
    * @return 左モータ角位置[deg]
    */
   int getLeftCount();
 
   /**
-   * 右モータ角位置取得
+   * @brief　右モータ角位置取得
    * @return 右モータ角位置[deg]
    */
   int getRightCount();
 
   /**
-   * アームモータ角位置取得
+   * @brief　アームモータ角位置取得
    * @return アームモータ角位置[deg]
    */
   int getArmMotorCount();
 
   /**
-   * 正面から見て左ボタンの押下状態を取得
+   * @brief　正面から見て左ボタンの押下状態を取得
    * @return 左ボタンの押下状態 true:押されてる, false：押されていない
    */
   bool getLeftButton();
 
   /**
-   * 正面から見て右ボタンの押下状態を取得
+   * @brief　正面から見て右ボタンの押下状態を取得
    * @return 右ボタンの押下状態 true:押されてる, false：押されていない
    */
   bool getRightButton();
 
   /**
-   * 中央ボタンの押下状態を取得
+   * @brief　中央ボタンの押下状態を取得
    * @return 中央ボタンの押下状態 true:押されてる, false：押されていない
    */
   bool getEnterButton();
 
   /**
-   * 超音波センサからの距離を取得
+   * @brief　超音波センサからの距離を取得
    * @return 超音波センサからの距離[cm]
    * @note センサが認識していない時は1000を返す
    */
   int getForwardDistance();
 
   /**
-   * SPIKEの電圧を取得
+   * @brief　SPIKEの電圧を取得
    * @return SPIKEの電圧[V]
    */
   double getVoltage();
