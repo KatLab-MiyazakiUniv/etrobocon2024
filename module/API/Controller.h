@@ -11,7 +11,10 @@
 
 class Controller {
  public:
+  /** PWM値の上限 */
   static const int MOTOR_PWM_MAX = 100;
+
+  /** PWM値の下限 */
   static const int MOTOR_PWM_MIN = -100;
 
   /**
@@ -20,25 +23,25 @@ class Controller {
   Controller();
 
   /**
-   * タイヤのモータにPWM値をセット
+   * @brief タイヤのモータにPWM値をセット
    * @param pwm PWM値
    */
   void setRightMotorPwm(const int pwm);
   void setLeftMotorPwm(const int pwm);
 
   /**
-   * タイヤのモータを停止する
+   * @brief タイヤのモータを停止する
    */
   void stopMotor();
 
   /**
-   * アームのモータにPWM値をセット
+   * @brief アームのモータにPWM値をセット
    * @param pwm PWM値
    */
   void setArmMotorPwm(const int pwm);
 
   /**
-   * アームのモータを停止する
+   * @brief アームのモータを停止する
    */
   void stopArmMotor();
 
@@ -48,7 +51,7 @@ class Controller {
   ev3api::Motor armMotor;
 
   /**
-   * モータに設定するPWM値の制限
+   * @brief モータに設定するPWM値の制限
    * @param value 入力されたPWM値
    * @return 制限されたPWM値
    */

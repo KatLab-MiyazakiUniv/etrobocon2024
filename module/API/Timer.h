@@ -18,13 +18,13 @@ class Timer {
   Timer();
 
   /**
-   * 自タスクスリープ（デフォルトは10ミリ秒）
+   * @brief 自タスクスリープ（デフォルトは10ミリ秒）
    * @param milliSec スリープ時間(ミリ秒)
    */
   void sleep(int milliSec = 10);
 
   /**
-   * 走行時間を取得
+   * @brief 走行時間を取得
    * @return 走行時間(ミリ秒)
    */
   int now();
