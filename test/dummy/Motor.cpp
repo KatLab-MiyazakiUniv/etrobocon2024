@@ -38,8 +38,13 @@ void Motor::setPWM(int pwm)
 
 void Motor::reset()
 {
-  leftCount = 0;
-  rightCount = 0;
+  if(port == PORT_C) {
+    leftCount = 0;
+  } else if(port == PORT_B) {
+    rightCount = 0;
+  } else {
+    armCount = 0;
+  }
 }
 
 double Motor::leftCount = 0.0;

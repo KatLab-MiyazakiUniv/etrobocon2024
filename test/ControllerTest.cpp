@@ -21,6 +21,7 @@ namespace etrobocon2024_test {
     controller.setRightMotorPwm(pwm);
     int currentCount = measurer.getRightCount();
     EXPECT_LT(initCount, currentCount);
+    controller.resetRightMotorPwm();
   }
 
   // 右車輪のモータにマイナスのPWM値をセットできるかどうかのテスト
@@ -31,6 +32,7 @@ namespace etrobocon2024_test {
     controller.setRightMotorPwm(pwm);
     int currentCount = measurer.getRightCount();
     EXPECT_GT(initCount, currentCount);
+    controller.resetRightMotorPwm();
   }
 
   // 左車輪のモータにPWM値をセットできるかのテスト
@@ -41,6 +43,7 @@ namespace etrobocon2024_test {
     controller.setLeftMotorPwm(pwm);
     int currentCount = measurer.getLeftCount();
     EXPECT_LT(initCount, currentCount);
+    controller.resetLeftMotorPwm();
   }
 
   // 左車輪のモータにマイナスのPWM値をセットできるかどうかのテスト
@@ -51,6 +54,7 @@ namespace etrobocon2024_test {
     controller.setLeftMotorPwm(pwm);
     int currentCount = measurer.getLeftCount();
     EXPECT_GT(initCount, currentCount);
+    controller.resetLeftMotorPwm();
   }
 
   // モータに設定するPWM値の制限が行われているか確認するテスト
@@ -59,10 +63,11 @@ namespace etrobocon2024_test {
     const int pwm = -150;
     controller.setLeftMotorPwm(Controller::MOTOR_PWM_MIN);
     int minCount = measurer.getLeftCount();
-    controller.setLeftMotorPwm(Controller::MOTOR_PWM_MIN * -1);
+    controller.resetLeftMotorPwm();
     controller.setLeftMotorPwm(pwm);
     int currentCount = measurer.getLeftCount();
     EXPECT_EQ(minCount, currentCount);
+    controller.resetLeftMotorPwm();
   }
 
   // stopMotor()を呼び出せるか確認するテスト
@@ -80,6 +85,7 @@ namespace etrobocon2024_test {
     controller.setArmMotorPwm(pwm);
     int currentCount = measurer.getArmMotorCount();
     EXPECT_LT(initCount, currentCount);
+    controller.resetArmMotorPwm();
   }
 
   // stopArmMotor()を呼び出せるか確認するテスト

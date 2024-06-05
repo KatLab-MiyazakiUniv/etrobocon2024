@@ -30,6 +30,12 @@ class Controller {
   void setLeftMotorPwm(const int pwm);
 
   /**
+   * @brief タイヤのモータのPWM値をリセット
+   */
+  void resetRightMotorPwm();
+  void resetLeftMotorPwm();
+
+  /**
    * @brief タイヤのモータを停止する
    */
   void stopMotor();
@@ -39,6 +45,11 @@ class Controller {
    * @param pwm PWM値
    */
   void setArmMotorPwm(const int pwm);
+
+  /**
+   * @brief アームのモータのPWM値をリセット
+   */
+  void resetArmMotorPwm();
 
   /**
    * @brief アームのモータを停止する

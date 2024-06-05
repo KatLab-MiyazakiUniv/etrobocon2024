@@ -30,6 +30,18 @@ void Controller::setLeftMotorPwm(const int pwm)
   leftWheel.setPWM(limitPwmValue(pwm));
 }
 
+// 右モータのPWM値をリセット
+void Controller::resetRightMotorPwm()
+{
+  rightWheel.reset();
+}
+
+// 左モータのPWM値をリセット
+void Controller::resetLeftMotorPwm()
+{
+  leftWheel.reset();
+}
+
 // タイヤのモータを停止する
 void Controller::stopMotor()
 {
@@ -41,6 +53,12 @@ void Controller::stopMotor()
 void Controller::setArmMotorPwm(const int pwm)
 {
   armMotor.setPWM(limitPwmValue(pwm));
+}
+
+// アームのモータのPWM値をリセット
+void Controller::resetArmMotorPwm()
+{
+  armMotor.reset();
 }
 
 // アームのモータを停止する
