@@ -6,11 +6,15 @@ jobs:
   format-check:
     runs-on: ubuntu-20.04
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Install clang-format
-      run: sudo apt-get -y install clang-format
+      - name: Install clang-format
+        run: sudo apt-get -y install clang-format
 
-    - name: Format 
-      run: find ./test ./module -type f -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror *.h *.cpp
+      # 実行コマンドを変更 2024/05/30 YKhm20020
+      # 旧コマンド: find ./test ./module -type f -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror *.h *.cpp
+      # --Werror の後は拡張子を指定する必要ない？
+      # 参考: https://www.turtlestoffel.com/Clang-Format, https://github.com/vllm-project/vllm/blob/main/.github/workflows/clang-format.yml, https://community.cesium.com/t/ci-cd-deployment-issues/28272
+      - name: Format
+        run: find ./test ./module -type f -name "\*.cpp" -o -name "\*.h" | xargs clang-format --dry-run --Werror
