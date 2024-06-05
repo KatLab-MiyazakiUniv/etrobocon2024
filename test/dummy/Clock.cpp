@@ -19,6 +19,6 @@ void Clock::sleep(int duration)
 
 uint64_t Clock::now()
 {
-  microTime = microTime + static_cast<uint64_t>(1);
+  microTime += static_cast<uint64_t>(1);
   return microTime;
 }
