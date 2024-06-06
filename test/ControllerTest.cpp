@@ -1,7 +1,7 @@
 /**
  * @file ControllerTest.cpp
  * @brief Controllerクラスをテストする
- * @author takahashitom
+ * @author takahashitom CHIHAYATAKU
  */
 
 #include "ev3api.h"
@@ -95,4 +95,28 @@ namespace etrobocon2024_test {
     SUCCEED();
   }
 
+  // 右タイヤのPWMを取得できるかのテスト
+  TEST(ControllerTest, getRightPwm)
+  {
+    double expected = 0;
+    double actual = controller.getRightPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+    int pwm = 80;
+    controller.setRightMotorPwm(pwm);
+    expected = 80;
+    actual = controller.getRightPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+  }
+  // 左タイヤのPWMを取得できるかのテスト
+  TEST(ControllerTest, getLeftPwm)
+  {
+    double expected = 0;
+    double actual = controller.getLeftPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+    int pwm = 80;
+    controller.setLeftMotorPwm(pwm);
+    expected = 80;
+    actual = controller.getLeftPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+  }
 }  // namespace etrobocon2024_test

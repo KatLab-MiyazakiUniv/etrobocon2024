@@ -1,7 +1,7 @@
 /**
  * @file Controller.h
  * @brief モーター制御に用いる関数をまとめたラッパークラス
- * @author takahashitom
+ * @author takahashitom CHIHAYATAKU
  */
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
@@ -56,10 +56,25 @@ class Controller {
    */
   void stopArmMotor();
 
+  /**
+   * @brief 右タイヤのPWMを取得する
+   * @return 右タイヤのPWM
+   */
+  static double getRightPwm();
+
+  /**
+   * @brief 左タイヤのPWMを取得する
+   * @return 左タイヤのPWM
+   */
+  static double getLeftPwm();
+
  private:
   ev3api::Motor rightWheel;
   ev3api::Motor leftWheel;
   ev3api::Motor armMotor;
+  static double manageRightPwm;  // 右タイヤPWM
+  static double manageLeftPwm;   // 左タイヤPWM
+  static double manageArmPwm;    // アームPWM
 
   /**
    * @brief モータに設定するPWM値の制限
