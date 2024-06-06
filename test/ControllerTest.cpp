@@ -10,12 +10,12 @@
 #include <gtest/gtest.h>
 
 namespace etrobocon2024_test {
-  Measurer measurer;
-  Controller controller;
 
   // 右車輪のモータにPWM値をセットできるかのテスト
   TEST(ControllerTest, setRightMotorPwm)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = 50;
     int initCount = measurer.getRightCount();
     controller.setRightMotorPwm(pwm);
@@ -27,6 +27,8 @@ namespace etrobocon2024_test {
   // 右車輪のモータにマイナスのPWM値をセットできるかどうかのテスト
   TEST(ControllerTest, setRightMotorMinusPwm)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = -50;
     int initCount = measurer.getRightCount();
     controller.setRightMotorPwm(pwm);
@@ -38,6 +40,8 @@ namespace etrobocon2024_test {
   // 左車輪のモータにPWM値をセットできるかのテスト
   TEST(ControllerTest, setLeftMotorPwm)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = 50;
     int initCount = measurer.getLeftCount();
     controller.setLeftMotorPwm(pwm);
@@ -49,6 +53,8 @@ namespace etrobocon2024_test {
   // 左車輪のモータにマイナスのPWM値をセットできるかどうかのテスト
   TEST(ControllerTest, setLeftMotorMinusPwm)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = -50;
     int initCount = measurer.getLeftCount();
     controller.setLeftMotorPwm(pwm);
@@ -60,6 +66,8 @@ namespace etrobocon2024_test {
   // モータに設定するPWM値の制限が行われているか確認するテスト
   TEST(ControllerTest, setLeftMotorPwmMin)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = -150;
     controller.setLeftMotorPwm(Controller::MOTOR_PWM_MIN);
     int minCount = measurer.getLeftCount();
@@ -73,6 +81,7 @@ namespace etrobocon2024_test {
   // stopMotor()を呼び出せるか確認するテスト
   TEST(ControllerTest, stopMotor)
   {
+    Controller controller;
     controller.stopMotor();
     SUCCEED();
   }
@@ -80,6 +89,8 @@ namespace etrobocon2024_test {
   // アームモータにPWM値を設定できるかどうか確認するテスト
   TEST(ControllerTest, setArmMotorPwm)
   {
+    Measurer measurer;
+    Controller controller;
     const int pwm = 50;
     int initCount = measurer.getArmMotorCount();
     controller.setArmMotorPwm(pwm);
@@ -91,6 +102,7 @@ namespace etrobocon2024_test {
   // stopArmMotor()を呼び出せるか確認するテスト
   TEST(ControllerTest, stopArmMotor)
   {
+    Controller controller;
     controller.stopArmMotor();
     SUCCEED();
   }
@@ -98,6 +110,7 @@ namespace etrobocon2024_test {
   // 右タイヤのPWMを取得できるかのテスト
   TEST(ControllerTest, getRightPwm)
   {
+    Controller controller;
     double expected = 0;
     double actual = controller.getRightPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
@@ -111,6 +124,7 @@ namespace etrobocon2024_test {
   // 左タイヤのPWMを取得できるかのテスト
   TEST(ControllerTest, getLeftPwm)
   {
+    Controller controller;
     double expected = 0;
     double actual = controller.getLeftPwm();
     EXPECT_DOUBLE_EQ(expected, actual);

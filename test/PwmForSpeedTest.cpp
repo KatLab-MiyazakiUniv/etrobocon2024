@@ -7,12 +7,14 @@
 #include "PwmForSpeed.h"
 #include <gtest/gtest.h>
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
+
   TEST(PwmForSpeedTest, calcRightPwmFromSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(300.0);
     double actualPwm = speedCalc.calcRightPwmFromSpeed();
     EXPECT_LT(0, actualPwm);
@@ -20,9 +22,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcRightPwmFromMinusSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(-250.7);
     double actualPwm = speedCalc.calcRightPwmFromSpeed();
     EXPECT_GT(0, actualPwm);
@@ -30,9 +33,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcRightPwmFromZeroSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(0.0);
     double actualPwm = speedCalc.calcRightPwmFromSpeed();
     EXPECT_EQ(0, actualPwm);
@@ -40,9 +44,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcLeftPwmFromSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(300.0);
     double actualPwm = speedCalc.calcLeftPwmFromSpeed();
     EXPECT_LT(0, actualPwm);
@@ -50,9 +55,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcLeftPwmFromMinusSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(-250.7);
     double actualPwm = speedCalc.calcLeftPwmFromSpeed();
     EXPECT_GT(0, actualPwm);
@@ -60,9 +66,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcLeftPwmFromZeroSpeed)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(0.0);
     double actualPwm = speedCalc.calcLeftPwmFromSpeed();
     EXPECT_EQ(0, actualPwm);
@@ -70,9 +77,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcPwmFromMinusLeftSpeedWithTwoArguments)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(300.0, -300.0);
     double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
     double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
@@ -82,9 +90,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcPwmFromMinusRightSpeedWithTwoArguments)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(-250.7, 250.7);
     double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
     double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
@@ -94,9 +103,10 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcPwmFromZeroRightSpeedWithTwoArguments)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(0.0, 250.7);
     double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
     double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
@@ -106,13 +116,14 @@ namespace etrobocon2023_test {
 
   TEST(PwmForSpeedTest, calcPwmFromZeroLeftSpeedWithTwoArguments)
   {
+    Controller controller;
     // PWMの初期化
-    Controller::setRightMotorPwm(0.0);
-    Controller::setLeftMotorPwm(0.0);
+    controller.setRightMotorPwm(0.0);
+    controller.setLeftMotorPwm(0.0);
     PwmForSpeed speedCalc(-300.0, 0.0);
     double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
     double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
     EXPECT_GT(0, actualRightPwm);
     EXPECT_EQ(0, actualLeftPwm);
   }
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test
