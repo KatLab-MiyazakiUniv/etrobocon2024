@@ -13,8 +13,8 @@ PwmForSpeed::PwmForSpeed(double _targetSpeed)
 {
   rightPwm = Controller::getRightPwm();
   leftPwm = Controller::getLeftPwm();
-  int rightAngle = Measurer::getRightCount();
-  int leftAngle = Measurer::getLeftCount();
+  int rightAngle = measurer.getRightCount();
+  int leftAngle = measurer.getLeftCount();
   prevRightMileage = Mileage::calculateWheelMileage(rightAngle);
   prevLeftMileage = Mileage::calculateWheelMileage(leftAngle);
   int currentTime = timer.now();
@@ -30,8 +30,8 @@ PwmForSpeed::PwmForSpeed(double _rightTargetSpeed, double _leftTargetSpeed)
 {
   rightPwm = Controller::getRightPwm();
   leftPwm = Controller::getLeftPwm();
-  int rightAngle = Measurer::getRightCount();
-  int leftAngle = Measurer::getLeftCount();
+  int rightAngle = measurer.getRightCount();
+  int leftAngle = measurer.getLeftCount();
   prevRightMileage = Mileage::calculateWheelMileage(rightAngle);
   prevLeftMileage = Mileage::calculateWheelMileage(leftAngle);
   int currentTime = timer.now();
@@ -42,7 +42,7 @@ PwmForSpeed::PwmForSpeed(double _rightTargetSpeed, double _leftTargetSpeed)
 double PwmForSpeed::calcRightPwmFromSpeed()
 {
   // 右タイヤの回転角度を取得
-  int rightAngle = Measurer::getRightCount();
+  int rightAngle = measurer.getRightCount();
   // 右タイヤの走行距離を算出
   double currentRightMileage = Mileage::calculateWheelMileage(rightAngle);
   double diffRightMileage = currentRightMileage - prevRightMileage;
@@ -63,7 +63,7 @@ double PwmForSpeed::calcRightPwmFromSpeed()
 double PwmForSpeed::calcLeftPwmFromSpeed()
 {
   // 左タイヤの回転角度を取得
-  int leftAngle = Measurer::getLeftCount();
+  int leftAngle = measurer.getLeftCount();
   // 左タイヤの走行距離を算出
   double currentLeftMileage = Mileage::calculateWheelMileage(leftAngle);
   double diffLeftMileage = currentLeftMileage - prevLeftMileage;

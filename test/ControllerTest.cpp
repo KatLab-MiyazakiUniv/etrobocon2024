@@ -106,6 +106,7 @@ namespace etrobocon2024_test {
     expected = 80;
     actual = controller.getRightPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
+    controller.resetRightMotorPwm();
   }
   // 左タイヤのPWMを取得できるかのテスト
   TEST(ControllerTest, getLeftPwm)
@@ -118,5 +119,6 @@ namespace etrobocon2024_test {
     expected = 80;
     actual = controller.getLeftPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
+    controller.resetLeftMotorPwm();
   }
 }  // namespace etrobocon2024_test

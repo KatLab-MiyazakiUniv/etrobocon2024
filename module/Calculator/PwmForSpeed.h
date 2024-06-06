@@ -10,8 +10,8 @@
 #include "Mileage.h"
 #include "Pid.h"
 #include "Timer.h"
-#include "Measurer.h"
 #include "Controller.h"
+#include "Measurer.h"
 
 class PwmForSpeed {
  public:
@@ -46,6 +46,7 @@ class PwmForSpeed {
   Pid rightPid;
   Pid leftPid;
   Timer timer;
+  Measurer measurer;
   double rightPwm;
   double leftPwm;
   double prevRightMileage;
