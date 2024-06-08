@@ -72,9 +72,9 @@ class Controller {
   ev3api::Motor rightWheel;
   ev3api::Motor leftWheel;
   ev3api::Motor armMotor;
-  static double manageRightPwm;  // 右タイヤPWM
-  static double manageLeftPwm;   // 左タイヤPWM
-  static double manageArmPwm;    // アームPWM
+  static double pwmOfRightWheel;  // 右タイヤPWM
+  static double pwmOfLeftWheel;   // 左タイヤPWM
+  static double pwmOfArm;         // アームPWM
 
   /**
    * @brief モータに設定するPWM値の制限

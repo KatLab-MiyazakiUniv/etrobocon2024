@@ -8,9 +8,9 @@
 Controller::Controller() : rightWheel(PORT_B), leftWheel(PORT_C), armMotor(PORT_A) {}
 
 // PWMの初期化
-double Controller::manageRightPwm = 0.0;
-double Controller::manageLeftPwm = 0.0;
-double Controller::manageArmPwm = 0.0;
+double Controller::pwmOfRightWheel = 0.0;
+double Controller::pwmOfLeftWheel = 0.0;
+double Controller::pwmOfArm = 0.0;
 
 // モータに設定するPWM値の制限
 int Controller::limitPwmValue(const int value)
@@ -26,36 +26,36 @@ int Controller::limitPwmValue(const int value)
 // 右モータにPWM値をセット
 void Controller::setRightMotorPwm(const int pwm)
 {
-  manageRightPwm = pwm;
+  pwmOfRightWheel = pwm;
   rightWheel.setPWM(limitPwmValue(pwm));
 }
 
 // 左モータにPWM値をセット
 void Controller::setLeftMotorPwm(const int pwm)
 {
-  manageLeftPwm = pwm;
+  pwmOfLeftWheel = pwm;
   leftWheel.setPWM(limitPwmValue(pwm));
 }
 
 // 右モータのPWM値をリセット
 void Controller::resetRightMotorPwm()
 {
-  manageRightPwm = 0;
+  pwmOfRightWheel = 0.0;
   rightWheel.reset();
 }
 
 // 左モータのPWM値をリセット
 void Controller::resetLeftMotorPwm()
 {
-  manageLeftPwm = 0;
+  pwmOfLeftWheel = 0.0;
   leftWheel.reset();
 }
 
 // タイヤのモータを停止する
 void Controller::stopMotor()
 {
-  manageRightPwm = 0.0;
-  manageLeftPwm = 0.0;
+  pwmOfRightWheel = 0.0;
+  pwmOfLeftWheel = 0.0;
   leftWheel.stop();
   rightWheel.stop();
 }
@@ -63,29 +63,32 @@ void Controller::stopMotor()
 // アームのモータにPWM値をセット
 void Controller::setArmMotorPwm(const int pwm)
 {
+  pwmOfArm = pwm;
   armMotor.setPWM(limitPwmValue(pwm));
 }
 
 // アームのモータのPWM値をリセット
 void Controller::resetArmMotorPwm()
 {
+  pwmOfArm = 0;
   armMotor.reset();
 }
 
 // アームのモータを停止する
 void Controller::stopArmMotor()
 {
+  pwmOfArm = 0;
   armMotor.stop();
 }
 
 // 右タイヤのPWMを取得する
 double Controller::getRightPwm()
 {
-  return manageRightPwm;
+  return pwmOfRightWheel;
 }
 
 // 左タイヤのPWMを取得する
 double Controller::getLeftPwm()
 {
-  return manageLeftPwm;
+  return pwmOfLeftWheel;
 }
