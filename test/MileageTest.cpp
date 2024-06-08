@@ -5,7 +5,7 @@
  */
 
 #include "Mileage.h"
-#include <math.h>
+#include <cmath>
 #include <gtest/gtest.h>
 
 namespace etrobocon2023_test {
