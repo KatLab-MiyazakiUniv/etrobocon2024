@@ -1,6 +1,6 @@
 /**
  **  @file Mileage.cpp
- **  @brief 走行距離を計算するクラス
+ **  @brief 走行距離をタイヤの回転角度から計算するクラス
  **  @author CHIHAYATAKU
  **/
 
