@@ -14,13 +14,14 @@ namespace etrobocon2024_test {
     double radius = 50.0;
     double rightAngle = 30.0;
     double leftAngle = 40.0;
-    double rightWheelMileage = 2.0 * rightAngle * radius * M_PI / 360.0;
-    double leftWheelMileage = 2.0 * leftAngle * radius * M_PI / 360.0;
+
     // 計算過程
     // 1.右車輪の累計走行距離を算出
+    // double rightWheelMileage = 2.0 * rightAngle * radius * M_PI / 360.0;
     // M_PI = 3.14: rightWheelMileage = 2.0 * 30.0 * 50.0 * 3.14 / 360.0 = 26.1666...
     // M_PI = 3.15: rightWheelMileage = 2.0 * 30.0 * 50.0 * 3.15 / 360.0 = 26.25
     // 2.左車輪の累計走行距離を算出
+    // double leftWheelMileage = 2.0 * leftAngle * radius * M_PI / 360.0;
     // M_PI = 3.14: leftWheelMileage = 2.0 * 40.0 * 50.0 * 3.14 / 360.0 = 32.1111...
     // M_PI = 3.15: leftWheelMileage = 2.0 * 40.0 * 50.0 * 3.15 / 360.0 = 35
     // 3.両車輪の累計走行距離の平均を算出
@@ -43,8 +44,6 @@ namespace etrobocon2024_test {
     double radius = 50.0;
     double rightAngle = -30.0;
     double leftAngle = -40.0;
-    double rightWheelMileage = 2.0 * rightAngle * radius * M_PI / 360.0;
-    double leftWheelMileage = 2.0 * leftAngle * radius * M_PI / 360.0;
     double expected_min = -30.625;
     double expected_max = -29.13888;
     double actual = Mileage::calculateMileage(rightAngle, leftAngle);
@@ -57,8 +56,6 @@ namespace etrobocon2024_test {
     double radius = 50.0;
     double rightAngle = 0.0;
     double leftAngle = 0.0;
-    double rightWheelMileage = 2.0 * rightAngle * radius * M_PI / 360.0;
-    double leftWheelMileage = 2.0 * leftAngle * radius * M_PI / 360.0;
     double expected = 0.0;
     double actual = Mileage::calculateMileage(rightAngle, leftAngle);
     EXPECT_DOUBLE_EQ(expected, actual);
