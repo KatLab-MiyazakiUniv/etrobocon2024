@@ -8,7 +8,7 @@
 #include <cmath>
 #include <gtest/gtest.h>
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
   TEST(MileageTest, calculateMileage)
   {
     double radius = 50.0;
@@ -44,4 +44,4 @@ namespace etrobocon2023_test {
     double actual = Mileage::calculateMileage(rightAngle, leftAngle);
     EXPECT_DOUBLE_EQ(expected, actual);
   }
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test
