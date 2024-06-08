@@ -1,7 +1,7 @@
 /**
  **  @file Mileage.h
- **  @brief 走行距離をタイヤの回転角度から計算するクラス
- **  @author CHIHAYATAKU
+ **  @brief 走行距離を計算するクラス
+ **  @author YKhm20020
  **/
 
 #ifndef MILEAGE_H
