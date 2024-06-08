@@ -23,7 +23,7 @@ namespace etrobocon2024_test {
     // 2.左車輪の累計走行距離を算出
     // double leftWheelMileage = 2.0 * leftAngle * radius * M_PI / 360.0;
     // M_PI = 3.14: leftWheelMileage = 2.0 * 40.0 * 50.0 * 3.14 / 360.0 = 32.1111...
-    // M_PI = 3.15: leftWheelMileage = 2.0 * 40.0 * 50.0 * 3.15 / 360.0 = 35
+    // M_PI = 3.15: leftWheelMileage = 2.0 * 40.0 * 50.0 * 3.15 / 360.0 = 35.0
     // 3.両車輪の累計走行距離の平均を算出
     // double expected = (rightWheelMileage + leftWheelMileage) / 2.0;
     // M_PI = 3.14: (26.1666... + 32.1111...) / 2 = 29.13888...
