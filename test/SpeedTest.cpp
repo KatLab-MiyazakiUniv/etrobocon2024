@@ -9,120 +9,120 @@
 
 namespace etrobocon2024_test {
 
-  TEST(SpeedTest, calcRightPwmFromSpeed)
+  TEST(SpeedTest, calculateLeftPwmFromTargetSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(300.0);
-    double actualPwm = speedCalc.calcRightPwmFromSpeed();
+    double actualPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_LT(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcRightPwmFromMinusSpeed)
+  TEST(SpeedTest, calculateRightPwmFromMinusSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(-250.7);
-    double actualPwm = speedCalc.calcRightPwmFromSpeed();
+    double actualPwm = speedCalc.calculateRightPwmFromTargetSpeed();
     EXPECT_GT(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcRightPwmFromZeroSpeed)
+  TEST(SpeedTest, calculateRightPwmFromZeroSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(0.0);
-    double actualPwm = speedCalc.calcRightPwmFromSpeed();
+    double actualPwm = speedCalc.calculateRightPwmFromTargetSpeed();
     EXPECT_EQ(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcLeftPwmFromSpeed)
+  TEST(SpeedTest, calculateRightPwmFromTargetSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(300.0);
-    double actualPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualPwm = speedCalc.calculateRightPwmFromTargetSpeed();
     EXPECT_LT(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcLeftPwmFromMinusSpeed)
+  TEST(SpeedTest, calculateLeftPwmFromMinusSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(-250.7);
-    double actualPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_GT(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcLeftPwmFromZeroSpeed)
+  TEST(SpeedTest, calculateLeftPwmFromZeroSpeed)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(0.0);
-    double actualPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_EQ(0, actualPwm);
   }
 
-  TEST(SpeedTest, calcPwmFromMinusLeftSpeedWithTwoArguments)
+  TEST(SpeedTest, calculatePwmFromMinusLeftSpeedWithTwoArguments)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(300.0, -300.0);
-    double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
-    double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
+    double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_LT(0, actualRightPwm);
     EXPECT_GT(0, actualLeftPwm);
   }
 
-  TEST(SpeedTest, calcPwmFromMinusRightSpeedWithTwoArguments)
+  TEST(SpeedTest, calculatePwmFromMinusRightSpeedWithTwoArguments)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(-250.7, 250.7);
-    double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
-    double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
+    double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_GT(0, actualRightPwm);
     EXPECT_LT(0, actualLeftPwm);
   }
 
-  TEST(SpeedTest, calcPwmFromZeroRightSpeedWithTwoArguments)
+  TEST(SpeedTest, calculatePwmFromZeroRightSpeedWithTwoArguments)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(0.0, 250.7);
-    double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
-    double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
+    double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_EQ(0, actualRightPwm);
     EXPECT_LT(0, actualLeftPwm);
   }
 
-  TEST(SpeedTest, calcPwmFromZeroLeftSpeedWithTwoArguments)
+  TEST(SpeedTest, calculatePwmFromZeroLeftSpeedWithTwoArguments)
   {
     Controller controller;
     // PWMの初期化
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     Speed speedCalc(-300.0, 0.0);
-    double actualRightPwm = speedCalc.calcRightPwmFromSpeed();
-    double actualLeftPwm = speedCalc.calcLeftPwmFromSpeed();
+    double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
+    double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
     EXPECT_GT(0, actualRightPwm);
     EXPECT_EQ(0, actualLeftPwm);
   }

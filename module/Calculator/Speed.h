@@ -32,13 +32,13 @@ class Speed {
    * @brief 目標とする走行速度に相当する右車輪のPWM値を算出する
    * @return 走行速度に相当する右タイヤのPWM値
    */
-  double calcRightPwmFromSpeed();
+  double calculateRightPwmFromTargetSpeed();
 
   /**
    * @brief 目標とする走行速度に相当する左車輪のPWM値を算出する
    * @return 走行速度に相当する左タイヤのPWM値
    */
-  double calcLeftPwmFromSpeed();
+  double calculateLeftPwmFromTargetSpeed();
 
  private:
   const double rightTargetSpeed;
@@ -69,6 +69,6 @@ class Speed {
    * @param diffTime 移動時間[ms]
    * @return 走行速度[mm/s]
    */
-  double calcSpeed(double diffMileage, double diffTime);
+  double calculateSpeed(double diffMileage, double diffTime);
 };
 #endif
