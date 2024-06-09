@@ -1,7 +1,7 @@
 /**
  * @file RgbData.h
  * @brief RGB値のサンプルデータ
- * @author YKhm20020
+ * @author keiya121
  */
 #ifndef RGB_DATA_H
 #define RGB_DATA_H
