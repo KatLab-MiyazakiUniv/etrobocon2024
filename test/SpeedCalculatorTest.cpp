@@ -38,8 +38,9 @@ namespace etrobocon2024_test {
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     SpeedCalculator speedCalc(0.0);
+    double expected = 0.0;
     double actualPwm = speedCalc.calculateRightPwmFromTargetSpeed();
-    EXPECT_EQ(0, actualPwm);
+    EXPECT_EQ(expected, actualPwm);
   }
 
   TEST(SpeedCalculatorTest, calculateRightPwmFromTargetSpeed)
@@ -71,8 +72,9 @@ namespace etrobocon2024_test {
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     SpeedCalculator speedCalc(0.0);
+    double expected = 0.0;
     double actualPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
-    EXPECT_EQ(0, actualPwm);
+    EXPECT_EQ(expected, actualPwm);
   }
 
   TEST(SpeedCalculatorTest, calculatePwmFromMinusLeftSpeedWithTwoArguments)
@@ -110,7 +112,8 @@ namespace etrobocon2024_test {
     SpeedCalculator speedCalc(0.0, 250.7);
     double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
     double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
-    EXPECT_EQ(0, actualRightPwm);
+    double expected_right = 0.0;
+    EXPECT_EQ(expected_right, actualRightPwm);
     EXPECT_LT(0, actualLeftPwm);
   }
 
@@ -123,7 +126,8 @@ namespace etrobocon2024_test {
     SpeedCalculator speedCalc(-300.0, 0.0);
     double actualRightPwm = speedCalc.calculateRightPwmFromTargetSpeed();
     double actualLeftPwm = speedCalc.calculateLeftPwmFromTargetSpeed();
+    double expected_left = 0.0;
     EXPECT_GT(0, actualRightPwm);
-    EXPECT_EQ(0, actualLeftPwm);
+    EXPECT_EQ(expected_left, actualLeftPwm);
   }
 }  // namespace etrobocon2024_test

@@ -22,6 +22,7 @@ SpeedCalculator::SpeedCalculator(double _targetSpeed)
   prevLeftTime = currentTime;
 }
 
+// 回頭用（2024版では使わないかもしれないが一応残しておく）
 SpeedCalculator::SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
   : rightTargetSpeed(_rightTargetSpeed),
     leftTargetSpeed(_leftTargetSpeed),

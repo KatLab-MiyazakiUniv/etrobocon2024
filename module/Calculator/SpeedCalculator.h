@@ -7,11 +7,11 @@
 #ifndef SpeedCalculator_H
 #define SpeedCalculator_H
 
-#include "Measurer.h"
-#include "Controller.h"
 #include "Mileage.h"
 #include "Pid.h"
 #include "Timer.h"
+#include "Controller.h"
+#include "Measurer.h"
 
 class SpeedCalculator {
  public:
@@ -22,7 +22,7 @@ class SpeedCalculator {
   SpeedCalculator(double _targetSpeed);
 
   /**
-   * @brief 引数２つの場合のコンストラクタ
+   * @brief 引数２つの場合のコンストラクタ．（2024版では使わないかもしれないが一応残しておく）
    * @param _rightTargetSpeed 目標とする右タイヤ走行速度[mm/s]
    * @param _leftTargetSpeed 目標とする左タイヤ走行速度[mm/s]
    */
