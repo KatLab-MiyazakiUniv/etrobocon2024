@@ -9,7 +9,7 @@
 using namespace std;
 
 PwmRotation::PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
-  : Rotation(_pwm, _isClockwise), targetAngle(_targetAngle)
+  : Rotation(_targetAngle, _pwm, _isClockwise)
 {
 }
 
@@ -35,16 +35,9 @@ bool PwmRotation::isMetPrecondition()
   return true;
 }
 
-bool PwmRotation::isMetPostcondition(double initLeftMileage, double initRightMileage, int leftSign,
-                                     int rightSign)
+bool PwmRotation::isMetPostcondition(double targetLeftDistance, double targetRightDistance,
+                                     int leftSign, int rightSign)
 {
-  // 指定した角度に対する目標の走行距離(弧の長さ)
-  double targetDistance = M_PI * TREAD * targetAngle / 360;
-
-  // 目標距離（呼び出し時の走行距離 ± 指定された回転量に必要な距離）
-  double targetLeftDistance = initLeftMileage + targetDistance * leftSign;
-  double targetRightDistance = initRightMileage + targetDistance * rightSign;
-
   // 残りの移動距離を算出
   double diffLeftDistance
       = (targetLeftDistance - Mileage::calculateWheelMileage(measurer.getLeftCount())) * leftSign;

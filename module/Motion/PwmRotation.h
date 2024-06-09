@@ -41,9 +41,6 @@ class PwmRotation : public Rotation {
    * @brief 実行のログを取る
    */
   void logRunning() override;
-
- private:
-  int targetAngle;  // 目標回転角度(deg) 0~360
 };
 
 #endif

@@ -16,11 +16,11 @@ class Rotation : public Motion {
  public:
   /**
    * コンストラクタ
-   * @param _targetValue 目標値
+   * @param _targetAngle 目標回転角度(deg) 0~360
    * @param _pwm 指定するPWM値 0~100
    * @param _isClockwise 回頭方向 true:時計回り, false:反時計回り
    */
-  Rotation(int _pwm, bool _isClockwise);
+  Rotation(int _targetAngle, int _pwm, bool _isClockwise);
 
   /**
    * @brief 回頭する
@@ -35,12 +35,14 @@ class Rotation : public Motion {
 
   /**
    * @brief 回頭する際の継続条件判定をする　返り値がfalseでモーターが止まる
+   * @param targetLeftDistance 左車輪の目標距離
+   * @param targetRightDistance 右車輪の目標距離
    * @param leftSign 左車輪の回転方向
    * @param rightSign 右車輪の回転方向
    * @note オーバーライド必須
    */
-  virtual bool isMetPostcondition(double initLeftMileage, double initRightMileage, int leftSign,
-                                  int rightSign)
+  virtual bool isMetPostcondition(double targetLeftDistance, double targetRightDistance,
+                                  int leftSign, int rightSign)
       = 0;
 
   /**
@@ -50,6 +52,7 @@ class Rotation : public Motion {
   virtual void logRunning() = 0;
 
  protected:
+  int targetAngle;   // 目標回転角度(deg) 0~360
   int pwm;           // PWM値
   bool isClockwise;  // 回頭方向 true:時計回り, false:反時計回り
   Timer timer;
