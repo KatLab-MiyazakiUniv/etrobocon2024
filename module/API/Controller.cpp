@@ -24,14 +24,14 @@ int Controller::limitPwmValue(const int value)
 }
 
 // 右モータにPWM値をセット
-void Controller::setRightMotorPwm(const int pwm)
+void Controller::setRightMotorPwm(const double pwm)
 {
   pwmOfRightWheel = pwm;
   rightWheel.setPWM(limitPwmValue(pwm));
 }
 
 // 左モータにPWM値をセット
-void Controller::setLeftMotorPwm(const int pwm)
+void Controller::setLeftMotorPwm(const double pwm)
 {
   pwmOfLeftWheel = pwm;
   leftWheel.setPWM(limitPwmValue(pwm));
@@ -61,7 +61,7 @@ void Controller::stopMotor()
 }
 
 // アームのモータにPWM値をセット
-void Controller::setArmMotorPwm(const int pwm)
+void Controller::setArmMotorPwm(const double pwm)
 {
   pwmOfArm = pwm;
   armMotor.setPWM(limitPwmValue(pwm));

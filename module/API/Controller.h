@@ -26,8 +26,8 @@ class Controller {
    * @brief タイヤのモータにPWM値をセット
    * @param pwm PWM値
    */
-  void setRightMotorPwm(const int pwm);
-  void setLeftMotorPwm(const int pwm);
+  void setRightMotorPwm(const double pwm);
+  void setLeftMotorPwm(const double pwm);
 
   /**
    * @brief タイヤのモータのPWM値をリセット
@@ -44,7 +44,7 @@ class Controller {
    * @brief アームのモータにPWM値をセット
    * @param pwm PWM値
    */
-  void setArmMotorPwm(const int pwm);
+  void setArmMotorPwm(const double pwm);
 
   /**
    * @brief アームのモータのPWM値をリセット
