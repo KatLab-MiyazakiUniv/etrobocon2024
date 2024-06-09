@@ -1,11 +1,11 @@
 /**
- * @file PwmFromSpeedCalculator.h
+ * @file SpeedCalculator.h
  *  @brief 目標速度に対応するPWM値を算出するクラス
  *  @author CHIHAYATAKU
  */
 
-#ifndef PWMFROMSPEEDCALCULATOR_H
-#define PWMFROMSPEEDCALCULATOR_H
+#ifndef SpeedCalculator_H
+#define SpeedCalculator_H
 
 #include "Mileage.h"
 #include "Pid.h"
@@ -13,20 +13,20 @@
 #include "Controller.h"
 #include "Measurer.h"
 
-class PwmFromSpeedCalculator {
+class SpeedCalculator {
  public:
   /**
    * @brief 引数１つの場合のコンストラクタ
    * @param _targetSpeed 目標とする走行速度[mm/s]
    */
-  PwmFromSpeedCalculator(double _targetSpeed);
+  SpeedCalculator(double _targetSpeed);
 
   /**
    * @brief 引数２つの場合のコンストラクタ
    * @param _rightTargetSpeed 目標とする右タイヤ走行速度[mm/s]
    * @param _leftTargetSpeed 目標とする左タイヤ走行速度[mm/s]
    */
-  PwmFromSpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed);
+  SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed);
 
   /**
    * @brief 目標とする走行速度に相当する右車輪のPWM値を算出する

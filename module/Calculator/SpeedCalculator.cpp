@@ -1,11 +1,11 @@
 /**
- *  @file PwmFromSpeedCalculator.cpp
+ *  @file SpeedCalculator.cpp
  *  @brief 目標速度に対応するPWM値を算出するクラス
  *  @author CHIHAYATAKU
  */
-#include "PwmFromSpeedCalculator.h"
+#include "SpeedCalculator.h"
 
-PwmFromSpeedCalculator::PwmFromSpeedCalculator(double _targetSpeed)
+SpeedCalculator::SpeedCalculator(double _targetSpeed)
   : rightTargetSpeed(_targetSpeed),
     leftTargetSpeed(_targetSpeed),
     rightPid(K_P, K_I, K_D, _targetSpeed),
@@ -22,7 +22,7 @@ PwmFromSpeedCalculator::PwmFromSpeedCalculator(double _targetSpeed)
   prevLeftTime = currentTime;
 }
 
-PwmFromSpeedCalculator::PwmFromSpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
+SpeedCalculator::SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
   : rightTargetSpeed(_rightTargetSpeed),
     leftTargetSpeed(_leftTargetSpeed),
     rightPid(R_K_P, R_K_I, R_K_D, _rightTargetSpeed),
@@ -39,7 +39,7 @@ PwmFromSpeedCalculator::PwmFromSpeedCalculator(double _rightTargetSpeed, double 
   prevLeftTime = currentTime;
 }
 
-double PwmFromSpeedCalculator::calculateRightPwmFromTargetSpeed()
+double SpeedCalculator::calculateRightPwmFromTargetSpeed()
 {
   // 右タイヤの回転角度を取得
   int rightAngle = measurer.getRightCount();
@@ -60,7 +60,7 @@ double PwmFromSpeedCalculator::calculateRightPwmFromTargetSpeed()
   return rightPwm;
 }
 
-double PwmFromSpeedCalculator::calculateLeftPwmFromTargetSpeed()
+double SpeedCalculator::calculateLeftPwmFromTargetSpeed()
 {
   // 左タイヤの回転角度を取得
   int leftAngle = measurer.getLeftCount();
@@ -81,7 +81,7 @@ double PwmFromSpeedCalculator::calculateLeftPwmFromTargetSpeed()
   return leftPwm;
 }
 
-double PwmFromSpeedCalculator::calculateSpeed(double diffMileage, double diffTime)
+double SpeedCalculator::calculateSpeed(double diffMileage, double diffTime)
 {
   // 走行時間が0のとき、0を返す
   if(diffTime == 0.0) return 0.0;
