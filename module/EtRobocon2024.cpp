@@ -16,10 +16,10 @@
 
 void EtRobocon2024::start()
 {
-  Measurer measeurer;
+  Measurer measurer;
 
   while(1) {
-    gb_raw_t color = measurer.getRawColor();
+    rgb_raw_t color = measurer.getRawColor();
 
     COLOR actualColor = ColorJudge::getColor(color);
 
