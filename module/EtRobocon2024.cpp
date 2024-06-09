@@ -6,26 +6,14 @@
 
 #include "EtRobocon2024.h"
 // ev3api.hをインクルードしているものは.cppに書く
-#include "Measurer.h"
-#include "ev3api.h"
-#include "ColorSensor.h"
-#include "SonarSensor.h"
-#include "Motor.h"
-#include "Clock.h"
-#include "ColorJudge.h"
+// #include "ev3api.h"
+// #include "ColorSensor.h"
+// #include "SonarSensor.h"
+// #include "Motor.h"
+// #include "Clock.h"
 
 void EtRobocon2024::start()
 {
-  Measurer measurer;
-
-  while(1) {
-    rgb_raw_t color = measurer.getRawColor();
-
-    COLOR actualColor = ColorJudge::getColor(color);
-
-    printf("actualColor:%s", actualColor);
-  }
-
   // const ePortS colorSensorPort = PORT_2;
   // const ePortS sonarSensorPort = PORT_3;
   // const ePortM armMotorPort = PORT_A;

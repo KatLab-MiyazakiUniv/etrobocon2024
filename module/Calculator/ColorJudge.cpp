@@ -89,17 +89,17 @@ Hsv ColorJudge::convertRgbToHsv(rgb_raw_t const& _rgb)
 
 COLOR ColorJudge::stringToColor(const char* str)
 {
-  if(str == "BLACK") {  // 文字列がBLACKの場合
+  if(strcmp(str, "BLACK") == 0) {  // 文字列がBLACKの場合
     return COLOR::BLACK;
-  } else if(str == "WHITE") {  // 文字列がWHITEの場合
+  } else if(strcmp(str, "WHITE") == 0) {  // 文字列がWHITEの場合
     return COLOR::WHITE;
-  } else if(str == "BLUE") {  // 文字列がBLUEの場合
+  } else if(strcmp(str, "BLUE") == 0) {  // 文字列がBLUEの場合
     return COLOR::BLUE;
-  } else if(str == "GREEN") {  // 文字列がGREENの場合
+  } else if(strcmp(str, "GREEN") == 0) {  // 文字列がGREENの場合
     return COLOR::GREEN;
-  } else if(str == "YELLOW") {  // 文字列がYELLOWの場合
+  } else if(strcmp(str, "YELLOW") == 0) {  // 文字列がYELLOWの場合
     return COLOR::YELLOW;
-  } else if(str == "RED") {  // 文字列がREDの場合
+  } else if(strcmp(str, "RED") == 0) {  // 文字列がREDの場合
     return COLOR::RED;
   } else {  // 想定していない文字列が来た場合
     return COLOR::NONE;
