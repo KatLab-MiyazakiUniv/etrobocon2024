@@ -1,7 +1,7 @@
 /**
  * @file   PwmRotationTest.cpp
  * @brief  PwmRotationクラスのテスト
- * @author Negimarge
+ * @author takahashitom
  */
 
 #include "PwmRotation.h"
