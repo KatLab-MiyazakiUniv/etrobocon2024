@@ -1,7 +1,7 @@
 /**
  * @file Motor.cpp
  * @brief モータクラスで用いる関数（ダミー）
- * @author keiya121
+ * @author keiya121 CHIHAYATAKU
  */
 
 #include "Motor.h"
@@ -25,7 +25,7 @@ int Motor::getCount()
 }
 
 // pwm値設定
-void Motor::setPWM(int pwm)
+void Motor::setPWM(double pwm)
 {
   if(port == PORT_C) {
     leftCount += pwm * 0.05;

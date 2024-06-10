@@ -12,10 +12,10 @@
 class Controller {
  public:
   /** PWM値の上限 */
-  static const int MOTOR_PWM_MAX = 100;
+  static constexpr double MOTOR_PWM_MAX = 100.0;
 
   /** PWM値の下限 */
-  static const int MOTOR_PWM_MIN = -100;
+  static constexpr double MOTOR_PWM_MIN = -100.0;
 
   /**
    * コンストラクタ
@@ -60,13 +60,13 @@ class Controller {
    * @brief 右タイヤのPWMを取得する
    * @return 右タイヤのPWM
    */
-  static double getRightPwm();
+  static double getRightMotorPwm();
 
   /**
    * @brief 左タイヤのPWMを取得する
    * @return 左タイヤのPWM
    */
-  static double getLeftPwm();
+  static double getLeftMotorPwm();
 
  private:
   ev3api::Motor rightWheel;
@@ -78,10 +78,10 @@ class Controller {
 
   /**
    * @brief モータに設定するPWM値の制限
-   * @param value 入力されたPWM値
+   * @param inputPwm 入力されたPWM値
    * @return 制限されたPWM値
    */
-  int limitPwmValue(const int value);
+  double limitPwmValue(const double inputPwm);
 };
 
 #endif

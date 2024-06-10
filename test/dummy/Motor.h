@@ -1,7 +1,7 @@
 /**
  * @file Motor.h
  * @brief モータクラス（ダミー）
- * @author keiya121
+ * @author keiya121 CHIHAYATAKU
  */
 
 #ifndef MOTOR_H
@@ -34,7 +34,7 @@ namespace ev3api {
      * pwm値設定
      * @param pwm pwm値
      */
-    void setPWM(int pwm);
+    void setPWM(double pwm);
 
     /**
      * 停止する

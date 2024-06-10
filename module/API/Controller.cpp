@@ -13,14 +13,14 @@ double Controller::pwmOfLeftWheel = 0.0;
 double Controller::pwmOfArm = 0.0;
 
 // モータに設定するPWM値の制限
-int Controller::limitPwmValue(const int value)
+double Controller::limitPwmValue(const double inputPwm)
 {
-  if(value > MOTOR_PWM_MAX) {
+  if(inputPwm > MOTOR_PWM_MAX) {
     return MOTOR_PWM_MAX;
-  } else if(value < MOTOR_PWM_MIN) {
+  } else if(inputPwm < MOTOR_PWM_MIN) {
     return MOTOR_PWM_MIN;
   }
-  return value;
+  return inputPwm;
 }
 
 // 右モータにPWM値をセット
@@ -70,25 +70,25 @@ void Controller::setArmMotorPwm(const double pwm)
 // アームのモータのPWM値をリセット
 void Controller::resetArmMotorPwm()
 {
-  pwmOfArm = 0;
+  pwmOfArm = 0.0;
   armMotor.reset();
 }
 
 // アームのモータを停止する
 void Controller::stopArmMotor()
 {
-  pwmOfArm = 0;
+  pwmOfArm = 0.0;
   armMotor.stop();
 }
 
 // 右タイヤのPWMを取得する
-double Controller::getRightPwm()
+double Controller::getRightMotorPwm()
 {
   return pwmOfRightWheel;
 }
 
 // 左タイヤのPWMを取得する
-double Controller::getLeftPwm()
+double Controller::getLeftMotorPwm()
 {
   return pwmOfLeftWheel;
 }

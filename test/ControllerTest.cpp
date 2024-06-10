@@ -16,7 +16,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = 50;
+    const double pwm = 50.0;
     int initCount = measurer.getRightCount();
     controller.setRightMotorPwm(pwm);
     int currentCount = measurer.getRightCount();
@@ -29,7 +29,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = -50;
+    const double pwm = -50.0;
     int initCount = measurer.getRightCount();
     controller.setRightMotorPwm(pwm);
     int currentCount = measurer.getRightCount();
@@ -42,7 +42,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = 50;
+    const double pwm = 50.0;
     int initCount = measurer.getLeftCount();
     controller.setLeftMotorPwm(pwm);
     int currentCount = measurer.getLeftCount();
@@ -55,7 +55,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = -50;
+    const double pwm = -50.0;
     int initCount = measurer.getLeftCount();
     controller.setLeftMotorPwm(pwm);
     int currentCount = measurer.getLeftCount();
@@ -68,7 +68,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = -150;
+    const double pwm = -150.0;
     controller.setLeftMotorPwm(Controller::MOTOR_PWM_MIN);
     int minCount = measurer.getLeftCount();
     controller.resetLeftMotorPwm();
@@ -91,7 +91,7 @@ namespace etrobocon2024_test {
   {
     Measurer measurer;
     Controller controller;
-    const int pwm = 50;
+    const double pwm = 50.0;
     int initCount = measurer.getArmMotorCount();
     controller.setArmMotorPwm(pwm);
     int currentCount = measurer.getArmMotorCount();
@@ -108,31 +108,31 @@ namespace etrobocon2024_test {
   }
 
   // 右タイヤのPWM値を取得できるかのテスト
-  TEST(ControllerTest, getRightPwm)
+  TEST(ControllerTest, getRightMotorPwm)
   {
     Controller controller;
-    double expected = 0;
-    double actual = controller.getRightPwm();
+    double expected = 0.0;
+    double actual = controller.getRightMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
-    int pwm = 80;
+    double pwm = 90.2;
     controller.setRightMotorPwm(pwm);
-    expected = 80;
-    actual = controller.getRightPwm();
+    expected = 90.2;
+    actual = controller.getRightMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
     controller.resetRightMotorPwm();
   }
 
   // 左タイヤのPWM値を取得できるかのテスト
-  TEST(ControllerTest, getLeftPwm)
+  TEST(ControllerTest, getleftMotorPwm)
   {
     Controller controller;
     double expected = 0;
-    double actual = controller.getLeftPwm();
+    double actual = controller.getLeftMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
-    int pwm = 80;
+    double pwm = 80.1;
     controller.setLeftMotorPwm(pwm);
-    expected = 80;
-    actual = controller.getLeftPwm();
+    expected = 80.1;
+    actual = controller.getLeftMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
     controller.resetLeftMotorPwm();
   }
