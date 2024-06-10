@@ -81,6 +81,7 @@ namespace etrobocon2024_test {
     EXPECT_GE(expected + error, actual);
   }
 
+  // PWM値を0に設定して回頭するテスト
   TEST(PwmRotationTest, runZeroPWM)
   {
     Controller controller;
@@ -117,6 +118,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
   }
 
+  // PWM値をマイナスに設定して回頭するテスト
   TEST(PwmRotationTest, runMinusPWM)
   {
     Controller controller;
@@ -153,6 +155,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
   }
 
+  // 回頭角度を0に設定して回頭するテスト
   TEST(PwmRotationTest, runZeroAngle)
   {
     Controller controller;
@@ -189,6 +192,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
   }
 
+  // 回頭角度をマイナスに設定して回頭するテスト
   TEST(PwmRotationTest, runMinusAngle)
   {
     Controller controller;
@@ -225,6 +229,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
   }
 
+  // 回頭角度を360度以上に設定して回頭するテスト
   TEST(PwmRotationTest, runOverAngle)
   {
     Controller controller;
