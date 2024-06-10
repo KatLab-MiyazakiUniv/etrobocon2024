@@ -9,7 +9,7 @@
 
 #include "Measurer.h"
 #include "Controller.h"
-// #include "Logger.h"
+#include "Logger.h"
 
 class Motion {
  public:
@@ -29,7 +29,7 @@ class Motion {
   virtual void logRunning() = 0;
 
  protected:
-  // Logger logger;
+  Logger logger;
 };
 
 #endif
