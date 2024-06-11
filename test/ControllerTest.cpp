@@ -119,6 +119,16 @@ namespace etrobocon2024_test {
     expected = 90.2;
     actual = controller.getRightMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
+    pwm = 200.0;
+    controller.setRightMotorPwm(pwm);
+    expected = 100.0;
+    actual = controller.getRightMotorPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+    pwm = -200.0;
+    controller.setRightMotorPwm(pwm);
+    expected = -100.0;
+    actual = controller.getRightMotorPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
     controller.resetRightMotorPwm();
   }
 
@@ -132,6 +142,16 @@ namespace etrobocon2024_test {
     double pwm = 80.1;
     controller.setLeftMotorPwm(pwm);
     expected = 80.1;
+    actual = controller.getLeftMotorPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+    pwm = 200.0;
+    controller.setLeftMotorPwm(pwm);
+    expected = 100.0;
+    actual = controller.getLeftMotorPwm();
+    EXPECT_DOUBLE_EQ(expected, actual);
+    pwm = -200.0;
+    controller.setLeftMotorPwm(pwm);
+    expected = -100.0;
     actual = controller.getLeftMotorPwm();
     EXPECT_DOUBLE_EQ(expected, actual);
     controller.resetLeftMotorPwm();

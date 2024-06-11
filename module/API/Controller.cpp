@@ -26,14 +26,26 @@ double Controller::limitPwmValue(const double inputPwm)
 // 右モータにPWM値をセット
 void Controller::setRightMotorPwm(const double pwm)
 {
-  pwmOfRightWheel = pwm;
+  if(pwm > MOTOR_PWM_MAX) {
+    pwmOfRightWheel = MOTOR_PWM_MAX;
+  } else if(pwm < MOTOR_PWM_MIN) {
+    pwmOfRightWheel = MOTOR_PWM_MIN;
+  } else {
+    pwmOfRightWheel = pwm;
+  }
   rightWheel.setPWM(int(limitPwmValue(pwm)));
 }
 
 // 左モータにPWM値をセット
 void Controller::setLeftMotorPwm(const double pwm)
 {
-  pwmOfLeftWheel = pwm;
+  if(pwm > MOTOR_PWM_MAX) {
+    pwmOfLeftWheel = MOTOR_PWM_MAX;
+  } else if(pwm < MOTOR_PWM_MIN) {
+    pwmOfLeftWheel = MOTOR_PWM_MIN;
+  } else {
+    pwmOfLeftWheel = pwm;
+  }
   leftWheel.setPWM(int(limitPwmValue(pwm)));
 }
 
