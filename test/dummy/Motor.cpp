@@ -25,7 +25,7 @@ int Motor::getCount()
 }
 
 // pwm値設定
-void Motor::setPWM(double pwm)
+void Motor::setPWM(int pwm)
 {
   if(port == PORT_C) {
     leftCount += pwm * 0.05;

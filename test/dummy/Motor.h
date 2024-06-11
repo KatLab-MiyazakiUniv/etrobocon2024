@@ -34,7 +34,7 @@ namespace ev3api {
      * pwm値設定
      * @param pwm pwm値
      */
-    void setPWM(double pwm);
+    void setPWM(int pwm);
 
     /**
      * 停止する
