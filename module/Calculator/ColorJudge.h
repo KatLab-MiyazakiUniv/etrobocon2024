@@ -33,7 +33,7 @@ class ColorJudge {
 
   /**
    * 与えられたRGB値から、何色かを返す
-   * @param rgb RGB
+   * @param rgb RGB値
    * @return 色
    */
   static COLOR getColor(rgb_raw_t const& rgb);
@@ -65,9 +65,9 @@ class ColorJudge {
   static constexpr rgb_raw_t MIN_RGB = { 9, 10, 10 };  // コースが黒の時（最小）のRGB値
 
   /**
-   * RGBをHSVに変換する
-   * @param rgb RGB
-   * @return hsv HSV
+   * RGB値をHSV値に変換する
+   * @param rgb RGB値
+   * @return hsv HSV値
    */
   static Hsv convertRgbToHsv(rgb_raw_t const& rgb);
 };

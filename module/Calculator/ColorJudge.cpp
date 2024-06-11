@@ -6,9 +6,8 @@
 
 #include "ColorJudge.h"
 
-// RGBから色を判別する
-COLOR
-ColorJudge::getColor(rgb_raw_t const& _rgb)
+// RGB値から色を判別する
+COLOR ColorJudge::getColor(rgb_raw_t const& _rgb)
 {
   rgb_raw_t rgb;
   Hsv hsv;
