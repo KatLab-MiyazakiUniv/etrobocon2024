@@ -6,8 +6,6 @@
 #ifndef RGB_DATA_H
 #define RGB_DATA_H
 
-#include "ColorJudge.h"
-
 static constexpr rgb_raw_t BLUE_DATA[] = {
   { 20, 47, 78 }, { 19, 46, 76 }, { 20, 46, 76 }, { 20, 48, 80 }, { 21, 48, 80 }, { 21, 49, 80 },
   { 21, 49, 81 }, { 21, 51, 84 }, { 22, 51, 84 }, { 22, 52, 86 }, { 22, 53, 88 }, { 23, 55, 91 },
