@@ -1,7 +1,7 @@
 /**
  * @file Motor.cpp
  * @brief モータクラスで用いる関数（ダミー）
- * @author keiya121 CHIHAYATAKU
+ * @author keiya121
  */
 
 #include "Motor.h"

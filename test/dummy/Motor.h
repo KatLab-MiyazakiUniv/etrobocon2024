@@ -1,7 +1,7 @@
 /**
  * @file Motor.h
  * @brief モータクラス（ダミー）
- * @author keiya121 CHIHAYATAKU
+ * @author keiya121
  */
 
 #ifndef MOTOR_H
