@@ -34,7 +34,7 @@ class Logger {
 
   /**
    * @brief 入力された文字列をhighlightLogとして色を変更し、ターミナルに表示
-   * @param hilightLog 表示するhighlightlogメッセージ
+   * @param highlightLog 表示するhighlightlogメッセージ
    */
   void logHighlight(const char* highlightLog);
 
