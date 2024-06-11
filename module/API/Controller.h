@@ -38,7 +38,7 @@ class Controller {
   /**
    * @brief タイヤのモータを停止する
    */
-  void stopMotor();
+  void stopWheelsMotor();
 
   /**
    * @brief アームのモータにPWM値をセット

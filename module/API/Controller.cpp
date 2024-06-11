@@ -26,27 +26,15 @@ double Controller::limitPwmValue(const double inputPwm)
 // 右モータにPWM値をセット
 void Controller::setRightMotorPwm(const double pwm)
 {
-  if(pwm > MOTOR_PWM_MAX) {
-    pwmOfRightWheel = MOTOR_PWM_MAX;
-  } else if(pwm < MOTOR_PWM_MIN) {
-    pwmOfRightWheel = MOTOR_PWM_MIN;
-  } else {
-    pwmOfRightWheel = pwm;
-  }
-  rightWheel.setPWM(int(limitPwmValue(pwm)));
+  pwmOfRightWheel = limitPwmValue(pwm);
+  rightWheel.setPWM(static_cast<int>(pwmOfRightWheel));
 }
 
 // 左モータにPWM値をセット
 void Controller::setLeftMotorPwm(const double pwm)
 {
-  if(pwm > MOTOR_PWM_MAX) {
-    pwmOfLeftWheel = MOTOR_PWM_MAX;
-  } else if(pwm < MOTOR_PWM_MIN) {
-    pwmOfLeftWheel = MOTOR_PWM_MIN;
-  } else {
-    pwmOfLeftWheel = pwm;
-  }
-  leftWheel.setPWM(int(limitPwmValue(pwm)));
+  pwmOfLeftWheel = limitPwmValue(pwm);
+  leftWheel.setPWM(static_cast<int>(pwmOfLeftWheel));
 }
 
 // 右モータのPWM値をリセット
@@ -64,7 +52,7 @@ void Controller::resetLeftMotorPwm()
 }
 
 // タイヤのモータを停止する
-void Controller::stopMotor()
+void Controller::stopWheelsMotor()
 {
   pwmOfRightWheel = 0.0;
   pwmOfLeftWheel = 0.0;

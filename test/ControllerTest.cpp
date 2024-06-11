@@ -78,11 +78,11 @@ namespace etrobocon2024_test {
     controller.resetLeftMotorPwm();
   }
 
-  // stopMotor()を呼び出せるか確認するテスト
-  TEST(ControllerTest, stopMotor)
+  // stopWheelsMotor()を呼び出せるか確認するテスト
+  TEST(ControllerTest, stopWheelsMotor)
   {
     Controller controller;
-    controller.stopMotor();
+    controller.stopWheelsMotor();
     SUCCEED();
   }
 

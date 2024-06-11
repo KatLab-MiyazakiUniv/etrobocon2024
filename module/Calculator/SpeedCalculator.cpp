@@ -40,7 +40,7 @@ SpeedCalculator::SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpe
   prevLeftTime = currentTime;
 }
 
-double SpeedCalculator::calculaterightMotorPwmFromTargetSpeed()
+double SpeedCalculator::calculateRightMotorPwmFromTargetSpeed()
 {
   // 右タイヤの回転角度を取得
   int rightAngle = measurer.getRightCount();
@@ -61,7 +61,7 @@ double SpeedCalculator::calculaterightMotorPwmFromTargetSpeed()
   return rightMotorPwm;
 }
 
-double SpeedCalculator::calculateleftMotorPwmFromTargetSpeed()
+double SpeedCalculator::calculateLeftMotorPwmFromTargetSpeed()
 {
   // 左タイヤの回転角度を取得
   int leftAngle = measurer.getLeftCount();

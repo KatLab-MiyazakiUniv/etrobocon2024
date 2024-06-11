@@ -32,13 +32,13 @@ class SpeedCalculator {
    * @brief 目標とする走行速度に相当する右車輪のPWM値を算出する
    * @return 走行速度に相当する右タイヤのPWM値
    */
-  double calculaterightMotorPwmFromTargetSpeed();
+  double calculateRightMotorPwmFromTargetSpeed();
 
   /**
    * @brief 目標とする走行速度に相当する左車輪のPWM値を算出する
    * @return 走行速度に相当する左タイヤのPWM値
    */
-  double calculateleftMotorPwmFromTargetSpeed();
+  double calculateLeftMotorPwmFromTargetSpeed();
 
  private:
   const double rightTargetSpeed;
