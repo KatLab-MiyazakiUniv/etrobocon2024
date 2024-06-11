@@ -1,7 +1,7 @@
 /**
  * @file ColorJudge.cpp
  * @brief 色識別クラス
- * @author keiya121
+ * @author keiya121 YKhm20020
  */
 
 #include "ColorJudge.h"

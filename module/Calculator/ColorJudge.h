@@ -1,7 +1,7 @@
 /**
  * @file ColorJudge.h
  * @brief 色識別クラス
- * @author keiya121
+ * @author keiya121 YKhm20020
  */
 
 #ifndef COLOR_JUDGE_H

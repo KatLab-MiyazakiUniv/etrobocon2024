@@ -1,7 +1,7 @@
 /**
  * @file   ColorJudgeTest.cpp
  * @brief  ColorJudgeクラスをテストする
- * @author keiya121
+ * @author keiya121 YKhm20020
  */
 
 #include "ColorJudge.h"
