@@ -5,13 +5,16 @@
  */
 #include "Logger.h"
 
+// NOTE: メモリ領域不足によってログが全て表示できない場合があるため、大きめのメモリ領域を別に確保
+#define LARGE_BUF_SIZE 256
+#define SMALL_BUF_SIZE 128
+
 Logger::Logger() {}
 
 void Logger::log(const char* logMessage)
 {
-  const int BUF_SIZE = 256;
-  char message[BUF_SIZE];  // 表示するメッセージ
-  snprintf(message, BUF_SIZE, "%s\n", logMessage);
+  char message[LARGE_BUF_SIZE];  // 表示するメッセージ
+  snprintf(message, LARGE_BUF_SIZE, "%s\n", logMessage);
   printf("%s", message);
 
   strncat(logs, message, sizeof(logs));  // logsとmessageを結合する
@@ -19,9 +22,8 @@ void Logger::log(const char* logMessage)
 
 void Logger::logWarning(const char* warningMessage)
 {
-  const int BUF_SIZE = 128;
-  char message[BUF_SIZE];  // 表示するメッセージ
-  snprintf(message, BUF_SIZE, "%s\n", warningMessage);
+  char message[SMALL_BUF_SIZE];  // 表示するメッセージ
+  snprintf(message, SMALL_BUF_SIZE, "%s\n", warningMessage);
   printf("\x1b[36m"); /* 文字色をシアンに */
   printf("Warning: %s", message);
   printf("\x1b[39m"); /* 文字色をデフォルトに戻す */
@@ -31,9 +33,8 @@ void Logger::logWarning(const char* warningMessage)
 
 void Logger::logError(const char* errorMessage)
 {
-  const int BUF_SIZE = 128;
-  char message[BUF_SIZE];  // 表示するメッセージ
-  snprintf(message, BUF_SIZE, "%s\n", errorMessage);
+  char message[SMALL_BUF_SIZE];  // 表示するメッセージ
+  snprintf(message, SMALL_BUF_SIZE, "%s\n", errorMessage);
   printf("\x1b[35m"); /* 文字色をマゼンタに */
   printf("Error: %s", message);
   printf("\x1b[39m"); /* 文字色をデフォルトに戻す */
@@ -43,9 +44,8 @@ void Logger::logError(const char* errorMessage)
 
 void Logger::logHighlight(const char* highlightLog)
 {
-  const int BUF_SIZE = 128;
-  char message[BUF_SIZE];  // 表示するメッセージ
-  snprintf(message, BUF_SIZE, "%s\n", highlightLog);
+  char message[SMALL_BUF_SIZE];  // 表示するメッセージ
+  snprintf(message, SMALL_BUF_SIZE, "%s\n", highlightLog);
   printf("\x1b[32m"); /* 文字色を緑色に */
   printf("%s", message);
   printf("\x1b[39m"); /* 文字色をデフォルトに戻す */
