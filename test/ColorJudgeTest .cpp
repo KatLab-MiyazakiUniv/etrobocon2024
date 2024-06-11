@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 namespace etrobocon2024_test {
+  // RGB値が全て0の色を取得し、色を判定する
   TEST(ColorJudgeTest, getColorZeroRgb)
   {
     rgb_raw_t rgb = { 0, 0, 0 };
@@ -18,6 +19,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // RGBが全て255の色を取得し、色を判定する
   TEST(ColorJudgeTest, getColorFullRgb)
   {
     rgb_raw_t rgb = { 255, 255, 255 };
@@ -27,6 +29,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 青色に設定したRGB値から色を判定する
   TEST(ColorJudgeTest, getColorBlue)
   {
     COLOR expected = COLOR::BLUE;
@@ -38,6 +41,7 @@ namespace etrobocon2024_test {
     }
   }
 
+  // 緑色に設定したRGB値から色を判定する
   TEST(ColorJudgeTest, getColorGreen)
   {
     COLOR expected = COLOR::GREEN;
@@ -49,6 +53,7 @@ namespace etrobocon2024_test {
     }
   }
 
+  // 黄色に設定したRGB値から色を判定する
   TEST(ColorJudgeTest, getColorYellow)
   {
     COLOR expected = COLOR::YELLOW;
@@ -60,6 +65,7 @@ namespace etrobocon2024_test {
     }
   }
 
+  // 赤色に設定したRGB値から色を判定する
   TEST(ColorJudgeTest, getColorRed)
   {
     COLOR expected = COLOR::RED;
@@ -71,6 +77,7 @@ namespace etrobocon2024_test {
     }
   }
 
+  // 黒色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorBlack)
   {
     const char* str = "BLACK";
@@ -81,6 +88,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 白色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorWhite)
   {
     const char* str = "WHITE";
@@ -91,6 +99,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 青色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorBlue)
   {
     const char* str = "BLUE";
@@ -101,6 +110,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 緑色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorGreen)
   {
     const char* str = "GREEN";
@@ -111,6 +121,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 黄色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorYellow)
   {
     const char* str = "YELLOW";
@@ -121,6 +132,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 赤色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorRed)
   {
     const char* str = "RED";
@@ -131,6 +143,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 無色の文字列から列挙型の色に変換する
   TEST(ColorJudgeTest, stringToColorNone)
   {
     const char* str = "NONE";
@@ -141,6 +154,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 列挙型の黒色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringBlack)
   {
     COLOR color = COLOR::BLACK;
@@ -151,6 +165,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の白色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringWhite)
   {
     COLOR color = COLOR::WHITE;
@@ -161,6 +176,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の青色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringBlue)
   {
     COLOR color = COLOR::BLUE;
@@ -171,6 +187,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の緑色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringGreen)
   {
     COLOR color = COLOR::GREEN;
@@ -181,6 +198,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の黄色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringYellow)
   {
     COLOR color = COLOR::YELLOW;
@@ -191,6 +209,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の赤色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringRed)
   {
     COLOR color = COLOR::RED;
@@ -201,6 +220,7 @@ namespace etrobocon2024_test {
     EXPECT_STREQ(expected, actual);
   }
 
+  // 列挙型の無色から文字列に変換する
   TEST(ColorJudgeTest, colorToStringNone)
   {
     COLOR color = COLOR::NONE;
