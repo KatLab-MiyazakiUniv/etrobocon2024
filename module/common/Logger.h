@@ -12,6 +12,9 @@
 
 class Logger {
  public:
+  /**
+   * コンストラクタ
+   */
   Logger();
 
   /**
