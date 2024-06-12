@@ -27,14 +27,14 @@ class PwmRotation : public Rotation {
   /**
    * @brief 回頭する際の事前条件判定をする
    */
-  bool isMetPrecondition() override;
+  bool isMetPreCondition() override;
 
   /**
    * @brief 回頭する際の継続条件判定をする　返り値がfalseでモーターが止まる
    * @param leftSign 左車輪の回転方向
    * @param rightSign 右車輪の回転方向
    */
-  bool isMetPostcondition(double initLeftMileage, double initRightMileage, int leftSign,
+  bool isMetContCondition(double initLeftMileage, double initRightMileage, int leftSign,
                           int rightSign) override;
 
   /**

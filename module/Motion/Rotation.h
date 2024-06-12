@@ -31,7 +31,7 @@ class Rotation : public Motion {
    * @brief 回頭する際の事前条件判定をする
    * @note オーバーライド必須
    */
-  virtual bool isMetPrecondition() = 0;
+  virtual bool isMetPreCondition() = 0;
 
   /**
    * @brief 回頭する際の継続条件判定をする　返り値がfalseでモーターが止まる
@@ -41,7 +41,7 @@ class Rotation : public Motion {
    * @param rightSign 右車輪の回転方向
    * @note オーバーライド必須
    */
-  virtual bool isMetPostcondition(double targetLeftDistance, double targetRightDistance,
+  virtual bool isMetContCondition(double targetLeftDistance, double targetRightDistance,
                                   int leftSign, int rightSign)
       = 0;
 

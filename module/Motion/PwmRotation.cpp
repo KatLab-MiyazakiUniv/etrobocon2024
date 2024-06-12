@@ -13,7 +13,7 @@ PwmRotation::PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
 {
 }
 
-bool PwmRotation::isMetPrecondition()
+bool PwmRotation::isMetPreCondition()
 {
   const int BUF_SIZE = 256;
   char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
@@ -35,7 +35,7 @@ bool PwmRotation::isMetPrecondition()
   return true;
 }
 
-bool PwmRotation::isMetPostcondition(double targetLeftDistance, double targetRightDistance,
+bool PwmRotation::isMetContCondition(double targetLeftDistance, double targetRightDistance,
                                      int leftSign, int rightSign)
 {
   // 残りの移動距離を算出

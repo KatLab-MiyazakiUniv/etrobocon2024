@@ -16,7 +16,7 @@ Rotation::Rotation(int _targetAngle, int _pwm, bool _isClockwise)
 void Rotation::run()
 {
   // 事前条件を判定する
-  if(!isMetPrecondition()) {
+  if(!isMetPreCondition()) {
     return;
   }
 
@@ -37,7 +37,7 @@ void Rotation::run()
   double targetRightDistance = initRightMileage + targetDistance * rightSign;
 
   // 継続条件を満たしている間ループ
-  while(isMetPostcondition(targetLeftDistance, targetRightDistance, leftSign, rightSign)) {
+  while(isMetContCondition(targetLeftDistance, targetRightDistance, leftSign, rightSign)) {
     // モータにPWM値をセット
     controller.setLeftMotorPwm(pwm * leftSign);
     controller.setRightMotorPwm(pwm * rightSign);
