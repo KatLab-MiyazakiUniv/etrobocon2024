@@ -15,20 +15,19 @@ PwmRotation::PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
 
 bool PwmRotation::isMetPreCondition()
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
   // pwm値が0以下の場合はwarningを出して終了する
   if(pwm <= 0) {
-    snprintf(buf, BUF_SIZE, "The pwm value passed to PwmRotation is %d", pwm);
-    // logger.logWarning(buf);
+    snprintf(buf, LARGE_BUF_SIZE, "The pwm value passed to PwmRotation is %d", pwm);
+    logger.logWarning(buf);
     return false;
   }
 
   // targetAngleが0以下の場合はwarningを出して終了する
   if(targetAngle <= 0 || targetAngle >= 360) {
-    snprintf(buf, BUF_SIZE, "The targetAngle value passed to PwmRotation is %d", targetAngle);
-    // logger.logWarning(buf);
+    snprintf(buf, LARGE_BUF_SIZE, "The angle value passed to PwmRotation is %d", targetAngle);
+    logger.logWarning(buf);
     return false;
   }
 
@@ -54,11 +53,10 @@ bool PwmRotation::isMetContCondition(double targetLeftDistance, double targetRig
 
 void PwmRotation::logRunning()
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* str = isClockwise ? "true" : "false";
 
-  snprintf(buf, BUF_SIZE, "Run PwmRotation (angle: %d, pwm: %d, isClockwise: %s)", targetAngle, pwm,
-           str);
-  //   logger.log(buf);
+  snprintf(buf, LARGE_BUF_SIZE, "Run PwmRotation (angle: %d, pwm: %d, isClockwise: %s)",
+           targetAngle, pwm, str);
+  logger.log(buf);
 }

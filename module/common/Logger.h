@@ -10,6 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+// NOTE: メモリ領域不足によってログが全て表示できない場合があるため、大きめのメモリ領域を別に確保
+#define LARGE_BUF_SIZE 256
+#define SMALL_BUF_SIZE 128
+
 class Logger {
  public:
   /**
