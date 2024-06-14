@@ -7,11 +7,11 @@
 #ifndef SpeedCalculator_H
 #define SpeedCalculator_H
 
+#include "Measurer.h"
+#include "Controller.h"
 #include "Mileage.h"
 #include "Pid.h"
 #include "Timer.h"
-#include "Controller.h"
-#include "Measurer.h"
 
 class SpeedCalculator {
  public:
