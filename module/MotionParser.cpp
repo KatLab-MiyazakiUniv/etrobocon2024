@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author aridome222
+ * @author keiya121
  */
 
 #include "MotionParser.h"
@@ -72,11 +72,11 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       ColorStraight* cs = new ColorStraight(ColorJudge::stringToColor(params[1]),  // 目標色
                                             atof(params[2]));                      // 目標速度
 
-      motionList.push_back(cs);                               // 動作リストに追加
-    } else if(command == COMMAND::AR) {                       // 指定角度回頭動作の生成
-      AngleRotation* ar = new AngleRotation(atoi(params[1]),  // 目標角度
-                                            atof(params[2]),  // 目標速度
-                                            convertBool(params[0], params[3]));  // 回頭方向
+      motionList.push_back(cs);                             // 動作リストに追加
+    } else if(command == COMMAND::AR) {                     // 指定角度回頭動作の生成
+      AngleRotation* ar = new PwmRotation(atoi(params[1]),  // 目標角度
+                                          atoi(params[2]),  // 目標PWM
+                                          convertBool(params[0], params[3]));  // 回頭方向
 
       motionList.push_back(ar);                        // 動作リストに追加
     } else if(command == COMMAND::EC) {                // エッジ切り替えの生成
