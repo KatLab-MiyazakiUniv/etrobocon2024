@@ -10,10 +10,11 @@ Calibrator::Calibrator() : isLeftCourse(true), targetBrightness(50) {}
 
 void Calibrator::run()
 {
-  //  画像の削除
-  char cmd[LARGE_BUF_SIZE];
-  snprintf(cmd, LARGE_BUF_SIZE, "cd etrobocon2024/rear_camera_py && make rm-img && cd ../..");
-  system(cmd);
+  // まだ画像に関する処理が実装されていないためコメントアウト
+  //   //  画像の削除
+  //   char cmd[LARGE_BUF_SIZE];
+  //   snprintf(cmd, LARGE_BUF_SIZE, "cd etrobocon2024/rear_camera_py && make rm-img && cd ../..");
+  //   system(cmd);
 
   // 左右ボタンでコースのLRを選択する
   selectCourse();
