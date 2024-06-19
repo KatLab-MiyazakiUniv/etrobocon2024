@@ -13,7 +13,7 @@ using namespace std;
 
 namespace etrobocon2023_test {
   TEST(DistanceStraightTest, run)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -24,7 +24,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     double leftInitial = Mileage::calculateWheelMileage(leftCount);
@@ -63,7 +63,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runFullPwm)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -74,7 +74,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     double leftInitial = Mileage::calculateWheelMileage(leftCount);
@@ -113,7 +113,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runMinusDistance)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -124,7 +124,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     // 期待する走行距離
@@ -149,7 +149,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runBack)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -160,7 +160,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     double leftInitial = Mileage::calculateWheelMileage(leftCount);
@@ -199,7 +199,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runBackFullPwm)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -210,7 +210,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     double leftInitial = Mileage::calculateWheelMileage(leftCount);
@@ -249,7 +249,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runZeroPwm)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -260,7 +260,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     // 期待する走行距離
@@ -285,7 +285,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(DistanceStraightTest, runMinusDistanceZeroPwm)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -296,7 +296,7 @@ namespace etrobocon2023_test {
     DistanceStraight ds(targetDistance, targetSpeed);
 
     // 初期値
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int leftCount = measurer.getLeftCount();
     int rightCount = measurer.getRightCount();
     // 期待する走行距離

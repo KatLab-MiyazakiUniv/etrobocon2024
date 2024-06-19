@@ -15,7 +15,7 @@ namespace etrobocon2023_test {
 
   // 最初の色取得で指定色を取得するテストケース
   TEST(ColorStraightTest, runToGetFirst)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -24,9 +24,9 @@ namespace etrobocon2023_test {
     COLOR targetColor = COLOR::GREEN;
     int targetSpeed = 100;
     ColorStraight cs(targetColor, targetSpeed);
-    
+
     // 初期値から期待する走行距離を求める
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int initialRightCount = measurer.getRightCount();
     int initialLeftCount = measurer.getLeftCount();
     double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
@@ -55,7 +55,7 @@ namespace etrobocon2023_test {
     ColorStraight cs(targetColor, targetSpeed);
 
     // 初期値から期待する走行距離を求める
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int initialRightCount = measurer.getRightCount();
     int initialLeftCount = measurer.getLeftCount();
     double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
@@ -81,7 +81,7 @@ namespace etrobocon2023_test {
 
   // 少し走ってから指定色を取得するテストケース
   TEST(ColorStraightTest, runBack)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -92,7 +92,7 @@ namespace etrobocon2023_test {
     ColorStraight cs(targetColor, targetSpeed);
 
     // 初期値から期待する走行距離を求める
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int initialRightCount = measurer.getRightCount();
     int initialLeftCount = measurer.getLeftCount();
     double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
@@ -117,7 +117,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(ColorStraightTest, runZeroPWM)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -128,7 +128,7 @@ namespace etrobocon2023_test {
     ColorStraight cs(targetColor, targetSpeed);
 
     // 初期値から期待する走行距離を求める
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int initialRightCount = measurer.getRightCount();
     int initialLeftCount = measurer.getLeftCount();
     double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
@@ -153,7 +153,7 @@ namespace etrobocon2023_test {
   }
 
   TEST(ColorStraightTest, runNoneColor)
-  { 
+  {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
@@ -164,7 +164,7 @@ namespace etrobocon2023_test {
     ColorStraight cs(targetColor, targetSpeed);
 
     // 初期値から期待する走行距離を求める
-    Measurer measurer; // Measurerクラスのオブジェクトを生成
+    Measurer measurer;  // Measurerクラスのオブジェクトを生成
     int initialRightCount = measurer.getRightCount();
     int initialLeftCount = measurer.getLeftCount();
     double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);

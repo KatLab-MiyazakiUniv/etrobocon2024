@@ -33,7 +33,7 @@ void Straight::run()
 
   double currentLeftPwm = 0.0;   // 現在の左タイヤpwd値
   double currentRightPwm = 0.0;  // 現在の右タイヤpwd値
-  Controller controller; // Controllerクラスのオブジェクトを生成
+  Controller controller;         // Controllerクラスのオブジェクトを生成
 
   // 走行距離が目標値に到達するまで繰り返す
   while(true) {
@@ -45,7 +45,7 @@ void Straight::run()
     // PWM値を目標速度値に合わせる
     currentLeftPwm = speedCalculator.calculateLeftMotorPwmFromTargetSpeed();
     currentRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
-    
+
     // モータにPWM値をセット
     controller.setLeftMotorPwm(currentLeftPwm);
     controller.setRightMotorPwm(currentRightPwm);

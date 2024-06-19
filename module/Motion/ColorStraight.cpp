@@ -13,7 +13,7 @@ ColorStraight::ColorStraight(COLOR _targetColor, double _targetSpeed)
 }
 
 bool ColorStraight::isRunPostconditionJudgement()
-{ 
+{
   Measurer measurer;
   COLOR color = ColorJudge::getColor(measurer.getRawColor());
   if(color == targetColor) {
