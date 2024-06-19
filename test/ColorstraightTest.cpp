@@ -1,7 +1,7 @@
 /**
  *  @file   ColorStraightTest.cpp
  *  @brief  ColorStraightクラスのテスト
- *  @author Negimarge bizyutyu
+ *  @author bizyutyu
  */
 
 #include <gtest/gtest.h>

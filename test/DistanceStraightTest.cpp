@@ -1,7 +1,7 @@
 /**
  *  @file   DistanceStraightTest.cpp
  *  @brief  DistanceStraightクラスのテスト
- *  @author Negimarge
+ *  @author bizyutyu
  */
 
 #include "DistanceStraight.h"
