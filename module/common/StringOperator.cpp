@@ -1,7 +1,7 @@
 /**
  * @file   StringOperator.cpp
  * @brief  文字列を操作するstatic関数を持つクラス
- * @author aridome222
+ * @author keiya121
  */
 
 #include "StringOperator.h"

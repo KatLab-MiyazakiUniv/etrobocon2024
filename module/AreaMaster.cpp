@@ -1,7 +1,7 @@
 /**
  * @file   AreaMaster.cpp
  * @brief  エリアを攻略するクラス
- * @author aridome222
+ * @author keiya121
  */
 
 #include "AreaMaster.h"

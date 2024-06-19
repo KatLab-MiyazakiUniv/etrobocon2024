@@ -1,7 +1,7 @@
 /**
  * @file   AreaMaster.h
  * @brief  エリアを攻略するクラス
- * @author aridome222
+ * @author keiya121
  */
 
 #ifndef AREA_MASTER_H

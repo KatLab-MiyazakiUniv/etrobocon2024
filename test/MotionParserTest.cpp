@@ -1,7 +1,7 @@
 /**
  * @file   MotionParserTest.cpp
  * @brief  MotionParserクラスをテストする
- * @author aridome222
+ * @author keiya121
  */
 
 #include "MotionParser.h"
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
   TEST(MotionParserTest, createMotions)
   {
     const char* filePath = "../test/test_data/CommandParserTestData.csv";
@@ -80,4 +80,4 @@ namespace etrobocon2023_test {
     EXPECT_EQ(expectedList, actualList);  // ファイルを読み込めないためリストは空のまま
   }
 
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test

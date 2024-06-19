@@ -1,7 +1,7 @@
 /**
  * @file AreaMasterTest.cpp
  * @brief AreaMasterクラスのテスト
- * @author aridome222
+ * @author keiya121
  */
 
 #include "AreaMaster.h"
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
 
   TEST(AreaMasterTest, runLineTraceLeftCourse)
   {
@@ -116,4 +116,4 @@ namespace etrobocon2023_test {
 
     EXPECT_TRUE(actual);  // WarningやErrorが出ていないかテスト
   }
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test

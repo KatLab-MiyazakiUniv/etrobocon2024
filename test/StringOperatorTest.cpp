@@ -1,14 +1,14 @@
 /**
  * @file   StringOperatorTest.cpp
  * @brief  StringOperatorクラスのテスト
- * @author aridome222
+ * @author keiya121
  */
 
 #include "StringOperator.h"
 #include <gtest/gtest.h>
 #include <gtest/internal/gtest-port.h>
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
 
   TEST(StringOperatorTest, removeEOL)
   {
@@ -50,4 +50,4 @@ namespace etrobocon2023_test {
     // Warningが出ているかテスト
     EXPECT_EQ(expected, actual);
   }
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test

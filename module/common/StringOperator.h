@@ -1,7 +1,7 @@
 /**
  * @file   StringOperator.h
  * @brief  文字列を操作するstatic関数を持つクラス
- * @author aridome222
+ * @author keiya121
  */
 #ifndef STRING_OPERATOR_H
 #define STRING_OPERATOR_H
