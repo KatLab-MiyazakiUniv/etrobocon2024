@@ -5,6 +5,7 @@
  */
 
 #include "Calibrator.h"
+#include "DummyRobot.h"
 #include <gtest/gtest.h>
 #include <gtest/internal/gtest-port.h>
 #include <time.h>
@@ -16,8 +17,10 @@ namespace etrobocon2024_test {
   TEST(CalibratorTest, run)
   {
     Calibrator calibrator;
-    srand(2);  // SPIKEの電圧が標準値でLeftコースを選択する乱数シード
-    testing::internal::CaptureStdout();  // 標準出力キャプチャ開始
+    // srand(2);  // SPIKEの電圧が標準値でLeftコースを選択する乱数シード
+    DummyRobot::setButtonState(
+        DummyRobot::ButtonState::right);  // 実機のボタン押下状態を「右」に設定
+    testing::internal::CaptureStdout();   // 標準出力キャプチャ開始
     calibrator.run();
     string output = testing::internal::GetCapturedStdout();  // キャプチャ終了
 
