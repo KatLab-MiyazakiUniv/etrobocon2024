@@ -33,13 +33,13 @@ class DistanceLineTracing : public LineTracing {
    * @param targetSpeed 目標速度
    * @note オーバーライド必須
    */
-  bool isMetPrecondition(double targetSpeed) override;
+  bool isMetPreCondition(double targetSpeed) override;
 
   /**
    * @brief 指定距離ライントレースする際の継続条件判定をする　返り値がfalseでモーターが止まる
    * @note オーバーライド必須
    */
-  bool isMetPostcondition() override;
+  bool isMetContinuationCondition() override;
 
   /**
    * @brief 実行のログを取る
