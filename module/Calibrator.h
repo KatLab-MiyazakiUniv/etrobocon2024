@@ -19,23 +19,23 @@ class Calibrator {
   Calibrator();
 
   /**
-   * キャリブレーション処理（入力系）をまとめて実行する
+   * @brief キャリブレーション処理（入力系）をまとめて実行する
    */
   void run();
 
   /**
-   * スタート合図が出るまで待機状態にする
+   * @brief スタート合図が出るまで待機状態にする
    */
   void waitForStart();
 
   /**
-   * isLeftCourseのゲッター
+   * @brief isLeftCourseのゲッター
    * @return true:Lコース, false:Rコース
    */
   bool getIsLeftCourse();
 
   /**
-   * targetBrightnessのゲッター
+   * @brief targetBrightnessのゲッター
    * @return 目標輝度
    */
   int getTargetBrightness();
@@ -47,12 +47,12 @@ class Calibrator {
   Measurer measurer;
 
   /**
-   * 左右ボタンでLRコースを選択してisLeftCourseをセットする
+   * @brief 左右ボタンでLRコースを選択してisLeftCourseをセットする
    */
   void selectCourse();
 
   /**
-   * 黒と白の輝度を測定して目標輝度を求めtargetBrightnessをセットする
+   * @brief 黒と白の輝度を測定して目標輝度を求めtargetBrightnessをセットする
    */
   void measureTargetBrightness();
 };

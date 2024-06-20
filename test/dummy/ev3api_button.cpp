@@ -1,7 +1,7 @@
 /**
  * @file ev3api_button.cpp
  * @brief ボタン関連のダミー
- * @author keiya121
+ * @author keiya121 takahashitom
  */
 
 #include "ev3api_button.h"

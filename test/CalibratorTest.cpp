@@ -14,6 +14,7 @@ using namespace std;
 
 namespace etrobocon2024_test {
 
+  // run()において期待した出力がされており，WarningやErrorが出ていないかテスト
   TEST(CalibratorTest, run)
   {
     Calibrator calibrator;
@@ -29,9 +30,10 @@ namespace etrobocon2024_test {
                   && output.find("Warning") == string::npos  // Warningがない
                   && output.find("Error") == string::npos;   // Errorがない
 
-    EXPECT_TRUE(actual);  // 期待した出力がされており，WarningやErrorが出ていないかテスト
+    EXPECT_TRUE(actual);
   }
 
+  // waitForStart()において期待した出力がされており，WarningやErrorが出ていないかテスト
   TEST(CalibratorTest, waitForStart)
   {
     Calibrator calibrator;
@@ -44,9 +46,10 @@ namespace etrobocon2024_test {
                   && output.find("Warning") == string::npos  // Warningがない
                   && output.find("Error") == string::npos;   // Errorがない
 
-    EXPECT_TRUE(actual);  // 期待した出力がされており，WarningやErrorが出ていないかテスト
+    EXPECT_TRUE(actual);
   }
 
+  // getIsLeftCourse()により、isLeftCourseの値を取得できるかのテスト
   TEST(CalibratorTest, getIsLeftCourse)
   {
     Calibrator calibrator;
@@ -74,6 +77,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // 出力とゲッタの値が等しいかテスト
   }
 
+  // getTargetBrightness()により、targetBrightnessの値を取得できるかのテスト
   TEST(CalibratorTest, getTargetBrightness)
   {
     Calibrator calibrator;
