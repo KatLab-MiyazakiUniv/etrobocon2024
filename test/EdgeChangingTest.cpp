@@ -10,6 +10,7 @@
 
 namespace etrobocon2024_test {
 
+  // 右エッジから右エッジの切り替えのテスト
   TEST(EdgeChanging, runFalseToFalse)
   {
     bool isLeftEdge = false;  // run()を実行することでこの変数が切り替わる（ecに参照渡しするため）
@@ -24,6 +25,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 右エッジから左エッジの切り替えのテスト
   TEST(EdgeChanging, runFalseToTrue)
   {
     bool isLeftEdge = false;  // run()を実行することでこの変数が切り替わる（ecに参照渡しするため）
@@ -38,6 +40,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 左エッジから右エッジの切り替えのテスト
   TEST(EdgeChanging, runTrueToFalse)
   {
     bool isLeftEdge = true;  // run()を実行することでこの変数が切り替わる（ecに参照渡しするため）
@@ -52,6 +55,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);
   }
 
+  // 左エッジから左エッジの切り替えのテスト
   TEST(EdgeChanging, runTrueToTrue)
   {
     bool isLeftEdge = true;  // run()を実行することでこの変数が切り替わる（ecに参照渡しするため）
