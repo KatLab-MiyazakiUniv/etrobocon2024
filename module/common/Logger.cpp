@@ -5,10 +5,6 @@
  */
 #include "Logger.h"
 
-// NOTE: メモリ領域不足によってログが全て表示できない場合があるため、大きめのメモリ領域を別に確保
-#define LARGE_BUF_SIZE 256
-#define SMALL_BUF_SIZE 128
-
 Logger::Logger() {}
 
 void Logger::log(const char* logMessage)

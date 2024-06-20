@@ -17,11 +17,11 @@ class DistanceLineTracing : public LineTracing {
    * @param _targetDistance 目標距離 0~
    * @param _targetSpeed 目標速度 0~
    * @param _targetBrightness 目標輝度 0~
-   * @param _gain PIDゲイン
+   * @param _pidGain PIDゲイン
    * @param _isLeftEdge エッジの左右判定(true:左エッジ, false:右エッジ)
    */
   DistanceLineTracing(double _targetDistance, double _targetSpeed, int _targetBrightness,
-                      const PidGain& _gain, bool& _isLeftEdge);
+                      const PidGain& _pidGain, bool& _isLeftEdge);
 
   /**
    * @brief 指定距離だけライントレースする

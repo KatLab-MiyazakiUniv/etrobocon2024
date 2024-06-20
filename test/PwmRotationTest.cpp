@@ -114,8 +114,8 @@ namespace etrobocon2024_test {
     int leftMotorCount = abs(measurer.getLeftCount() - initialLeftMotorCount);
     double actual = ((rightMotorCount + leftMotorCount) * TRANSFORM) / 2;
 
-    // EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
-    EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);              // 回頭の前後で角度に変化はない
   }
 
   // PWM値をマイナスに設定して回頭するテスト
@@ -151,8 +151,8 @@ namespace etrobocon2024_test {
     int leftMotorCount = abs(measurer.getLeftCount() - initialLeftMotorCount);
     double actual = ((rightMotorCount + leftMotorCount) * TRANSFORM) / 2;
 
-    // EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
-    EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);              // 回頭の前後で角度に変化はない
   }
 
   // 回頭角度を0に設定して回頭するテスト
@@ -188,8 +188,8 @@ namespace etrobocon2024_test {
     int leftMotorCount = abs(measurer.getLeftCount() - initialLeftMotorCount);
     double actual = ((rightMotorCount + leftMotorCount) * TRANSFORM) / 2;
 
-    // EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
-    EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);              // 回頭の前後で角度に変化はない
   }
 
   // 回頭角度をマイナスに設定して回頭するテスト
@@ -225,8 +225,8 @@ namespace etrobocon2024_test {
     int leftMotorCount = abs(measurer.getLeftCount() - initialLeftMotorCount);
     double actual = ((rightMotorCount + leftMotorCount) * TRANSFORM) / 2;
 
-    // EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
-    EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);              // 回頭の前後で角度に変化はない
   }
 
   // 回頭角度を360度以上に設定して回頭するテスト
@@ -262,7 +262,7 @@ namespace etrobocon2024_test {
     int leftMotorCount = abs(measurer.getLeftCount() - initialLeftMotorCount);
     double actual = ((rightMotorCount + leftMotorCount) * TRANSFORM) / 2;
 
-    // EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
-    EXPECT_EQ(expected, actual);  // 回頭の前後で角度に変化はない
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);              // 回頭の前後で角度に変化はない
   }
 }  // namespace etrobocon2024_test

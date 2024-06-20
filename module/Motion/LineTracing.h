@@ -7,11 +7,11 @@
 #ifndef LINE_TRACING_H
 #define LINE_TRACING_H
 
+#include "SpeedCalculator.h"
 #include "Motion.h"
 #include "Mileage.h"
 #include "Timer.h"
 #include "Pid.h"
-#include "SpeedCalculator.h"
 
 class LineTracing : public Motion {
  public:

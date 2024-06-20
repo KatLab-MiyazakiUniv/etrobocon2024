@@ -15,19 +15,18 @@ DistanceLineTracing::DistanceLineTracing(double _targetDistance, double _targetS
 
 bool DistanceLineTracing::isMetPrecondition(double targetSpeed)
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];
+  char buf[LARGE_BUF_SIZE];
 
   // targetSpeed値が0の場合はwarningを出して終了する
   if(targetSpeed == 0.0) {
-    snprintf(buf, BUF_SIZE, "The targetSpeed value passed to DistanceLineTracing is 0");
+    snprintf(buf, LARGE_BUF_SIZE, "The targetSpeed value passed to DistanceLineTracing is 0");
     logger.logWarning(buf);
     return false;
   }
 
   // targetDistance値が0以下の場合はwarningを出して終了する
   if(targetDistance <= 0.0) {
-    snprintf(buf, BUF_SIZE, "The targetDistance value passed to DistanceLineTracing is %.2f",
+    snprintf(buf, LARGE_BUF_SIZE, "The targetDistance value passed to DistanceLineTracing is %.2f",
              targetDistance);
     logger.logWarning(buf);
     return false;
@@ -49,11 +48,10 @@ bool DistanceLineTracing::isMetPostcondition()
 
 void DistanceLineTracing::logRunning()
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* str = isLeftEdge ? "true" : "false";
 
-  snprintf(buf, BUF_SIZE,
+  snprintf(buf, LARGE_BUF_SIZE,
            "Run DistanceLineTracing (targetDistance: %.2f, targetSpeed: %.2f, targetBrightness: "
            "%d, gain: (%.2f,%.2f,%.2f), isLeftEdge: %s)",
            targetDistance, targetSpeed, targetBrightness, pidGain.kp, pidGain.ki, pidGain.kd, str);
