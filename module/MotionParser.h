@@ -12,13 +12,7 @@
 #include <string.h>
 #include "Logger.h"
 #include "Motion.h"
-#include "DistanceLineTracing.h"
-#include "ColorLineTracing.h"
-#include "DistanceStraight.h"
-#include "ColorStraight.h"
-#include "AngleRotation.h"
-#include "Sleeping.h"
-#include "EdgeChanging.h"
+#include "PwmRotation.h"
 #include "StringOperator.h"
 
 enum class COMMAND {
