@@ -4,10 +4,8 @@
  *  @author bizyutyu
  */
 
-#include <gtest/gtest.h>
-#include "Measurer.h"
-#include "Mileage.h"
 #include "ColorStraight.h"
+#include <gtest/gtest.h>
 
 using namespace std;
 

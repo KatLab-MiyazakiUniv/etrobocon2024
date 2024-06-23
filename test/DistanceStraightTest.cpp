@@ -6,8 +6,6 @@
 
 #include "DistanceStraight.h"
 #include <gtest/gtest.h>
-#include "Measurer.h"
-#include "Controller.h"
 
 using namespace std;
 
