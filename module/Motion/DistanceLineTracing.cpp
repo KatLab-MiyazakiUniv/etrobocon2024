@@ -17,6 +17,17 @@ bool DistanceLineTracing::isMetPreCondition(double targetSpeed)
 {
   char buf[SMALL_BUF_SIZE];
 
+  // targetDistance値が0以下かつtargetSpeed値が0のときwarningを出して終了する
+  if(targetDistance <= 0.0 && targetSpeed == 0.0) {
+    snprintf(buf, SMALL_BUF_SIZE,
+             "The targetDistance value passed to DistanceLineTracing is %.2f, and the targetSpeed "
+             "value passed "
+             "to ColorLineTracing is 0",
+             targetDistance);
+    logger.logWarning(buf);
+    return false;
+  }
+
   // targetSpeed値が0の場合はwarningを出して終了する
   if(targetSpeed == 0.0) {
     snprintf(buf, SMALL_BUF_SIZE, "The targetSpeed value passed to DistanceLineTracing is 0");
@@ -37,11 +48,11 @@ bool DistanceLineTracing::isMetPreCondition(double targetSpeed)
 
 bool DistanceLineTracing::isMetContinuationCondition()
 {
-  // 初期値を代入
-  currentDistance = Mileage::calculateMileage(measurer.getRightCount(), measurer.getLeftCount());
-
   // 走行距離が目標距離に到達
-  if(abs(currentDistance - initDistance) >= targetDistance) return false;
+  if(fabs(Mileage::calculateMileage(measurer.getRightCount(), measurer.getLeftCount())
+          - initDistance)
+     >= targetDistance)
+    return false;
 
   return true;
 }

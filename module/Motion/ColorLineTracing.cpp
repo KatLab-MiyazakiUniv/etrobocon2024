@@ -15,7 +15,16 @@ ColorLineTracing::ColorLineTracing(COLOR _targetColor, double _targetSpeed, int 
 
 bool ColorLineTracing::isMetPreCondition(double targetSpeed)
 {
-  char buf[LARGE_BUF_SIZE];
+  char buf[SMALL_BUF_SIZE];
+
+  // 目標の色がNoneかつtargetSpeed値が0のときwarningを出して終了する
+  if(targetColor == COLOR::NONE && targetSpeed == 0.0) {
+    snprintf(buf, SMALL_BUF_SIZE,
+             "The targetColor passed to ColorLineTracing is NONE, and the targetSpeed value passed "
+             "to ColorLineTracing is 0");
+    logger.logWarning(buf);
+    return false;
+  }
 
   // targetSpeed値が0の場合はwarningを出して終了する
   if(targetSpeed == 0.0) {

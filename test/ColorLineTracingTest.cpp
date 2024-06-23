@@ -21,7 +21,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::GREEN;
     double targetSpeed = 50000.0;
     double targetBrightness = 50.0;
-    int basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = true;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -52,7 +51,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::BLUE;
     double targetSpeed = 100.0;
     double targetBrightness = 45.0;
-    int basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = true;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -84,7 +82,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::RED;
     double targetSpeed = 100.0;
     double targetBrightness = 45.0;
-    int basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = false;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -106,7 +103,7 @@ namespace etrobocon2024_test {
     EXPECT_LT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース
+  // 少し走ってから指定色を取得するテストケース（バック）
   TEST(ColorLineTracingTest, runBackLeftEdge)
   {
     Controller controller;
@@ -116,7 +113,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::YELLOW;
     double targetSpeed = -100.0;
     double targetBrightness = 45.0;
-    int basePwm = -100;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = true;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -138,7 +134,7 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース
+  // 少し走ってから指定色を取得するテストケース（バック）
   TEST(ColorLineTracingTest, runBackRightEdge)
   {
     Controller controller;
@@ -148,7 +144,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::GREEN;
     double targetSpeed = -100.0;
     double targetBrightness = 45.0;
-    int basePwm = -100;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = false;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -170,6 +165,7 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
+  // targetSpeed値が0の時にwarning文を出力するテストケース
   TEST(ColorLineTracingTest, runZeroSpeed)
   {
     Controller controller;
@@ -179,7 +175,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::BLUE;
     double targetSpeed = 0.0;
     double targetBrightness = 45.0;
-    int basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = true;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -209,6 +204,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expected, actual);  // ライントレース前後で走行距離に変化はない
   }
 
+  // 目標の色がNONEの時にwarning文を出力するテストケース
   TEST(ColorLineTracingTest, runNoneColor)
   {
     Controller controller;
@@ -218,7 +214,6 @@ namespace etrobocon2024_test {
     COLOR targetColor = COLOR::NONE;
     double targetSpeed = 100.0;
     double targetBrightness = 45.0;
-    int basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
     bool isLeftEdge = true;
     ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
@@ -232,6 +227,46 @@ namespace etrobocon2024_test {
     // Warning文
     string expectedOutput = "\x1b[36m";  // 文字色をシアンに
     expectedOutput += "Warning: The targetColor passed to ColorLineTracing is NONE";
+    expectedOutput += "\n\x1b[39m";  // 文字色をデフォルトに戻す
+
+    testing::internal::CaptureStdout();  // 標準出力キャプチャ開始
+    cl.run();                            // ライントレースを実行
+    string actualOutput = testing::internal::GetCapturedStdout();  // キャプチャ終了
+
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_EQ(expectedOutput, actualOutput);  // 標準出力でWarningを出している
+    EXPECT_EQ(expected, actual);  // ライントレース前後で走行距離に変化はない
+  }
+
+  // 目標の色がNoneかつtargetSpeed値が0のときwarning文を出力するテストケース
+  TEST(ColorLineTracingTest, runNoneColorAndZeroSpeed)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    COLOR targetColor = COLOR::NONE;
+    double targetSpeed = 0.0;
+    double targetBrightness = 45.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = true;
+    ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
+    double expected = 0.0;
+
+    // Warning文
+    string expectedOutput = "\x1b[36m";  // 文字色をシアンに
+    expectedOutput += "Warning: The targetColor passed to ColorLineTracing is NONE, and the "
+                      "targetSpeed value passed "
+                      "to ColorLineTracing is 0";
     expectedOutput += "\n\x1b[39m";  // 文字色をデフォルトに戻す
 
     testing::internal::CaptureStdout();  // 標準出力キャプチャ開始
