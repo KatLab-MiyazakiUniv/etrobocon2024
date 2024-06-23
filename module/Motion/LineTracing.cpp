@@ -46,7 +46,7 @@ void LineTracing::run()
     // PIDで旋回値を計算
     double turningPwm = pid.calculatePid(measurer.getBrightness()) * edgeSign;
 
-    // モータのPWM値をセット（0を超えないようにセット）
+    // モータのPWM値をセット（前進の時0を下回らないように，後進の時0を上回らないようにセット）
     double rightPwm = baseRightPwm > 0.0 ? max(baseRightPwm - turningPwm, 0.0)
                                          : min(baseRightPwm + turningPwm, 0.0);
     double leftPwm = baseLeftPwm > 0.0 ? max(baseLeftPwm + turningPwm, 0.0)
