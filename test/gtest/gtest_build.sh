@@ -26,7 +26,7 @@ mkdir -p build/etrobocon2024/scripts
 mkdir -p build/etrobocon2024/datafiles
 cd build
 cp ../scripts/*.sh etrobocon2024/scripts/
-# cp ../datafiles/*.csv etrobocon2024/datafiles/
+cp ../datafiles/*.csv etrobocon2024/datafiles/
 chmod 777 ./etrobocon2024/scripts/*.sh
 
 cmake -DCMAKE_BUILD_TYPE=Coverage ..

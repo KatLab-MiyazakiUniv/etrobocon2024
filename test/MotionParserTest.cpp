@@ -11,9 +11,10 @@
 using namespace std;
 
 namespace etrobocon2024_test {
+  // csvファイルから、コマンドを実行できるかのテスト
   TEST(MotionParserTest, createMotions)
   {
-    const char* filePath = "../test/test_data/CommandParserTestData.csv";
+    const char* filePath = "../test/test_data/MotionParserTestData.csv";
     int targetBrightness = 45;
     bool isLeftEdge = true;
     // actualListの生成とlogRunning()のログを取る
@@ -31,21 +32,25 @@ namespace etrobocon2024_test {
      * 順にインスタンス化したものをexpectedListに追加する
      */
     std::vector<Motion*> expectedList;
-    DistanceLineTracing* dl = new DistanceLineTracing(1080, targetBrightness + 10, 70,
-                                                      PidGain(0.2, 0.8, 0.1), isLeftEdge);
-    expectedList.push_back(dl);
-    ColorLineTracing* cl = new ColorLineTracing(COLOR::RED, targetBrightness + 0, 30,
-                                                PidGain(0.1, 0.2, 0.3), isLeftEdge);
-    expectedList.push_back(cl);
-    DistanceStraight* ds = new DistanceStraight(100.2, 100);
-    expectedList.push_back(ds);
-    ColorStraight* cs = new ColorStraight(COLOR::GREEN, 100);
-    expectedList.push_back(cs);
-    AngleRotation* ar = new AngleRotation(90, 80, false);
+
+    // 回頭動作以外のテストをコメントアウト
+
+    // DistanceLineTracing* dl = new DistanceLineTracing(1080, targetBrightness + 10, 70,
+    //                                                   PidGain(0.2, 0.8, 0.1), isLeftEdge);
+    // expectedList.push_back(dl);
+    // ColorLineTracing* cl = new ColorLineTracing(COLOR::RED, targetBrightness + 0, 30,
+    //                                             PidGain(0.1, 0.2, 0.3), isLeftEdge);
+    // expectedList.push_back(cl);
+    // DistanceStraight* ds = new DistanceStraight(100.2, 100);
+    // expectedList.push_back(ds);
+    // ColorStraight* cs = new ColorStraight(COLOR::GREEN, 100);
+    // expectedList.push_back(cs);
+
+    PwmRotation* ar = new PwmRotation(90, 80, false);
     expectedList.push_back(ar);
     // Warning文
     string expectedOutput = "\x1b[36m";  // 文字色をシアンに
-    expectedOutput += "Warning: ../test/test_data/CommandParserTestData.csv:6: ";
+    expectedOutput += "Warning: ../test/test_data/MotionParserTestData.csv:2: ";
     expectedOutput += "'UNDEFINED' is undefined command";
     expectedOutput += "\n\x1b[39m";  // 文字色をデフォルトに戻す
 
@@ -59,6 +64,7 @@ namespace etrobocon2024_test {
     EXPECT_EQ(expectedOutput, actualOutput);  // ログが一致していることを確認する
   }
 
+  // ファイルパスが存在しない場合のテスト
   TEST(MotionParserTest, notCreateMotions)
   {
     const char* filePath = "../test/test_data/non_existent_file.csv";  // 存在しないファイル

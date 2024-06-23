@@ -10,6 +10,7 @@
 
 namespace etrobocon2024_test {
 
+  // 改行コードを削除するテスト
   TEST(StringOperatorTest, removeEOL)
   {
     char actual[32] = "StringOperator test\n";
