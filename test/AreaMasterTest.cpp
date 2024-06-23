@@ -36,8 +36,8 @@ namespace etrobocon2024_test {
     }
   }
 
-  　  //右コースで指定動作を行う場合のテスト
-      TEST(AreaMasterTest, runRightCourse)
+  // 右コースで指定動作を行う場合のテスト
+  TEST(AreaMasterTest, runRightCourse)
   {
     Area area = Area::AreaMaster;
     bool isLeftCourse = false;
