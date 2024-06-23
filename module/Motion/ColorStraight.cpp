@@ -12,7 +12,7 @@ ColorStraight::ColorStraight(COLOR _targetColor, double _targetSpeed)
 {
 }
 
-bool ColorStraight::isRunPostconditionJudgement()
+bool ColorStraight::isRunPostConditionJudgement()
 {
   Measurer measurer;
   COLOR color = ColorJudge::getColor(measurer.getRawColor());
@@ -23,7 +23,7 @@ bool ColorStraight::isRunPostconditionJudgement()
   return false;
 }
 
-bool ColorStraight::isRunPreconditionJudgement()
+bool ColorStraight::isRunPreConditionJudgement()
 {
   // 目標速度値が0の場合は終了する
   if(targetSpeed == 0) {
@@ -41,10 +41,9 @@ bool ColorStraight::isRunPreconditionJudgement()
 
 void ColorStraight::logRunning()
 {
-  const int BUF_SIZE = 128;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
-  snprintf(buf, BUF_SIZE, "Run ColorStraight (Color: %s, targetSpeed: %f)",
+  snprintf(buf, SMALL_BUF_SIZE, "Run ColorStraight (Color: %s, targetSpeed: %f)",
            ColorJudge::colorToString(targetColor), targetSpeed);
   logger.log(buf);
 }

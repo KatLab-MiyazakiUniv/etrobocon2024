@@ -12,7 +12,7 @@ Straight::Straight(double _targetSpeed) : targetSpeed(_targetSpeed) {}
 void Straight::run()
 {
   // 事前条件判定が真でないときは終了する
-  if(isRunPreconditionJudgement() == false) {
+  if(isRunPreConditionJudgement() == false) {
     return;
   }
   Measurer measurer;
@@ -38,7 +38,7 @@ void Straight::run()
   // 走行距離が目標値に到達するまで繰り返す
   while(true) {
     // 終了条件が満たされたときループから抜ける オーバーライド必須
-    if(isRunPostconditionJudgement() == true) {
+    if(isRunPostConditionJudgement() == true) {
       break;
     }
 
@@ -57,10 +57,9 @@ void Straight::run()
   controller.stopWheelsMotor();
 }
 
-bool Straight::isRunPreconditionJudgement()
+bool Straight::isRunPreConditionJudgement()
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];
+  char buf[LARGE_BUF_SIZE];
   // \"target\"をオーバーライド必須
   // 目標速度値が0の場合は終了する
   if(targetSpeed == 0) {
@@ -73,7 +72,7 @@ bool Straight::isRunPreconditionJudgement()
   double rightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
   double leftPwm = speedCalculator.calculateLeftMotorPwmFromTargetSpeed();
   if(abs(rightPwm) < MIN_PWM || abs(leftPwm) < MIN_PWM) {
-    snprintf(buf, BUF_SIZE,
+    snprintf(buf, LARGE_BUF_SIZE,
              "The pwm value passed to \"target\" Straight is rightPwm = %f and leftPwm = %f",
              rightPwm, leftPwm);
     logger.logWarning(buf);
@@ -89,11 +88,10 @@ bool Straight::isRunPreconditionJudgement()
 
 void Straight::logRunning()
 {
-  const int BUF_SIZE = 128;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
   // targetValueと%~のオーバーライド必須
-  snprintf(buf, BUF_SIZE, "Run \"targetValue\"Straight (\"targetValue\": , targetSpeed: %f)",
+  snprintf(buf, SMALL_BUF_SIZE, "Run \"targetValue\"Straight (\"targetValue\": , targetSpeed: %f)",
            targetSpeed);
   logger.log(buf);
 }

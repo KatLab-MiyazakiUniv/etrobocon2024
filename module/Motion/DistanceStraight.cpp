@@ -12,7 +12,7 @@ DistanceStraight::DistanceStraight(double _targetDistance, double _targetSpeed)
 {
 }
 
-bool DistanceStraight::isRunPostconditionJudgement()
+bool DistanceStraight::isRunPostConditionJudgement()
 {
   Measurer measurer;
   // 現在の距離を取得する
@@ -30,10 +30,9 @@ bool DistanceStraight::isRunPostconditionJudgement()
   return false;
 }
 
-bool DistanceStraight::isRunPreconditionJudgement()
+bool DistanceStraight::isRunPreConditionJudgement()
 {
-  const int BUF_SIZE = 256;
-  char buf[BUF_SIZE];
+  char buf[LARGE_BUF_SIZE];
   // 目標速度値が0の場合は終了する
   if(targetSpeed == 0) {
     logger.logWarning("The targetSpeed value passed to DistanceStraight is 0");
@@ -41,7 +40,7 @@ bool DistanceStraight::isRunPreconditionJudgement()
   }
   // 目標距離の値が0以下の場合はwarningを出して終了する
   if(targetDistance <= 0) {
-    snprintf(buf, BUF_SIZE, "The targetDistance value passed to DistanceStraight is %.2f",
+    snprintf(buf, LARGE_BUF_SIZE, "The targetDistance value passed to DistanceStraight is %.2f",
              targetDistance);
     logger.logWarning(buf);
     return false;
@@ -52,10 +51,9 @@ bool DistanceStraight::isRunPreconditionJudgement()
 
 void DistanceStraight::logRunning()
 {
-  const int BUF_SIZE = 128;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
-  snprintf(buf, BUF_SIZE, "Run DistanceStraight (Distance: %f, targetSpeed: %f)", targetDistance,
-           targetSpeed);
+  snprintf(buf, SMALL_BUF_SIZE, "Run DistanceStraight (Distance: %f, targetSpeed: %f)",
+           targetDistance, targetSpeed);
   logger.log(buf);
 }

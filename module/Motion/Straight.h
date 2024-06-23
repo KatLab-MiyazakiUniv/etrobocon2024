@@ -28,17 +28,18 @@ class Straight : public Motion {
    */
   void run();
 
+ protected:
   /**
    * @brief 直進する際の事前条件判定をする
    * @note オーバーライド必須
    */
-  virtual bool isRunPreconditionJudgement();
+  virtual bool isRunPreConditionJudgement();
 
   /**
    * @brief 直進する際の終了条件判定をする　返り値が真でモーターが止まる
    * @note オーバーライド必須
    */
-  virtual bool isRunPostconditionJudgement() = 0;
+  virtual bool isRunPostConditionJudgement() = 0;
 
   /**
    * @brief 実行のログを取る

@@ -19,15 +19,16 @@ class ColorStraight : public Straight {
    */
   ColorStraight(COLOR _targetColor, double _speed);
 
+ protected:
   /**
    * @brief 直進する際の事前条件判定をする
    */
-  virtual bool isRunPreconditionJudgement() override;
+  virtual bool isRunPreConditionJudgement() override;
 
   /**
    * @brief 直進する際の終了条件判定をする　返り値が真でモーターが止まる
    */
-  virtual bool isRunPostconditionJudgement() override;
+  virtual bool isRunPostConditionJudgement() override;
 
   /**
    * @brief 実行のログを取る
