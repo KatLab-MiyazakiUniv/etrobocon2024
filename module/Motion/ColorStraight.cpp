@@ -12,18 +12,7 @@ ColorStraight::ColorStraight(COLOR _targetColor, double _targetSpeed)
 {
 }
 
-bool ColorStraight::isRunPostConditionJudgement()
-{
-  Measurer measurer;
-  COLOR color = ColorJudge::getColor(measurer.getRawColor());
-  if(color == targetColor) {
-    return true;
-  }
-
-  return false;
-}
-
-bool ColorStraight::isRunPreConditionJudgement()
+bool ColorStraight::isMetPreCondition()
 {
   // 目標速度値が0の場合は終了する
   if(targetSpeed == 0) {
@@ -37,6 +26,16 @@ bool ColorStraight::isRunPreConditionJudgement()
   }
 
   return true;
+}
+
+bool ColorStraight::isMetContinuationCondition()
+{
+  COLOR color = ColorJudge::getColor(measurer.getRawColor());
+  if(color != targetColor) {
+    return true;
+  }
+
+  return false;
 }
 
 void ColorStraight::logRunning()

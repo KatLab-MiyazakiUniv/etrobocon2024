@@ -22,12 +22,12 @@ class DistanceStraight : public Straight {
   /**
    * @brief 直進する際の事前条件判定をする
    */
-  virtual bool isRunPreConditionJudgement() override;
+  virtual bool isMetPreCondition() override;
 
   /**
-   * @brief 直進する際の終了条件判定をする　返り値が真でモーターが止まる
+   * @brief 直進する際の動作継続条件判定をする　返り値がtrueの間モーターが回転
    */
-  virtual bool isRunPostConditionJudgement() override;
+  virtual bool isMetContinuationCondition() override;
 
   /**
    * @brief 実行のログを取る

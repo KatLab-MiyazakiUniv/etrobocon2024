@@ -12,25 +12,7 @@ DistanceStraight::DistanceStraight(double _targetDistance, double _targetSpeed)
 {
 }
 
-bool DistanceStraight::isRunPostConditionJudgement()
-{
-  Measurer measurer;
-  // 現在の距離を取得する
-  currentRightMotorCount = measurer.getRightCount();
-  currentLeftMotorCount = measurer.getLeftCount();
-  currentRightDistance = Mileage::calculateWheelMileage(currentRightMotorCount);
-  currentLeftDistance = Mileage::calculateWheelMileage(currentLeftMotorCount);
-
-  // 現在の距離が目標距離に到達したらループを終了する
-  if((abs(currentRightDistance - initialRightDistance) >= targetDistance)
-     && (abs(currentLeftDistance - initialLeftDistance) >= targetDistance)) {
-    return true;
-  }
-
-  return false;
-}
-
-bool DistanceStraight::isRunPreConditionJudgement()
+bool DistanceStraight::isMetPreCondition()
 {
   char buf[LARGE_BUF_SIZE];
   // 目標速度値が0の場合は終了する
@@ -47,6 +29,25 @@ bool DistanceStraight::isRunPreConditionJudgement()
   }
 
   return true;
+}
+
+bool DistanceStraight::isMetContinuationCondition()
+{
+  // 現在の走行距離を取得する
+  currentRightMotorCount = measurer.getRightCount();
+  currentLeftMotorCount = measurer.getLeftCount();
+  currentRightDistance = Mileage::calculateWheelMileage(currentRightMotorCount);
+  currentLeftDistance = Mileage::calculateWheelMileage(currentLeftMotorCount);
+
+  // 現在の走行距離が目標走行距離に達していなければtrueを返す
+  // 左右どちらとも
+  if((abs(currentRightDistance - initialRightDistance) < targetDistance)
+     && (abs(currentLeftDistance - initialLeftDistance) < targetDistance)) {
+    return true;
+  }
+
+  // 現在の走行距離が目標走行距離に達した場合falseを返す
+  return false;
 }
 
 void DistanceStraight::logRunning()

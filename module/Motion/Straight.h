@@ -19,7 +19,6 @@ class Straight : public Motion {
   /**
    * @brief コンストラクタ
    * @param _speed       目標速度[mm/s]
-   * @note オーバーライド必須
    */
   Straight(double _speed);
 
@@ -31,19 +30,17 @@ class Straight : public Motion {
  protected:
   /**
    * @brief 直進する際の事前条件判定をする
-   * @note オーバーライド必須
    */
-  virtual bool isRunPreConditionJudgement();
+  virtual bool isMetPreCondition();
 
   /**
-   * @brief 直進する際の終了条件判定をする　返り値が真でモーターが止まる
+   * @brief 直進する際の動作継続条件判定をする　返り値がtrueの間モーターが回転
    * @note オーバーライド必須
    */
-  virtual bool isRunPostConditionJudgement() = 0;
+  virtual bool isMetContinuationCondition() = 0;
 
   /**
    * @brief 実行のログを取る
-   * @note オーバーライド必須
    */
   virtual void logRunning();
 
@@ -51,15 +48,14 @@ class Straight : public Motion {
   // 目標値は継承後に追加する
   static constexpr double MIN_PWM = 40.0;  // 静止時から走行体がモーターを動かせないPWM値
   double targetSpeed;                      // 目標速度[mm/s]
-  int initialRightMotorCount;              // 初期右輪モーター距離
-  int initialLeftMotorCount;               // 初期左輪モーター距離
   double initialRightDistance;             // 初期右輪距離
   double initialLeftDistance;              // 初期左輪距離
-  int currentRightMotorCount;              // 現在右輪モーター距離
-  int currentLeftMotorCount;               // 現在左輪モーター距離
+  int currentRightMotorCount;              // 現在右モーター角位置
+  int currentLeftMotorCount;               // 現在左モーター角位置
   double currentRightDistance;             // 現在右輪距離
   double currentLeftDistance;              // 現在左輪距離
   Timer timer;
+  Measurer measurer;
 };
 
 #endif
