@@ -44,13 +44,13 @@ void LineTracing::run()
     double baseLeftPwm = speedCalculator.calculateLeftMotorPwmFromTargetSpeed();
 
     // PIDで旋回値を計算
-    double turnPwm = pid.calculatePid(measurer.getBrightness()) * edgeSign;
+    double turningPwm = pid.calculatePid(measurer.getBrightness()) * edgeSign;
 
     // モータのPWM値をセット（0を超えないようにセット）
-    double rightPwm
-        = baseRightPwm > 0.0 ? max(baseRightPwm - turnPwm, 0.0) : min(baseRightPwm + turnPwm, 0.0);
-    double leftPwm
-        = baseLeftPwm > 0.0 ? max(baseLeftPwm + turnPwm, 0.0) : min(baseLeftPwm - turnPwm, 0.0);
+    double rightPwm = baseRightPwm > 0.0 ? max(baseRightPwm - turningPwm, 0.0)
+                                         : min(baseRightPwm + turningPwm, 0.0);
+    double leftPwm = baseLeftPwm > 0.0 ? max(baseLeftPwm + turningPwm, 0.0)
+                                       : min(baseLeftPwm - turningPwm, 0.0);
     controller.setRightMotorPwm(rightPwm);
     controller.setLeftMotorPwm(leftPwm);
 

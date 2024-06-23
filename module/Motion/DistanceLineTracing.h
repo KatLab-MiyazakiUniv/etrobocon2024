@@ -28,11 +28,13 @@ class DistanceLineTracing : public LineTracing {
    */
   using LineTracing::run;
 
+ protected:
   /**
    * @brief 指定距離ライントレースする際の事前条件判定をする
    * @param targetSpeed 目標速度
    * @note オーバーライド必須
    */
+
   bool isMetPreCondition(double targetSpeed) override;
 
   /**

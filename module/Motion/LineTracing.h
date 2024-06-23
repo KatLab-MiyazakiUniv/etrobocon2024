@@ -35,6 +35,8 @@ class LineTracing : public Motion {
    * @param targetSpeed 目標速度
    * @note オーバーライド必須
    */
+
+ protected:
   virtual bool isMetPreCondition(double targetSpeed) = 0;
 
   /**

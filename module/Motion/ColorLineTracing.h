@@ -28,6 +28,7 @@ class ColorLineTracing : public LineTracing {
    */
   using LineTracing::run;
 
+ protected:
   /**
    * @brief 指定色ライントレースする際の事前条件判定をする
    * @param targetSpeed 目標速度
