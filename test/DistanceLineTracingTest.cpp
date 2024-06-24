@@ -11,7 +11,7 @@
 using namespace std;
 
 namespace etrobocon2024_test {
-  // 目標距離までライントレースを行うテストケース
+  // 目標距離までライントレースを行うテストケース（左エッジ走行）
   TEST(DistanceLineTracingTest, runLeftEdge)
   {
     Controller controller;
@@ -47,7 +47,7 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected + error, actual);  // ライントレース後に走行した距離が許容誤差未満である
   }
 
-  // 目標距離までライントレースを行うテストケース
+  // 目標距離までライントレースを行うテストケース（右エッジ走行）
   TEST(DistanceLineTracingTest, runRightEdge)
   {
     Controller controller;
@@ -83,7 +83,7 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected + error, actual);  // ライントレース後に走行した距離が許容誤差未満である
   }
 
-  // 目標距離までライントレースを行うテストケース（バック）
+  // 目標距離までライントレースを行うテストケース（バック，左エッジ走行）
   TEST(DistanceLineTracingTest, runBackLeftEdge)
   {
     Controller controller;
@@ -120,7 +120,7 @@ namespace etrobocon2024_test {
     EXPECT_LT(expected - error, actual);  // ライントレース後に走行した距離が許容誤差未満である
   }
 
-  // 目標距離までライントレースを行うテストケース（バック）
+  // 目標距離までライントレースを行うテストケース（バック，右エッジ走行）
   TEST(DistanceLineTracingTest, runBackRightEdge)
   {
     Controller controller;

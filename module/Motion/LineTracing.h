@@ -30,13 +30,12 @@ class LineTracing : public Motion {
    */
   void run();
 
+ protected:
   /**
    * @brief ライントレースする際の事前条件判定をする
    * @param targetSpeed 目標速度
    * @note オーバーライド必須
    */
-
- protected:
   virtual bool isMetPreCondition(double targetSpeed) = 0;
 
   /**

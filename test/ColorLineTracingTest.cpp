@@ -41,7 +41,7 @@ namespace etrobocon2024_test {
     EXPECT_LT(expected, actual);  // 初期値より少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース
+  // 少し走ってから指定色を取得するテストケース（左エッジ走行）
   TEST(ColorLineTracingTest, runLeftEdge)
   {
     Controller controller;
@@ -72,7 +72,7 @@ namespace etrobocon2024_test {
     EXPECT_LT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース
+  // 少し走ってから指定色を取得するテストケース（右エッジ走行）
   TEST(ColorLineTracingTest, runRightEdge)
   {
     Controller controller;
@@ -103,7 +103,7 @@ namespace etrobocon2024_test {
     EXPECT_LT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース（バック）
+  // 少し走ってから指定色を取得するテストケース（バック，左エッジ走行）
   TEST(ColorLineTracingTest, runBackLeftEdge)
   {
     Controller controller;
@@ -134,7 +134,7 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
-  // 少し走ってから指定色を取得するテストケース（バック）
+  // 少し走ってから指定色を取得するテストケース（バック，右エッジ走行）
   TEST(ColorLineTracingTest, runBackRightEdge)
   {
     Controller controller;
