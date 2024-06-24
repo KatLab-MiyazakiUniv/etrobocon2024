@@ -31,11 +31,11 @@ bool ColorStraight::isMetPreCondition()
 bool ColorStraight::isMetContinuationCondition()
 {
   COLOR color = ColorJudge::getColor(measurer.getRawColor());
-  if(color != targetColor) {
-    return true;
+  if(color == targetColor) {
+    return false;
   }
 
-  return false;
+  return true;
 }
 
 void ColorStraight::logRunning()

@@ -15,9 +15,10 @@ void Straight::run()
   if(!isMetPreCondition()) {
     return;
   }
-  // 呼び出し時の走行距離
-  initialRightDistance = Mileage::calculateWheelMileage(measurer.getRightCount());
-  initialLeftDistance = Mileage::calculateWheelMileage(measurer.getLeftCount());
+  // 呼び出し時の走行距離を取得する
+  double initialRightMotorCount = measurer.getRightCount();
+  double initialLeftMotorCount = measurer.getLeftCount();
+  initialDistance = Mileage::calculateMileage(initialRightMotorCount, initialLeftMotorCount);
 
   // SpeedCalculatorのオブジェクトを生成
   SpeedCalculator speedCalculator(targetSpeed);

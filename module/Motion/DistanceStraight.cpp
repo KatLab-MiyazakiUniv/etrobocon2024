@@ -34,20 +34,18 @@ bool DistanceStraight::isMetPreCondition()
 bool DistanceStraight::isMetContinuationCondition()
 {
   // 現在の走行距離を取得する
-  currentRightMotorCount = measurer.getRightCount();
-  currentLeftMotorCount = measurer.getLeftCount();
-  currentRightDistance = Mileage::calculateWheelMileage(currentRightMotorCount);
-  currentLeftDistance = Mileage::calculateWheelMileage(currentLeftMotorCount);
-
-  // 現在の走行距離が目標走行距離に達していなければtrueを返す
-  // 左右どちらとも
-  if((abs(currentRightDistance - initialRightDistance) < targetDistance)
-     && (abs(currentLeftDistance - initialLeftDistance) < targetDistance)) {
-    return true;
-  }
+  double currentRightMotorCount = measurer.getRightCount();
+  double currentLeftMotorCount = measurer.getLeftCount();
+  double currentDistance = Mileage::calculateMileage(currentRightMotorCount, currentLeftMotorCount);
 
   // 現在の走行距離が目標走行距離に達した場合falseを返す
-  return false;
+  // ここでは、左右どちらとも達したかどうかで判断する
+  if((fabs(currentDistance - initialDistance) >= targetDistance)) {
+    return false;
+  }
+
+  // 現在の走行距離が目標走行距離に達していなければtrueを返す
+  return true;
 }
 
 void DistanceStraight::logRunning()

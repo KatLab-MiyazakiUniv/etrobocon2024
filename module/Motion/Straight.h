@@ -46,14 +46,8 @@ class Straight : public Motion {
 
  protected:
   // 目標値は継承後に追加する
-  static constexpr double MIN_PWM = 40.0;  // 静止時から走行体がモーターを動かせないPWM値
-  double targetSpeed;                      // 目標速度[mm/s]
-  double initialRightDistance;             // 初期右輪距離
-  double initialLeftDistance;              // 初期左輪距離
-  int currentRightMotorCount;              // 現在右モーター角位置
-  int currentLeftMotorCount;               // 現在左モーター角位置
-  double currentRightDistance;             // 現在右輪距離
-  double currentLeftDistance;              // 現在左輪距離
+  double targetSpeed;      // 目標速度[mm/s]
+  double initialDistance;  // 初期走行距離
   Timer timer;
   Measurer measurer;
 };
