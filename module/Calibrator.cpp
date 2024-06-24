@@ -17,13 +17,13 @@ void Calibrator::run()
   //   system(cmd);
 
   // 左右ボタンでコースのLRを選択する
-  selectCourse();
+  selectAndSetCourse();
 
   // 目標輝度を測定する
-  measureTargetBrightness();
+  measureAndSetTargetBrightness();
 }
 
-void Calibrator::selectCourse()
+void Calibrator::selectAndSetCourse()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
@@ -56,7 +56,7 @@ void Calibrator::selectCourse()
   timer.sleep(1000);  // 1秒スリープ
 }
 
-void Calibrator::measureTargetBrightness()
+void Calibrator::measureAndSetTargetBrightness()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;

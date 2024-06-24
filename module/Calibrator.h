@@ -49,12 +49,12 @@ class Calibrator {
   /**
    * @brief 左右ボタンでLRコースを選択してisLeftCourseをセットする
    */
-  void selectCourse();
+  void selectAndSetCourse();
 
   /**
    * @brief 黒と白の輝度を測定して目標輝度を求めtargetBrightnessをセットする
    */
-  void measureTargetBrightness();
+  void measureAndSetTargetBrightness();
 };
 
 #endif
