@@ -8,7 +8,6 @@
 #include "DummyRobot.h"
 #include <gtest/gtest.h>
 #include <gtest/internal/gtest-port.h>
-#include <time.h>
 
 using namespace std;
 
@@ -18,7 +17,6 @@ namespace etrobocon2024_test {
   TEST(CalibratorTest, run)
   {
     Calibrator calibrator;
-    // srand(2);  // SPIKEの電圧が標準値でLeftコースを選択する乱数シード
     DummyRobot::setButtonState(
         DummyRobot::ButtonState::right);  // 実機のボタン押下状態を「右」に設定
     testing::internal::CaptureStdout();   // 標準出力キャプチャ開始
@@ -53,7 +51,6 @@ namespace etrobocon2024_test {
   TEST(CalibratorTest, getIsLeftCourse)
   {
     Calibrator calibrator;
-    srand((unsigned int)time(NULL));     // 現在時刻を元に乱数シードを生成
     testing::internal::CaptureStdout();  // 標準出力キャプチャ開始
     calibrator.run();
     string output = testing::internal::GetCapturedStdout();  // キャプチャ終了
@@ -81,7 +78,6 @@ namespace etrobocon2024_test {
   TEST(CalibratorTest, getTargetBrightness)
   {
     Calibrator calibrator;
-    srand((unsigned int)time(NULL));     // 現在時刻を元に乱数シードを生成
     testing::internal::CaptureStdout();  // 標準出力キャプチャ開始
     calibrator.run();
     string output = testing::internal::GetCapturedStdout();  // キャプチャ終了
