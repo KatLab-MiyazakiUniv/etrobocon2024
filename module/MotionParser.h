@@ -15,6 +15,8 @@
 #include "PwmRotation.h"
 #include "StringOperator.h"
 
+#define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
+
 enum class COMMAND {
   DL,  // 指定距離ライントレース
   CL,  // 指定色ライントレース

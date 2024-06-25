@@ -11,8 +11,7 @@ using namespace std;
 vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int targetBrightness,
                                             bool& isLeftEdge)
 {
-  const int BUF_SIZE = 512;
-  char buf[BUF_SIZE];  // log用にメッセージを一時保持する領域
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
   int lineNum = 1;  // Warning用の行番号
 
@@ -22,16 +21,16 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
   FILE* fp = fopen(commandFilePath, "r");
   // ファイル読み込み失敗
   if(fp == NULL) {
-    snprintf(buf, BUF_SIZE, "%s file not open!\n", commandFilePath);
+    snprintf(buf, LARGE_BUF_SIZE, "%s file not open!\n", commandFilePath);
     logger.logWarning(buf);
     return motionList;
   }
 
-  char row[BUF_SIZE];           // 各行の文字を一時的に保持する領域
+  char row[READ_BUF_SIZE];      // 各行の文字を一時的に保持する領域
   const char* separator = ",";  // 区切り文字
 
   // 行ごとにパラメータを読み込む
-  while(fgets(row, BUF_SIZE, fp) != NULL) {
+  while(fgets(row, READ_BUF_SIZE, fp) != NULL) {
     vector<char*> params;
     // separatorを区切り文字にしてrowを分解し，paramに代入する
     char* param = strtok(row, separator);
@@ -113,8 +112,9 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
     //     motionList.push_back(xr);                                          // 動作リストに追加
     //   }
+
     else {  // 未定義のコマンドの場合
-      snprintf(buf, BUF_SIZE, "%s:%d: '%s' is undefined command", commandFilePath, lineNum,
+      snprintf(buf, LARGE_BUF_SIZE, "%s:%d: '%s' is undefined command", commandFilePath, lineNum,
                params[0]);
       logger.logWarning(buf);
     }
