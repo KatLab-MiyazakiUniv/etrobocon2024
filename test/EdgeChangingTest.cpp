@@ -6,7 +6,6 @@
 
 #include "EdgeChanging.h"
 #include <gtest/gtest.h>
-#include <cmath>
 
 namespace etrobocon2024_test {
 
