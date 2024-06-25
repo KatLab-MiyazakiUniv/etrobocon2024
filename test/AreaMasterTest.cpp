@@ -26,7 +26,7 @@ namespace etrobocon2024_test {
     areaMaster.run();
     string output = testing::internal::GetCapturedStdout();  // キャプチャ終了
 
-    // find("str")はstrが見つからない場合string::nposを返すß
+    // find("str")はstrが見つからない場合string::nposを返す
     bool actual = output.find("Warning") == string::npos && output.find("Error") == string::npos;
     printf("%s", output.c_str());
     EXPECT_TRUE(actual);  // WarningやErrorが出ていないかテスト
