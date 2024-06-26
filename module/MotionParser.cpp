@@ -54,41 +54,42 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
     // TODO: 後で作成する
 
-    // else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
-    //   DistanceLineTracing* dl = new DistanceLineTracing(
-    //       atof(params[1]),                                             // 目標距離
-    //       targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
-    //       atof(params[3]),                                             // 目標速度
-    //       PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
-    //       isLeftEdge);                                                 // エッジ
+    else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
+      DistanceLineTracing* dl = new DistanceLineTracing(
+          atof(params[1]),                                             // 目標距離
+          targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
+          atof(params[3]),                                             // 目標速度
+          PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイ
+          isLeftEdge);                                                 // エッジ
 
-    //   motionList.push_back(dl);          // 動作リストに追加
-    // } else if(command == COMMAND::CL) {  // 指定色ライントレース動作の生成
-    //   ColorLineTracing* cl = new ColorLineTracing(
-    //       ColorJudge::stringToColor(params[1]),                        // 目標色
-    //       targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
-    //       atof(params[3]),                                             // 目標速度
-    //       PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
-    //       isLeftEdge);                                                 // エッジ
+      motionList.push_back(dl);          // 動作リストに追加
+    } else if(command == COMMAND::CL) {  // 指定色ライントレース動作の生成
+      ColorLineTracing* cl = new ColorLineTracing(
+          ColorJudge::stringToColor(params[1]),                        // 目標色
+          targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
+          atof(params[3]),                                             // 目標速度
+          PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
+          isLeftEdge);                                                 // エッジ
 
-    //   motionList.push_back(cl);          // 動作リストに追加
-    // } else if(command == COMMAND::DS) {  // 指定距離直進動作の生成
-    //   DistanceStraight* ds = new DistanceStraight(atof(params[1]),   // 目標距離
-    //                                               atof(params[2]));  // 目標速度
+      motionList.push_back(cl);          // 動作リストに追加
+    } else if(command == COMMAND::DS) {  // 指定距離直進動作の生成
+      DistanceStraight* ds = new DistanceStraight(atof(params[1]),   // 目標距離
+                                                  atof(params[2]));  // 目標速度
 
-    //   motionList.push_back(ds);          // 動作リストに追加
-    // } else if(command == COMMAND::CS) {  // 指定色直進動作の生成
-    //   ColorStraight* cs = new ColorStraight(ColorJudge::stringToColor(params[1]),  // 目標色
-    //                                         atof(params[2]));                      // 目標速度
+      motionList.push_back(ds);          // 動作リストに追加
+    } else if(command == COMMAND::CS) {  // 指定色直進動作の生成
+      ColorStraight* cs = new ColorStraight(ColorJudge::stringToColor(params[1]),  // 目標色
+                                            atof(params[2]));                      // 目標速度
 
-    //   motionList.push_back(cs);                             // 動作リストに追加
-    //   }else if(command == COMMAND::EC) {                // エッジ切り替えの生成
-    //      EdgeChanging* ec = new EdgeChanging(isLeftEdge,  // エッジ
-    //                                          convertBool(params[0], params[1]));  //
-    //                                          切り替え後のエッジ
+      motionList.push_back(cs);                        // 動作リストに追加
+    } else if(command == COMMAND::EC) {                // エッジ切り替えの生成
+      EdgeChanging* ec = new EdgeChanging(isLeftEdge,  // エッジ
+                                          convertBool(params[0], params[1]));  // 切り替え後のエッジ
 
-    //      motionList.push_back(ec);          // 動作リストに追加
-    //    } else if(command == COMMAND::SL) {  // 自タスクスリープの生成
+      motionList.push_back(ec);  // 動作リストに追加
+    }
+
+    //    else if(command == COMMAND::SL) {  // 自タスクスリープの生成
     //      Sleeping* sl = new Sleeping(atoi(params[1]));
 
     //      motionList.push_back(sl);  // 動作リストに追加

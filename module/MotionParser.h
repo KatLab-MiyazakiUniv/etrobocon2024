@@ -14,6 +14,11 @@
 #include "Motion.h"
 #include "PwmRotation.h"
 #include "StringOperator.h"
+#include "ColorStraight.h"
+#include "ColorLineTracing.h"
+#include "DistanceLineTracing.h"
+#include "DistanceStraight.h"
+#include "EdgeChanging.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
