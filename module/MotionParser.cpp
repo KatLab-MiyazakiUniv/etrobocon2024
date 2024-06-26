@@ -59,7 +59,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           atof(params[1]),                                             // 目標距離
           targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
           atof(params[3]),                                             // 目標速度
-          PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイ
+          PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
 
       motionList.push_back(dl);          // 動作リストに追加
