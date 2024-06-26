@@ -51,6 +51,15 @@ void Controller::resetLeftMotorPwm()
   leftWheel.reset();
 }
 
+// 右左両モータの状態をリセット
+void Controller::resetWheelsMotorPwm()
+{
+  pwmOfRightWheel = 0.0;
+  pwmOfLeftWheel = 0.0;
+  rightWheel.reset();
+  leftWheel.reset();
+}
+
 // タイヤのモータを停止する
 void Controller::stopWheelsMotor()
 {

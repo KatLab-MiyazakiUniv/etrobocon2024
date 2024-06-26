@@ -34,6 +34,7 @@ class Controller {
    */
   void resetRightMotorPwm();
   void resetLeftMotorPwm();
+  void resetWheelsMotorPwm();
 
   /**
    * @brief タイヤのモータを停止する
