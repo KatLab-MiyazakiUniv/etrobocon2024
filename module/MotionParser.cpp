@@ -49,25 +49,21 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       PwmRotation* ar = new PwmRotation(atoi(params[1]),  // 目標角度
                                         atoi(params[2]),  // 目標PWM
                                         convertBool(params[0], params[3]));  // 回頭方向
-      motionList.push_back(ar);  // 動作リストに追加
-    }
-
-    // TODO: 後で作成する
-
-    else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
+      motionList.push_back(ar);          // 動作リストに追加
+    } else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
       DistanceLineTracing* dl = new DistanceLineTracing(
           atof(params[1]),                                             // 目標距離
-          targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
-          atof(params[3]),                                             // 目標速度
+          atof(params[2]),                                             // 目標速度
+          targetBrightness + atoi(params[3]),                          // 目標輝度 + 調整
           PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
 
       motionList.push_back(dl);          // 動作リストに追加
     } else if(command == COMMAND::CL) {  // 指定色ライントレース動作の生成
       ColorLineTracing* cl = new ColorLineTracing(
-          ColorJudge::stringToColor(params[1]),                        // 目標色
-          targetBrightness + atoi(params[2]),                          // 目標輝度 + 調整
-          atof(params[3]),                                             // 目標速度
+          ColorJudge::stringToColor(params[1]),  // 目標色
+          atof(params[2]),                       // 目標速度
+          targetBrightness + atoi(params[3]),    // 目標輝度 + 調整 // 目標速度
           PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
 
@@ -88,6 +84,8 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
       motionList.push_back(ec);  // 動作リストに追加
     }
+
+    // TODO: 後で作成する
 
     //    else if(command == COMMAND::SL) {  // 自タスクスリープの生成
     //      Sleeping* sl = new Sleeping(atoi(params[1]));
