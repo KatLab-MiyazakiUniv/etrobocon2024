@@ -45,7 +45,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     // 取得したパラメータから動作インスタンスを生成する
     COMMAND command = convertCommand(params[0]);  // 行の最初のパラメータをCOMMAND型に変換
 
-    if(command == COMMAND::PR) {                          // 指定角度回頭動作の生成
+    if(command == COMMAND::PR) {                          // PWM指定回頭動作の生成
       PwmRotation* pr = new PwmRotation(atoi(params[1]),  // 目標角度
                                         atoi(params[2]),  // 目標PWM
                                         convertBool(params[0], params[3]));  // 回頭方向
