@@ -46,8 +46,8 @@ namespace etrobocon2024_test {
     // ColorStraight* cs = new ColorStraight(COLOR::GREEN, 100);
     // expectedList.push_back(cs);
 
-    PwmRotation* ar = new PwmRotation(90, 80, false);
-    expectedList.push_back(ar);
+    PwmRotation* pr = new PwmRotation(90, 80, false);
+    expectedList.push_back(pr);
     // Warning文
     string expectedOutput = "\x1b[36m";  // 文字色をシアンに
     expectedOutput += "Warning: ../test/test_data/MotionParserTestData.csv:2: ";
