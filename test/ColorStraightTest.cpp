@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace etrobocon2023_test {
+namespace etrobocon2024_test {
 
   // 最初の色取得で指定色を取得するテストケース
   TEST(ColorStraightTest, runToGetFirst)
@@ -185,4 +185,4 @@ namespace etrobocon2023_test {
     EXPECT_EQ(expected, actual);              // 直進前後で走行距離に変化はない
   }
 
-}  // namespace etrobocon2023_test
+}  // namespace etrobocon2024_test
