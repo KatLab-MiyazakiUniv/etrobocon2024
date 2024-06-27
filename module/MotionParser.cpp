@@ -45,11 +45,11 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     // 取得したパラメータから動作インスタンスを生成する
     COMMAND command = convertCommand(params[0]);  // 行の最初のパラメータをCOMMAND型に変換
 
-    if(command == COMMAND::AR) {                          // 指定角度回頭動作の生成
-      PwmRotation* ar = new PwmRotation(atoi(params[1]),  // 目標角度
+    if(command == COMMAND::PR) {                          // 指定角度回頭動作の生成
+      PwmRotation* pr = new PwmRotation(atoi(params[1]),  // 目標角度
                                         atoi(params[2]),  // 目標PWM
                                         convertBool(params[0], params[3]));  // 回頭方向
-      motionList.push_back(ar);          // 動作リストに追加
+      motionList.push_back(pr);          // 動作リストに追加
     } else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
       DistanceLineTracing* dl = new DistanceLineTracing(
           atof(params[1]),                                             // 目標距離
@@ -136,8 +136,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::DS;
   } else if(strcmp(str, "CS") == 0) {  // 文字列がCSの場合
     return COMMAND::CS;
-  } else if(strcmp(str, "AR") == 0) {  // 文字列がARの場合
-    return COMMAND::AR;
+  } else if(strcmp(str, "PR") == 0) {  // 文字列がPRの場合
+    return COMMAND::PR;
   } else if(strcmp(str, "DT") == 0) {  // 文字列がDTの場合
     return COMMAND::DT;
   } else if(strcmp(str, "EC") == 0) {  // 文字列がECの場合
@@ -162,7 +162,7 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
   // 末尾の改行を削除
   char* param = StringOperator::removeEOL(stringParameter);
 
-  if(strcmp(command, "AR") == 0) {         //  コマンドがARの場合
+  if(strcmp(command, "PR") == 0) {         //  コマンドがPRの場合
     if(strcmp(param, "clockwise") == 0) {  // パラメータがclockwiseの場合
       return true;
     } else if(strcmp(param, "anticlockwise") == 0) {  // パラメータがanticlockwiseの場合
