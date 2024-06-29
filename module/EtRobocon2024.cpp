@@ -43,6 +43,29 @@ void EtRobocon2024::start()
   //   // スタートのメッセージログを出す
   //   const char* course = isLeftCourse ? "Left" : "Right";
   //   snprintf(buf, BUF_SIZE, "\nRun on the %s Course\n", course);
+  bool isLeftCourse = true;
+  bool isLeftEdge = true;
+  Calibrator calibrator;
+
+    // キャリブレーションする
+  calibrator.run();
+  isLeftCourse = calibrator.getIsLeftCourse();
+  // isLeftCourse = true;
+  isLeftEdge = isLeftCourse;
+  int targetBrightness = calibrator.getTargetBrightness();
+
+  // int targetBrightness = 50;
+ // 各エリアを走行する
+  // 走行状態をwait(開始合図待ち)に変更
+  setstate("wait");
+  // 合図を送るまで待機する
+  calibrator.waitForStart();
+
+  AreaMaster lineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
+  
+
+  // LAPゲートを通過する
+  lineTraceAreaMaster.run();
 }
 
 // void EtRobocon2024::sigint(int _)
