@@ -13,11 +13,8 @@
 #include "MotionParser.h"
 #include "Logger.h"
 
-// エリア攻略のクラスが未定義のため、仮のエリアを指定
-enum Area { AreaMaster };
-
 // エリア名を持つ列挙型変数（LineTrace = 0, DoubleLoop = 1, DebrisRemoval = 2, SmartCarry = 3）
-// enum Area { LineTrace, DoubleLoop, DebrisRemoval, SmartCarry };
+enum Area { LineTrace, DoubleLoop, DebrisRemoval, SmartCarry };
 
 class AreaMaster {
  public:
@@ -44,12 +41,8 @@ class AreaMaster {
   // 各エリアのコマンドファイルベースパス
   const char* basePath = "etrobocon2024/datafiles/";
 
-  // コマンドファイル名
-  const char* commandFileNames[1] = { "AreaMaster" };
-
-  // TODO:今後切り替えるコマンドファイル名
-  // // コマンドファイル名（各エリア名）
-  // const char* commandFileNames[4] = { "LineTrace", "DoubleLoop", "DebrisRemoval", "SmartCarry" };
+  // コマンドファイル名（各エリア名）
+  const char* commandFileNames[4] = { "LineTrace", "DoubleLoop", "DebrisRemoval", "SmartCarry" };
 };
 
 #endif

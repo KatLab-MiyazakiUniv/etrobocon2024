@@ -1,2 +1,2 @@
-AR,90,80,anticlockwise,角度指定回頭
+PR,90,80,anticlockwise,PWM指定回頭
 UNDEFINED,未定義コマンド
