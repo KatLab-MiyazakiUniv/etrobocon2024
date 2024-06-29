@@ -6,11 +6,17 @@
 
 #include "EtRobocon2024.h"
 // ev3api.hをインクルードしているものは.cppに書く
-// #include "ev3api.h"
-// #include "ColorSensor.h"
-// #include "SonarSensor.h"
-// #include "Motor.h"
-// #include "Clock.h"
+#include "AreaMaster.h"
+#include "Measurer.h"
+#include "Controller.h"
+#include "Calibrator.h"
+#include "SystemInfo.h"
+#include "ev3api.h"
+#include "ColorSensor.h"
+#include "SonarSensor.h"
+#include "Motor.h"
+#include "Clock.h"
+#include "Timer.h"
 
 void EtRobocon2024::start()
 {
@@ -51,7 +57,7 @@ void EtRobocon2024::start()
   calibrator.run();
   isLeftCourse = calibrator.getIsLeftCourse();
   // isLeftCourse = true;
-  isLeftEdge = isLeftCourse;
+  // isLeftEdge = isLeftCourse;
   int targetBrightness = calibrator.getTargetBrightness();
 
   // int targetBrightness = 50;
@@ -61,11 +67,11 @@ void EtRobocon2024::start()
   // 合図を送るまで待機する
   calibrator.waitForStart();
 
-  AreaMaster lineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
+  AreaMaster doubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
   
 
   // LAPゲートを通過する
-  lineTraceAreaMaster.run();
+  doubleLoopAreaMaster.run();
 }
 
 // void EtRobocon2024::sigint(int _)
