@@ -19,6 +19,7 @@
 #include "DistanceLineTracing.h"
 #include "DistanceStraight.h"
 #include "EdgeChanging.h"
+#include "Sleeping.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 

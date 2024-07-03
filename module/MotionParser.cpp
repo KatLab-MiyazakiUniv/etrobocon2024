@@ -85,12 +85,14 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(ec);  // 動作リストに追加
     }
 
+    else if(command == COMMAND::SL) {  // 自タスクスリープの生成
+      Sleeping* sl = new Sleeping(atoi(params[1]));
+
+      motionList.push_back(sl);  // 動作リストに追加
+    }
+
     // TODO: 後で作成する
 
-    //    else if(command == COMMAND::SL) {  // 自タスクスリープの生成
-    //      Sleeping* sl = new Sleeping(atoi(params[1]));
-
-    //      motionList.push_back(sl);  // 動作リストに追加
     //    }else if(command == COMMAND::DT) {  // 距離指定旋回動作の生成
     //     DistanceTurning* dt = new DistanceTurning(atof(params[1]),   // 目標距離
     //                                               atoi(params[2]),   // 左モータのPWM値
