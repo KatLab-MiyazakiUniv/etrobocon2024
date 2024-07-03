@@ -5,7 +5,6 @@
  */
 
 #include "Sleeping.h"
-#include "Timer.h"
 
 Sleeping::Sleeping(int _milliSec) : milliSec(_milliSec) {}
 
