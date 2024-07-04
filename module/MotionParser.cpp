@@ -85,8 +85,8 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(ec);  // 動作リストに追加
     }
 
-    else if(command == COMMAND::SL) {  // 自タスクスリープの生成
-      Sleeping* sl = new Sleeping(atoi(params[1]));
+    else if(command == COMMAND::SL) {                // 自タスクスリープの生成
+      Sleeping* sl = new Sleeping(atoi(params[1]));  // スリープ時間(ミリ秒)
 
       motionList.push_back(sl);  // 動作リストに追加
     }
