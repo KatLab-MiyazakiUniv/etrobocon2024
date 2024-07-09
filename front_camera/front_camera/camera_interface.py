@@ -2,17 +2,61 @@
 フロントカメラから画像を取得する
 @author: bizyutyu
 """
-import cv2
 from picamera2 import Picamera2, MappedArray
+from datetime import datetime
+from typing import Tuple, Union
+import cv2
 import numpy as np
+import os
+import argparse
+import time
+
+
 
 class CameraInterface:
-    def __init__(self, camera_index=0):
-        self.camera_index = camera_index
-        self.cap = cv2.VideoCapture(camera_index)
-        self.picam2 = Picamera2()
-        self.picam2.configure(self.picam2.create_still_configuration())
-        self.picam2.start()
+    def __init__(self, camera_id=0, data_format: str = "RGB888", size: Tuple[int, int] = (1640, 1232)) -> None:
+        self.camera_id = camera_id
+        # self.cap = cv2.VideoCapture(camera_id)
+        # self.picam2 = Picamera2()
+        # self.picam2.configure(self.picam2.create_still_configuration())
+        # self.picam2.start()
+        self.format = data_format
+        self.size = size
+        self.picam2 = None
+
+    def start_camera(self) -> None:
+        """Picamera2インスタンスの初期化を行う."""
+        if self.picam2 is None:
+            picam2 = Picamera2(camera_num=self.camera_id)
+            conf = picam2.create_preview_configuration(
+                main={"format": self.format, "size": self.size})
+            picam2.configure(conf)
+            picam2.start()
+            self.picam2 = picam2
+
+    def capture_image(self) -> Union[np.ndarray, None]:
+        """カメラで画像を取得する関数.
+
+        Returns:
+            Union[np.ndarray, None]: カメラ画像データ
+        """
+        return self.picam2.capture_array()
+
+        # camera.capture_image_cv2("captured_image_cv2.png")
+        # camera.capture_image_picamera2("captured_image_picamera2.png")
+        # buffer = camera.capture_buffers()
+        # array = camera.capture_array()
+        # print("Buffer captured:", buffer)
+        # print("Array captured:", array)
+
+    def capture_save_image(self, save_path) -> None:
+        """カメラで画像を取得し、保存する関数.
+
+        Args:
+            save_path (int): 画像の保存先パス(拡張子込み)
+        """
+        img = self.capture_image()
+        cv2.imwrite(save_path, img)
 
     def capture_image_cv2(self, save_path):
         ret, frame = self.cap.read()
@@ -38,13 +82,43 @@ class CameraInterface:
         self.picam2.stop()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="リアカメラに関するプログラム")
+    parser.add_argument("--camera-num", type=int, default=0,
+                        help="カメラIDを指定する")
+    parser.add_argument("-s", "--images",  action="store_true",
+                        help="リアカメラで1秒ごとに画像を取得する")
+    parser.add_argument("-spath", "--save_path", type=str, default=None,
+                        help="保存する画像の名前を指定")
+    args = parser.parse_args()
     camera = CameraInterface()
-    try:
-        camera.capture_image_cv2("captured_image_cv2.jpg")
-        camera.capture_image_picamera2("captured_image_picamera2.jpg")
-        buffer = camera.capture_buffers()
-        array = camera.capture_array()
-        print("Buffer captured:", buffer)
-        print("Array captured:", array)
-    finally:
-        camera.release()
+
+    # 保存用フォルダの作成
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    parent_path = os.path.dirname(current_path)
+    folder_path = os.path.join(parent_path, "image_data")
+    if not os.path.exists(folder_path):
+        os.mkdir(folder_path)
+
+    # 画像の取得
+    camera = CameraInterface(camera_id=args.camera_num)
+    camera.start_camera()
+
+    # 1秒ごとにリアカメラで画像を取得する
+    if args.images:
+        while True:
+            file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
+            save_path = os.path.join(folder_path, file_name)
+            camera.capture_save_image(folder_path+"/"+file_name)
+            time.sleep(1)
+
+    # １枚だけリアカメラで画像を取得する
+    else:
+        if args.save_path is not None:
+            save_path = os.path.join(folder_path, args.save_path)
+        else:
+            file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
+            save_path = os.path.join(folder_path, file_name)
+        # try:
+        camera.capture_save_image(save_path)
+        # finally:
+            # camera.release()
