@@ -30,10 +30,13 @@ bool ColorStraight::isMetPreCondition()
 
 bool ColorStraight::isMetContinuationCondition()
 {
-  COLOR color = ColorJudge::getColor(measurer.getRawColor());
-  if(color == targetColor) {
-    return false;
+  if(ColorJudge::getColor(measurer.getRawColor()) == targetColor) {
+    colorCount++;
+  } else {
+    colorCount = 0;
   }
+  // 指定された色をJUDGE_COUNT回連続で取得したときモータが止まる
+  if(colorCount >= JUDGE_COUNT) return false;
 
   return true;
 }
