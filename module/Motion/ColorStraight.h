@@ -36,6 +36,8 @@ class ColorStraight : public Straight {
   virtual void logRunning() override;
 
  private:
+  static constexpr int JUDGE_COUNT = 3;
+  int colorCount = 0;
   COLOR targetColor;  // 目標色
 };
 
