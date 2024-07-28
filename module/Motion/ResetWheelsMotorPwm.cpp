@@ -1,7 +1,7 @@
 /**
  * @file   ResetWheelsMotorPwm.cpp
  * @brief  両輪モーターリセット&停止
- * @author YourName
+ * @author Negimarge
  */
 
 #include "ResetWheelsMotorPwm.h"
