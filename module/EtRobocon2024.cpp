@@ -49,6 +49,7 @@ void EtRobocon2024::start()
   //   // スタートのメッセージログを出す
   //   const char* course = isLeftCourse ? "Left" : "Right";
   //   snprintf(buf, BUF_SIZE, "\nRun on the %s Course\n", course);
+
   bool isLeftCourse = true;
   bool isLeftEdge = true;
   Calibrator calibrator;
