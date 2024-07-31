@@ -57,6 +57,7 @@ void LineTracing::run()
     // 10ミリ秒待機
     timer.sleep(10);
   }
+
   // モータの停止
   // controller.stopWheelsMotor();
 }
