@@ -230,7 +230,17 @@ package "etrobocon2024" {
             }
             Motion <|-- Sleeping
 
-            class Straight
+            class Straight {
+                + Straight(double _speed)
+                + void run()
+                # virtual bool isMetPreCondition()
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # double initialDistance
+                # Timer timer
+                # Measurer measurer
+            }
             Motion <|-- Straight
         }
 
