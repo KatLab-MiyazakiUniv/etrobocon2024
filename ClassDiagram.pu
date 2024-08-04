@@ -63,7 +63,12 @@ package "etrobocon2024" {
                 RED = 6
             }
 
-            struct Hsv
+            struct Hsv {
+                - int hue
+                - int saturation
+                - int value
+            }
+
             class ColorJudge
             class Mileage
             struct PidGain
