@@ -152,7 +152,7 @@ package "etrobocon2024" {
             }
 
             class StringOperator {
-                + static char* removeEOL(const char*)
+                + static char* removeEOL(const char* string)
                 - StringOperator()
             }
         }
