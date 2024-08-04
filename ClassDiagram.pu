@@ -287,7 +287,11 @@ package "etrobocon2024" {
 
         class Calibrator
 
-        class EtRobocon2024
+        class EtRobocon2024 {
+            --
+            + static void start()
+            - static void sigint(int _)
+        }
 
         enum COMMAND <<int>> {
             DL = 0
