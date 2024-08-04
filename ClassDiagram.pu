@@ -221,7 +221,13 @@ package "etrobocon2024" {
             }
             Motion <|-- Rotation
 
-            class Sleeping
+            class Sleeping {
+                + Sleeping(int milliSec)
+                + void run()
+                + void logRunning()
+                - int milliSec
+                - Timer timer
+            }
             Motion <|-- Sleeping
 
             class Straight
