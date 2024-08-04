@@ -289,9 +289,29 @@ package "etrobocon2024" {
 
         class EtRobocon2024
 
-        enum COMMAND
+        enum COMMAND <<int>> {
+            DL = 0
+            CL = 1
+            DS = 2
+            CS = 3
+            PR = 4
+            DT = 5
+            EC = 6
+            SL = 7
+            AU = 8
+            AD = 9
+            XR = 10
+            NONE = 11
+        }
 
-        class MotionParser
+        class MotionParser {
+            --
+            + static std::vector<Motion*> createMotions(const char* filePath, int targetBrightness, bool& isLeftEdge)
+            - MotionParser()
+            - static COMMAND convertCommand(char* str)
+            - static bool convertBool(char* command, char* stringParameter)
+        }
+
     }
 }
 
