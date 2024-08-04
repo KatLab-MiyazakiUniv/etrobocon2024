@@ -108,7 +108,7 @@ package "etrobocon2024" {
             SmartCarry = 3
         }
 
-        RECTANGLE AreaMaster {
+        class AreaMaster {
             - bool isLeftCourse
             - bool isLeftEdge
             - int targetBrightness
