@@ -158,7 +158,16 @@ package "etrobocon2024" {
         }
 
         package "Motion" {
-            class ColorLineTracing
+            class ColorLineTracing {
+                + ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness, const PidGain& _gain, bool& _isLeftEdge)
+                + using LineTracing::run
+                # bool isMetPreCondition(double targetSpeed) override
+                # bool isMetContinuationCondition() override
+                # void logRunning() override
+                - static constexpr int JUDGE_COUNT = 3
+                - int colorCount = 0
+                - COLOR targetColor
+            }
             LineTracing <|-- ColorLineTracing
 
             class ColorStraight
