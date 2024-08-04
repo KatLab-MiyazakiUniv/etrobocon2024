@@ -109,11 +109,12 @@ package "etrobocon2024" {
         }
 
         class AreaMaster {
+            - Area area
             - bool isLeftCourse
             - bool isLeftEdge
             - int targetBrightness
-            - const char* basePath
-            - const char* commandFileNames[4]
+            - const char* basePath = "etrobocon2024/datafiles/"
+            - const char* commandFileNames[4] = { "LineTrace", "DoubleLoop", "DebrisRemoval", "SmartCarry" }
             --
             + AreaMaster(Area area, bool isLeftCourse, bool& isLeftEdge, int targetBrightness)
             + void run()
