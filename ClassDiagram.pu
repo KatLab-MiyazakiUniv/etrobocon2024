@@ -69,7 +69,24 @@ package "etrobocon2024" {
                 - int value
             }
 
-            class ColorJudge
+            class ColorJudge {
+                + ColorJudge() = delete
+                + static COLOR getColor(rgb_raw_t const& rgb)
+                + static COLOR stringToColor(const char* str)
+                + static const char* colorToString(COLOR color)
+                - static constexpr int SATURATION_BORDER = 27
+                - static constexpr int BLACK_LIMIT_BORDER = 10
+                - static constexpr int WHITE_LIMIT_BORDER = 250
+                - static constexpr int BLACK_BORDER = 110
+                - static constexpr int RED_BORDER = 25
+                - static constexpr int YELLOW_BORDER = 50
+                - static constexpr int GREEN_BORDER = 170
+                - static constexpr int BLUE_BORDER = 300
+                - static constexpr rgb_raw_t MAX_RGB = { 244, 245, 252 }
+                - static constexpr rgb_raw_t MIN_RGB = { 9, 10, 10 }
+                - static Hsv convertRgbToHsv(rgb_raw_t const& rgb)
+            }
+
             class Mileage
             struct PidGain
             class Pid
