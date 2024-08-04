@@ -1,0 +1,85 @@
+@startuml sample
+
+package "etrobocon2024" {
+    package "module" {
+        package "API" {
+            class Controller
+            class Measurer
+            class Timer
+        }
+
+        package "Calculator" {
+            enum COLOR
+            struct Hsv
+            class ColorJudge
+            class Mileage
+            struct PidGain
+            class Pid
+            class SpeedCalculator
+        }
+
+        package "common" {
+            class Logger
+            class StringOperator
+        }
+
+        package "Motion" {
+            class ColorLineTracing
+            LineTracing <|-- ColorLineTracing
+
+            class ColorStraight
+            Straight <|-- ColorStraight
+
+            class DistanceLineTraicing
+            LineTracing <|-- DistanceLineTraicing
+
+            class DistanceStraight
+            Straight <|-- DistanceStraight
+
+            class EdgeChanging
+            Motion <|-- EdgeChanging
+
+            class LineTracing
+            Motion <|-- LineTracing
+
+            class Motion
+
+            class PwmRotation
+            Rotation <|-- PwmRotation
+
+            class Rotation
+            Motion <|-- Rotation
+
+            class Sleeping
+            Motion <|-- Sleeping
+
+            class Straight
+            Motion <|-- Straight
+        }
+
+        enum Area
+        class AreaMaster
+
+        class Calibrator
+
+        class EtRobocon2024
+
+        enum COMMAND
+
+        class MotionParser
+    }
+}
+
+package "etrobocon2024-camera-system" {
+    package "src" {
+        class CameraSystem
+        class Client
+        class DetectObject
+        class ImageProcessing
+        class ResponseError
+        class OfficialInterface
+        class RoboSnap
+        class TrainTracker
+    }
+}
+@enduml
