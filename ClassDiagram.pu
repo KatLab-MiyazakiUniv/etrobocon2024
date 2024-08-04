@@ -178,7 +178,14 @@ package "etrobocon2024" {
             }
             Straight <|-- ColorStraight
 
-            class DistanceLineTraicing
+            class DistanceLineTraicing {
+                + DistanceLineTracing(double _targetDistance, double _targetSpeed, int _targetBrightness, const PidGain& _pidGain, bool& _isLeftEdge)
+                + using LineTracing::run
+                # bool isMetPreCondition(double targetSpeed) override
+                # bool isMetContinuationCondition() override
+                # void logRunning() override
+                - double targetDistance
+            }
             LineTracing <|-- DistanceLineTraicing
 
             class DistanceStraight
