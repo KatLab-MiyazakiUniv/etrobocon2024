@@ -170,7 +170,24 @@ package "etrobocon2024" {
             class EdgeChanging
             Motion <|-- EdgeChanging
 
-            class LineTracing
+            class LineTracing {
+                + LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
+              bool& _isLeftEdge)
+                + void run()
+                # virtual bool isMetPreCondition(double targetSpeed) = 0
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # int targetBrightness
+                # PidGain pidGain
+                # bool& isLeftEdge
+                # double initLeftMileage
+                # double initRightMileage
+                # double initDistance
+                # Timer timer
+                # Measurer measurer
+                # Controller controller
+            }
             Motion <|-- LineTracing
 
             class Motion
