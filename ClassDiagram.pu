@@ -1,4 +1,4 @@
-@startuml sample
+@startuml ETRobocon2024
 
 package "etrobocon2024" {
     package "module" {
