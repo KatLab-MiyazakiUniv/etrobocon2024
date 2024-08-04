@@ -300,7 +300,6 @@ package "etrobocon2024" {
         }
 
         class EtRobocon2024 {
-            --
             + static void start()
             - static void sigint(int _)
         }
@@ -326,7 +325,6 @@ package "etrobocon2024" {
             - static COMMAND convertCommand(char* str)
             - static bool convertBool(char* command, char* stringParameter)
         }
-
     }
 }
 
