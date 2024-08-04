@@ -110,7 +110,31 @@ package "etrobocon2024" {
                 - double targetValue
             }
 
-            class SpeedCalculator
+            class SpeedCalculator {
+                + SpeedCalculator(double _targetSpeed)
+                + SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
+                + double calculateRightMotorPwmFromTargetSpeed()
+                + double calculateLeftMotorPwmFromTargetSpeed()
+                - const double rightTargetSpeed
+                - const double leftTargetSpeed
+                - Pid rightPid
+                - Pid leftPid
+                - Timer timer
+                - Measurer measurer
+                - double rightMotorPwm
+                - double leftMotorPwm
+                - double prevRightMileage
+                - double prevLeftMileage
+                - int prevRightTime
+                - int prevLeftTime
+                - static constexpr double K_P = 0.004
+                - static constexpr double K_I = 0.0000005
+                - static constexpr double K_D = 0.0007
+                - static constexpr double R_K_P = 0.004
+                - static constexpr double R_K_I = 0.0000005
+                - static constexpr double R_K_D = 0.0007
+                - double calculateSpeed(double diffMileage, double diffTime)
+            }
         }
 
         package "common" {
