@@ -28,7 +28,7 @@ package "etrobocon2024" {
             }
 
             class Measurer {
-                + Measurer(colorSensor(PORT_2),　sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
+                + Measurer(colorSensor(PORT_2), sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
                 + int getBrightness()
                 + rgb_raw_t getRawColor()
                 + int getLeftCount()
@@ -285,7 +285,19 @@ package "etrobocon2024" {
         enum Area
         class AreaMaster
 
-        class Calibrator
+        class Calibrator {
+            - bool isLeftCourse
+            - int targetBrightness
+            - Timer timer
+            - Measurer measurer
+            + Calibrator(bool isLeftCourse = true, int targetBrightness = 50)
+            + void run()
+            + void waitForStart()
+            + bool getIsLeftCourse()
+            + int getTargetBrightness()
+            - void selectAndSetCourse()
+            - void measureAndSetTargetBrightness()
+        }
 
         class EtRobocon2024 {
             --
