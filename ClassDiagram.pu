@@ -188,7 +188,13 @@ package "etrobocon2024" {
             }
             LineTracing <|-- DistanceLineTraicing
 
-            class DistanceStraight
+            class DistanceStraight {
+                + DistanceStraight(double _targetDiatance, double _speed)
+                # virtual bool isMetPreCondition() override
+                # virtual bool isMetContinuationCondition() override
+                # virtual void logRunning() override
+                - double targetDistance
+            }
             Straight <|-- DistanceStraight
 
             class EdgeChanging
