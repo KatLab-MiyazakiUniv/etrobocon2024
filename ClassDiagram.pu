@@ -48,7 +48,7 @@ package "etrobocon2024" {
 
             class Timer {
                 + Timer()
-                + void sleep(int)
+                + void sleep(int milliSec = 10)
                 + int now()
                 - ev3api::Clock clock
             }
