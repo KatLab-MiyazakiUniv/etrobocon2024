@@ -197,7 +197,13 @@ package "etrobocon2024" {
                 # Logger logger
             }
 
-            class PwmRotation
+            class PwmRotation {
+                + PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + using Rotation::run
+                + bool isMetPreCondition() override
+                + bool isMetContCondition(double initLeftMileage, double initRightMileage, int leftSign, int rightSign) override
+                + void logRunning() override
+            }
             Rotation <|-- PwmRotation
 
             class Rotation
