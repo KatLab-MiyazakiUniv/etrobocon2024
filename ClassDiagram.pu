@@ -107,7 +107,7 @@ package "etrobocon2024" {
             - Timer timer
             - Measurer measurer
             --
-            + Calibrator()
+            + Calibrator(bool isLeftCourse = true, int targetBrightness = 50)
             + void run()
             + void waitForStart()
             + bool getIsLeftCourse()
