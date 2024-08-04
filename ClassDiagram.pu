@@ -170,7 +170,15 @@ package "etrobocon2024" {
             }
             LineTracing <|-- ColorLineTracing
 
-            class ColorStraight
+            class ColorStraight {
+                + ColorStraight(COLOR _targetColor, double _speed)
+                # virtual bool isMetPreCondition() override
+                # virtual bool isMetContinuationCondition() override
+                # virtual void logRunning() override
+                - static constexpr int JUDGE_COUNT = 3
+                - int colorCount = 0
+                - COLOR targetColor
+            }
             Straight <|-- ColorStraight
 
             class DistanceLineTraicing
