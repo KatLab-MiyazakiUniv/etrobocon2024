@@ -345,7 +345,10 @@ package "etrobocon2024" {
 
 package "etrobocon2024-camera-system" {
     package "src" {
-        class CameraSystem
+        class CameraSystem {
+            __init__(self) -> None
+            start(self) -> None
+        }
         class Client
         class DetectObject
         class ImageProcessing
