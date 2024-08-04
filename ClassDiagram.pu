@@ -93,7 +93,13 @@ package "etrobocon2024" {
                 - Mileage()
             }
 
-            struct PidGain
+            struct PidGain {
+                + double kp
+                + double ki
+                + double kd
+                - PidGain(double _kp, double _ki, double _kd)
+            }
+
             class Pid
             class SpeedCalculator
         }
