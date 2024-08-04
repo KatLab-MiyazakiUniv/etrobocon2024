@@ -206,7 +206,19 @@ package "etrobocon2024" {
             }
             Rotation <|-- PwmRotation
 
-            class Rotation
+            class Rotation {
+                + Rotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + void run()
+                + virtual bool isMetPreCondition() = 0
+                + virtual bool isMetContCondition(double targetLeftDistance, double targetRightDistance, int leftSign, int rightSign) = 0
+                + virtual void logRunning() = 0
+                # int targetAngle
+                # int pwm
+                # bool isClockwise
+                # Timer timer
+                # Controller controller
+                # Measurer measurer
+            }
             Motion <|-- Rotation
 
             class Sleeping
