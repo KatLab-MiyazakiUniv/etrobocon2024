@@ -87,7 +87,12 @@ package "etrobocon2024" {
                 - static Hsv convertRgbToHsv(rgb_raw_t const& rgb)
             }
 
-            class Mileage
+            class Mileage {
+                + static double calculateWheelMileage(int angle)
+                + static double calculateMileage(int rightAngle, int leftAngle)
+                - Mileage()
+            }
+
             struct PidGain
             class Pid
             class SpeedCalculator
