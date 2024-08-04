@@ -305,7 +305,6 @@ package "etrobocon2024" {
         }
 
         class MotionParser {
-            --
             + static std::vector<Motion*> createMotions(const char* filePath, int targetBrightness, bool& isLeftEdge)
             - MotionParser()
             - static COMMAND convertCommand(char* str)
