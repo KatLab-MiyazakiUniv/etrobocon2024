@@ -63,8 +63,20 @@ package "etrobocon2024" {
         }
 
         package "common" {
-            class Logger
-            class StringOperator
+            class Logger {
+                + Logger()
+                + void log(const char*)
+                + void logWarning(const char*)
+                + void logError(const char*)
+                + void logHighlight(const char*)
+                + void outputToFile()
+                + void initLogs()
+                - static char logs[65536]
+            }
+            class StringOperator {
+                + static char* removeEOL(const char*)
+                - StringOperator()
+            }
         }
 
         package "Motion" {
