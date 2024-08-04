@@ -28,9 +28,12 @@ ClassDiagram.pu は、クラス図作成の補助のため、PlantUML を用い�
 1. PlantUML をインストールする
    PlantUML をインストールするため、以下のコマンドで必要なパッケージをインストールする。
    Mac 環境では、Homebrew を用いて、以下のコマンドでインストールする。
-   `brew install adoptopenjdk --cask`
-   `brew install graphviz`
-   `brew install plantuml`
+
+   ```
+   $ brew install adoptopenjdk --cask
+   $ brew install graphviz
+   $ brew install plantuml
+   ```
 
    また、Mac 環境において、[Times free font](https://www.freebestfonts.com/timr45w-font#google_vignette)のインストールが必要な場合がある現象を確認した。ダウンロードしたフォントを開くと、フォントを追加するボタンが表示されるため、ボタンを押下して追加する。
 
@@ -49,13 +52,21 @@ KatLab メンバー, 宮崎大学片山徹郎研究室
 ビルドする(開発環境、実機共通)
 
 ```
+
 $ cd ~/etrobo/workspace/etrobocon2024
 $ make build
+
 ```
 
 走行を開始する(実機限定)
 
 ```
+
 $ cd ~/etrobo/workspace/etrobocon2024
 $ make start
+
+```
+
+```
+
 ```
