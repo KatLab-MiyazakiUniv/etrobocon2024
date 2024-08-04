@@ -190,7 +190,12 @@ package "etrobocon2024" {
             }
             Motion <|-- LineTracing
 
-            class Motion
+            class Motion {
+                + Motion()
+                + virtual void run() = 0
+                + virtual void logRunning() = 0
+                # Logger logger
+            }
 
             class PwmRotation
             Rotation <|-- PwmRotation
