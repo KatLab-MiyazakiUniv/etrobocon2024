@@ -53,13 +53,88 @@ package "etrobocon2024" {
         }
 
         package "Calculator" {
-            enum COLOR
-            struct Hsv
-            class ColorJudge
-            class Mileage
-            struct PidGain
-            class Pid
-            class SpeedCalculator
+            enum COLOR <<int>> {
+                NONE = 0
+                BLACK = 1
+                WHITE = 2
+                BLUE = 3
+                GREEN = 4
+                YELLOW = 5
+                RED = 6
+            }
+
+            struct Hsv {
+                - int hue
+                - int saturation
+                - int value
+            }
+
+            class ColorJudge {
+                + ColorJudge() = delete
+                + static COLOR getColor(rgb_raw_t const& rgb)
+                + static COLOR stringToColor(const char* str)
+                + static const char* colorToString(COLOR color)
+                - static constexpr int SATURATION_BORDER = 27
+                - static constexpr int BLACK_LIMIT_BORDER = 10
+                - static constexpr int WHITE_LIMIT_BORDER = 250
+                - static constexpr int BLACK_BORDER = 110
+                - static constexpr int RED_BORDER = 25
+                - static constexpr int YELLOW_BORDER = 50
+                - static constexpr int GREEN_BORDER = 170
+                - static constexpr int BLUE_BORDER = 300
+                - static constexpr rgb_raw_t MAX_RGB = { 244, 245, 252 }
+                - static constexpr rgb_raw_t MIN_RGB = { 9, 10, 10 }
+                - static Hsv convertRgbToHsv(rgb_raw_t const& rgb)
+            }
+
+            class Mileage {
+                + static double calculateWheelMileage(int angle)
+                + static double calculateMileage(int rightAngle, int leftAngle)
+                - Mileage()
+            }
+
+            struct PidGain {
+                + double kp
+                + double ki
+                + double kd
+                - PidGain(double _kp, double _ki, double _kd)
+            }
+
+            class Pid {
+                + Pid(double _kp, double _ki, double _kd, double _targetValue)
+                + void setPidGain(double _kp, double _ki, double _kd)
+                + double calculatePid(double currentValue, double delta = 0.01)
+                - PidGain pidGain
+                - double prevDeviation
+                - double integral
+                - double targetValue
+            }
+
+            class SpeedCalculator {
+                + SpeedCalculator(double _targetSpeed)
+                + SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
+                + double calculateRightMotorPwmFromTargetSpeed()
+                + double calculateLeftMotorPwmFromTargetSpeed()
+                - const double rightTargetSpeed
+                - const double leftTargetSpeed
+                - Pid rightPid
+                - Pid leftPid
+                - Timer timer
+                - Measurer measurer
+                - double rightMotorPwm
+                - double leftMotorPwm
+                - double prevRightMileage
+                - double prevLeftMileage
+                - int prevRightTime
+                - int prevLeftTime
+                - static constexpr double K_P = 0.004
+                - static constexpr double K_I = 0.0000005
+                - static constexpr double K_D = 0.0007
+                - static constexpr double R_K_P = 0.004
+                - static constexpr double R_K_I = 0.0000005
+                - static constexpr double R_K_D = 0.0007
+                - double calculateSpeed(double diffMileage, double diffTime)
+            }
         }
 
         package "common" {
