@@ -282,7 +282,7 @@ package "etrobocon2024" {
             Motion <|-- Straight
         }
         
-        enum Area {
+        enum Area <<int>> {
             LineTrace = 0
             DoubleLoop = 1
             DebrisRemoval = 2
