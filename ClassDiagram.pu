@@ -170,21 +170,77 @@ package "etrobocon2024" {
             class EdgeChanging
             Motion <|-- EdgeChanging
 
-            class LineTracing
+            class LineTracing {
+                + LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
+              bool& _isLeftEdge)
+                + void run()
+                # virtual bool isMetPreCondition(double targetSpeed) = 0
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # int targetBrightness
+                # PidGain pidGain
+                # bool& isLeftEdge
+                # double initLeftMileage
+                # double initRightMileage
+                # double initDistance
+                # Timer timer
+                # Measurer measurer
+                # Controller controller
+            }
             Motion <|-- LineTracing
 
-            class Motion
+            class Motion {
+                + Motion()
+                + virtual void run() = 0
+                + virtual void logRunning() = 0
+                # Logger logger
+            }
 
-            class PwmRotation
+            class PwmRotation {
+                + PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + using Rotation::run
+                + bool isMetPreCondition() override
+                + bool isMetContCondition(double initLeftMileage, double initRightMileage, int leftSign, int rightSign) override
+                + void logRunning() override
+            }
             Rotation <|-- PwmRotation
 
-            class Rotation
+            class Rotation {
+                + Rotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + void run()
+                + virtual bool isMetPreCondition() = 0
+                + virtual bool isMetContCondition(double targetLeftDistance, double targetRightDistance, int leftSign, int rightSign) = 0
+                + virtual void logRunning() = 0
+                # int targetAngle
+                # int pwm
+                # bool isClockwise
+                # Timer timer
+                # Controller controller
+                # Measurer measurer
+            }
             Motion <|-- Rotation
 
-            class Sleeping
+            class Sleeping {
+                + Sleeping(int milliSec)
+                + void run()
+                + void logRunning()
+                - int milliSec
+                - Timer timer
+            }
             Motion <|-- Sleeping
 
-            class Straight
+            class Straight {
+                + Straight(double _speed)
+                + void run()
+                # virtual bool isMetPreCondition()
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # double initialDistance
+                # Timer timer
+                # Measurer measurer
+            }
             Motion <|-- Straight
         }
 
