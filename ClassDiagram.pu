@@ -26,6 +26,7 @@ package "etrobocon2024" {
                 - static double pwmOfArm
                 - double limitPwmValue(const double)
             }
+
             class Measurer {
                 + Measurer()
                 + int getBrightness()
@@ -44,12 +45,8 @@ package "etrobocon2024" {
                 - ev3api::Motor rightWheel
                 - ev3api::Motor armMotor
             }
-            class Timer {
-                + Timer()
-                + void sleep(int)
-                + int now()
-                - ev3api::Clock clock
-            }
+
+            class Timer
         }
 
         package "Calculator" {
@@ -104,7 +101,20 @@ package "etrobocon2024" {
         enum Area
         class AreaMaster
 
-        class Calibrator
+        class Calibrator {
+            - bool isLeftCourse
+            - int targetBrightness
+            - Timer timer
+            - Measurer measurer
+            --
+            + Calibrator()
+            + void run()
+            + void waitForStart()
+            + bool getIsLeftCourse()
+            + int getTargetBrightness()
+            - void selectAndSetCourse()
+            - void measureAndSetTargetBrightness()
+        }
 
         class EtRobocon2024
 
