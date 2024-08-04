@@ -197,7 +197,13 @@ package "etrobocon2024" {
             }
             Straight <|-- DistanceStraight
 
-            class EdgeChanging
+            class EdgeChanging {
+                + EdgeChanging(bool& _isLeftEdge, bool _nextEdge)
+                # void run()
+                # void logRunning()
+                - bool& isLeftEdge
+                - bool nextEdge
+            }
             Motion <|-- EdgeChanging
 
             class LineTracing
