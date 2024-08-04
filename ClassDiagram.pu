@@ -7,13 +7,13 @@ package "etrobocon2024" {
                 + static constexpr double MOTOR_PWM_MAX = 100.0
                 + static constexpr double MOTOR_PWM_MIN = -100.0
                 + Controller(rightWheel(PORT_B), leftWheel(PORT_C), armMortor(PORT_A))
-                + void setRightMotorPwm(const double)
-                + void setLeftMotorPwm(const double)
+                + void setRightMotorPwm(const double pwm)
+                + void setLeftMotorPwm(const double pwm)
                 + void resetRightMotorPwm()
                 + void resetLeftMotorPwm()
                 + void resetWheelsMotorPwm()
                 + void stopWheelsMotor()
-                + void setArmMotorPwm(const double)
+                + void setArmMotorPwm(const double pwm)
                 + void resetArmMotorPwm()
                 + void stopArmMotor()
                 + double getRightMotorPwm()
@@ -24,10 +24,11 @@ package "etrobocon2024" {
                 - static double pwmOfRightWheel
                 - static double pwmOfLeftWheel
                 - static double pwmOfArm
-                - double limitPwmValue(const double)
+                - double limitPwmValue(const double inputPwm)
             }
+
             class Measurer {
-                + Measurer()
+                + Measurer(colorSensor(PORT_2),　sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
                 + int getBrightness()
                 + rgb_raw_t getRawColor()
                 + int getLeftCount()
@@ -44,9 +45,10 @@ package "etrobocon2024" {
                 - ev3api::Motor rightWheel
                 - ev3api::Motor armMotor
             }
+
             class Timer {
                 + Timer()
-                + void sleep(int)
+                + void sleep(int milliSec = 10)
                 + int now()
                 - ev3api::Clock clock
             }
@@ -140,16 +142,17 @@ package "etrobocon2024" {
         package "common" {
             class Logger {
                 + Logger()
-                + void log(const char*)
-                + void logWarning(const char*)
-                + void logError(const char*)
-                + void logHighlight(const char*)
+                + void log(const char* logMessage)
+                + void logWarning(const char* warningMessage)
+                + void logError(const char* errorMessage)
+                + void logHighlight(const char* highlightLog)
                 + void outputToFile()
                 + void initLogs()
                 - static char logs[65536]
             }
+
             class StringOperator {
-                + static char* removeEOL(const char*)
+                + static char* removeEOL(const char* string)
                 - StringOperator()
             }
         }
