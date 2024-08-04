@@ -53,7 +53,16 @@ package "etrobocon2024" {
         }
 
         package "Calculator" {
-            enum COLOR
+            enum COLOR <<int>> {
+                NONE = 0
+                BLACK = 1
+                WHITE = 2
+                BLUE = 3
+                GREEN = 4
+                YELLOW = 5
+                RED = 6
+            }
+
             struct Hsv
             class ColorJudge
             class Mileage
