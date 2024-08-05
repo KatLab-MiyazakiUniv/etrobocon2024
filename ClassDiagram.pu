@@ -354,6 +354,11 @@ package "etrobocon2024-camera-system" {
         class CameraSystem {
             start(self) -> None
         }
+        class CameraInterface {
+            start_record(self) -> cv2.VideoWriter, cv2.VideoWriter
+            end_record(self) -> None
+            get_frame(self) -> None
+        }
         class Client {
             get_robot_state(self) -> str
             set_true_camera_action_skip(self) -> None
