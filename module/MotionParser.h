@@ -20,6 +20,8 @@
 #include "DistanceStraight.h"
 #include "EdgeChanging.h"
 #include "Sleeping.h"
+#include "StopWheelsMotor.h"
+#include "ResetWheelsMotorPwm.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
@@ -35,6 +37,8 @@ enum class COMMAND {
   AU,  // アームを上げる
   AD,  // アームを下げる
   XR,  // 角度補正回頭
+  RM,  // 両輪モーターリセット&停止
+  SM,  // 両輪モーター停止
   NONE
 };
 

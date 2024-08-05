@@ -91,6 +91,18 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(sl);  // 動作リストに追加
     }
 
+    else if(command == COMMAND::RM) {  // 両輪モーターリセット&停止の生成
+      // モーターのリセット
+      ResetWheelsMotorPwm* rm = new ResetWheelsMotorPwm();  // モーターのリセット
+
+      motionList.push_back(rm);  // 動作リストに追加
+    }
+
+    else if(command == COMMAND::SM) {               // 両輪モーター停止の生成
+      StopWheelsMotor* sm = new StopWheelsMotor();  // モーターの停止
+
+      motionList.push_back(sm);  // 動作リストに追加
+    }
     // TODO: 後で作成する
 
     //    }else if(command == COMMAND::DT) {  // 距離指定旋回動作の生成
@@ -152,6 +164,10 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::AD;
   } else if(strcmp(str, "XR") == 0) {  // 文字列がXRの場合
     return COMMAND::XR;
+  } else if(strcmp(str, "RM") == 0) {  // 文字列がRMの場合
+    return COMMAND::RM;
+  } else if(strcmp(str, "SM") == 0) {  // 文字列がSMの場合
+    return COMMAND::SM;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }

@@ -47,5 +47,5 @@ void Rotation::run()
   }
 
   // モータの停止
-  controller.stopWheelsMotor();
+  // controller.stopWheelsMotor();
 }
