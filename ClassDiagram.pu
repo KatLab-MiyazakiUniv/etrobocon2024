@@ -362,8 +362,16 @@ package "etrobocon2024" {
     }
 
     package "front_camera" {
-        class CameraInterface {}
-        class CaptureImage {}
+        class CameraInterface {
+            start_camera(self) -> None
+            capture_image_picamera2(self, save_path) -> None
+            capture_save_image(self, save_path) -> None
+        }
+        class CaptureImage {
+            sharpen_image(self, np.ndarray img) -> np.ndarray
+            resize_image(self, np.ndarray img) -> np.ndarray
+            capture(self) -> None
+        }
     }
 }
 
