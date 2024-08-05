@@ -351,16 +351,20 @@ package "etrobocon2024" {
 package "etrobocon2024-camera-system" {
     package "src" {
         class CameraSystem {
-            __init__(self) -> None
             start(self) -> None
         }
-        class Client
+        class Client {
+        }
         class DetectObject
         class ImageProcessing
         class ResponseError
         class OfficialInterface
         class RoboSnap
-        class TrainTracker
+        class TrainTracker {
+            calibrate(self) -> None
+            observe(self) -> None
+            detect_train(self, frame, initial_frame) -> None
+        }
     }
 }
 @enduml
