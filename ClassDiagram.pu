@@ -245,6 +245,13 @@ package "etrobocon2024" {
             }
             Rotation <|-- PwmRotation
 
+            class ResetWheelsMotorPwm {
+                + ResetWheelsMotorPwm()
+                + void run()
+                + void logRunning()
+                - Controller controller
+            }
+
             class Rotation {
                 + Rotation(int _targetAngle, int _pwm, bool _isClockwise)
                 + void run()
