@@ -379,11 +379,28 @@ package "etrobocon2024-camera-system" {
             get_robot_state(self) -> str
             set_true_camera_action_skip(self) -> None
         }
-        class DetectObject
-        class ImageProcessing
-        class ResponseError
-        class OfficialInterface
-        class RoboSnap
+        CameraSystem <-- Client
+        class DetectObject {
+            detect_object(self, str image_path, str save_path) -> List[object]
+        }
+        class ImageProcessing {
+            sharpen_image(str image_path, str save_path) -> np.ndarray
+            resize_image(str image_path, str save_path, int resize_h, int resize_w) -> np.ndarray
+        }
+        class ResponseError {
+            ResponseError(self, str message)
+        }
+        class OfficialInterface {
+            str server_ip
+            int team_id
+            upload_snap(cls, int pwm) -> bool
+        }
+        class RoboSnap {
+            RoboSnap(self, str raspike_ip) -> None
+            scp_fig_image(self) -> str, str
+            check_best_shot(self, List[object] objects) -> int
+            start_snap(self) -> None
+        }
         class TrainTracker {
             calibrate(self) -> None
             observe(self) -> None
