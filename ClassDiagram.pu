@@ -251,6 +251,7 @@ package "etrobocon2024" {
                 + void logRunning()
                 - Controller controller
             }
+            Motion <|-- ResetWheelsMotorPwm
 
             class Rotation {
                 + Rotation(int _targetAngle, int _pwm, bool _isClockwise)
@@ -282,6 +283,7 @@ package "etrobocon2024" {
                 + void logRunning()
                 - Controller controller
             }
+            Motion <|-- StopWheelsMotor
 
             class Straight {
                 + Straight(double _speed)
