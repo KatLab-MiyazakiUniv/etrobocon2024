@@ -276,6 +276,13 @@ package "etrobocon2024" {
             }
             Motion <|-- Sleeping
 
+            class StopWheelsMotor {
+                + StopWheelsMotor()
+                + void run()
+                + void logRunning()
+                - Controller controller
+            }
+
             class Straight {
                 + Straight(double _speed)
                 + void run()
