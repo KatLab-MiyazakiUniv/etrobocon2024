@@ -66,7 +66,3 @@ $ cd ~/etrobo/workspace/etrobocon2024
 $ make start
 
 ```
-
-```
-
-```
