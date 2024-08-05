@@ -340,7 +340,9 @@ package "etrobocon2024" {
             AU = 8
             AD = 9
             XR = 10
-            NONE = 11
+            RM = 11
+            SM = 12
+            NONE = 13
         }
 
         class MotionParser {
