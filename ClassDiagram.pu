@@ -355,6 +355,8 @@ package "etrobocon2024-camera-system" {
             start(self) -> None
         }
         class Client {
+            get_robot_state(self) -> str
+            set_true_camera_action_skip(self) -> None
         }
         class DetectObject
         class ImageProcessing
