@@ -342,6 +342,11 @@ package "etrobocon2024" {
             - static bool convertBool(char* command, char* stringParameter)
         }
     }
+
+    package "front_camera" {
+        class CameraInterface {}
+        class CaptureImage {}
+    }
 }
 
 package "etrobocon2024-camera-system" {
