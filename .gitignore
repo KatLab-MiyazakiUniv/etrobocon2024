@@ -19,6 +19,9 @@ server/skip_camera_action.flag
 # vscode設定ファイル
 .vscode/settings.json
 
+# PlantUMLで作成したpuファイルをエクスポートするディレクトリ
+out/
+
 # Created by https://www.toptal.com/developers/gitignore/api/c++,macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,macos,windows
 
