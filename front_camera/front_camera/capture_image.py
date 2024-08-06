@@ -13,9 +13,9 @@ from .camera_interface import CameraInterface
 class CaptureImage:
     """ロボコンスナップNEO撮影用クラス."""
 
-    resize = (640, 480)
+    resize = (800, 600)
 
-    def __init__(self, camera_id=0, img_name="Fig_1.png"):
+    def __init__(self, camera_id=0, img_name="Fig_1.jpeg"):
         """コンストラクタ."""
         self.camera_id = camera_id
         self.img_name = img_name

@@ -41,8 +41,8 @@ class CameraInterface:
         """
         return self.picam2.capture_array()
 
-        # camera.capture_image_cv2("captured_image_cv2.png")
-        # camera.capture_image_picamera2("captured_image_picamera2.png")
+        # camera.capture_image_cv2("captured_image_cv2.jpeg")
+        # camera.capture_image_picamera2("captured_image_picamera2.jpeg")
         # buffer = camera.capture_buffers()
         # array = camera.capture_array()
         # print("Buffer captured:", buffer)
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     if args.save_path is not None:
         save_path = os.path.join(folder_path, args.save_path)
     else:
-        file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
+        file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".jpeg"
         save_path = os.path.join(folder_path, file_name)
     # try:
     camera.capture_save_image(save_path)
