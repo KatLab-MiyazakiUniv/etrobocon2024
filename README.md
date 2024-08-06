@@ -38,10 +38,25 @@ ClassDiagram.pu は、クラス図作成の補助のため、PlantUML を用い�
    また、Mac 環境において、[Times free font](https://www.freebestfonts.com/timr45w-font#google_vignette)のインストールが必要な場合がある現象を確認した。ダウンロードしたフォントを開くと、フォントを追加するボタンが表示されるため、ボタンを押下して追加する。
 
 2. VSCode の拡張機能をインストールする
-   .vscode/extensions.json に記述している拡張機能をインストールする
+   .vscode/extensions.json に記述している拡張機能をインストールする。
 
    - PlantUML
    - Mardown Preview Enhanced
+
+3. .pu ファイルを記述し、プレビュー画面で確認する
+   .pu ファイルを作成し、クラス図を作成する。書き方の詳細は、ClassDiagram.pu ファイルを参照。
+   また、必要な拡張機能をインストールすることにより、.pu ファイルから画像を確認することができる。
+   .pu ファイルを開くと、VSCode のウインドウ左上にある、「カーソル位置のダイアグラムをプレビュー」を押すと、PlantUML プレビューを右に分割して開くことができる。
+   開いたプレビューは、.pu ファイルの記述から UML を自動作成した図を表示する。
+   変更箇所を保存後、しばらくすると画像を更新し、プレビューに出力する画像に反映する。
+
+4. .pu ファイルを SVG にエクスポートする
+   miro に貼り付けるために、.pu ファイルから SVG でエクスポートする。
+   なお、png ファイルでは左から始まって一定幅しか写らず、それ以上は切り取られてしまうため、写らない場所ができる可能性がある。プレビュー画面をスクリーンショットで切り取った場合でも、拡大すると解像度が下がり、文字を読めない場合がある。この問題は、劣化が少ない SVG ファイルをエクスポートし、miro に貼り付けることで解決できる。
+
+   エクスポートは、Ctrl + Shift + P (Command + Shift + P) で、「PlantUML: ワークスペース内のダイアグラムをエクスポート (PlantUML: Export in WorkSpace Diagrams)」を選択することで、エクスポートできる。
+   次に拡張子を選択(SVG を推奨)すると、ルートディレクトリに out ディレクトリを作成し、その中にさらに .pu ファイルと同名のディレクトリを作成し、1 行目にある @startuml {title} の title にあたるファイル名で SVG を出力する。
+   例えば、ClassDiagram.pu に @startuml ETRobocon2024 と書かれている場合は、/out/ClassDiagram/ETRobocon2024.svg を出力する。
 
 ## Authors
 
