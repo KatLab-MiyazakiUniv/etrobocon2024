@@ -66,8 +66,15 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           targetBrightness + atoi(params[3]),    // 目標輝度 + 調整 // 目標速度
           PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
-
-      motionList.push_back(cl);          // 動作リストに追加
+    } else if(command == COMMAND::CD) {  // 色距離指定ライントレース動作の生成
+      ColorDistanceLineTracing* cd = new ColorDistanceLineTracing(
+          ColorJudge::stringToColor(params[1]),  // 目標色
+          atof(params[2]),                       // 目標距離
+          atof(params[3]),                       // 目標速度
+          targetBrightness + atoi(params[4]),    // 目標輝度 + 調整 // 目標速度
+          PidGain(atof(params[5]), atof(params[6]), atof(params[7])),  // PIDゲイン
+          isLeftEdge);                                                 // エッジ
+      motionList.push_back(cd);                                        // 動作リストに追加
     } else if(command == COMMAND::DS) {  // 指定距離直進動作の生成
       DistanceStraight* ds = new DistanceStraight(atof(params[1]),   // 目標距離
                                                   atof(params[2]));  // 目標速度
@@ -148,6 +155,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::CL;
   } else if(strcmp(str, "DS") == 0) {  // 文字列がDSの場合
     return COMMAND::DS;
+  } else if(strcmp(str, "CD") == 0) {  // 文字列がCSの場合
+    return COMMAND::CD;
   } else if(strcmp(str, "CS") == 0) {  // 文字列がCSの場合
     return COMMAND::CS;
   } else if(strcmp(str, "PR") == 0) {  // 文字列がPRの場合
