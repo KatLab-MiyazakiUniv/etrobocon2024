@@ -15,6 +15,16 @@ LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGa
     pidGain(_pidGain),
     isLeftEdge(_isLeftEdge)
 {
+  isRecoveryEnabled = true;
+}
+LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
+                         bool& _isLeftEdge, bool _isRecoveryEnabled)
+  : targetSpeed(_targetSpeed),
+    targetBrightness(_targetBrightness),
+    pidGain(_pidGain),
+    isLeftEdge(_isLeftEdge),
+    isRecoveryEnabled(_isRecoveryEnabled)
+{
 }
 
 void LineTracing::run()
@@ -40,8 +50,10 @@ void LineTracing::run()
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
-    if(isErrorState()) {
-      recover();
+    if(isRecoveryEnabled) {
+      if(isErrorState()) {
+        recover();
+      }
     }
     // 初期pwm値を計算
     double baseRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
@@ -93,6 +105,7 @@ void LineTracing::recover()
     delete *motion;                     // メモリを解放
     motion = motionList.erase(motion);  // リストから削除
   }
+  logFinishingRecovering();
 }
 
 bool LineTracing::isErrorState()
@@ -113,6 +126,14 @@ void LineTracing::logRunningRecovering()
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
   snprintf(buf, LARGE_BUF_SIZE, "Running Recovering");
+  logger.log(buf);
+}
+
+void LineTracing::logFinishingRecovering()
+{
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
+
+  snprintf(buf, LARGE_BUF_SIZE, "Finishing Recovering");
   logger.log(buf);
 }
 

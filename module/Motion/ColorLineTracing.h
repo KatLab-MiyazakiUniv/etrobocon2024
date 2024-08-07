@@ -13,7 +13,7 @@
 class ColorLineTracing : public LineTracing {
  public:
   /**
-   * コンストラクタ
+   * コンストラクタ（引数が5つの場合）
    * @param _targetColor 指定色
    * @param _targetSpeed 目標速度
    * @param _targetBrightness 目標輝度 0~
@@ -22,6 +22,18 @@ class ColorLineTracing : public LineTracing {
    */
   ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
                    const PidGain& _gain, bool& _isLeftEdge);
+
+  /**
+   * コンストラクタ（引数が6つの場合）
+   * @param _targetColor 指定色
+   * @param _targetSpeed 目標速度
+   * @param _targetBrightness 目標輝度 0~
+   * @param _gain PIDゲイン
+   * @param _isLeftEdge エッジの左右判定(true:左エッジ, false:右エッジ)
+   * @param _isRecoveryEnabled 復帰動作を行うかの判定(true:行う, false:行わない)
+   */
+  ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
+                   const PidGain& _gain, bool& _isLeftEdge, bool _isRecoveryEnabled);
 
   /**
    * @brief 指定色までライントレースする

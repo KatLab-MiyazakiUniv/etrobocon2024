@@ -11,7 +11,13 @@ using namespace std;
 ColorLineTracing::ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
                                    const PidGain& _pidGain, bool& _isLeftEdge)
   : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge),
-    targetColor(_targetColor){};
+    targetColor(_targetColor) {};
+
+ColorLineTracing::ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
+                                   const PidGain& _pidGain, bool& _isLeftEdge,
+                                   bool _isRecoveryEnabled)
+  : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge, _isRecoveryEnabled),
+    targetColor(_targetColor) {};
 
 bool ColorLineTracing::isMetPreCondition(double targetSpeed)
 {

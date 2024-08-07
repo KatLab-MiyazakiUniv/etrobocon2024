@@ -11,7 +11,12 @@ DistanceLineTracing::DistanceLineTracing(double _targetDistance, double _targetS
                                          int _targetBrightness, const PidGain& _pidGain,
                                          bool& _isLeftEdge)
   : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge),
-    targetDistance(_targetDistance){};
+    targetDistance(_targetDistance) {};
+DistanceLineTracing::DistanceLineTracing(double _targetDistance, double _targetSpeed,
+                                         int _targetBrightness, const PidGain& _pidGain,
+                                         bool& _isLeftEdge, bool _isRecoveryEnabled)
+  : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge, _isRecoveryEnabled),
+    targetDistance(_targetDistance) {};
 
 bool DistanceLineTracing::isMetPreCondition(double targetSpeed)
 {
