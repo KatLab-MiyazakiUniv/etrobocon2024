@@ -52,10 +52,10 @@ class ColorDistanceLineTracing : public LineTracing {
   void logRunning() override;
 
  private:
-  double targetDistance;  // 目標距離 0~
   static constexpr int JUDGE_COUNT = 3;
   int colorCount = 0;
-  COLOR targetColor;  // 指定色
+  COLOR targetColor;      // 指定色
+  double targetDistance;  // 目標距離 0~
 };
 
 #endif
