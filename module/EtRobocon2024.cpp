@@ -53,7 +53,7 @@ void EtRobocon2024::start()
   bool isLeftEdge = true;
   Calibrator calibrator;
 
-    // キャリブレーションする
+  // キャリブレーションする
   calibrator.run();
   isLeftCourse = calibrator.getIsLeftCourse();
   // isLeftCourse = true;
@@ -61,7 +61,7 @@ void EtRobocon2024::start()
   int targetBrightness = calibrator.getTargetBrightness();
 
   // int targetBrightness = 50;
- // 各エリアを走行する
+  // 各エリアを走行する
   // 走行状態をwait(開始合図待ち)に変更
   setstate("wait");
   // 合図を送るまで待機する
@@ -69,8 +69,8 @@ void EtRobocon2024::start()
 
   AreaMaster LineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
   AreaMaster doubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
-  AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemoval, isLeftCourse, isLeftEdge, targetBrightness);
-  
+  AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemoval, isLeftCourse, isLeftEdge,
+                                     targetBrightness);
 
   // LAPゲートを通過する
   LineTraceAreaMaster.run();

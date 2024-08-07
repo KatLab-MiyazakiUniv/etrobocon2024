@@ -12,6 +12,7 @@
 #include "Mileage.h"
 #include "Timer.h"
 #include "Pid.h"
+#include "ColorJudge.h"
 
 class LineTracing : public Motion {
  public:
@@ -49,6 +50,21 @@ class LineTracing : public Motion {
    */
   virtual void logRunning();
 
+  /**
+   * @brief 走行体がコースを外れたときに復帰動作をする
+   */
+  void recover();
+
+  /**
+   * @brief 走行体がコースを脱線しているかを判定をする　返り値がtrueで復帰動作開始
+   */
+  bool isErrorState();
+
+  /**
+   * @brief 実行のログを取る
+   */
+  void logRunningRecovering();
+
  protected:
   double targetSpeed;    // 目標速度 0~
   int targetBrightness;  // 目標輝度 0~
@@ -61,6 +77,16 @@ class LineTracing : public Motion {
   Timer timer;
   Measurer measurer;
   Controller controller;
+
+  static constexpr int ERROR_JUDGE_COUNT = 3;  // 目標色の連続取得回数の定義
+  int errorColorCount = 0;  // 目標色の連続取得回数を記録するための変数
+  COLOR targetColorForError = COLOR::GREEN;  // コース脱線判定のための目標色
+
+  // コマンドファイルベースパス
+  const char* basePath = "etrobocon2024/datafiles/";
+
+  // コマンドファイル名
+  const char* commandFileName = "Recovery";
 };
 
 #endif
