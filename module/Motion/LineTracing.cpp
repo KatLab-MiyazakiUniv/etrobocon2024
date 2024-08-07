@@ -112,7 +112,7 @@ void LineTracing::logRunningRecovering()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
-  snprintf(buf, LARGE_BUF_SIZE, "Run Recovering");
+  snprintf(buf, LARGE_BUF_SIZE, "Running Recovering");
   logger.log(buf);
 }
 

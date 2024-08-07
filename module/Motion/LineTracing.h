@@ -61,7 +61,7 @@ class LineTracing : public Motion {
   bool isErrorState();
 
   /**
-   * @brief 実行のログを取る
+   * @brief 復帰動作実行のログを取る
    */
   void logRunningRecovering();
 

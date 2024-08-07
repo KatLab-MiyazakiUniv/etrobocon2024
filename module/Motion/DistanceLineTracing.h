@@ -49,6 +49,21 @@ class DistanceLineTracing : public LineTracing {
    */
   void logRunning() override;
 
+  /**
+   * @brief 走行体がコースを外れたときに復帰動作をする
+   */
+  using LineTracing::recover;
+
+  /**
+   * @brief 走行体がコースを脱線しているかを判定をする　返り値がtrueで復帰動作開始
+   */
+  using LineTracing::isErrorState;
+
+  /**
+   * @brief 復帰動作実行のログを取る
+   */
+  using LineTracing::logRunningRecovering;
+
  private:
   double targetDistance;  // 目標距離 0~
 };
