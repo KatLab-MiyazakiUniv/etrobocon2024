@@ -66,6 +66,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           targetBrightness + atoi(params[3]),    // 目標輝度 + 調整 // 目標速度
           PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
+      motionList.push_back(cl);                                        // 動作リストに追加
     } else if(command == COMMAND::CD) {  // 色距離指定ライントレース動作の生成
       ColorDistanceLineTracing* cd = new ColorDistanceLineTracing(
           ColorJudge::stringToColor(params[1]),  // 目標色
