@@ -78,14 +78,14 @@ class LineTracing : public Motion {
   Measurer measurer;
   Controller controller;
 
-  static constexpr int ERROR_JUDGE_COUNT = 3;  // 目標色の連続取得回数の定義
-  int errorColorCount = 0;  // 目標色の連続取得回数を記録するための変数
+  static constexpr int ERROR_JUDGE_COUNT = 3;  // コース脱線判定に用いる目標色の連続取得回数の定義
+  int errorColorCount = 0;  // コース脱線判定に用いる目標色の連続取得回数を記録するための変数
   COLOR targetColorForError = COLOR::GREEN;  // コース脱線判定のための目標色
 
-  // コマンドファイルベースパス
+  // 復帰動作コマンドファイルベースパス
   const char* basePath = "etrobocon2024/datafiles/";
 
-  // コマンドファイル名
+  // 復帰動作コマンドファイル名
   const char* commandFileName = "Recovery";
 };
 
