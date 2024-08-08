@@ -72,6 +72,7 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
 
+    srand(9);  // 3回連続して緑を取得する乱数シード
     dl.run();  // ライントレースを実行
 
     // ライントレース後の走行距離
