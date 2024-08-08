@@ -5,6 +5,7 @@
  */
 
 #include "LineTracing.h"
+#include "MotionParser.h"
 using namespace std;
 
 LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
@@ -13,6 +14,16 @@ LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGa
     targetBrightness(_targetBrightness),
     pidGain(_pidGain),
     isLeftEdge(_isLeftEdge)
+{
+  isRecoveryEnabled = true;
+}
+LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
+                         bool& _isLeftEdge, bool _isRecoveryEnabled)
+  : targetSpeed(_targetSpeed),
+    targetBrightness(_targetBrightness),
+    pidGain(_pidGain),
+    isLeftEdge(_isLeftEdge),
+    isRecoveryEnabled(_isRecoveryEnabled)
 {
 }
 
@@ -39,6 +50,11 @@ void LineTracing::run()
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
+    if(isRecoveryEnabled) {
+      if(isErrorState()) {
+        recover();
+      }
+    }
     // 初期pwm値を計算
     double baseRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
     double baseLeftPwm = speedCalculator.calculateLeftMotorPwmFromTargetSpeed();
@@ -60,6 +76,65 @@ void LineTracing::run()
 
   // モータの停止
   // controller.stopWheelsMotor();
+}
+
+void LineTracing::recover()
+{
+  char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
+  Logger logger;
+
+  // ファイルから受け取る動作リスト
+  vector<Motion*> motionList;
+
+  // コマンドファイルパスを作成する
+  char commandFilePath[SMALL_BUF_SIZE];
+  snprintf(commandFilePath, SMALL_BUF_SIZE, "%s%s.csv", basePath, commandFileName);
+
+  // 動作インスタンスのリストを生成する
+  motionList = MotionParser::createMotions(commandFilePath, targetBrightness, isLeftEdge);
+
+  // 動作実行のメッセージログを出す
+  snprintf(buf, SMALL_BUF_SIZE, "\nRun the commands in '%s'\n", commandFilePath);
+  logger.logHighlight(buf);
+
+  logRunningRecovering();
+  // 各動作を実行する
+  for(auto motion = motionList.begin(); motion != motionList.end();) {
+    (*motion)->logRunning();
+    (*motion)->run();
+    delete *motion;                     // メモリを解放
+    motion = motionList.erase(motion);  // リストから削除
+  }
+  logFinishingRecovering();
+}
+
+bool LineTracing::isErrorState()
+{
+  if(ColorJudge::getColor(measurer.getRawColor()) == targetColorForError) {
+    errorColorCount++;
+  } else {
+    errorColorCount = 0;
+  }
+  if(errorColorCount < ERROR_JUDGE_COUNT) return false;
+  // 指定された色をJUDGE_COUNT回連続で取得したときモータが止まる
+  errorColorCount = 0;
+  return true;
+}
+
+void LineTracing::logRunningRecovering()
+{
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
+
+  snprintf(buf, LARGE_BUF_SIZE, "Running Recovering");
+  logger.log(buf);
+}
+
+void LineTracing::logFinishingRecovering()
+{
+  char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
+
+  snprintf(buf, LARGE_BUF_SIZE, "Finishing Recovering");
+  logger.log(buf);
 }
 
 void LineTracing::logRunning()

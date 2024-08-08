@@ -165,6 +165,39 @@ namespace etrobocon2024_test {
     EXPECT_GT(expected, actual);  // 実行後に少しでも進んでいる
   }
 
+  // 少し走ってから指定色を取得するテストケース（バック，右エッジ走行）
+  TEST(ColorLineTracingTest, runBackRightEdgeOffRecovery)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    COLOR targetColor = COLOR::GREEN;
+    double targetSpeed = -100.0;
+    double targetBrightness = 45.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = false;
+    bool isRecoveryEnabled = false;
+    ColorLineTracing cl(targetColor, targetSpeed, targetBrightness, gain, isLeftEdge,
+                        isRecoveryEnabled);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected = Mileage::calculateMileage(initialRightCount, initialLeftCount);
+    double expected = 0.0;
+
+    srand(0);  // 最初に識別する色が緑ではない乱数シード
+    cl.run();  // 緑までライントレースを実行
+
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_GT(expected, actual);  // 実行後に少しでも進んでいる
+  }
+
   // targetSpeed値が0の時にwarning文を出力するテストケース
   TEST(ColorLineTracingTest, runZeroSpeed)
   {
