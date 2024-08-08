@@ -75,6 +75,11 @@ class ColorLineTracing : public LineTracing {
    */
   using LineTracing::logRunningRecovering;
 
+  /**
+   * @brief 復帰動作終了のログを取る
+   */
+  using LineTracing::logFinishingRecovering;
+
  private:
   static constexpr int JUDGE_COUNT = 3;
   int colorCount = 0;

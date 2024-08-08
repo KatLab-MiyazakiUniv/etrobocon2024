@@ -76,6 +76,11 @@ class DistanceLineTracing : public LineTracing {
    */
   using LineTracing::logRunningRecovering;
 
+  /**
+   * @brief 復帰動作終了のログを取る
+   */
+  using LineTracing::logFinishingRecovering;
+
  private:
   double targetDistance;  // 目標距離 0~
 };
