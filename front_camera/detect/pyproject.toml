@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "detect-system"
+version = "0.1.0"
+description = "宮崎大学片山徹郎研究室チームKatLabが作成するETロボコン2024アドバンストクラスのYOLOによる物体検出用のプログラムです."
+authors = ["KatLab-MiyazakiUniv"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9.2"
+autopep8 = "^2.0.2"
+pycodestyle = "^2.10.0"
+pydocstyle = "^6.3.0"
+coverage = "^7.2.7"
+datetime = "^5.2"
+opencv-python = "^4.8.0.74"
+requests = "^2.31.0"
+torch = ">=2.0.0, !=2.0.1, !=2.1.0"
+torchvision = ">=0.15.3"
+torchaudio = "^2.0.2"
+ultralytics = "^8.0.163"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+autopep8 = "^2.0.2"
+pytest-mock = "^3.11.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
