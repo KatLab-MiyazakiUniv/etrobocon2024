@@ -66,11 +66,12 @@ void DistanceLineTracing::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* strWhetherIsLeftEdge = isLeftEdge ? "true" : "false";
+  const char* strIsRecoveryEnabled = isRecoveryEnabled ? "true" : "false";
 
   snprintf(buf, LARGE_BUF_SIZE,
            "Run DistanceLineTracing (targetDistance: %.2f, targetSpeed: %.2f, targetBrightness: "
-           "%d, gain: (%.2f,%.2f,%.2f), isLeftEdge: %s)",
+           "%d, gain: (%.2f,%.2f,%.2f), isLeftEdge: %s, isRecoveryEnabled: %s)",
            targetDistance, targetSpeed, targetBrightness, pidGain.kp, pidGain.ki, pidGain.kd,
-           strWhetherIsLeftEdge);
+           strWhetherIsLeftEdge, strIsRecoveryEnabled);
   logger.log(buf);
 }

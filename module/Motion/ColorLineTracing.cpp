@@ -66,11 +66,12 @@ void ColorLineTracing::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* strWhetherIsLeftEdge = isLeftEdge ? "true" : "false";
+  const char* strIsRecoveryEnabled = isRecoveryEnabled ? "true" : "false";
 
   snprintf(buf, LARGE_BUF_SIZE,
            "Run ColorLineTracing (targetColor: %s, targetSpeed: %.2f, targetBrightness: %d, "
-           "gain: (%.2f,%.2f,%.2f), isLeftEdge: %s)",
+           "gain: (%.2f,%.2f,%.2f), isLeftEdge: %s, isRecoveryEnabled: %s)",
            ColorJudge::colorToString(targetColor), targetSpeed, targetBrightness, pidGain.kp,
-           pidGain.ki, pidGain.kd, strWhetherIsLeftEdge);
+           pidGain.ki, pidGain.kd, strWhetherIsLeftEdge, strIsRecoveryEnabled);
   logger.log(buf);
 }
