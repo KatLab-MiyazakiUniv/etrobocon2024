@@ -23,6 +23,7 @@ void Straight::run()
   // SpeedCalculatorのオブジェクトを生成
   SpeedCalculator speedCalculator(targetSpeed);
   Controller controller;  // Controllerクラスのオブジェクトを生成
+  RunLogger runLogger;
 
   // 継続条件を満たしている間繰り返す
   while(isMetContinuationCondition()) {
@@ -34,11 +35,24 @@ void Straight::run()
     controller.setLeftMotorPwm(currentLeftPwm);
     controller.setRightMotorPwm(currentRightPwm);
 
+    // 現在の輝度値を取得
+    int currentBrightness = measurer.getBrightness();
+
+    // 現在のRGB値を取得
+    rgb_raw_t currentRgb = measurer.getRawColor();
+
+    // RunLoggerにデータを追加
+    runLogger.addTolog(currentBrightness, static_cast<int>(currentRightPwm),
+                       static_cast<int>(currentLeftPwm), currentRgb);
+
     // 10ミリ秒待機
     timer.sleep(10);
   }
   // モータの停止
   // controller.stopWheelsMotor();
+
+  // 走行ログ書き込み
+  runLogger.outputToFile();
 }
 
 bool Straight::isMetPreCondition()

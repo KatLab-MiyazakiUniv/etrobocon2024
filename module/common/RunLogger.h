@@ -3,8 +3,8 @@
  * @brief 走行中の各種値可視化のためのcsvファイル作成に関するクラス
  * @author bizyutyu
  */
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef RUNLOGGER_H
+#define RUNLOGGER_H
 
 #include <ColorSensor.h>
 #include <vector>
@@ -25,16 +25,15 @@ class RunLogger {
 
   // /**
   //  * @brief 輝度を追加する
-  //  * @param Brightness 
+  //  * @param Brightness
   //  */
   // void addBrightnessTolog(int _Brightness);
 
   // /**
   //  * @brief PWMを追加する
-  //  * @param Pwm 
+  //  * @param Pwm
   //  */
   // void addPwmTolog(int _RightPwm, int _leftPwm);
-
 
   // /**
   //  * @brief RGBを追加する
