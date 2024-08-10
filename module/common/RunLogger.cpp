@@ -7,10 +7,10 @@
 
 RunLogger::RunLogger() {}
 
-void RunLogger::addTolog(int _Brightness, int _RightPwm, int _leftPwm, rgb_raw_t _Rgb)
+void RunLogger::addTolog(int _Brightness, int _RightPwm, int _leftPwm, int _r, int _g, int _b)
 {
   // 新しい配列を追加
-  RunLogs.push_back({ _Brightness, _RightPwm, _leftPwm, _Rgb.r, _Rgb.g, _Rgb.b });
+  sprintf(RunLogs, "%s%d,%d,%d,%d,%d,%d\n", RunLogs, _Brightness, _RightPwm, _leftPwm, _r, _g, _b);
 }
 
 // void RunLogger::addBrightnessTolog(int _RightPwm, int _leftPwm)
@@ -60,16 +60,15 @@ void RunLogger::addTolog(int _Brightness, int _RightPwm, int _leftPwm, rgb_raw_t
 void RunLogger::outputToFile()
 {
   FILE* outputFile;
-  const char* fileName = "logfiles/Runlogfile.csv";  // 暫定のファイル名
-  outputFile = fopen(fileName, "w");                 // Runlogfile.csvを作成
+  outputFile = fopen("etrobocon2024/logfiles/Runlogfile.csv", "w");  // Runlogfile.csvを作成
   if(outputFile == NULL) {
-    printf("cannot open file");
+    printf("cannot open file\n");
     return;
+  } else {
+    printf("can open file!!!\n");
   }
   // RunLogsの各要素をCSV形式で書き込む
-  for(const auto& log : RunLogs) {
-    fprintf(outputFile, "%d,%d,%d,%d,%d,%d\n", log[0], log[1], log[2], log[3], log[4], log[5]);
-  }
+  fprintf(outputFile, "%s\n", RunLogs);
   fclose(outputFile);
 
   /*
@@ -77,13 +76,12 @@ void RunLogger::outputToFile()
   ディレクトリを生成するためのヘッダdirect.hを使用できないため（多分），
   bashでRunlogfile.csvの名前をログ生成時刻に変更し，logfiles/に移動する
   */
-  system("bash ./etrobocon2024/scripts/organize_logfile.sh");
+  // system("bash ./etrobocon2024/scripts/organize_logfile.sh");
 }
 
 void RunLogger::initRunLogs()
 {
-  RunLogs.clear();  // 配列を初期化
+  RunLogs[0] = '\0';  // 配列を初期化
 }
 
-std::vector<std::array<int, 6>> RunLogger::RunLogs;
-// char RunLogger::logs[65536] = "";  // logsを初期化
+char RunLogger::RunLogs[65536] = "";  // logsを初期化

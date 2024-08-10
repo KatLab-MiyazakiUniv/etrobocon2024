@@ -3,12 +3,12 @@
  * @brief 走行中の各種値可視化のためのcsvファイル作成に関するクラス
  * @author bizyutyu
  */
-#ifndef RUNLOGGER_H
-#define RUNLOGGER_H
+#ifndef RUNLOGGER_HPP
+#define RUNLOGGER_HPP
 
-#include <ColorSensor.h>
-#include <vector>
-#include <array>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 class RunLogger {
  public:
@@ -21,7 +21,7 @@ class RunLogger {
    * @brief 各種値を追加する
    * @param Brightness
    */
-  void addTolog(int _Brightness, int _RightPwm, int _leftPwm, rgb_raw_t _Rgb);
+  void addTolog(int _Brightness, int _RightPwm, int _leftPwm, int _r, int _g, int _b);
 
   // /**
   //  * @brief 輝度を追加する
@@ -57,7 +57,7 @@ class RunLogger {
   void initRunLogs();
 
  private:
-  static std::vector<std::array<int, 6>> RunLogs;  // 走行ログを保持する配列
+  static char RunLogs[65536];  // 走行ログを保持する文字列
 };
 
 #endif

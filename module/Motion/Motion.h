@@ -7,10 +7,10 @@
 #ifndef MOTION_H
 #define MOTION_H
 
-#include "RunLogger.h"
 #include "Measurer.h"
 #include "Controller.h"
 #include "Logger.h"
+#include "RunLogger.h"
 
 class Motion {
  public:
@@ -31,7 +31,7 @@ class Motion {
 
  protected:
   Logger logger;
-  RunLogger runlogger;
+  RunLogger runLogger;
 };
 
 #endif
