@@ -95,7 +95,7 @@ class LineTracing : public Motion {
   Measurer measurer;
   Controller controller;
 
-  static constexpr int ERROR_JUDGE_COUNT = 10;  // コース脱線判定に用いる目標色の連続取得回数の定義
+  static constexpr int ERROR_JUDGE_COUNT = 7;  // コース脱線判定に用いる目標色の連続取得回数の定義
   int errorColorCount = 0;  // コース脱線判定に用いる目標色の連続取得回数を記録するための変数
   COLOR targetColorForError = COLOR::GREEN;  // コース脱線判定のための目標色
 
