@@ -4,8 +4,8 @@
  * @author CHIHAYATAKU
  */
 
-#include "LineTracing.h"
 #include "MotionParser.h"
+#include "LineTracing.h"
 using namespace std;
 
 LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,

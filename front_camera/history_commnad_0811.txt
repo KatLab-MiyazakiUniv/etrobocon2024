@@ -1,0 +1,1000 @@
+ 1013  git switch main 
+ 1014  sudo shutdown now
+ 1015  cd etrobocon2024
+ 1016  git swt
+ 1017  git switch work-KLI-93
+ 1018  git switch main 
+ 1019  sudo shutdown now
+ 1020  cd etrobocon2024
+ 1021  git branch 
+ 1022  git switch work-KLI-92
+ 1023  make rebuild
+ 1024  make start 
+ 1025  s
+ 1026  ps
+ 1027  make start 
+ 1028  make rebuild
+ 1029  make start 
+ 1030  make rebuild 
+ 1031  make start 
+ 1032  git switch main
+ 1033  git switch -c work-KLI-92-ver2
+ 1034  git switch work-KLI-92
+ 1035  git switch work-KLI-92-ver2
+ 1036  make start 
+ 1037  ps
+ 1038  git switch ticket-KLI-92
+ 1039  git merge --squash work-KLI-92-ver2 
+ 1040  git switch work-KLI-92
+ 1041  git branch -m work-KLI-92-ver1
+ 1042  git switch main
+ 1043  sudo shutdown now
+ 1044  cd etrobocon2024
+ 1045  git checkout ticket-KLI-91
+ 1046  git log
+ 1047  git reset --hard HEAD^
+ 1048  git log
+ 1049  git reset --hard HEAD^
+ 1050  git status
+ 1051  git log
+ 1052  git status
+ 1053  git push origin ticket-KLI-91 --force
+ 1054  git push origin ticket-KLI-91
+ 1055  git reset --hard HEAD^
+ 1056  git status
+ 1057  git push origin ticket-KLI-91
+ 1058  git remote -v
+ 1059  git remote set-url origin git@github.com:
+ 1060  git remote
+ 1061  git push origin ticket-KLI-91
+ 1062  git reset --hard HEAD^
+ 1063  git checkout main
+ 1064  git remote
+ 1065  git remote set-url origin https://github.com/KatLab-MiyazakiUniv/etrobocon2024.git
+ 1066  git remote
+ 1067  git remote -v
+ 1068  git branch -D ticket-KLI-91
+ 1069  git checkout -b ticket-KLI-91
+ 1070  git push origin ticket-KLI-91
+ 1071  git remote set-url origin git@github.com:KatLab-MiyazakiUniv/etrobocon2024.git
+ 1072  git remote -v
+ 1073  git push origin ticket-KLI-91
+ 1074  git remote set-url https://github.com/KatLab-MiyazakiUniv/etrobocon2024.git
+ 1075  git remote -v
+ 1076  git remote set-url https://github.com/KatLab-MiyazakiUniv/etrobocon2024.git
+ 1077  git remote -v
+ 1078  git remote set-url origin https://github.com/KatLab-MiyazakiUniv/etrobocon2024.git
+ 1079  git remote -v
+ 1080  git push origin ticket-KLI-91
+ 1081  git push origin ticket-KLI-91
+ 1082  git remote git@github.com:KatLab-MiyazakiUniv/etrobocon2024.git
+ 1083  git remote set-url git@github.com:KatLab-MiyazakiUniv/etrobocon2024.git
+ 1084  git remote set-url origin git@github.com:KatLab-MiyazakiUniv/etrobocon2024.git
+ 1085  git remote -v
+ 1086  git push origin ticket-KLI-91
+ 1087  git remote set-url origin https://github.com/KatLab-MiyazakiUniv/etrobocon2024.git
+ 1088  git remote -v
+ 1089  git push origin ticket-KLI-91
+ 1090  git branch
+ 1091  git remote -v
+ 1092  git push origin ticket-KLI-91
+ 1093  git log
+ 1094  git push origin ticket-KLI-91
+ 1095  sudo shutdown now
+ 1096  ls
+ 1097  cd etrobocon202
+ 1098  cd etrobocon2024/
+ 1099  ls
+ 1100  git branch
+ 1101  git switch main
+ 1102  git pull origin main
+ 1103  git bf
+ 1104  git branch
+ 1105  git pull origin main
+ 1106  git branch
+ 1107  git pull origin main
+ 1108  git switch work-KLI-92
+ 1109  git switch main
+ 1110  git switch work-KLI-91
+ 1111  git switch ticket-KLI-91
+ 1112  make build
+ 1113  make start
+ 1114  make rebuild
+ 1115  make start
+ 1116  ps
+ 1117  make start
+ 1118  sudo shutdown now
+ 1119  cd etrobocon2024
+ 1120  make start
+ 1121  ps $0
+ 1122  ps
+ 1123  cd ..
+ 1124  ls
+ 1125  cd etrobocon2023/
+ 1126  cd rear_camera_py/
+ 1127  make image
+ 1128  cd ..
+ 1129  ls
+ 1130  cd etrobocon2024/
+ 1131  ls
+ 1132  git branch
+ 1133  git ticket-KLI-94
+ 1134  gitbranch
+ 1135  git branch
+ 1136  git switch ticket-KLI-94
+ 1137  git status
+ 1138  ls
+ 1139  cd module/
+ 1140  ls
+ 1141  vi EtRobocon2024.cpp 
+ 1142  cd ..
+ 1143  make rebuild
+ 1144  make start
+ 1145  cd module/
+ 1146  vi EtRobocon2024.
+ 1147  vi EtRobocon2024.cpp
+ 1148  cd ..
+ 1149  make rebuild
+ 1150  make start
+ 1151  sudo shutdown now
+ 1152  cd etrobocon2024/
+ 1153  ls
+ 1154  git log
+ 1155  git status
+ 1156  git add front_camera/front_camera/
+ 1157  git status
+ 1158  git commit -m "add: フロントカメラによる撮影機能のためのファイルを追加"
+ 1159  git status
+ 1160  git add front_camera/Makefile 
+ 1161  git commit -m "add: 撮影コマンド簡略化のためのMakefile追加"
+ 1162  git status
+ 1163  git branhc
+ 1164  git branch
+ 1165  make format
+ 1166  git stauts
+ 1167  git status
+ 1168  git push origin ticket-KLI-161
+ 1169  apt-get install --reinstall ca-certificates
+ 1170  git push origin ticket-KLI-161
+ 1171  sudo apt-get install --reinstall ca-certificates
+ 1172  git push origin ticket-KLI-161
+ 1173  apt-get update
+ 1174  sudo apt-get update
+ 1175  git push origin ticket-KLI-161
+ 1176  git config --global http.sslverify false
+ 1177  git push origin ticket-KLI-161
+ 1178  sudo shutdown now
+ 1179  cd etrobocon2024
+ 1180  HOST=MY.PRIVATE.HOST
+ 1181  PORT=443
+ 1182  sudo shutdown now
+ 1183  cd etrobocon2024/
+ 1184  ls
+ 1185  git status
+ 1186  git log
+ 1187  git status
+ 1188  git push origin ticket-KLI-161
+ 1189  git config --global http.sslverify true
+ 1190  git push origin ticket-KLI-161
+ 1191  git stauts
+ 1192  git status
+ 1193  git log
+ 1194  ls
+ 1195  cd etrobocon2024/
+ 1196  git status
+ 1197  git log
+ 1198  git branch
+ 1199  git push origin ticket-KLI-161
+ 1200  git remote -v
+ 1201  git log
+ 1202  git push origin ticket-KLI-161
+ 1203  apt-get install --reinstall ca-certificates
+ 1204  sudo apt-get install --reinstall ca-certificates
+ 1205  sudo apt install --reinstall ca-certificates
+ 1206  apt-get --fix-missing
+ 1207  hostname
+ 1208  port
+ 1209  HOST=katlab2
+ 1210  PORT=443
+ 1211  E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+ 1212  E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root
+ 1213  echo -n | openssl s_client -showcerts -connect ${HOST}:${PORT} 2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+ 1214  git push origin ticket-KLI-161
+ 1215  HOST=katlab2
+ 1216  PORT=443
+ 1217  echo -n | openssl s_client -showcerts -connect ${HOST}:${PORT} 2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+ 1218  git push origin ticket-KLI-161
+ 1219  export GIT_SSL_NO_VERIFY=1
+ 1220  git push origin ticket-KLI-161
+ 1221  export -n GIT_SSL_NO_VERIFY
+ 1222  git push origin ticket-KLI-161
+ 1223  git staut
+ 1224  git status
+ 1225  git switch main
+ 1226  git branch
+ 1227  git switch shisoukai1 
+ 1228  git pull origin main
+ 1229  git push origin shisoukai1 
+ 1230  git remote -v
+ 1231  git credential-cache exit
+ 1232  git push origin shisoukai1 
+ 1233  git switch origin ticket-KLI-161
+ 1234  git switch ticket-KLI-161
+ 1235  git push -f origin ticket-KLI-161
+ 1236  sudo apt-get update
+ 1237  git push origin ticket-KLI-161
+ 1238  cd etrobocon2024/
+ 1239  git push origin ticket-KLI-161
+ 1240  git config
+ 1241  git username
+ 1242  git user.name
+ 1243  git config.username
+ 1244  git username
+ 1245  git push origin ticket-KLI-161
+ 1246  sudo nano /etc/apt/apt.conf
+ 1247  sudo apt-get install --reinstall ca-certificates
+ 1248  sudo apt-get update --fix-missing
+ 1249  sudo apt-get install --reinstall ca-certificates
+ 1250  git branch
+ 1251  git switch main
+ 1252  git pull origin main
+ 1253  cat ~/.gitconfig
+ 1254  git switch ticket-161
+ 1255  git switch ticket-KLI-161
+ 1256  cat ~/.gitconfig
+ 1257  git remote -v
+ 1258  git status
+ 1259  git push origin ticket-KLI-161
+ 1260  git config --global http.sslCAInfo /etc/ssl/certs/ca-certificates.crt
+ 1261  git push origin ticket-KLI-161
+ 1262  git config --global http.sslVerify false
+ 1263  git push origin ticket-KLI-161
+ 1264  curl -L -c cookies.txt "http://cpauth.cc.miyazaki-u.ac.jp/guest/cp-login.php?&mac=10:6F:3F:F4:94:8B&ip=133.54.230.199&timestamp=2353594065&url=https%3A%2F%2Fgithub.com%2FKatLab-MiyazakiUniv%2Fetrobocon2024.git%2Finfo%2Frefs%3Fservice%3Dgit-receive-pack"
+ 1265  curl -L -b cookies.txt -c cookies.txt -d "username=YOUR_USERNAME&password=YOUR_PASSWORD" "http://cpauth.cc.miyazaki-u.ac.jp/guest/cp-login.php"
+ 1266  curl -L -b cookies.txt -c cookies.txt -d "username=svm7042&password=FuRaiDrive.1156" "http://cpauth.cc.miyazaki-u.ac.jp/guest/cp-login.php"
+ 1267  git push origin ticket-KLI-161
+ 1268  git switch main
+ 1269  git branch
+ 1270  sudo shut down now
+ 1271  sudo shutdown now
+ 1272  ls
+ 1273  cd etrobocon2024
+ 1274  ls
+ 1275  cd front_camera/
+ 1276  ls
+ 1277  cd etrobocon202
+ 1278  cd etrobocon2024
+ 1279  git pull origin main
+ 1280  make image SAVE_NAME="testdesu"
+ 1281  ls
+ 1282  make image
+ 1283  ls
+ 1284  cd front_camera/
+ 1285  ls
+ 1286  make image SAVE_NAME="testdesu"
+ 1287  git log
+ 1288  make image
+ 1289  make image SAVE_NAME="testdesu"
+ 1290  make image
+ 1291  git brach
+ 1292  git branch
+ 1293  make image
+ 1294  cd ..
+ 1295  git branch
+ 1296  git pull origin main
+ 1297  cd front_camera/
+ 1298  make image
+ 1299  c d..
+ 1300  cd ..
+ 1301  ls
+ 1302  git branch
+ 1303  git switch -c ticket-KLI-161
+ 1304  git switch ticket-KLI-161
+ 1305  git fetch origin ticket-KLI-161
+ 1306  git reset --hard origin/ticket-161
+ 1307  git reset --hard origin/ticket-KLI-161
+ 1308  cd front_camera/
+ 1309  make image
+ 1310  git log
+ 1311  git reset --hard HEAD
+ 1312  git reset --hard HEAD^
+ 1313  git log
+ 1314  make image
+ 1315  git reset --hard HEAD^
+ 1316  make image
+ 1317  git switch man
+ 1318  git switch main
+ 1319  git branch tic-D ket-KLI-161
+ 1320  git branch -D ticket-KLI-161
+ 1321  git log
+ 1322  make image
+ 1323  ps
+ 1324  cd etrobocon2024
+ 1325  ls
+ 1326  git log
+ 1327  cd front_camera/
+ 1328  make image
+ 1329  ls
+ 1330  cd work/
+ 1331  ls
+ 1332  cd RasPike/
+ 1333  ls
+ 1334  git log
+ 1335  cd ..
+ 1336  ls
+ 1337  rm -rf work/
+ 1338  ls
+ 1339  make image
+ 1340  python3 --version
+ 1341  python --version
+ 1342  make image
+ 1343  vcgencmd get_camera
+ 1344  make image
+ 1345  make rm-img
+ 1346  sudo raspi-config
+ 1347  libcamera-hello
+ 1348  sudo raspi-config
+ 1349  git log
+ 1350  git status
+ 1351  git branch
+ 1352  cd etrobocon2024/
+ 1353  git status
+ 1354  git branch
+ 1355  git log
+ 1356  cd front_camera/
+ 1357  make image
+ 1358  sudo raspi-config
+ 1359  vcgencmd get_camera
+ 1360  libcamera-still -n -o /tmp/photo.jpg
+ 1361  uname
+ 1362  lsb_release
+ 1363  uname -a
+ 1364  libcamera-hello --version
+ 1365  libcamera-hello
+ 1366  lsb_release -a
+ 1367  vcgencmd get_camera
+ 1368  lsb_release -a
+ 1369  nano /boot/config.txt
+ 1370  vi /boot/config.txt
+ 1371  nano /boot/config.txt
+ 1372  sudo nano /boot/config.txt
+ 1373  sudo shutdown now
+ 1374  git branch
+ 1375  cd etrobocon2024/
+ 1376  git branch
+ 1377  cd front_camera/
+ 1378  make image
+ 1379  ]
+ 1380  make image 
+ 1381  ps
+ 1382  sudo shutdown now
+ 1383  cd etrobocon2024/
+ 1384  cd front_camera/
+ 1385  make image
+ 1386  make image SAVE_NAME=Fig01.jpeg
+ 1387  cd image_data/
+ 1388  rm -f Fig1.png
+ 1389  rm -f Fig1.jpeg
+ 1390  ls
+ 1391  sudo rm -f Fig1.jpeg
+ 1392  sudo rm -f Fig1.png
+ 1393  ls
+ 1394  cd ..
+ 1395  sudo rm -rf image_data/
+ 1396  make image SAVE_NAME=Fig1-1.jpeg
+ 1397  make image SAVE_NAME=Fig1-2.jpeg
+ 1398  make image SAVE_NAME=Fig1-3.jpeg
+ 1399  make image SAVE_NAME=Fig1-4.jpeg
+ 1400  make image SAVE_NAME=Fig1-5.jpeg
+ 1401  make image SAVE_NAME=Fig2-1.jpeg
+ 1402  make image SAVE_NAME=Fig2-2.jpeg
+ 1403  make image SAVE_NAME=Fig2-3.jpeg
+ 1404  make image SAVE_NAME=Fig2-4.jpeg
+ 1405  make image SAVE_NAME=Fig2-5.jpeg
+ 1406  make image SAVE_NAME=Fig3-1.jpeg
+ 1407  make image SAVE_NAME=Fig3-2.jpeg
+ 1408  make image SAVE_NAME=Fig3-3.jpeg
+ 1409  make image SAVE_NAME=Fig3-4.jpeg
+ 1410  make image SAVE_NAME=Fig3-5.jpeg
+ 1411  make image SAVE_NAME=Fig4-1.jpeg
+ 1412  make image SAVE_NAME=Fig4-2.jpeg
+ 1413  make image SAVE_NAME=Fig4-3.jpeg
+ 1414  make image SAVE_NAME=Fig4-4.jpeg
+ 1415  make image SAVE_NAME=Fig4-5.jpeg
+ 1416  rm -rf image_data/
+ 1417  sudo rm -rf image_data/
+ 1418  make image SAVE_NAME=Fig1-6.jpeg
+ 1419  make image SAVE_NAME=Fig1-7.jpeg
+ 1420  make image SAVE_NAME=Fig1-8.jpeg
+ 1421  make image SAVE_NAME=Fig1-9.jpeg
+ 1422  make image SAVE_NAME=Fig1-10.jpeg
+ 1423  make image SAVE_NAME=Fig2-6.jpeg
+ 1424  make image SAVE_NAME=Fig2-7.jpeg
+ 1425  make image SAVE_NAME=Fig2-8.jpeg
+ 1426  make image SAVE_NAME=Fig2-9.jpeg
+ 1427  make image SAVE_NAME=Fig2-10.jpeg
+ 1428  make image SAVE_NAME=Fig3-6.jpeg
+ 1429  make image SAVE_NAME=Fig3-7.jpeg
+ 1430  make image SAVE_NAME=Fig3-8.jpeg
+ 1431  make image SAVE_NAME=Fig3-9.jpeg
+ 1432  make image SAVE_NAME=Fig3-10.jpeg
+ 1433  make image SAVE_NAME=Fig4-6.jpeg
+ 1434  make image SAVE_NAME=Fig4-7.jpeg
+ 1435  make image SAVE_NAME=Fig4-8.jpeg
+ 1436  make image SAVE_NAME=Fig4-9.jpeg
+ 1437  make image SAVE_NAME=Fig4-10.jpeg
+ 1438  cd etrobocon2024/
+ 1439  git status
+ 1440  git fetch origin main
+ 1441  git reset --hard origin/main
+ 1442  git status
+ 1443  sudo shutdown now
+ 1444  cd etrobocon2024
+ 1445  cd front_camera/detect/
+ 1446  git status
+ 1447  poetry lock --no-update
+ 1448  poetry install
+ 1449  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+ 1450  pip3 install torch-1.13.1+cpu-cp39-cp39-linux_armv7l.whl torchvision-0.14.1+cpu-cp39-cp39-linux_armv7l.whl
+ 1451  poetry lock --no-update
+ 1452  poetry install
+ 1453  poetry update
+ 1454  poetry lock
+ 1455  poetry install
+ 1456  poetry lock
+ 1457  rm poetry.lock 
+ 1458  poetry lock
+ 1459  poetry install
+ 1460  rm poetry.lock 
+ 1461  poetry lock
+ 1462  poetry install
+ 1463  poetry env remove python
+ 1464  poetry install
+ 1465  poetry run python3
+ 1466  sudo apt update
+ 1467  sudo apt upgrade
+ 1468  sudo pip install --upgrade pip
+ 1469  sudo apt install libavutil56 libcairo-gobject2 libgtk-3-0 libqtgui4 libpango-1.0-0 libqtcore4 libavcodec58 libcairo2 libswscale5 libtiff5 libqt4-test libatk1.0-0 libavformat58 libgdk-pixbuf2.0-0 libilmbase23 libjasper1 libopenexr23 libpangocairo-1.0-0 libwebp6
+ 1470  sudo pip3 install opencv-python==4.10.0.84
+ 1471  sudo apt install -y libatlas-base-dev
+ 1472  pip3 install opencv-python==4.10.0.84
+ 1473  pip install numpy --upgrade
+ 1474  pip3 install opencv-python==4.10.0.84
+ 1475  sudo apt-get update
+ 1476  sudo apt-get install -y libssl-dev
+ 1477  pip3 install opencv-python==4.10.0.84
+ 1478  sudo apt-get install --reinstall cmake
+ 1479  poetry env remove python
+ 1480  pip3 install opencv-python==4.10.0.84
+ 1481  python3 -m venv myenv
+ 1482  source myenv/bin/activate
+ 1483  pip install --upgrade pip
+ 1484  pip install opencv-python==4.10.0.84
+ 1485  exit
+ 1486  cd etrobocon2024
+ 1487  code .
+ 1488  code
+ 1489  exit
+ 1490  cd etrobocon2024
+ 1491  cd front_camera/detect/
+ 1492  sudo apt install libcairo-gobject2 libsnappy1v5 libopus0 libva2 libfontconfig1 libharfbuzz0b libwayland-cursor0 libavformat58 libxcomposite1 libxrender1 libthai0 libxfixes3 libxdamage1 libatspi2.0-0 libswresample3 libepoxy0 libwebpmux3 libvorbis0a libgdk-pixbuf2.0-0 libgtk-3-0 libxcursor1 librsvg2-2 libopenmpt0 libxcb-render0 libspeex1 libva-drm2 libopenjp2-7 libvorbisenc2 libpangocairo-1.0-0 libpixman-1-0 libtheora0 libxcb-shm0 libshine3 libavutil56 libtwolame0 libvpx5 libxi6 libavcodec58 libwayland-egl1 libatk1.0-0 libogg0 libcodec2-0.8.1 libjbig0 libtiff5 libpango-1.0-0 libdrm2 libx264-155 libx265-165 libgfortran5 libatk-bridge2.0-0 libxinerama1 libva-x11-2 libgme0 libvorbisfile3 libaom0 libcairo2 libchromaprint1 libvdpau1 libwayland-client0 libwebp6 libgraphite2-3 libswscale5 libssh-gcrypt-4 libxrandr2 libdatrie1 libwavpack1 libsoxr0 libpangoft2-1.0-0 libatlas3-base libcroco3 libxvidcore4 libmpg123-0 libmp3lame0 libzvbi0 libxkbcommon0 libbluray2 libgsm1
+ 1493  sudo add-apt-repository universe
+ 1494  sudo apt-get update
+ 1495  sudo apt install libcairo-gobject2 libsnappy1v5 libopus0 libva2 libfontconfig1 libharfbuzz0b libwayland-cursor0 libavformat58 libxcomposite1 libxrender1 libthai0 libxfixes3 libxdamage1 libatspi2.0-0 libswresample3 libepoxy0 libwebpmux3 libvorbis0a libgdk-pixbuf2.0-0 libgtk-3-0 libxcursor1 librsvg2-2 libopenmpt0 libxcb-render0 libspeex1 libva-drm2 libopenjp2-7 libvorbisenc2 libpangocairo-1.0-0 libpixman-1-0 libtheora0 libxcb-shm0 libshine3 libavutil56 libtwolame0 libvpx5 libxi6 libavcodec58 libwayland-egl1 libatk1.0-0 libogg0 libcodec2-0.8.1 libjbig0 libtiff5 libpango-1.0-0 libdrm2 libx264-155 libx265-165 libgfortran5 libatk-bridge2.0-0 libxinerama1 libva-x11-2 libgme0 libvorbisfile3 libaom0 libcairo2 libchromaprint1 libvdpau1 libwayland-client0 libwebp6 libgraphite2-3 libswscale5 libssh-gcrypt-4 libxrandr2 libdatrie1 libwavpack1 libsoxr0 libpangoft2-1.0-0 libatlas3-base libcroco3 libxvidcore4 libmpg123-0 libmp3lame0 libzvbi0 libxkbcommon0 libbluray2 libgsm1
+ 1496  sudo apt install libavutil56 libcairo-gobject2 libgtk-3-0 libqtgui4 libpango-1.0-0 libqtcore4 libavcodec58 libcairo2 libswscale5 libtiff5 libqt4-test libatk1.0-0 libavformat58 libgdk-pixbuf2.0-0 libilmbase23 libjasper1 libopenexr23 libpangocairo-1.0-0 libwebp6
+ 1497  sudo apt install libavutil56 libcairo-gobject2 libgtk-3-0 libqt5gui5 libpango-1.0-0 libqt5core5a libavcodec58 libcairo2 libswscale5 libtiff5 libqt5test5 libatk1.0-0 libavformat58 libgdk-pixbuf2.0-0 libilmbase25 libjasper1 libopenexr25 libpangocairo-1.0-0 libwebp6
+ 1498  pip install opencv-python==4.8.0.74
+ 1499  pip3 install opencv-python==4.8.0.74
+ 1500  sudo bluetoothctl
+ 1501  sudo shutdown now
+ 1502  cd etrobocon2024
+ 1503  cd front_camera/
+ 1504  cd detect/
+ 1505  git status
+ 1506  git switch main 
+ 1507  cd ../../
+ 1508  git add .
+ 1509  git status
+ 1510  git reset
+ 1511  git status
+ 1512  git add front_camera/detect/poetry.lock front_camera/detect/pyproject.toml 
+ 1513  git status
+ 1514  git commit -m "update: poetry環境"
+ 1515  git switch main 
+ 1516  git status
+ 1517  rm -rf front_camera/detect/myenv/
+ 1518  rm -rf front_camera/detect
+ 1519  git switch ticket-KLI-164
+ 1520  poetry lock
+ 1521  cd front_camera/detect/
+ 1522  poetry lock
+ 1523  poetry install
+ 1524  rm poetry.lock 
+ 1525  poetry install
+ 1526  poetry lock
+ 1527  poetry search torchaudio
+ 1528  poetry install
+ 1529  pip install torch
+ 1530  poetry install
+ 1531  poetry lock
+ 1532  poetry export --without-hashes > requirements.txt
+ 1533  pip install --requirement requirements.txt
+ 1534  pip install --upgrade --require-hashes -r requirements.txt > new_requirements.txt
+ 1535  sudo shutdown now
+ 1536  git status
+ 1537  git etrobocon2024
+ 1538  cd etrobocon2024
+ 1539  git status
+ 1540  git switch main 
+ 1541  git add front_camera/detect/poetry.lock front_camera/detect/pyproject.toml 
+ 1542  git commit -m "update: poetry環境"
+ 1543  git switch main 
+ 1544  sudo shutdown now
+ 1545  git status
+ 1546  git log
+ 1547  cd etrobocon2024/
+ 1548  ls
+ 1549  git status
+ 1550  git log
+ 1551  make rebuild
+ 1552  git status
+ 1553  ls
+ 1554  make rebuild
+ 1555  make start
+ 1556  ps
+ 1557  make kill
+ 1558  ps
+ 1559  make start
+ 1560  make kill
+ 1561  make start
+ 1562  make kill
+ 1563  make start
+ 1564  ls
+ 1565  make kill
+ 1566  make rebuild
+ 1567  make start
+ 1568  make kill
+ 1569  make start
+ 1570  make rebuild
+ 1571  make kill
+ 1572  make start
+ 1573  make make
+ 1574  make makeps
+ 1575  make kill
+ 1576  ps
+ 1577  make kill
+ 1578  exit
+ 1579  cd etrobocon2024
+ 1580  git branch
+ 1581  make kill
+ 1582  make rebuild
+ 1583  make start
+ 1584  make kill
+ 1585  git status
+ 1586  make kill
+ 1587  make rebuild
+ 1588  git status
+ 1589  make start
+ 1590  make kill
+ 1591  make start
+ 1592  ls
+ 1593  git status
+ 1594  pwd
+ 1595  make kill
+ 1596  make rebuild
+ 1597  cd ..
+ 1598  ls
+ 1599  cat Runlogfile.csv
+ 1600  ls
+ 1601  rm Runlogfile.csv
+ 1602  rm Runlogfile.txt
+ 1603  make kill
+ 1604  ps
+ 1605  make rebuild
+ 1606  maek rebuild
+ 1607  cd etrobocon2024
+ 1608  make kill
+ 1609  makerebuild
+ 1610  maek rebuild
+ 1611  pw
+ 1612  make rebuild
+ 1613  make format
+ 1614  make rebuild
+ 1615  make start
+ 1616  make 
+ 1617  make kill
+ 1618  make start
+ 1619  make format
+ 1620  make kill
+ 1621  make rebuild
+ 1622  make start
+ 1623  make kill
+ 1624  make start
+ 1625  make format
+ 1626  make gtest
+ 1627  git status
+ 1628  git add .
+ 1629  git status
+ 1630  git reset HEAD
+ 1631  git status
+ 1632  git add module/
+ 1633  git status
+ 1634  git commit -m "fix: 実機での即高ログ記録のための修正"
+ 1635  git push origin ticket-KLI-165
+ 1636  cd etrobocon202
+ 1637  cd etrobocon2024
+ 1638  ls
+ 1639  cd logfiles/
+ 1640  $ curl -X POST -F "file=@Runlogfile.csv http://"192:168:11:18 8000/run-log
+ 1641  $ curl -X POST -F "file=@Runlogfile.csv http://192:168:11:18 8000/run-log
+ 1642  $ curl -X POST -F "file=@"Runlogfile.csv" http://192:168:11:18 8000/run-log
+ 1643  $ curl -X POST -F "file=@"Runlogfile.csv"" http://192:168:11:18 8000/run-log
+ 1644  curl -X POST -F "file=@"Runlogfile.csv"" http://192:168:11:18 8000/run-log
+ 1645  curl -X POST -F "file=@"Runlogfile.csv"" http://192.168.11.18:8000/run-log
+ 1646  curl -X POST -F "file=@"Runlogfile.csv"" http://"192.168.11.18":8000/run-log
+ 1647  curl -X POST -F "file=@Runlogfile.csv" http://192.168.11.18:8000/run-log
+ 1648  cd etrobocon2024
+ 1649  git status
+ 1650  git branch
+ 1651  curl -X POST -F "file=@file" http://192.168.11.18:8000/run-log
+ 1652  curl -X POST -F "file=@logfiles/Runlogfile.csv" http://192.168.11.18:8000/run-log
+ 1653  curl -X POST -F "file=@"logfiles/Runlogfile.csv"" http://192.168.11.18:8000/run-log
+ 1654  cd etrobocon2024
+ 1655  cd logfiles/
+ 1656  curl -X POST -F "file=@"logfiles/Runlogfile.csv"" http://192.168.11.5:8000/run-log
+ 1657  curl -X POST -F "file=@"Runlogfile.csv"" http://192.168.11.5:8000/run-log
+ 1658  ls
+ 1659  cd etrobocon2024/
+ 1660  ls
+ 1661  git log
+ 1662  poetry install
+ 1663  ls
+ 1664  cd front_camera/
+ 1665  ls
+ 1666  poetry install
+ 1667  cd front_camera/
+ 1668  ls
+ 1669  cd ..
+ 1670  ls
+ 1671  cd detect/
+ 1672  poetry install
+ 1673  poetry run python --version
+ 1674  poetry run pip install torch==2.4.0
+ 1675  python --version
+ 1676  pip install --upgrade pip
+ 1677  poetry run python --version
+ 1678  poetry cache clear pypi --all
+ 1679  poetry install
+ 1680  rm poetry.lock
+ 1681  poetry install
+ 1682  poetry lock
+ 1683  sudo apt-get update
+ 1684  poetry env info
+ 1685  poetry install
+ 1686  vi ~/.bashrc
+ 1687  dpkg --get-selectionssudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+ 1688  libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev \
+ 1689  xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+ 1690  pip list
+ 1691  sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+ 1692  curl https://pyenv.run | bash
+ 1693  pyenv install 3.10.0
+ 1694  vi ~/.bashrc
+ 1695  echo '-export PATH="$HOME/.local/bin:$PATH"'>> ~/.bashrc
+ 1696  cat ~/.bashrc
+ 1697  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+ 1698  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+ 1699  echo ' >> ~/.bashrc
+ 1700  cat ~/.bashrc
+ 1701  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+ 1702  cat ~/.bashrc
+ 1703  history
+ 1704  echo '----------- end et2024 ----------' >> ~/.bashrc
+ 1705  cat ~/.bashrc
+ 1706  source ~/.bashrc
+ 1707  cat ~/.bashrc
+ 1708  vi ~/.bashrc
+ 1709  vim ~/.bashrc
+ 1710  vi ~/.bashrc
+ 1711  pyenv install 3.10.0
+ 1712  python --version
+ 1713  pyenv versions
+ 1714  pyenv version
+ 1715  pyenv doctor
+ 1716  pip list
+ 1717  which python
+ 1718  whereis python
+ 1719  pyenv versions
+ 1720  pyenv install --list
+ 1721  pyenv versions
+ 1722  ls
+ 1723  cd etrobocon2023/
+ 1724  ls
+ 1725  cd .
+ 1726  cd ..
+ 1727  cd etrobocon2024/
+ 1728  ls
+ 1729  cd front_camera/
+ 1730  ls
+ 1731  cd front_camera/
+ 1732  ls
+ 1733  cd ..
+ 1734  ls
+ 1735  make image
+ 1736  vi ~/.bashrc
+ 1737  cat ~/.bashrc
+ 1738  source ~/.bashrc
+ 1739  make image
+ 1740  cd etrobocon2024/front_camera/
+ 1741  make image
+ 1742  pyenv install 3.9.2
+ 1743  pyenv versions
+ 1744  python --version
+ 1745  history
+ 1746  pyenv global 3.9.2
+ 1747  python --version
+ 1748  pyenv versions
+ 1749  make image
+ 1750  cat ~/.bashrc
+ 1751  source ~/.bashrc
+ 1752  ls -ld /home/et2023/.pyenv/shims
+ 1753  find ~/.pyenv
+ 1754  which ~/.pyenv
+ 1755  which pyenv
+ 1756  ls -la /home/et2023/.pyenv/bin/pyenv 
+ 1757  rm -rf ~/.pyenv
+ 1758  which pyenv
+ 1759  python --version
+ 1760  which pyenv
+ 1761  cd etrobocon2024/front_camera/
+ 1762  ls
+ 1763  make image
+ 1764  pip list
+ 1765  whereis python
+ 1766  source ~/.bashrc
+ 1767  cat ~/.bashrc
+ 1768  python3 --version
+ 1769  which python3
+ 1770  python3 -m pip list
+ 1771  pip list
+ 1772  python3 -m pip --version
+ 1773  ls ~/.pyenv/shims/pip
+ 1774  python3 -m pip --version
+ 1775  which pip
+ 1776  ls ~/.pyenv/shims/python
+ 1777  ls ~/.pyenv/shims/pip
+ 1778  ls ~/.pyenv/shims/python3
+ 1779  ls -la /usr/local/bin/pip
+ 1780  python3 -m pip --version
+ 1781  python3 -m pip list
+ 1782  pip list
+ 1783  pip --version
+ 1784  rm -f ~/.pyenv/shims/pip
+ 1785  rm -f ~/.pyenv/shims/python
+ 1786  python3 --version
+ 1787  rm -f ~/.pyenv/shims/python3
+ 1788  python3 --version
+ 1789  pip list
+ 1790  sudo apt-get update
+ 1791  which pip
+ 1792  echo $PATH
+ 1793  cat ~/.bashrc
+ 1794  source ~/.bashrc
+ 1795  ls -ld /home/et2023/.poetry/bin
+ 1796  ls -ld /home/et2023/.pyenv/shims
+ 1797  ls -ld /home/et2023/.vscode-server/cli/servers/Stable-b1c0a14de1414fcdaa400695b4db1c0799bc3124/server/bin/remote-cli
+ 1798  ls /home/et2023/.poetry/bin
+ 1799  ls /home/et2023/.local/bin
+ 1800  ls /home/et2023/.pyenv/shims
+ 1801  ls /home/et2023/.pyenv/bin
+ 1802  ls /home/et2023/.vscode-server/cli/servers/Stable-b1c0a14de1414fcdaa400695b4db1c0799bc3124/server/bin/remote-cli
+ 1803  ls /usr/local/sbin
+ 1804  ls /usr/local/bin
+ 1805  ls /usr/sbin
+ 1806  ls -ld /usr/bin
+ 1807  ls -ld /usr/sbin
+ 1808  ls -ld /usr/bin
+ 1809  ls -ld /sbin
+ 1810  ls -ld /bin
+ 1811  ls -ld /usr/local/games
+ 1812  ls -ld /usr/games
+ 1813  cat ~/.bashrc
+ 1814  cat -n ~/.bashrc
+ 1815  vi ~/.bashrc
+ 1816  cat -n ~/.bashrc
+ 1817  source ~/.bashrc
+ 1818  pip list
+ 1819  echo $PATH
+ 1820  cat /etc/profile
+ 1821  cat ~/.profile
+ 1822  cat -n ~/.bashrc
+ 1823  cd etrobocon2024/front_camera/
+ 1824  ls
+ 1825  make image
+ 1826  pip list
+ 1827  grep -r 'PATH=.*\.pyenv' ~/
+ 1828  pip -v
+ 1829  pip3 -v
+ 1830  python -m pip -v
+ 1831  python3 -m pip -v
+ 1832  $ python --version
+ 1833  python --version
+ 1834  ls ~/.local/bin
+ 1835  which pip
+ 1836  which pip3
+ 1837  ls /usr/local/bin/
+ 1838  printenv$ env
+ 1839  env
+ 1840  set
+ 1841  pip list
+ 1842  which pip
+ 1843  pip list
+ 1844  which pip
+ 1845  echo $PATH
+ 1846  vi ~/.bashrc
+ 1847  cat ~/.bashrc
+ 1848  source ~/.bashrc
+ 1849  cat ~/.bashrc
+ 1850  echo $PATH
+ 1851  pip list
+ 1852  echo $HOME
+ 1853  pwd
+ 1854  ls /home
+ 1855  ls /
+ 1856  exit
+ 1857  cd etrobocon2024
+ 1858  git status
+ 1859  git switch ticket-KLI-164
+ 1860  cd front_camera/detect/
+ 1861  pip list
+ 1862  cd PyTorch-and-Vision-for-Raspberry-Pi-4B/
+ 1863  pip install torch-1.8.0a0+56b43f4-cp37-cp37m-linux_armv7l.whl 
+ 1864  uname
+ 1865  uname -a
+ 1866  cd ../
+ 1867  poetry install
+ 1868  poetry lock
+ 1869  pip list
+ 1870  uname
+ 1871  uname -a
+ 1872  uname -m
+ 1873  sudo pip install torch torchvision torchaudio
+ 1874  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+ 1875  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl
+ 1876  cat /etc/os-release
+ 1877  python -v
+ 1878  python -V
+ 1879  pip list
+ 1880  pip -V
+ 1881  pip list
+ 1882  cd ../
+ 1883  pip list
+ 1884  cat ~/.bashrc
+ 1885  pip list
+ 1886  which pip
+ 1887  pip list
+ 1888  make image
+ 1889  pip -V
+ 1890  echo $PATH
+ 1891  pip -V
+ 1892  make image
+ 1893  pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+ 1894  pip install torch
+ 1895  cd detect/PyTorch-and-Vision-for-Raspberry-Pi-4B/
+ 1896  pip install torch-1.8.0-cp39-cp39-manylinux2014_aarch64.whl 
+ 1897  python -V
+ 1898  pip install torch-1.8.0-cp39-cp39-manylinux2014_aarch64.whl 
+ 1899  git status
+ 1900  cd ../../
+ 1901  git stauts
+ 1902  git status
+ 1903  git switch main 
+ 1904  git switch -c work-KLI-166
+ 1905  git pull origin work-KLI-166
+ 1906  cd 
+ 1907  cd work/RasPike/sdk/workspace/etrobocon2024/
+ 1908  make build
+ 1909  make rebuild
+ 1910  make start
+ 1911  git switch main
+ 1912  git status
+ 1913  git switch ticket-KLI-164
+ 1914  cd front_camera/detect
+ 1915  cd PyTorch-and-Vision-for-Raspberry-Pi-4B/
+ 1916  pip install torch-1.8.0-cp39-cp39-manylinux2014_aarch64.whl 
+ 1917  uname -m
+ 1918  pip install torch==1.8.0
+ 1919  nvcc -V
+ 1920  pip install torch torchvision torchaudio
+ 1921  cd ../
+ 1922  poetry install
+ 1923  poetry lock
+ 1924  poetry install
+ 1925  poetry lock
+ 1926  poetry install
+ 1927  pip install torch https://download.pytorch.org/whl/torch/
+ 1928  exit() exit()
+ 1929  exit
+ 1930  . /home/et2023/.cache/pypoetry/virtualenvs/detect-system-8NdPMBGe-py3.9/bin/activate
+ 1931  deactivate
+ 1932  cd etrobocon2024/front_camera/detect/
+ 1933  poetry run pip install torch==1.13.1+cpu torchvision==0.14.1+cpu torchaudio==0.13.1+cpu --extra-index-url https://download.pytorch.org/whl/raspberrypi/
+ 1934  poetry run pip search torch
+ 1935  poetry run python -c "import torch; print(torch.__version__)"
+ 1936  pip install torch
+ 1937  poetry run pip install --upgrade pip
+ 1938  poetry run pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/raspberrypi/
+ 1939  curl https://pyenv.run | bash
+ 1940  pyenv install 3.10.0
+ 1941  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+ 1942  poetry install
+ 1943  poetry lock --no-update
+ 1944  poetry install
+ 1945  poetry lock --no-update
+ 1946  poetry install
+ 1947  poetry lock --no-update
+ 1948  poetry install
+ 1949  poetry lock --no-update && poetry install
+ 1950  python3 -m pip --version
+ 1951  whereis python
+ 1952  pyenv versions
+ 1953  ls /usr/bin/
+ 1954  echo $PATH
+ 1955  whereis python
+ 1956  sudo apt-get install python3.10 python3.10-venv python3.10-dev
+ 1957  sudo apt-get update
+ 1958  lsb_release -a
+ 1959  uname -a
+ 1960  cat /proc/cpuinfo  | grep Revision
+ 1961  getconf LONG_BIT
+ 1962  ls /etc/dhcpcd.conf 
+ 1963  cat /etc/dhcpcd.conf
+ 1964  history | grep "logout"
+ 1965  exit
+ 1966  cat ~/.bashrc
+ 1967  prinvenv
+ 1968  printvenv
+ 1969  printenv
+ 1970  cat ~/.bashrc
+ 1971  $ python --version
+ 1972  python --version
+ 1973  poetry --version
+ 1974  poetry run python --version
+ 1975  cd etrobocon2024/front_camera/detect/
+ 1976  poetry run python --version
+ 1977  poetry install
+ 1978  poetry env use python3.10
+ 1979  ls /usr/bin
+ 1980  poetry env info
+ 1981  poetry update
+ 1982  poetry self update
+ 1983  poetry add torch==2.3.0
+ 1984  pip list
+ 1985  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+ 1986  pip install torch==1.13.1+cpu torchvision==0.14.1+cpu torchaudio==0.13.1+cpu --extra-index-url https://download.pytorch.org/whl/raspberrypi/
+ 1987  poetry --version
+ 1988  python --version
+ 1989  poetry run python --version
+ 1990  poetry shell
+ 1991  exit
+ 1992  cd etrobocon2024/front_camera/detect/
+ 1993  ls /usr/local/bin/
+ 1994  whereis python
+ 1995  wget https://github.com/nknytk/built-onnxruntime-for-raspberrypi-linux/raw/master/wheels/bullseye/onnxruntime-1.14.0-cp39-cp39-linux_armv7l.whl
+ 1996  pip list
+ 1997  sudo pip install onnxruntime-1.14.0-cp39-cp39-linux_armv7l.whl
+ 1998  cd ..
+ 1999  ls
+ 2000  make image
+ 2001  sudo pip install numpy==1.19.5
+ 2002  make image
+ 2003  sudo pip uninstall onnxruntime coloredlogs flatbuffers numpy
+ 2004  make image
+ 2005  pip lsit
+ 2006  pip list
+ 2007  pip3 list
+ 2008  which python3
+ 2009  echo $VIRTUAL_ENV
+ 2010  which python3
+ 2011  whereis python
+ 2012  history > history.txt

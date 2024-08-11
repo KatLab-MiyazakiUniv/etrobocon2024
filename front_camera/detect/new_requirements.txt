@@ -1,0 +1,18 @@
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Ignoring colorama: markers 'python_full_version >= "3.9.2" and python_full_version < "4.0.0" and platform_system == "Windows"' don't match your environment
+Ignoring nvidia-cublas-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cuda-cupti-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cuda-nvrtc-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cuda-runtime-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cudnn-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cufft-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-curand-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cusolver-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-cusparse-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-nccl-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-nvjitlink-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring nvidia-nvtx-cu12: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_full_version >= "3.9.2" and python_full_version < "4.0.0"' don't match your environment
+Ignoring triton: markers 'platform_system == "Linux" and platform_machine == "x86_64" and python_version < "3.13" and python_full_version >= "3.9.2"' don't match your environment
+Collecting autopep8==2.3.1 (from -r requirements.txt (line 1))
+  Using cached https://www.piwheels.org/simple/autopep8/autopep8-2.3.1-py2.py3-none-any.whl (45 kB)
