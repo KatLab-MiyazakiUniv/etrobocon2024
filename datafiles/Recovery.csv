@@ -1,2 +1,7 @@
-CS,BLACK,-300,黒線までバック
-DL,150,180,0,0.7,0.35,0.08,false,黒線にのる
+SM,stop
+DS,100,-200,kyori
+SM,stop
+CS,BLACK,-100,黒線までバック
+SM,stop
+DL,200,100,0,0.5,0.35,0.08,false,黒線にのる
+SM,stop
