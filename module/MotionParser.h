@@ -17,6 +17,7 @@
 #include "ColorStraight.h"
 #include "ColorLineTracing.h"
 #include "DistanceLineTracing.h"
+#include "ColorDistanceLineTracing.h"
 #include "DistanceStraight.h"
 #include "EdgeChanging.h"
 #include "Sleeping.h"
@@ -28,6 +29,7 @@
 enum class COMMAND {
   DL,  // 指定距離ライントレース
   CL,  // 指定色ライントレース
+  CD,  // 色距離指定ライントレース
   DS,  // 指定距離直進
   CS,  // 指定色直進
   PR,  // PWM指定回頭
