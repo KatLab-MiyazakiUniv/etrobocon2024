@@ -16,14 +16,23 @@ ColorDistanceLineTracing::ColorDistanceLineTracing(COLOR _targetColor, double _t
 
 bool ColorDistanceLineTracing::isMetPreCondition(double targetSpeed)
 {
-  char buf[SMALL_BUF_SIZE];
+  char buf[LARGE_BUF_SIZE];
+
+  // 目標の色がNoneかつtargetSpeed値が0のときwarningを出して終了する
+  if(targetColor == COLOR::NONE && targetSpeed == 0.0) {
+    snprintf(buf, LARGE_BUF_SIZE,
+             "The targetColor passed to ColorDistanceLineTracing is NONE, and the targetSpeed "
+             "value passed "
+             "to ColorDistanceLineTracing is 0");
+    logger.logWarning(buf);
+    return false;
+  }
 
   // targetDistance値が0以下かつtargetSpeed値が0のときwarningを出して終了する
   if(targetDistance <= 0.0 && targetSpeed == 0.0) {
-    snprintf(buf, SMALL_BUF_SIZE,
-             "The targetDistance value passed to DistanceLineTracing is %.2f, and the targetSpeed "
-             "value passed "
-             "to ColorLineTracing is 0",
+    snprintf(buf, LARGE_BUF_SIZE,
+             "The targetDistance value to ColorDistanceLineTracing is %.2f, and the targetSpeed "
+             "value to ColorDistanceLineTracing is 0",
              targetDistance);
     logger.logWarning(buf);
     return false;
@@ -31,21 +40,21 @@ bool ColorDistanceLineTracing::isMetPreCondition(double targetSpeed)
 
   // 目標の色がNoneのときwarningを出して終了する
   if(targetColor == COLOR::NONE) {
-    logger.logWarning("The targetColor passed to ColorStraight is NONE");
+    logger.logWarning("The targetColor passed to ColorDistanceLineTracing is NONE");
     return false;
   }
 
   // targetSpeed値が0の場合はwarningを出して終了する
   if(targetSpeed == 0.0) {
-    snprintf(buf, SMALL_BUF_SIZE, "The targetSpeed value passed to DistanceLineTracing is 0");
+    snprintf(buf, LARGE_BUF_SIZE, "The targetSpeed value passed to ColorDistanceLineTracing is 0");
     logger.logWarning(buf);
     return false;
   }
 
   // targetDistance値が0以下の場合はwarningを出して終了する
   if(targetDistance <= 0.0) {
-    snprintf(buf, SMALL_BUF_SIZE, "The targetDistance value passed to DistanceLineTracing is %.2f",
-             targetDistance);
+    snprintf(buf, LARGE_BUF_SIZE,
+             "The targetDistance value passed to ColorDistanceLineTracing is %.2f", targetDistance);
     logger.logWarning(buf);
     return false;
   }
