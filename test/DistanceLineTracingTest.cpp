@@ -36,7 +36,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
 
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -71,8 +72,8 @@ namespace etrobocon2024_test {
 
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
-    srand(10);  // 3回連続して緑を取得する乱数シード
-    dl.run();   // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -91,7 +92,7 @@ namespace etrobocon2024_test {
     // PWMの初期化
     controller.resetWheelsMotorPwm();
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 1000.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -108,8 +109,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -128,7 +129,7 @@ namespace etrobocon2024_test {
     // PWMの初期化
     controller.resetWheelsMotorPwm();
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 1000.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -145,8 +146,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -183,8 +184,8 @@ namespace etrobocon2024_test {
 
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -221,8 +222,8 @@ namespace etrobocon2024_test {
 
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
-    srand(9);  // 3回連続して緑を取得する乱数シード
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -241,7 +242,7 @@ namespace etrobocon2024_test {
     // PWMの初期化
     controller.resetWheelsMotorPwm();
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 1000.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -260,8 +261,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -280,7 +281,7 @@ namespace etrobocon2024_test {
     // PWMの初期化
     controller.resetWheelsMotorPwm();
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 1000.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -299,8 +300,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
