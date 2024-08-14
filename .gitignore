@@ -6,6 +6,9 @@ logfiles/*
 !logfiles/.gitkeep
 image_data/
 debug/
+z_*/
+work/
+front_camera/detect/
 
 # シミュレータ自動実行ツール関係
 .cancel-sim-test
