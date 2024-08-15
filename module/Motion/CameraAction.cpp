@@ -31,7 +31,7 @@ void CameraAction::run()
 
   // 撮影に際してディレクトリ移動も行う
   char cmd[256];
-  snprintf(cmd, 256, "cd etrobocon2023/front_camera && make %s SAVE_NAME=%s && cd ../..",
+  snprintf(cmd, 256, "cd etrobocon2024/front_camera && make %s SAVE_NAME=%s && cd ../..",
            makeImageCommand, imageName);
   system(cmd);
 
