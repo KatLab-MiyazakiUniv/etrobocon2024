@@ -36,7 +36,6 @@ class ColorDistanceLineTracing : public LineTracing {
    * @param targetSpeed 目標速度
    * @note オーバーライド
    */
-
   bool isMetPreCondition(double targetSpeed) override;
 
   /**
