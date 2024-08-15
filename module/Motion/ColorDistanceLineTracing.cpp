@@ -12,7 +12,7 @@ ColorDistanceLineTracing::ColorDistanceLineTracing(COLOR _targetColor, double _t
                                                    const PidGain& _pidGain, bool& _isLeftEdge)
   : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge),
     targetColor(_targetColor),
-    targetDistance(_targetDistance) {};
+    targetDistance(_targetDistance){};
 
 bool ColorDistanceLineTracing::isMetPreCondition(double targetSpeed)
 {
