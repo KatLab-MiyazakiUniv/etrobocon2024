@@ -61,18 +61,18 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(dl);          // 動作リストに追加
     } else if(command == COMMAND::CL) {  // 指定色ライントレース動作の生成
       ColorLineTracing* cl = new ColorLineTracing(
-          ColorJudge::stringToColor(params[1]),  // 目標色
-          atof(params[2]),                       // 目標速度
-          targetBrightness + atoi(params[3]),    // 目標輝度 + 調整 // 目標速度
+          ColorJudge::stringToColor(params[1]),                        // 目標色
+          atof(params[2]),                                             // 目標速度
+          targetBrightness + atoi(params[3]),                          // 目標輝度 + 調整
           PidGain(atof(params[4]), atof(params[5]), atof(params[6])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
       motionList.push_back(cl);                                        // 動作リストに追加
     } else if(command == COMMAND::CD) {  // 色距離指定ライントレース動作の生成
       ColorDistanceLineTracing* cd = new ColorDistanceLineTracing(
-          ColorJudge::stringToColor(params[1]),  // 目標色
-          atof(params[2]),                       // 目標距離
-          atof(params[3]),                       // 目標速度
-          targetBrightness + atoi(params[4]),    // 目標輝度 + 調整 // 目標速度
+          ColorJudge::stringToColor(params[1]),                        // 目標色
+          atof(params[2]),                                             // 目標距離
+          atof(params[3]),                                             // 目標速度
+          targetBrightness + atoi(params[4]),                          // 目標輝度 + 調整
           PidGain(atof(params[5]), atof(params[6]), atof(params[7])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
       motionList.push_back(cd);                                        // 動作リストに追加
