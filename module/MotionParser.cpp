@@ -156,7 +156,7 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::CL;
   } else if(strcmp(str, "DS") == 0) {  // 文字列がDSの場合
     return COMMAND::DS;
-  } else if(strcmp(str, "CD") == 0) {  // 文字列がCSの場合
+  } else if(strcmp(str, "CD") == 0) {  // 文字列がCDの場合
     return COMMAND::CD;
   } else if(strcmp(str, "CS") == 0) {  // 文字列がCSの場合
     return COMMAND::CS;

@@ -1,6 +1,6 @@
 /**
  * @file   ColorDistanceLineTracing.cpp
- * @brief  色指定距離ライントレース動作
+ * @brief  色距離指定ライントレース動作
  * @author Negimarge
  */
 
