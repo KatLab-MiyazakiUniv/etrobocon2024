@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.h
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121
+ * @author keiya121 bizyutyu
  */
 
 #ifndef MOTION_PARSER_H
@@ -23,6 +23,7 @@
 #include "Sleeping.h"
 #include "StopWheelsMotor.h"
 #include "ResetWheelsMotorPwm.h"
+#include "CameraAction.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
@@ -41,6 +42,7 @@ enum class COMMAND {
   XR,  // 角度補正回頭
   RM,  // 両輪モーターリセット&停止
   SM,  // 両輪モーター停止
+  CA,  // カメラ撮影動作
   NONE
 };
 
@@ -73,6 +75,13 @@ class MotionParser {
    * @return bool値
    */
   static bool convertBool(char* command, char* stringParameter);
+
+  /**
+   * @brief 文字列をSubject型に変換する
+   * @param stringParameter 文字列のパラメータ
+   * @return Subject値
+   */
+  static CameraAction::Subject convertSubject(char* stringParameter);
 };
 
 #endif
