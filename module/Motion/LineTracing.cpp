@@ -50,10 +50,8 @@ void LineTracing::run()
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
-    if(isRecoveryEnabled) {
-      if(isErrorState()) {
-        recover();
-      }
+    if(isRecoveryEnabled && isErrorState()) {
+      recover();
     }
     // 初期pwm値を計算
     double baseRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
