@@ -33,8 +33,17 @@ void CameraAction::run()
   snprintf(cmd, 256, "cd etrobocon2024/front_camera && make %s SAVE_NAME=%s && cd ../..",
            makeImageCommand, imageName);
   system(cmd);
-
   printf("%s\n", cmd);
+
+  // 画像アップロードに際してディレクトリ移動も行う
+  char uploadImageName[20] = "Fig_3.jpeg";  // アップロードするミニフィグの画像を指定
+  if(imageName == uploadImageName || imageName == "Pla.jpeg") {
+    snprintf(cmd, 256,
+             "cd etrobocon2024 && make upload FILE_PATH=front_camera/image_data/%s && cd ..",
+             imageName);
+    system(cmd);
+    printf("%s\n", cmd);
+  }
 }
 
 void CameraAction::logRunning()

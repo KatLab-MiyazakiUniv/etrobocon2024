@@ -1,5 +1,6 @@
 MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 HOST = $(shell hostname)
+SERVER_URL = "無線通信デバイスのサーバURL"
 make = make --no-print-directory
 
 # 使い方
@@ -8,8 +9,8 @@ help:
 	@echo " $$ make build"
 	@echo ビルドファイルを消してからビルドする
 	@echo " $$ make rebuild"
-	@echo 走行状態を提供するサーバを起動する
-	@echo " $$ make server"
+	@echo 無線通信デバイスのサーバーに画像をアップロードする
+	@echo " $$ make upload"
 	@echo 走行を開始する\(実機限定\)
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
@@ -46,10 +47,9 @@ rebuild:
 	rm -rf build
 	@${make} build
 
-# 走行状態を提供するWebサーバを起動する
-.PHONY: server
-server:
-	cd $(MAKEFILE_PATH)/server && python3 flask_server.py
+# 無線通信デバイスのサーバーに画像をアップロードする
+upload:
+	curl -X POST -F "file=@$(FILE_PATH)" $(SERVER_URL)/upload
 
 # 実機の場合、走行を開始する 
 start:
