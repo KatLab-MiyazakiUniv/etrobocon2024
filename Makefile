@@ -1,6 +1,6 @@
 MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 HOST = $(shell hostname)
-SERVER_URL = "無線通信デバイスのサーバURL"
+SERVER_URL = サーバーのURL
 make = make --no-print-directory
 
 # 使い方
@@ -49,7 +49,7 @@ rebuild:
 
 # 無線通信デバイスのサーバーに画像をアップロードする
 upload:
-	curl -X POST -F "file=@$(FILE_PATH)" $(SERVER_URL)/upload
+	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
 
 # 実機の場合、走行を開始する 
 start:
