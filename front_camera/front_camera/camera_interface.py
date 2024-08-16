@@ -5,6 +5,7 @@
 from picamera2 import Picamera2, MappedArray
 from datetime import datetime
 from typing import Tuple, Union
+from PIL import Image
 import cv2
 import numpy as np
 import os
@@ -54,7 +55,10 @@ class CameraInterface:
             save_path (int): 画像の保存先パス(拡張子込み)
         """
         img = self.capture_image()
-        cv2.imwrite(save_path, img)
+        img = np.array(img)
+        img = img[:, :, ::-1]
+        im = Image.fromarray(img)
+        im.save(save_path)
 
     def capture_image_cv2(self, save_path):
         ret, frame = self.cap.read()

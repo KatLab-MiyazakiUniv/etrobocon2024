@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121
+ * @author keiya121 bizyutyu
  */
 
 #include "MotionParser.h"
@@ -109,7 +109,12 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     else if(command == COMMAND::SM) {               // 両輪モーター停止の生成
       StopWheelsMotor* sm = new StopWheelsMotor();  // モーターの停止
 
-      motionList.push_back(sm);  // 動作リストに追加
+      motionList.push_back(sm);          // 動作リストに追加
+    } else if(command == COMMAND::CA) {  // カメラ撮影動作の生成
+      CameraAction* ca = new CameraAction(
+          convertSubject(params[1]));  // フラグ確認を行うかの判断に用いる撮影対象
+
+      motionList.push_back(ca);  // 動作リストに追加
     }
     // TODO: 後で作成する
 
@@ -178,6 +183,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::RM;
   } else if(strcmp(str, "SM") == 0) {  // 文字列がSMの場合
     return COMMAND::SM;
+  } else if(strcmp(str, "CA") == 0) {  // 文字列がCAの場合
+    return COMMAND::CA;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }
@@ -210,5 +217,22 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
       logger.logWarning("Parameter before conversion must be 'left' or 'right'");
       return true;
     }
+  }
+}
+
+CameraAction::Subject MotionParser::convertSubject(char* stringParameter)
+{
+  Logger logger;
+
+  // 末尾の改行を削除
+  char* param = StringOperator::removeEOL(stringParameter);
+
+  if(strcmp(param, "FIG") == 0) {  // パラメータがFIGの場合
+    return CameraAction::Subject::FIGURE;
+  } else if(strcmp(param, "PLA") == 0) {  // パラメータがPLAの場合
+    return CameraAction::Subject::PLARAIL;
+  } else {  // 想定していないパラメータが来た場合
+    logger.logWarning("Parameter before conversion must be 'FIG' or 'PLA'");
+    return CameraAction::Subject::UNDEFINED;
   }
 }
