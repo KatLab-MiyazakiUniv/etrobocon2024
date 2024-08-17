@@ -1,6 +1,6 @@
 MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 HOST = $(shell hostname)
-SERVER_URL = サーバーのURL
+SERVER_URL = http://172.20.1.18:8000
 make = make --no-print-directory
 
 # 使い方
