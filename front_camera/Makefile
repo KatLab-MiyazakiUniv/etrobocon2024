@@ -11,7 +11,7 @@ help:
 
 ## 画像取得関連 ##
 ifeq ($(SAVE_NAME),)
-    SAVE_NAME = Fig_1.png # デフォルト値
+    SAVE_NAME = Fig.jpeg # デフォルト値
 endif
 image:
 	@${make} kill
