@@ -8,12 +8,12 @@ help:
 	@echo " $$ make build"
 	@echo ビルドファイルを消してからビルドする
 	@echo " $$ make rebuild"
-	@echo 走行状態を提供するサーバを起動する
-	@echo " $$ make server"
 	@echo 走行を開始する\(実機限定\)
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
 	@echo " $$ make kill"
+	@echo 走行ログ取得フラグを切り替える
+	@echo " $$ make toggle-logflag"
 
 	@echo 指定ファイルをフォーマットする
 	@echo " $$ make format FILES=<ディレクトリ名>/<ファイル名>.cpp"
@@ -46,11 +46,6 @@ rebuild:
 	rm -rf build
 	@${make} build
 
-# 走行状態を提供するWebサーバを起動する
-.PHONY: server
-server:
-	cd $(MAKEFILE_PATH)/server && python3 flask_server.py
-
 # 実機の場合、走行を開始する 
 start:
 ifeq ($(filter katlab%,$(HOST)), $(HOST))
@@ -60,6 +55,17 @@ endif
 # makeのプロセスIDを抽出し、キルする
 kill:
 	@ps aux | grep make | grep -v "grep" | awk '{print $$2}' | xargs -r kill -9
+
+# etrobocon2024/module/common/SystemInfo.hのshouldGetRunLogの値をトグルする
+toggle-logflag:
+	@if grep -q 'bool shouldGetRunLog = true;' ./module/common/SystemInfo.h; then \
+		sed -i 's/bool shouldGetRunLog = true;/bool shouldGetRunLog = false;/g' ./module/common/SystemInfo.h; \
+		echo "Will not get RunLog! Need rebuild"; \
+	else \
+		sed -i 's/bool shouldGetRunLog = false;/bool shouldGetRunLog = true;/g' ./module/common/SystemInfo.h; \
+		echo "Will get RunLog! Need rebuild"; \
+	fi
+
 
 
 ## 開発関連 ##
@@ -103,4 +109,3 @@ all-check:
 	@${make} utest
 	@${make} format-check
 	cd rear_camera_py && make format-check
-
