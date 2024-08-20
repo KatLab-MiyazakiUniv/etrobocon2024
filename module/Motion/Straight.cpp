@@ -34,18 +34,19 @@ void Straight::run()
     // モータにPWM値をセット
     controller.setLeftMotorPwm(currentLeftPwm);
     controller.setRightMotorPwm(currentRightPwm);
+    if(shouldGetRunLog) {
+      if(count / 10 == 0) {
+        // 現在の輝度値を取得
+        int currentBrightness = measurer.getBrightness();
 
-    if(count / 10 == 0) {
-      // 現在の輝度値を取得
-      int currentBrightness = measurer.getBrightness();
+        // 現在のRGB値を取得
+        rgb_raw_t currentRgb = measurer.getRawColor();
 
-      // 現在のRGB値を取得
-      rgb_raw_t currentRgb = measurer.getRawColor();
-
-      // RunLoggerにデータを追加
-      runLogger.addTolog(currentBrightness, static_cast<int>(currentRightPwm),
-                         static_cast<int>(currentLeftPwm), currentRgb.r, currentRgb.g,
-                         currentRgb.b);
+        // RunLoggerにデータを追加
+        runLogger.addTolog(currentBrightness, static_cast<int>(currentRightPwm),
+                           static_cast<int>(currentLeftPwm), currentRgb.r, currentRgb.g,
+                           currentRgb.b);
+      }
     }
     count++;
 
@@ -55,8 +56,10 @@ void Straight::run()
   // モータの停止
   // controller.stopWheelsMotor();
 
-  // 走行ログ書き込み
-  runLogger.outputToFile();
+  if(shouldGetRunLog) {
+    // 走行ログ書き込み
+    runLogger.outputToFile();
+  }
 }
 
 bool Straight::isMetPreCondition()
