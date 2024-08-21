@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121
+ * @author keiya121 bizyutyu
  */
 
 #include "MotionParser.h"
@@ -92,6 +92,15 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
         motionList.push_back(cl);  // 動作リストに追加
       }
+    } else if(command == COMMAND::CD) {  // 色距離指定ライントレース動作の生成
+      ColorDistanceLineTracing* cd = new ColorDistanceLineTracing(
+          ColorJudge::stringToColor(params[1]),                        // 目標色
+          atof(params[2]),                                             // 目標距離
+          atof(params[3]),                                             // 目標速度
+          targetBrightness + atoi(params[4]),                          // 目標輝度 + 調整
+          PidGain(atof(params[5]), atof(params[6]), atof(params[7])),  // PIDゲイン
+          isLeftEdge);                                                 // エッジ
+      motionList.push_back(cd);                                        // 動作リストに追加
     } else if(command == COMMAND::DS) {  // 指定距離直進動作の生成
       DistanceStraight* ds = new DistanceStraight(atof(params[1]),   // 目標距離
                                                   atof(params[2]));  // 目標速度
@@ -125,7 +134,12 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     else if(command == COMMAND::SM) {               // 両輪モーター停止の生成
       StopWheelsMotor* sm = new StopWheelsMotor();  // モーターの停止
 
-      motionList.push_back(sm);  // 動作リストに追加
+      motionList.push_back(sm);          // 動作リストに追加
+    } else if(command == COMMAND::CA) {  // カメラ撮影動作の生成
+      CameraAction* ca = new CameraAction(
+          convertSubject(params[1]));  // フラグ確認を行うかの判断に用いる撮影対象
+
+      motionList.push_back(ca);  // 動作リストに追加
     }
     // TODO: 後で作成する
 
@@ -172,6 +186,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::CL;
   } else if(strcmp(str, "DS") == 0) {  // 文字列がDSの場合
     return COMMAND::DS;
+  } else if(strcmp(str, "CD") == 0) {  // 文字列がCDの場合
+    return COMMAND::CD;
   } else if(strcmp(str, "CS") == 0) {  // 文字列がCSの場合
     return COMMAND::CS;
   } else if(strcmp(str, "PR") == 0) {  // 文字列がPRの場合
@@ -192,6 +208,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::RM;
   } else if(strcmp(str, "SM") == 0) {  // 文字列がSMの場合
     return COMMAND::SM;
+  } else if(strcmp(str, "CA") == 0) {  // 文字列がCAの場合
+    return COMMAND::CA;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }
@@ -224,5 +242,22 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
       logger.logWarning("Parameter before conversion must be 'left' or 'right'");
       return true;
     }
+  }
+}
+
+CameraAction::Subject MotionParser::convertSubject(char* stringParameter)
+{
+  Logger logger;
+
+  // 末尾の改行を削除
+  char* param = StringOperator::removeEOL(stringParameter);
+
+  if(strcmp(param, "FIG") == 0) {  // パラメータがFIGの場合
+    return CameraAction::Subject::FIGURE;
+  } else if(strcmp(param, "PLA") == 0) {  // パラメータがPLAの場合
+    return CameraAction::Subject::PLARAIL;
+  } else {  // 想定していないパラメータが来た場合
+    logger.logWarning("Parameter before conversion must be 'FIG' or 'PLA'");
+    return CameraAction::Subject::UNDEFINED;
   }
 }

@@ -4,8 +4,10 @@
  * @author CHIHAYATAKU
  */
 
-#include "LineTracing.h"
 #include "MotionParser.h"
+#include "MotionParser.h"
+#include "LineTracing.h"
+
 using namespace std;
 
 LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
@@ -17,6 +19,7 @@ LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGa
 {
   isRecoveryEnabled = true;
 }
+
 LineTracing::LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain,
                          bool& _isLeftEdge, bool _isRecoveryEnabled)
   : targetSpeed(_targetSpeed),
@@ -46,7 +49,8 @@ void LineTracing::run()
   initLeftMileage = Mileage::calculateWheelMileage(measurer.getLeftCount());
   initRightMileage = Mileage::calculateWheelMileage(measurer.getRightCount());
 
-  SpeedCalculator speedCalculator(targetSpeed);
+  speedCalculator = new SpeedCalculator(targetSpeed);
+  speedCalculator = new SpeedCalculator(targetSpeed);
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
@@ -54,8 +58,8 @@ void LineTracing::run()
       recover();
     }
     // 初期pwm値を計算
-    double baseRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
-    double baseLeftPwm = speedCalculator.calculateLeftMotorPwmFromTargetSpeed();
+    double baseRightPwm = speedCalculator->calculateRightMotorPwmFromTargetSpeed();
+    double baseLeftPwm = speedCalculator->calculateLeftMotorPwmFromTargetSpeed();
 
     // PIDで旋回値を計算
     double turningPwm = pid.calculatePid(measurer.getBrightness()) * edgeSign;
@@ -67,13 +71,20 @@ void LineTracing::run()
                                        : min(baseLeftPwm - turningPwm, 0.0);
     controller.setRightMotorPwm(rightPwm);
     controller.setLeftMotorPwm(leftPwm);
-
     // 10ミリ秒待機
     timer.sleep(10);
+    if(isRecoveryEnabled && isErrorState()) {
+      recover();
+      // 再インスタンス化
+      delete speedCalculator;                              // 既存のインスタンスを解放
+      speedCalculator = new SpeedCalculator(targetSpeed);  // 新しいインスタンスを生成
+    }
   }
+  delete speedCalculator;  // 既存のインスタンスを解放
 
   // モータの停止
-  // controller.stopWheelsMotor();
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
 
 void LineTracing::recover()
@@ -87,6 +98,25 @@ void LineTracing::recover()
   // コマンドファイルパスを作成する
   char commandFilePath[SMALL_BUF_SIZE];
   snprintf(commandFilePath, SMALL_BUF_SIZE, "%s%s.csv", basePath, commandFileName);
+
+  // 復帰動作の前の角度補正
+  double diffLeftMileage
+      = Mileage::calculateWheelMileage(measurer.getLeftCount()) - initLeftMileage;
+  double diffRightMileage
+      = Mileage::calculateWheelMileage(measurer.getRightCount()) - initRightMileage;
+  int targetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)
+                    / 3;  // 緑に入った角度によって回転角を変更
+  int pwmForRotation = 70;
+  bool isClockwise;
+  if(diffLeftMileage <= diffRightMileage) {
+    isClockwise = true;
+  } else {
+    isClockwise = false;
+  }
+  controller.stopWheelsMotor();
+  timer.sleep(200);
+  PwmRotation pwmRotation(targetAngle, pwmForRotation, isClockwise);
+  pwmRotation.run();
 
   // 動作インスタンスのリストを生成する
   motionList = MotionParser::createMotions(commandFilePath, targetBrightness, isLeftEdge);
@@ -103,6 +133,9 @@ void LineTracing::recover()
     delete *motion;                     // メモリを解放
     motion = motionList.erase(motion);  // リストから削除
   }
+  // モータの停止
+  controller.stopWheelsMotor();
+  timer.sleep(10);
   logFinishingRecovering();
 }
 

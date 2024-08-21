@@ -1,1 +1,6 @@
-PR,90,100,clockwise,Google Testパス用のサンプル
+DS,150,-150
+PR,40,70,anticlockwise
+DS,1700,350
+CS,BLACK,200
+PR,40,70,clockwise
+CL,BLUE,200,-5,0.15,0.05,0.1,青まで指定色ライントレース

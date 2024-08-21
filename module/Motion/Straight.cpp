@@ -1,7 +1,7 @@
 /**
  * @file   Straight.cpp
  * @brief  直進動作の抽象クラス
- * @author bizyutyu
+う * @author bizyutyu CHIHAYATAKU
  */
 
 #include "Straight.h"
@@ -38,7 +38,8 @@ void Straight::run()
     timer.sleep(10);
   }
   // モータの停止
-  // controller.stopWheelsMotor();
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
 
 bool Straight::isMetPreCondition()

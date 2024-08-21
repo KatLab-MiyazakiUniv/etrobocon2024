@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.h
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121
+ * @author keiya121 bizyutyu
  */
 
 #ifndef MOTION_PARSER_H
@@ -17,17 +17,20 @@
 #include "ColorStraight.h"
 #include "ColorLineTracing.h"
 #include "DistanceLineTracing.h"
+#include "ColorDistanceLineTracing.h"
 #include "DistanceStraight.h"
 #include "EdgeChanging.h"
 #include "Sleeping.h"
 #include "StopWheelsMotor.h"
 #include "ResetWheelsMotorPwm.h"
+#include "CameraAction.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
 enum class COMMAND {
   DL,  // 指定距離ライントレース
   CL,  // 指定色ライントレース
+  CD,  // 色距離指定ライントレース
   DS,  // 指定距離直進
   CS,  // 指定色直進
   PR,  // PWM指定回頭
@@ -39,6 +42,7 @@ enum class COMMAND {
   XR,  // 角度補正回頭
   RM,  // 両輪モーターリセット&停止
   SM,  // 両輪モーター停止
+  CA,  // カメラ撮影動作
   NONE
 };
 
@@ -71,6 +75,13 @@ class MotionParser {
    * @return bool値
    */
   static bool convertBool(char* command, char* stringParameter);
+
+  /**
+   * @brief 文字列をSubject型に変換する
+   * @param stringParameter 文字列のパラメータ
+   * @return Subject値
+   */
+  static CameraAction::Subject convertSubject(char* stringParameter);
 };
 
 #endif
