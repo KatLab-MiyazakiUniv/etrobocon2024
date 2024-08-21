@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121 bizyutyu
+ * @author keiya121 bizyutyu CHIHAYATAKU
  */
 
 #include "MotionParser.h"
