@@ -1,5 +1,6 @@
 MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 HOST = $(shell hostname)
+SERVER_URL = サーバーのURL
 make = make --no-print-directory
 
 # 使い方
@@ -8,6 +9,8 @@ help:
 	@echo " $$ make build"
 	@echo ビルドファイルを消してからビルドする
 	@echo " $$ make rebuild"
+	@echo 無線通信デバイスのサーバーに画像をアップロードする
+	@echo " $$ make upload"
 	@echo 走行を開始する\(実機限定\)
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
@@ -46,6 +49,9 @@ rebuild:
 	rm -rf build
 	@${make} build
 
+# 無線通信デバイスのサーバーに画像をアップロードする
+upload:
+	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
 # 実機の場合、走行を開始する 
 start:
 ifeq ($(filter katlab%,$(HOST)), $(HOST))
