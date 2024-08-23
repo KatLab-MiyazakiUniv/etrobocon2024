@@ -57,7 +57,7 @@ void EtRobocon2024::start()
   calibrator.run();
   isLeftCourse = calibrator.getIsLeftCourse();
   // isLeftCourse = true;
-  // isLeftEdge = isLeftCourse;
+  isLeftEdge = isLeftCourse;
   int targetBrightness = calibrator.getTargetBrightness();
 
   // int targetBrightness = 50;

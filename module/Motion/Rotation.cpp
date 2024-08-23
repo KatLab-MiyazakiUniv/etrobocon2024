@@ -1,7 +1,7 @@
 /**
  * @file   Rotation.cpp
  * @brief  回頭動作の中間クラス
- * @author takahashitom
+ * @author takahashitom CHIHAYATAKU
  */
 
 #include "Rotation.h"
@@ -47,5 +47,6 @@ void Rotation::run()
   }
 
   // モータの停止
-  // controller.stopWheelsMotor();
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
