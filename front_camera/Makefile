@@ -4,6 +4,8 @@ help:
 
 	@echo "	フロントカメラで画像を取得する"
 	@echo " $$ make image"
+	@echo "フロントカメラで動画を撮影する"
+	@echo " $$ make record"
 	@echo "画像のファイル名を指定してフロントカメラで画像を取得する"
 	@echo " $$ make image SAVE_NAME=(画像のファイル名)"
 	@echo "取得した画像を一括削除する"
@@ -17,6 +19,11 @@ image:
 	@${make} kill
 	sudo python3 front_camera/camera_interface.py --save_path $(SAVE_NAME)
 	@echo "$(SAVE_NAME) 画像取得しますた！！！！！！！"
+
+record:
+	@${make} kill
+	sudo python3 front_camera/video_recorder.py
+	@echo "動画を撮影したぷい！！！！"
 
 rm-img:
 	sudo rm -rf image_data/
