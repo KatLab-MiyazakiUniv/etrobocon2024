@@ -3,7 +3,7 @@
  * @brief  ライントレース動作の中間クラス
  * @author CHIHAYATAKU
  */
- 
+
 #include "MotionParser.h"
 #include "LineTracing.h"
 
@@ -53,9 +53,6 @@ void LineTracing::run()
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
-    if(isRecoveryEnabled && isErrorState()) {
-      recover();
-    }
     // 初期pwm値を計算
     double baseRightPwm = speedCalculator->calculateRightMotorPwmFromTargetSpeed();
     double baseLeftPwm = speedCalculator->calculateLeftMotorPwmFromTargetSpeed();
@@ -90,6 +87,10 @@ void LineTracing::recover()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
+  double diffLeftMileage
+      = Mileage::calculateWheelMileage(measurer.getLeftCount()) - initLeftMileage;
+  double diffRightMileage
+      = Mileage::calculateWheelMileage(measurer.getRightCount()) - initRightMileage;
 
   // ファイルから受け取る動作リスト
   vector<Motion*> motionList;
@@ -97,25 +98,6 @@ void LineTracing::recover()
   // コマンドファイルパスを作成する
   char commandFilePath[SMALL_BUF_SIZE];
   snprintf(commandFilePath, SMALL_BUF_SIZE, "%s%s.csv", basePath, commandFileName);
-
-  // 復帰動作の前の角度補正
-  double diffLeftMileage
-      = Mileage::calculateWheelMileage(measurer.getLeftCount()) - initLeftMileage;
-  double diffRightMileage
-      = Mileage::calculateWheelMileage(measurer.getRightCount()) - initRightMileage;
-  int targetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)
-                    / 3;  // 緑に入った角度によって回転角を変更
-  int pwmForRotation = 70;
-  bool isClockwise;
-  if(diffLeftMileage <= diffRightMileage) {
-    isClockwise = true;
-  } else {
-    isClockwise = false;
-  }
-  controller.stopWheelsMotor();
-  timer.sleep(200);
-  PwmRotation pwmRotation(targetAngle, pwmForRotation, isClockwise);
-  pwmRotation.run();
 
   // 動作インスタンスのリストを生成する
   motionList = MotionParser::createMotions(commandFilePath, targetBrightness, isLeftEdge);
@@ -132,6 +114,34 @@ void LineTracing::recover()
     delete *motion;                     // メモリを解放
     motion = motionList.erase(motion);  // リストから削除
   }
+
+    // 復帰動作コマンド実行後の角度補正
+  int endTargetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)/1.5;  // 緑に入った角度によって回転角を変更
+  int pwmForRotation = 70;
+  bool isClockwise;
+  if(diffLeftMileage <= diffRightMileage) {
+    isClockwise = true;
+  } else {
+    isClockwise = false;
+  }
+  // 黒線に到達した後の処理
+  PwmRotation endPwmRotation(endTargetAngle, pwmForRotation, isClockwise);
+  controller.stopWheelsMotor();
+  timer.sleep(200);
+  endPwmRotation.run();
+
+  COLOR endTargetColor = COLOR::BLACK; 
+  int endTargetSpeed = 200;
+  int endTargetBrightness = 5;
+  PidGain endPidGain(0.23,0.23,2.7);
+  bool endIsRecoveryEnabled = false;
+  ColorLineTracing endColorLineTracing(endTargetColor, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
+  endColorLineTracing.run();
+
+  int endTargetDistance = 200; 
+  DistanceLineTracing endDistanceLineTracing(endTargetDistance, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
+  endDistanceLineTracing.run();
+
   // モータの停止
   controller.stopWheelsMotor();
   timer.sleep(10);
