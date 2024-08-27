@@ -52,6 +52,7 @@ class Pid {
   PidGain pidGain;
   double prevDeviation;  // 前回の偏差
   double integral;       // 偏差の累積
+  double filteredDerivative = 0;  // フィルタされた微分項を保持する変数
   double targetValue;    // 目標値
 };
 
