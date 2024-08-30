@@ -5,6 +5,7 @@ build/
 logfiles/*
 !logfiles/.gitkeep
 image_data/
+video_data/
 debug/
 
 # 一部Pythonファイルを実行時に生成するキャッシュのディレクトリ
