@@ -1,6 +1,6 @@
 """
 動画中のプラレールが最も手前に来たタイミングのフレームを返す
-@author: bizyutyu
+@author: bizyutyu keiya121
 """
 
 import sys
@@ -9,7 +9,7 @@ import numpy as np
 
 
 class FrameTimingCalculator:
-    def __init__(self, video_path, bounding_box_width=20, bounding_box_height=100):
+    def __init__(self, video_path, bounding_box_width=50, bounding_box_height=200):
         """コンストラクタ"""
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
@@ -53,29 +53,42 @@ class FrameTimingCalculator:
 
         entry_frame = None
         exit_frame = None
+        prev_gray = None
+        avg = None
         frame_count = 0
 
         while cap.isOpened():
             ret, frame = cap.read()
+            # cv2.imwrite("frame.jpeg", frame)
             if not ret:
-                print("ret is false")
+                print("最終フレームに到達")
                 cap.release()
                 break
 
             frame_count += 1
 
             # バウンディングボックス内の領域を抽出（roi:Region of Interest (注目領域)の略です）
-            roi = frame[box_y1:box_y2, box_x1:box_x2]
-            print(f"roi.size:{roi.size}")
+            roi = frame[:, box_x1:box_x2]
 
             # 動体検出（グレースケール化して閾値処理）
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-            _, thresh = cv2.threshold(gray_roi, 127, 255, cv2.THRESH_BINARY)
+            if avg is None:
+                avg = gray_roi.copy().astype("float")
+                continue
+
+            cv2.accumulateWeighted(gray_roi, avg, 0.001)
+            if prev_gray is None:
+                prev_gray = gray_roi
+                continue
+            frame_diff = cv2.absdiff(gray_roi, cv2.convertScaleAbs(avg))
+            _, thresh = cv2.threshold(frame_diff, 127, 255, cv2.THRESH_BINARY)
+
+            print(np.sum(thresh))
 
             # 動体が検出されたかチェック
-            if np.sum(thresh) > 0 and entry_frame is None:
+            if np.sum(thresh) == 0 and entry_frame is None:
                 entry_frame = frame_count
-            elif np.sum(thresh) == 0 and entry_frame is not None and exit_frame is None:
+            elif np.sum(thresh) > 0 and entry_frame is not None and exit_frame is None:
                 exit_frame = frame_count
                 break
 
@@ -89,7 +102,23 @@ class FrameTimingCalculator:
 
         center_frame = (entry_frame + exit_frame) // 2
 
-        print(frame_count)
+        cap = cv2.VideoCapture(self.video_path)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
+
+        ret, frame = cap.read()  # フレーム画像を取得
+
+        if ret:
+            cv2.imwrite("center.jpeg", frame)  # フレーム画像を保存
+            print(f"Center frame saved as 'center.jpeg'")
+        else:
+            print("Failed to retrieve the center frame.")
+
+        # center_frame_image = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+        # cv2.imwrite("center.jpeg", center_frame_image)
+
+        print(entry_frame)
+        print(exit_frame)
+        print(center_frame)
 
         return center_frame
 
