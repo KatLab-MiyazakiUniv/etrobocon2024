@@ -132,7 +132,7 @@ void LineTracing::recover()
 
   COLOR endTargetColor = COLOR::BLACK; 
   int endTargetSpeed = 200;
-  int endTargetBrightness = 10;
+  int endTargetBrightness = 15;
   PidGain endPidGain(0.6,0.24,0.3);
   bool endIsRecoveryEnabled = false;
   ColorLineTracing endColorLineTracing(endTargetColor, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
