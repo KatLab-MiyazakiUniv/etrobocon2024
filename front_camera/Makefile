@@ -1,17 +1,14 @@
 make = make --no-print-directory
 
 help:
-
-	@echo "	フロントカメラで画像を取得する"
+	@echo "フロントカメラで画像を取得する"
 	@echo " $$ make image"
 	@echo "フロントカメラで動画を撮影する"
 	@echo " $$ make record"
 	@echo "画像のファイル名を指定してフロントカメラで画像を取得する"
 	@echo " $$ make image SAVE_NAME=(画像のファイル名)"
-	@echo "フロントカメラで動画を取得する"
-	@echo " $$ make record
 	@echo "プラレール画像を取得する"
-	@echo " $$ make plarail-image
+	@echo " $$ make plarail-image"
 	@echo "取得した画像を一括削除する"
 	@echo " $$ make rm-img"
 
