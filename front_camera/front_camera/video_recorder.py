@@ -3,7 +3,9 @@
 @author: YKhm20020 bizyutyu
 """
 
+import os
 import time
+from typing import Tuple
 from picamera2 import Picamera2
 from picamera2.encoders import H264Encoder
 
@@ -11,23 +13,23 @@ from picamera2.encoders import H264Encoder
 class VideoRecorder:
     """カメラモジュールで動画を撮影するクラス"""
 
-    def __init__(self, camera_id: int = 0, resolution=(1920, 1080), framerate=30) -> None:
+    def __init__(
+        self, camera_id: int = 0, size: Tuple[int, int] = (1640, 1232)
+    ) -> None:
         """コンストラクタ"""
-        self.__camera_id = camera_id 
-        self.__resolution = resolution
-        self.__framerate = framerate
+        self.__camera_id = camera_id
+        self.__size = size
         self.__camera = None
-    
+
     def start_camera(self) -> None:
         """Picamera2のインスタンス生成"""
         if self.__camera is None:
             camera = Picamera2()
-            video_config = camera.create_video_configuration()
+            video_config = camera.create_video_configuration(main={"size": self.__size})
             # camera = Picamera2(camera_id = self.__camera_id)
             # video_config = camera.create_video_configuration(main={"size": self.__resolution, "framerate": self.__framerate})
             camera.configure(video_config)
             self.__camera = camera
-
 
     def start_recording(self, encoder, output) -> None:
         """動画の撮影を開始する"""
@@ -50,9 +52,11 @@ if __name__ == "__main__":
     video_recorder.start_camera()
 
     try:
+        os.makedirs("video_data", exist_ok=True)
+
         # 出力する動画ファイルの名前
         encoder = H264Encoder(bitrate=10000000)
-        output_file_name = "recorded_video.h264"
+        output_file_name = "video_data/recorded_video.h264"
 
         video_recorder.start_recording(encoder, output_file_name)
         time.sleep(10)  # テストのため10秒間録画する
