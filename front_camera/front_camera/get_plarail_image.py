@@ -38,7 +38,7 @@ class GetPlarailImage:
         if ret:
             # フレームをJPEG形式で保存
             cv2.imwrite(output_path, frame)
-            print(f"中間フレームを {output_path} に保存しました。")
+            print(f"目標フレームを {output_path} に保存しました。")
         else:
             print("フレームの読み込みに失敗しました。")
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         output_video_path = "video_data/recorded_video.h264"
 
         video_recorder.start_recording(encoder, output_video_path)
-        time.sleep(10)  # 10秒間録画する
+        time.sleep(20)  # 20秒間録画する
         video_recorder.stop_recording()
 
     finally:

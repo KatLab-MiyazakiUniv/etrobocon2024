@@ -1,6 +1,6 @@
 """
 動画中のプラレールが最も手前に来たタイミングのフレームを返す
-@author: bizyutyu keiya121
+@author: bizyutyu
 """
 
 import sys
@@ -9,7 +9,7 @@ import numpy as np
 
 
 class FrameTimingCalculator:
-    def __init__(self, video_path, bounding_box_width=50, bounding_box_height=200):
+    def __init__(self, video_path, bounding_box_width=100, bounding_box_height=200):
         """コンストラクタ"""
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
@@ -42,12 +42,20 @@ class FrameTimingCalculator:
         else:
             # 黄色い長方形の下部にバウンディングボックスを配置
             box_x1 = yellow_rect[0] + yellow_rect[2] // 2 - self.bounding_box_width // 2
-            box_y1 = yellow_rect[1] + yellow_rect[3]
+            box_y1 = (yellow_rect[1] + yellow_rect[3]) * 3
             print("yellow_rect is found")
             print(f"box_x1={box_x1}, box_y1={box_y1}")
 
         box_x2 = box_x1 + self.bounding_box_width
         box_y2 = box_y1 + self.bounding_box_height
+        with_bbox = cv2.rectangle(
+            first_frame,
+            (box_x1, box_y1),
+            (box_x2, box_y2),
+            color=(255, 0, 0),
+            thickness=4,
+        )
+        cv2.imwrite("bbox.jpeg", with_bbox)
 
         print(f"box_x2={box_x2}, box_y2={box_y2}")
 
@@ -73,7 +81,7 @@ class FrameTimingCalculator:
             # 動体検出（グレースケール化して閾値処理）
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
             if avg is None:
-                avg = gray_roi.copy().astype("float")
+                avg = gray_roi.copy().astype(float)
                 continue
 
             cv2.accumulateWeighted(gray_roi, avg, 0.001)
@@ -83,20 +91,31 @@ class FrameTimingCalculator:
             frame_diff = cv2.absdiff(gray_roi, cv2.convertScaleAbs(avg))
             _, thresh = cv2.threshold(frame_diff, 127, 255, cv2.THRESH_BINARY)
 
-            print(np.sum(thresh))
+            thresh = thresh.tolist()
 
             # 動体が検出されたかチェック
-            if np.sum(thresh) == 0 and entry_frame is None:
+            if sum(sum(row) for row in thresh) != 0 and entry_frame is None:
                 entry_frame = frame_count
-            elif np.sum(thresh) > 0 and entry_frame is not None and exit_frame is None:
+            elif (
+                entry_frame != 0
+                and sum(sum(row) for row in thresh) == 0
+                and entry_frame is not None
+                and exit_frame is None
+            ):
                 exit_frame = frame_count
                 break
 
         cap.release()
 
-        if entry_frame is None or exit_frame is None:
+        if entry_frame is None:
             print(
-                "プラレールが侵入したフレーム、もしくは退出したフレームを検出できませんでした。"
+                "プラレールが侵入したフレームを検出できませんでした。"
+            )
+            return None
+        
+        if exit_frame is None:
+            print(
+                "プラレールが退出したフレームを検出できませんでした。"
             )
             return None
 
@@ -116,9 +135,9 @@ class FrameTimingCalculator:
         # center_frame_image = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         # cv2.imwrite("center.jpeg", center_frame_image)
 
-        print(entry_frame)
-        print(exit_frame)
-        print(center_frame)
+        print("entry_frame:",entry_frame)
+        print("exit_frame:",exit_frame)
+        print("center_frame:",center_frame)
 
         return center_frame
 
