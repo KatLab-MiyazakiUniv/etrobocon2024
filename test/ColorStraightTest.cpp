@@ -17,6 +17,7 @@ namespace etrobocon2024_test {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
+    controller.resetWheelsMotorPwm();
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     COLOR targetColor = COLOR::GREEN;
