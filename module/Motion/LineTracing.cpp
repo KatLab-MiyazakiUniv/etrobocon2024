@@ -137,7 +137,7 @@ void LineTracing::recover()
   ColorLineTracing endColorLineTracing(endTargetColor, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
   endColorLineTracing.run();
 
-  int endTargetDistance = 200; 
+  int endTargetDistance = 300; 
   DistanceLineTracing endDistanceLineTracing(endTargetDistance, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
   endDistanceLineTracing.run();
 

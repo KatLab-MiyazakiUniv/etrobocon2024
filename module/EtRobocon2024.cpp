@@ -69,7 +69,7 @@ void EtRobocon2024::start()
 
   AreaMaster LineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
   AreaMaster doubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
-  AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemoval, isLeftCourse, isLeftEdge,
+  AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemovalOver, isLeftCourse, isLeftEdge,
                                      targetBrightness);
 
   // LAPゲートを通過する

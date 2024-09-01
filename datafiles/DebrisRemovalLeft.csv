@@ -1,6 +1,0 @@
-DS,150,-150
-PR,40,70,clockwise
-DS,1700,350
-CS,BLACK,200
-PR,70,70,anticlockwise
-CL,BLUE,200,-5,0.15,0.05,0.1,青まで指定色ライントレース
