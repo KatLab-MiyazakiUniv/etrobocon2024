@@ -10,6 +10,8 @@
 // ev3api.hを読み込むヘッダは.cppに記述する
 #include <signal.h>
 #include <unistd.h>
+#include <time.h>
+#include "common/RunLogger.h"
 
 class EtRobocon2024 {
  public:

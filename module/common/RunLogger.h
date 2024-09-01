@@ -1,7 +1,7 @@
 /**
  * @file RunLogger.h
  * @brief 走行中の各種値可視化のためのcsvファイル作成に関するクラス
- * @author bizyutyu
+ * @author bizyutyu keiya121
  */
 #ifndef RUNLOGGER_HPP
 #define RUNLOGGER_HPP
@@ -32,6 +32,11 @@ class RunLogger {
    * @brief 記録した走行ログを初期化する
    */
   void initRunLogs();
+
+  /**
+   * @brief 走行ログcsvファイルのファイル名を保持する文字列
+   */
+  static char csvFileName[64];
 
  private:
   static char RunLogs[65536];  // 走行ログを保持する文字列
