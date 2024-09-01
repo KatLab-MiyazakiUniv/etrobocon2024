@@ -114,7 +114,7 @@ namespace etrobocon2024_test {
     double actual = Mileage::calculateMileage(rightCount, leftCount);
 
     EXPECT_GT(expected, actual);          // 実行後に少しでも進んでいる
-    EXPECT_LE(expected + error, actual);  // 直進後の走行距離が許容誤差以内である
+    EXPECT_GT(expected + error, actual);  // 直進後の走行距離が許容誤差以内である
   }
 
   TEST(ColorStraightTest, runZeroPWM)
