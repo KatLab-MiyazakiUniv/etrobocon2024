@@ -47,6 +47,7 @@ namespace etrobocon2024_test {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
+    controller.resetWheelsMotorPwm();
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     COLOR targetColor = COLOR::BLUE;
@@ -86,6 +87,7 @@ namespace etrobocon2024_test {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
+    controller.resetWheelsMotorPwm();
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     COLOR targetColor = COLOR::RED;
@@ -114,7 +116,7 @@ namespace etrobocon2024_test {
     double actual = Mileage::calculateMileage(rightCount, leftCount);
 
     EXPECT_GT(expected, actual);          // 実行後に少しでも進んでいる
-    EXPECT_GT(expected + error, actual);  // 直進後の走行距離が許容誤差以内である
+    EXPECT_ET(expected + error, actual);  // 直進後の走行距離が許容誤差以内である
   }
 
   TEST(ColorStraightTest, runZeroPWM)
@@ -122,6 +124,7 @@ namespace etrobocon2024_test {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
+    controller.resetWheelsMotorPwm();
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     COLOR targetColor = COLOR::YELLOW;
@@ -158,6 +161,7 @@ namespace etrobocon2024_test {
     // Controllerクラスのオブジェクトを生成
     Controller controller;
     // PWMの初期化
+    controller.resetWheelsMotorPwm();
     controller.setRightMotorPwm(0.0);
     controller.setLeftMotorPwm(0.0);
     COLOR targetColor = COLOR::NONE;
