@@ -11,7 +11,7 @@ using namespace std;
 // countShootFigureの初期化
 int CameraAction::countShootFigure = 0;
 
-CameraAction::CameraAction(Subject _subject) : subject(_subject){};
+CameraAction::CameraAction(Subject _subject) : subject(_subject) {};
 
 void CameraAction::run()
 {
@@ -36,8 +36,15 @@ void CameraAction::run()
   printf("%s\n", cmd);
 
   // 画像アップロードに際してディレクトリ移動も行う
-  char uploadImageName[20] = "Fig_3.jpeg";  // アップロードするミニフィグの画像を指定
-  if(strcmp(imageName, uploadImageName) == 0 || strcmp(imageName, "Pla.jpeg") == 0) {
+  // Fig_1の場合、物体検出を行うエンドポイントに画像をアップロードする
+  char uploadImageName[20] = "Fig_1.jpeg";
+  if(strcmp(imageName, uploadImageName) == 0) {
+    snprintf(cmd, 256,
+             "cd etrobocon2024 && make upload_detect FILE_PATH=front_camera/image_data/%s && cd ..",
+             imageName);
+    system(cmd);
+    printf("%s\n", cmd);
+  } else {
     snprintf(cmd, 256,
              "cd etrobocon2024 && make upload FILE_PATH=front_camera/image_data/%s && cd ..",
              imageName);
