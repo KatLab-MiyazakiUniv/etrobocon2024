@@ -13,8 +13,8 @@ debug/
 # カメラシステムへのメッセージファイル
 scripts/message.txt
 
-# Webサーバが管理する撮影終了フラグ用のファイル
-server/skip_camera_action.flag
+# 配置エリアAでの撮影箇所特定のためのフラグ用ファイル
+*.flag
 
 # vscode設定ファイル
 .vscode/settings.json

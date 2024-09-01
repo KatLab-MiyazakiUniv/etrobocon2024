@@ -11,6 +11,10 @@ help:
 	@echo " $$ make rebuild"
 	@echo 無線通信デバイスのサーバーに画像をアップロードする
 	@echo " $$ make upload"
+	@echo 無線通信デバイスのサーバーに画像をアップロードし、物体検出の結果を示すフラグ用ファイルを受け取る
+	@echo " $$ make upload_detect"
+	@echo フラグ管理用のファイルを全て削除する
+	@echo " $$ make flag_delete"
 	@echo 走行を開始する\(実機限定\)
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
@@ -50,6 +54,15 @@ rebuild:
 # 無線通信デバイスのサーバーに画像をアップロードする
 upload:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
+
+# 無線通信デバイスのサーバーに画像をアップロードし、物体検出の結果を示すフラグ用ファイルを受け取る
+upload_detect:
+	find ./ -type f -name "*.flag" -exec rm {} +
+	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/detect -OJ
+
+# フラグ管理用のファイルを全て削除する
+flag_delete:
+	find ./ -type f -name "*.flag" -exec rm {} +
 
 # 実機の場合、走行を開始する 
 start:
