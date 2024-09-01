@@ -96,6 +96,9 @@ class FrameTimingCalculator:
             # 動体が検出されたかチェック
             if sum(sum(row) for row in thresh) != 0 and entry_frame is None:
                 entry_frame = frame_count
+
+                print("entry_frame:",entry_frame)
+
             elif (
                 entry_frame != 0
                 and sum(sum(row) for row in thresh) == 0
@@ -104,8 +107,6 @@ class FrameTimingCalculator:
             ):
                 exit_frame = frame_count
                 break
-
-        cap.release()
 
         if entry_frame is None:
             print(
@@ -122,9 +123,12 @@ class FrameTimingCalculator:
         center_frame = (entry_frame + exit_frame) // 2
 
         cap = cv2.VideoCapture(self.video_path)
-        cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
+        center_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
+        print("center_frameeeeee:",center_frame)
+        print("center_cap:",cap.get(cv2.CAP_PROP_POS_FRAMES))
 
         ret, frame = cap.read()  # フレーム画像を取得
+        # print("頼みの綱",frame.tolist())
 
         if ret:
             cv2.imwrite("center.jpeg", frame)  # フレーム画像を保存
@@ -135,9 +139,37 @@ class FrameTimingCalculator:
         # center_frame_image = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         # cv2.imwrite("center.jpeg", center_frame_image)
 
+
+
+        #デバッグ用　entry_frameとexit_frameの画像も保存
+
+        entry_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, entry_frame)
+        print("entry_cap:",entry_cap)
+
+        ret, frame = cap.read()  # フレーム画像を取得
+
+        if ret:
+            cv2.imwrite("entry.jpeg", frame)  # フレーム画像を保存
+            print(f"Center frame saved as 'entry.jpeg'")
+        else:
+            print("Failed to retrieve the entry frame.")
+
+        exit_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, exit_frame)
+        print("exit_cap:",exit_cap)
+
+        ret, frame = cap.read()  # フレーム画像を取得
+
+        if ret:
+            cv2.imwrite("exit.jpeg", frame)  # フレーム画像を保存
+            print(f"Center frame saved as 'exit.jpeg'")
+        else:
+            print("Failed to retrieve the exit frame.")
+
         print("entry_frame:",entry_frame)
         print("exit_frame:",exit_frame)
         print("center_frame:",center_frame)
+
+        cap.release()
 
         return center_frame
 
