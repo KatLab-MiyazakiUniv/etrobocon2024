@@ -33,8 +33,11 @@ class VideoRecorder:
 
     def start_recording(self, encoder, output) -> None:
         """動画の撮影を開始する"""
-        self.__camera.start_recording(encoder, output)
         print("Recording started")
+        self.__camera.start_and_record_video(output, duration=20)
+        print("Recording stopped")
+
+        # self.__camera.start_recording(encoder, output)
 
     def stop_recording(self) -> None:
         """動画の録画を停止する"""

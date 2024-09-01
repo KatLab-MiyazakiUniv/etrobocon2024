@@ -76,7 +76,7 @@ class FrameTimingCalculator:
             frame_count += 1
 
             # バウンディングボックス内の領域を抽出（roi:Region of Interest (注目領域)の略です）
-            roi = frame[:, box_x1:box_x2]
+            roi = frame[box_y1:box_y2, box_x1:box_x2]
 
             # 動体検出（グレースケール化して閾値処理）
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
@@ -84,7 +84,7 @@ class FrameTimingCalculator:
                 avg = gray_roi.copy().astype(float)
                 continue
 
-            cv2.accumulateWeighted(gray_roi, avg, 0.001)
+            cv2.accumulateWeighted(gray_roi, avg, 0.1)
             if prev_gray is None:
                 prev_gray = gray_roi
                 continue
@@ -123,12 +123,12 @@ class FrameTimingCalculator:
         center_frame = (entry_frame + exit_frame) // 2
 
         cap = cv2.VideoCapture(self.video_path)
+        print(cap.isOpened())
         center_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
         print("center_frameeeeee:",center_frame)
         print("center_cap:",cap.get(cv2.CAP_PROP_POS_FRAMES))
 
         ret, frame = cap.read()  # フレーム画像を取得
-        # print("頼みの綱",frame.tolist())
 
         if ret:
             cv2.imwrite("center.jpeg", frame)  # フレーム画像を保存
@@ -150,7 +150,7 @@ class FrameTimingCalculator:
 
         if ret:
             cv2.imwrite("entry.jpeg", frame)  # フレーム画像を保存
-            print(f"Center frame saved as 'entry.jpeg'")
+            print(f"Entry frame saved as 'entry.jpeg'")
         else:
             print("Failed to retrieve the entry frame.")
 
@@ -161,7 +161,7 @@ class FrameTimingCalculator:
 
         if ret:
             cv2.imwrite("exit.jpeg", frame)  # フレーム画像を保存
-            print(f"Center frame saved as 'exit.jpeg'")
+            print(f"Exit frame saved as 'exit.jpeg'")
         else:
             print("Failed to retrieve the exit frame.")
 

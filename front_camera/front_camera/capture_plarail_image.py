@@ -6,18 +6,17 @@
 import cv2
 import os
 import time
+from video_recorder import VideoRecorder
 
 
 class CapturePlarailImage:
-    def __init__(self, video_path, bounding_box_width=100, bounding_box_height=200):
+    def __init__(self, bounding_box_width=100, bounding_box_height=200):
         """コンストラクタ"""
-        self.video_path = video_path
         self.bounding_box_width = bounding_box_width
         self.bounding_box_height = bounding_box_height
-        self.frame_timing_calculator = FrameTimingCalculator(video_path)
 
     def capture_and_extract_frame(self, output_path):
-        self.video_recorder.start_camera()
+        # self.video_recorder.start_camera()
 
         try:
             cap = cv2.VideoCapture(0)  # ラズパイのカメラを使用
@@ -91,7 +90,7 @@ class CapturePlarailImage:
             cap.release()
 
         finally:
-            self.video_recorder.close()
+            # self.video_recorder.close()
 
 
     def detect_yellow_rectangle(self, frame):

@@ -22,6 +22,8 @@ class GetPlarailImage:
         # 目標フレームを取得
         target_frame = self.frame_timing_calculator.get_target_timing()
 
+        print("target_frame:", target_frame)
+
         if target_frame is None:
             print("目標フレームの取得に失敗しました。")
             return
@@ -29,8 +31,15 @@ class GetPlarailImage:
         # 動画を開く
         cap = cv2.VideoCapture(self.video_path)
 
+       # 1秒あたりのフレーム数を取得
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        print("FPS:", fps)
+
         # 目標フレームに移動
-        cap.set(cv2.CAP_PROP_POS_FRAMES, target_frame)
+        cap.set(1, int(target_frame))
+
+        print("frames:", cap.get(1))
+        print("total frame:", cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
         # フレームを読み込む
         ret, frame = cap.read()
@@ -55,11 +64,11 @@ if __name__ == "__main__":
 
         # 出力する動画ファイルの名前
         encoder = H264Encoder(bitrate=10000000)
-        output_video_path = "video_data/recorded_video.h264"
+        output_video_path = "video_data/recorded_video.mp4"
 
         video_recorder.start_recording(encoder, output_video_path)
-        time.sleep(20)  # 20秒間録画する
-        video_recorder.stop_recording()
+        # time.sleep(20)  # 20秒間録画する
+        # video_recorder.stop_recording()
 
     finally:
         video_recorder.close()
