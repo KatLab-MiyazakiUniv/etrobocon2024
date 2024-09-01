@@ -49,7 +49,6 @@ void LineTracing::run()
   initRightMileage = Mileage::calculateWheelMileage(measurer.getRightCount());
 
   speedCalculator = new SpeedCalculator(targetSpeed);
-  speedCalculator = new SpeedCalculator(targetSpeed);
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
@@ -116,7 +115,7 @@ void LineTracing::recover()
   }
 
     // 復帰動作コマンド実行後の角度補正
-  int endTargetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)/1.5;  // 緑に入った角度によって回転角を変更
+  int endTargetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)/1.4;  // 緑に入った角度によって回転角を変更
   int pwmForRotation = 70;
   bool isClockwise;
   if(diffLeftMileage <= diffRightMileage) {
@@ -133,7 +132,7 @@ void LineTracing::recover()
   COLOR endTargetColor = COLOR::BLACK; 
   int endTargetSpeed = 200;
   int endTargetBrightness = 15;
-  PidGain endPidGain(0.6,0.24,0.3);
+  PidGain endPidGain(0.6,0.24,0.1);
   bool endIsRecoveryEnabled = false;
   ColorLineTracing endColorLineTracing(endTargetColor, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
   endColorLineTracing.run();
