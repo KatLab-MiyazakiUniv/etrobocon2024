@@ -38,7 +38,8 @@ void Straight::run()
     timer.sleep(10);
   }
   // モータの停止
-  // controller.stopWheelsMotor();
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
 
 bool Straight::isMetPreCondition()
