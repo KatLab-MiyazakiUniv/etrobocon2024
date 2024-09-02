@@ -3,13 +3,12 @@
 @author: bizyutyu
 """
 
-import sys
 import cv2
 import numpy as np
 
 
 class FrameTimingCalculator:
-    def __init__(self, video_path, bounding_box_width=100, bounding_box_height=200):
+    def __init__(self, video_path, bounding_box_width=300, bounding_box_height=600):
         """コンストラクタ"""
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
@@ -17,8 +16,6 @@ class FrameTimingCalculator:
 
     def get_target_timing(self):
         """映像から特定のフレームを画像として切り出すタイミングを取得する"""
-        sys.setrecursionlimit(5000)
-        print(sys.getrecursionlimit())
         cap = cv2.VideoCapture(self.video_path)
         print(f"cap_prop_frame_width: {int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))}")
         print(f"cap_prop_frame_height: {int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))}")
@@ -56,12 +53,11 @@ class FrameTimingCalculator:
             thickness=4,
         )
         cv2.imwrite("bbox.jpeg", with_bbox)
-
         print(f"box_x2={box_x2}, box_y2={box_y2}")
 
         entry_frame = None
         exit_frame = None
-        prev_gray = None
+        prev_frame_gray_roi = None
         avg = None
         frame_count = 0
 
@@ -76,18 +72,47 @@ class FrameTimingCalculator:
             frame_count += 1
 
             # バウンディングボックス内の領域を抽出（roi:Region of Interest (注目領域)の略です）
+            first_frame_roi = first_frame[box_y1:box_y2, box_x1:box_x2]
             roi = frame[box_y1:box_y2, box_x1:box_x2]
 
             # 動体検出（グレースケール化して閾値処理）
+            first_frame_gray_roi = cv2.cvtColor(first_frame_roi, cv2.COLOR_BGR2GRAY)
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-            if avg is None:
-                avg = gray_roi.copy().astype(float)
+
+            if prev_frame_gray_roi is None:
+                prev_frame_gray_roi = gray_roi
                 continue
 
-            cv2.accumulateWeighted(gray_roi, avg, 0.1)
-            if prev_gray is None:
-                prev_gray = gray_roi
+
+            # 前のフレームと比較して、注目領域との二値差分画像の中にある、白でない画素を探す
+            # 撮影開始時に注目領域中に動体が入っている場合は、動体が注目領域を通過するまで待つ
+            prev_frame_diff = cv2.absdiff(prev_frame_gray_roi, gray_roi)
+            prev_frame_diff = prev_frame_diff.tolist()
+
+            # if all(any(pixel != 0 for pixel in row) for row in prev_frame_diff):
+            #     prev_frame_gray_roi = gray_roi
+            #     continue
+
+            # if list(gray_roi) != list(prev_frame_gray_roi):
+            #     print("待機中")
+            #     continue
+
+
+            if avg is None:
+                avg = first_frame_gray_roi.copy().astype(float)
                 continue
+
+            # 注目領域侵入時のフレームとの移動平均を算出、重み付け
+            # 第3引数の値(忘れやすさ)が大きいほど、大きく動くもののみを動体として検知する
+            # 小さいほど、小さい動きでも動体として検知する
+            # 参考: https://docs.opencv.org/3.4/d7/df3/group__imgproc__motion.html,
+            # https://qiita.com/seri28/items/3ae4a2c87e352e976b46
+            cv2.accumulateWeighted(gray_roi, avg, 0.1)
+            # if prev_gray is None:
+            #     prev_gray = gray_roi
+            #     continue
+
+            # 注目領域侵入時のフレームとの二値差分画像を計算
             frame_diff = cv2.absdiff(gray_roi, cv2.convertScaleAbs(avg))
             _, thresh = cv2.threshold(frame_diff, 127, 255, cv2.THRESH_BINARY)
 
@@ -97,7 +122,7 @@ class FrameTimingCalculator:
             if sum(sum(row) for row in thresh) != 0 and entry_frame is None:
                 entry_frame = frame_count
 
-                print("entry_frame:",entry_frame)
+                print("entry_frame:", entry_frame)
 
             elif (
                 entry_frame != 0
@@ -109,24 +134,17 @@ class FrameTimingCalculator:
                 break
 
         if entry_frame is None:
-            print(
-                "プラレールが侵入したフレームを検出できませんでした。"
-            )
+            print("プラレールが侵入したフレームを検出できませんでした。")
             return None
-        
+
         if exit_frame is None:
-            print(
-                "プラレールが退出したフレームを検出できませんでした。"
-            )
+            print("プラレールが退出したフレームを検出できませんでした。")
             return None
 
         center_frame = (entry_frame + exit_frame) // 2
 
         cap = cv2.VideoCapture(self.video_path)
-        print(cap.isOpened())
-        center_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
-        print("center_frameeeeee:",center_frame)
-        print("center_cap:",cap.get(cv2.CAP_PROP_POS_FRAMES))
+        cap.set(cv2.CAP_PROP_POS_FRAMES, center_frame)
 
         ret, frame = cap.read()  # フレーム画像を取得
 
@@ -139,12 +157,9 @@ class FrameTimingCalculator:
         # center_frame_image = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         # cv2.imwrite("center.jpeg", center_frame_image)
 
+        # デバッグ用　entry_frameとexit_frameの画像も保存
 
-
-        #デバッグ用　entry_frameとexit_frameの画像も保存
-
-        entry_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, entry_frame)
-        print("entry_cap:",entry_cap)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, entry_frame)
 
         ret, frame = cap.read()  # フレーム画像を取得
 
@@ -154,8 +169,7 @@ class FrameTimingCalculator:
         else:
             print("Failed to retrieve the entry frame.")
 
-        exit_cap = cap.set(cv2.CAP_PROP_POS_FRAMES, exit_frame)
-        print("exit_cap:",exit_cap)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, exit_frame)
 
         ret, frame = cap.read()  # フレーム画像を取得
 
@@ -165,9 +179,9 @@ class FrameTimingCalculator:
         else:
             print("Failed to retrieve the exit frame.")
 
-        print("entry_frame:",entry_frame)
-        print("exit_frame:",exit_frame)
-        print("center_frame:",center_frame)
+        print("entry_frame:", entry_frame)
+        print("exit_frame:", exit_frame)
+        print("center_frame:", center_frame)
 
         cap.release()
 
