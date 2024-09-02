@@ -64,13 +64,16 @@ namespace etrobocon2024_test {
     // prevDeviation = 0
     // 2. 現在の誤差
     // currentDeviation = (70 - 20) = 50
-    // 3. 誤差の微分を計算
-    // derivative = (50 - 0) / 0.01 = 5000
+    // 3. 微分の処理を行う
+    // currentDerivative = (50 - 0) / 0.01 = 5000
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * 5000 + (1 - 0.8) * 0 = 4000
     // 4. 誤差の積分を計算
     // integral = 0 + (50 + 0) * 0.01 / 2 = 0.25
     // 5. PID制御を計算
-    // expected = 0.6 * 50 + 0.02 * 0.25 + 0.03 * 5000 = 180.005
-    double expected = 180.005;
+    // expected = 0.6 * 50 + 0.02 * 0.25 + 0.03 * 4000 = 150.005
+    double expected = 150.005;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 
@@ -117,13 +120,16 @@ namespace etrobocon2024_test {
     // prevDeviation = 0
     // 2. 現在の誤差
     // currentDeviation = (70 - 55) = 15
-    // 3. 誤差の微分を計算
-    // derivative = (15 - 0) / 0.03 = 500
+    // 3. 微分の処理を行う
+    // currentDerivative = (15 - 0) / 0.03 = 500
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * 500 + (1 - 0.8) * 0 = 400
     // 4. 誤差の積分を計算
     // integral = 0 + (15 + 0) * 0.03 / 2 = 0.225
     // 5. PID制御を計算
-    // expected = 0.6 * 15 + 0.02 * 0.225 + 0.03 * 500 = 24.0045
-    double expected = 24.0045;
+    // expected = 0.6 * 15 + 0.02 * 0.225 + 0.03 * 400 = 21.0045
+    double expected = 21.0045;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -142,13 +148,16 @@ namespace etrobocon2024_test {
     // prevDeviation = 0
     // 2. 現在の誤差
     // currentDeviation = (70 - 55) = 15
-    // 3. 誤差の微分を計算
-    // derivative = (15 - 0) / (-0.03) = -500
+    // 3. 微分の処理を行う
+    // currentDerivative = (15 - 0) / (-0.03) = -500
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * (-500) + (1 - 0.8) * 0 = -400
     // 4. 誤差の積分を計算
     // integral = 0 + (15 + 0) * (-0.03) / 2 = -0.225
     // 5. PID制御を計算
-    // expected = 0.6 * 15 + 0.02 * (-0.225) + 0.03 * (-500) = -6.0045
-    double expected = -6.0045;
+    // expected = 0.6 * 15 + 0.02 * (-0.225) + 0.03 * (-400) = -3.0045
+    double expected = -3.0045;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -169,13 +178,16 @@ namespace etrobocon2024_test {
     // prevDeviation = 0
     // 2. 現在の誤差
     // currentDeviation = (70 - 55) = 15
-    // 3. 誤差の微分を計算
-    // derivative = (15 - 0) / 0.01 = 1500
+    // 3. 微分の処理を行う
+    // currentDerivative = (15 - 0) / 0.01 = 1500
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * 1500 + (1 - 0.8) * 0 = 1200
     // 4. 誤差の積分を計算
     // integral = 0 + (15 + 0) * 0.01 / 2 = 0.075
     // 5. PID制御を計算
-    // expected = 0.6 * 15 + 0.02 * 0.075 + 0.03 * 1500 = 54.0015
-    double expected = 54.0015;
+    // expected = 0.6 * 15 + 0.02 * 0.075 + 0.03 * 1200 = 45.0015
+    double expected = 45.0015;
     // 第2引数に周期を渡し、周期に応じた計算結果を返すことができるかを確認(デフォルトでは0.01が渡される)
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue, DELTA));
   }
@@ -195,16 +207,19 @@ namespace etrobocon2024_test {
     // prevDeviation = 0
     // 2. 現在の誤差
     // currentDeviation = (70 - 60) = 10
-    // 3. 誤差の微分を計算
-    // derivative = (10 - 0) / 0.01 = 1000
+    // 3. 微分の処理を行う
+    // currentDerivative = (10 - 0) / 0.01 = 1000
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * 1000 + (1 - 0.8) * 0 = 800
     // 4. 誤差の積分を計算
     // integral = 0 + (10 + 0) * 0.01 / 2 = 0.05
     // 5. PID制御を計算
-    // expected = 0.6 * 10 + 0.05 * 0.05 + 0.01 * 1000 = 16.0025
-    double expected = 16.0025;
+    // expected = 0.6 * 10 + 0.05 * 0.05 + 0.01 * 800 = 14.0025
+    double expected = 14.0025;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
     // 6. 前回の誤差の更新
-    //  prevDeviation = 0 + 10 = 10
+    //  prevDeviation = 10
     kp = 0.1;
     ki = 0.2;
     kd = 0.3;
@@ -212,13 +227,16 @@ namespace etrobocon2024_test {
     currentValue = 100;
     // 7. 現在の誤差
     // currentDeviation = (70 - 100) = -30
-    // 8. 誤差の微分を計算
-    // derivative = (-30 - 10) / 0.01 = -4000
+    // 8. 微分の処理を行う
+    // currentDerivative = (-30 - 10) / 0.01 = -4000
+    // 微分項に低域通過フィルタを適用
+    // alpha = 0.8;
+    // filteredDerivative = 0.8 * (-4000) + (1 - 0.8) * 800 = -3040
     // 9. 誤差の積分を計算
     // integral = 0.05 + (-30 + 10) * 0.01 / 2 = -0.05
     // 10. PID制御を計算
-    // expected = 0.1 * (-30) + 0.2 * (-0.05) + 0.3 * (-4000) = -1203.01
-    expected = -1203.01;
+    // expected = 0.1 * (-30) + 0.2 * (-0.05) + 0.3 * (-3040) = -915.01
+    expected = -915.01;
     EXPECT_DOUBLE_EQ(expected, actualPid.calculatePid(currentValue));
   }
 

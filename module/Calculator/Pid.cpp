@@ -37,7 +37,6 @@ double Pid::calculatePid(double currentValue, double delta)
   // 微分の処理を行う
   double currentDerivative = (currentDeviation - prevDeviation) / delta;
   // 微分項に低域通過フィルタを適用
-  // αはフィルタ係数（例: 0.1）
   const double alpha = 0.8;
   filteredDerivative = alpha * currentDerivative + (1 - alpha) * filteredDerivative;
   // 前回の偏差を更新する
