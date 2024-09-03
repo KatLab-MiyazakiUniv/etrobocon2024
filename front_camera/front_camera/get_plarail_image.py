@@ -1,6 +1,6 @@
 """
 プラレール・背景撮影動画から画像を取得する
-@author: bizyutyu YKhm20020
+@author: bizyutyu YKhm20020 keiya121
 """
 
 import cv2

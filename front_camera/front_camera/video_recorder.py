@@ -1,6 +1,6 @@
 """
 フロントカメラから動画を取得する
-@author: YKhm20020 bizyutyu
+@author: bizyutyu YKhm20020 keiya121
 """
 
 import os

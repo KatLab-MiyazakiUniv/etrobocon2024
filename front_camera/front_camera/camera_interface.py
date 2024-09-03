@@ -1,6 +1,6 @@
 """
 フロントカメラから画像を取得する
-@author: bizyutyu
+@author: bizyutyu YKhm20020 keiya121
 """
 
 from picamera2 import Picamera2, MappedArray
