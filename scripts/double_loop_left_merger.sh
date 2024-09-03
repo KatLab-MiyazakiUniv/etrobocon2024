@@ -22,23 +22,23 @@ directory="./datafiles"
 parts_directory="./datafiles/datafile_parts"
 
 # 出力ファイル名
-output_file="$directory/DoubleLoopRight.csv"
+output_file="$directory/DoubleLoopLeft.csv"
 
 # 出力ファイルが既に存在する場合は削除する
 if [ -f "$output_file" ]; then
     rm "$output_file"
-    echo "DoubleLoopRight.csvを削除しました。"
+    echo "DoubleLoopLeft.csvを削除しました。"
 fi
 
 # 撮影箇所に応じて連結するファイルを決める
 if [ "$1" -le 2 ]; then
-    double_loop_first="$parts_directory/DoubleLoopRightFirst_$number.csv"
-    double_loop_middle="$parts_directory/DoubleLoopRightMiddle.csv"
-    double_loop_end="$parts_directory/DoubleLoopRightEnd.csv"
+    double_loop_first="$parts_directory/DoubleLoopLeftFirst_$number.csv"
+    double_loop_middle="$parts_directory/DoubleLoopLeftMiddle.csv"
+    double_loop_end="$parts_directory/DoubleLoopLeftEnd.csv"
 else
-    double_loop_first="$parts_directory/DoubleLoopRightFirst.csv"
-    double_loop_middle="$parts_directory/DoubleLoopRightMiddle.csv"
-    double_loop_end="$parts_directory/DoubleLoopRightEnd_$number.csv"
+    double_loop_first="$parts_directory/DoubleLoopLeftFirst.csv"
+    double_loop_middle="$parts_directory/DoubleLoopLeftMiddle.csv"
+    double_loop_end="$parts_directory/DoubleLoopLeftEnd_$number.csv"
 fi
 
 # ファイルが存在しない場合はエラーを表示して終了
