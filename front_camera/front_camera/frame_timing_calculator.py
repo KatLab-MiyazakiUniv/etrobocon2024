@@ -55,12 +55,13 @@ class FrameTimingCalculator:
         cv2.imwrite("bbox.jpeg", with_bbox)
         print(f"box_x2={box_x2}, box_y2={box_y2}")
 
+        base_frame = None
         entry_frame = None
         exit_frame = None
-        prev_frame_gray_roi = None
         avg = None
         frame_count = 0
 
+        # バウンディングボックス内の動体検出処理
         while cap.isOpened():
             ret, frame = cap.read()
             # cv2.imwrite("frame.jpeg", frame)
@@ -72,22 +73,43 @@ class FrameTimingCalculator:
             frame_count += 1
 
             # バウンディングボックス内の領域を抽出（roi:Region of Interest (注目領域)の略です）
-            first_frame_roi = first_frame[box_y1:box_y2, box_x1:box_x2]
+            # first_frame_roi = first_frame[box_y1:box_y2, box_x1:box_x2]
             roi = frame[box_y1:box_y2, box_x1:box_x2]
-
-            # 動体検出（グレースケール化して閾値処理）
-            first_frame_gray_roi = cv2.cvtColor(first_frame_roi, cv2.COLOR_BGR2GRAY)
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 
-            if prev_frame_gray_roi is None:
-                prev_frame_gray_roi = gray_roi
+            first_frame_gray_roi = cv2.cvtColor(first_frame_roi, cv2.COLOR_BGR2GRAY)
+
+            if avg is None:
+                avg = gray_roi.copy().astype(float)
                 continue
+
+            cv2.accumulateWeighted(gray_roi, avg, 0.1)
+
+            prev_frame_diff = cv2.absdiff(gray_roi, cv2.convertScaleAbs(avg))
+            _, prev_thresh = cv2.threshold(prev_frame_diff, 127, 255, cv2.THRESH_BINARY)
+
+            prev_thresh = prev_thresh.tolist()
+            
+            # 動体がバウンディングボックス内に存在しないタイミングのフレームを基準フレームとする
+            if base_frame is None:
+            if sum(sum(row) for row in prev_thresh) != 0:
+                base_frame = gray_roi
+                print(f"Base frame set at frame {frame_count}")
+            continue
+
+            # # 動体検出（グレースケール化して閾値処理）
+            # first_frame_gray_roi = cv2.cvtColor(first_frame_roi, cv2.COLOR_BGR2GRAY)
+            # gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+
+            # if prev_frame_gray_roi is None:
+            #     prev_frame_gray_roi = gray_roi
+            #     continue
 
 
             # 前のフレームと比較して、注目領域との二値差分画像の中にある、白でない画素を探す
             # 撮影開始時に注目領域中に動体が入っている場合は、動体が注目領域を通過するまで待つ
-            prev_frame_diff = cv2.absdiff(prev_frame_gray_roi, gray_roi)
-            prev_frame_diff = prev_frame_diff.tolist()
+            # prev_frame_diff = cv2.absdiff(prev_frame_gray_roi, gray_roi)
+            # prev_frame_diff = prev_frame_diff.tolist()
 
             # if all(any(pixel != 0 for pixel in row) for row in prev_frame_diff):
             #     prev_frame_gray_roi = gray_roi
@@ -98,22 +120,23 @@ class FrameTimingCalculator:
             #     continue
 
 
-            if avg is None:
-                avg = first_frame_gray_roi.copy().astype(float)
-                continue
+            # if avg is None:
+            #     avg = first_frame_gray_roi.copy().astype(float)
+            #     continue
 
             # 注目領域侵入時のフレームとの移動平均を算出、重み付け
             # 第3引数の値(忘れやすさ)が大きいほど、大きく動くもののみを動体として検知する
             # 小さいほど、小さい動きでも動体として検知する
             # 参考: https://docs.opencv.org/3.4/d7/df3/group__imgproc__motion.html,
             # https://qiita.com/seri28/items/3ae4a2c87e352e976b46
-            cv2.accumulateWeighted(gray_roi, avg, 0.1)
+            # cv2.accumulateWeighted(gray_roi, avg, 0.1)
             # if prev_gray is None:
             #     prev_gray = gray_roi
             #     continue
-
+            
+            # プラレール・背景撮影のための動体検出処理
             # 注目領域侵入時のフレームとの二値差分画像を計算
-            frame_diff = cv2.absdiff(gray_roi, cv2.convertScaleAbs(avg))
+            frame_diff = cv2.absdiff(base_frame, gray_roi)
             _, thresh = cv2.threshold(frame_diff, 127, 255, cv2.THRESH_BINARY)
 
             thresh = thresh.tolist()
