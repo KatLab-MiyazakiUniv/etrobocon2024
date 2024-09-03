@@ -5,6 +5,7 @@ build/
 logfiles/*
 !logfiles/.gitkeep
 image_data/
+confirmation_image
 video_data/
 debug/
 

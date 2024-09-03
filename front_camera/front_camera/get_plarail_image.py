@@ -31,15 +31,8 @@ class GetPlarailImage:
         # 動画を開く
         cap = cv2.VideoCapture(self.video_path)
 
-       # 1秒あたりのフレーム数を取得
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        print("FPS:", fps)
-
         # 目標フレームに移動
         cap.set(1, int(target_frame))
-
-        print("frames:", cap.get(1))
-        print("total frame:", cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
         # フレームを読み込む
         ret, frame = cap.read()
@@ -63,16 +56,14 @@ if __name__ == "__main__":
         os.makedirs("video_data", exist_ok=True)
 
         # 出力する動画ファイルの名前
-        encoder = H264Encoder(bitrate=10000000)
         output_video_path = "video_data/recorded_video.mp4"
 
-        video_recorder.start_recording(encoder, output_video_path)
-        # time.sleep(20)  # 20秒間録画する
-        # video_recorder.stop_recording()
+        video_recorder.start_recording(output_video_path)
 
     finally:
         video_recorder.close()
 
-    output_image_path = "Pla.jpeg"
+    os.makedirs("image_data", exist_ok=True)
+    output_image_path = "image_data/Pla.jpeg"
     extractor = GetPlarailImage(output_video_path)
     extractor.extract_target_frame(output_image_path)

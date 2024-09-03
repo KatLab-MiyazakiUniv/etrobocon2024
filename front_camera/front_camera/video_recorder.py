@@ -26,18 +26,14 @@ class VideoRecorder:
         if self.__camera is None:
             camera = Picamera2()
             video_config = camera.create_video_configuration(main={"size": self.__size})
-            # camera = Picamera2(camera_id = self.__camera_id)
-            # video_config = camera.create_video_configuration(main={"size": self.__resolution, "framerate": self.__framerate})
             camera.configure(video_config)
             self.__camera = camera
 
-    def start_recording(self, encoder, output) -> None:
+    def start_recording(self, output) -> None:
         """動画の撮影を開始する"""
         print("Recording started")
         self.__camera.start_and_record_video(output, duration=20)
         print("Recording stopped")
-
-        # self.__camera.start_recording(encoder, output)
 
     def stop_recording(self) -> None:
         """動画の録画を停止する"""
