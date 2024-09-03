@@ -16,7 +16,12 @@ class VideoRecorder:
     def __init__(
         self, camera_id: int = 0, size: Tuple[int, int] = (1640, 1232)
     ) -> None:
-        """コンストラクタ"""
+        """コンストラクタ
+
+        Args:
+            camera_id (int): カメラID、初期値は 0
+            size (Tuple[int, int]): カメラの解像度、初期値は (1640, 1232)
+        """
         self.__camera_id = camera_id
         self.__size = size
         self.__camera = None
@@ -30,7 +35,11 @@ class VideoRecorder:
             self.__camera = camera
 
     def start_recording(self, output) -> None:
-        """動画の撮影を開始する"""
+        """動画の撮影を開始する
+
+        Args:
+            output (str): 画像の保存先パス(拡張子込み)
+        """
         print("Recording started")
         self.__camera.start_and_record_video(output, duration=20)
         print("Recording stopped")

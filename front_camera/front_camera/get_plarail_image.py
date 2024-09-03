@@ -13,12 +13,20 @@ from picamera2.encoders import H264Encoder
 
 class GetPlarailImage:
     def __init__(self, video_path):
-        """コンストラクタ"""
+        """コンストラクタ
+
+        Args:
+            video_path (str): 動画の保存先パス(拡張子込み)
+        """
         self.video_path = video_path
         self.frame_timing_calculator = FrameTimingCalculator(video_path)
 
     def extract_target_frame(self, output_path) -> None:
-        """映像から特定のフレームを画像として切り出す"""
+        """映像から特定のフレームを画像として切り出す
+
+        Args:
+            output_path (str): 画像の保存先パス(拡張子込み)
+        """
         # 目標フレームを取得
         target_frame = self.frame_timing_calculator.get_target_timing()
 

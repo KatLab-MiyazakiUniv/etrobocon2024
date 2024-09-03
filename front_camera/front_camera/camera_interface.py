@@ -2,6 +2,7 @@
 フロントカメラから画像を取得する
 @author: bizyutyu
 """
+
 from picamera2 import Picamera2, MappedArray
 from datetime import datetime
 from typing import Tuple, Union
@@ -13,9 +14,20 @@ import argparse
 import time
 
 
-
 class CameraInterface:
-    def __init__(self, camera_id=0, data_format: str = "RGB888", size: Tuple[int, int] = (1640, 1232)) -> None:
+    def __init__(
+        self,
+        camera_id=0,
+        data_format: str = "RGB888",
+        size: Tuple[int, int] = (1640, 1232),
+    ) -> None:
+        """コンストラクタ
+
+        Args:
+            camera_id (int): カメラID、初期値は 0
+            data_format (str): カラーフォーマット、初期値は "RGB888"
+            size (Tuple[int, int]): カメラの解像度、初期値は (1640, 1232)
+        """
         self.camera_id = camera_id
         # self.cap = cv2.VideoCapture(camera_id)
         # self.picam2 = Picamera2()
@@ -30,13 +42,15 @@ class CameraInterface:
         if self.picam2 is None:
             picam2 = Picamera2(camera_num=self.camera_id)
             conf = picam2.create_preview_configuration(
-                main={"format": self.format, "size": self.size})
+                main={"format": self.format, "size": self.size}
+            )
             picam2.configure(conf)
             picam2.start()
             self.picam2 = picam2
 
     def capture_image(self) -> Union[np.ndarray, None]:
         """カメラで画像を取得する関数.
+
         Returns:
             Union[np.ndarray, None]: カメラ画像データ
         """
@@ -51,8 +65,9 @@ class CameraInterface:
 
     def capture_save_image(self, save_path) -> None:
         """カメラで画像を取得し、保存する関数.
+
         Args:
-            save_path (int): 画像の保存先パス(拡張子込み)
+            save_path (str): 画像の保存先パス(拡張子込み)
         """
         img = self.capture_image()
         img = np.array(img)
@@ -61,6 +76,14 @@ class CameraInterface:
         im.save(save_path)
 
     def capture_image_cv2(self, save_path):
+        """OpenCVを用いて画像を取得する関数.
+
+        Args:
+            save_path (str): 画像の保存先パス(拡張子込み)
+
+        Raises:
+            Exception: 画像情報の取得に失敗
+        """
         ret, frame = self.cap.read()
         if ret:
             cv2.imwrite(save_path, frame)
@@ -68,6 +91,11 @@ class CameraInterface:
             raise Exception("Failed to capture image")
 
     def capture_image_picamera2(self, save_path):
+        """Picamera2を用いて画像を取得する関数.
+
+        Args:
+            save_path (str): 画像の保存先パス(拡張子込み)
+        """
         self.picam2.capture_file(save_path)
 
     def capture_buffers(self):
@@ -83,12 +111,13 @@ class CameraInterface:
         self.cap.release()
         self.picam2.stop()
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="フロントカメラに関するプログラム")
-    parser.add_argument("--camera-num", type=int, default=0,
-                        help="カメラIDを指定する")
-    parser.add_argument("-spath", "--save_path", type=str, default=None,
-                        help="保存する画像の名前を指定")
+    parser.add_argument("--camera-num", type=int, default=0, help="カメラIDを指定する")
+    parser.add_argument(
+        "-spath", "--save_path", type=str, default=None, help="保存する画像の名前を指定"
+    )
     args = parser.parse_args()
     camera = CameraInterface()
 
@@ -109,7 +138,5 @@ if __name__ == "__main__":
     else:
         file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".jpeg"
         save_path = os.path.join(folder_path, file_name)
-    # try:
+
     camera.capture_save_image(save_path)
-    # finally:
-        # camera.release()
