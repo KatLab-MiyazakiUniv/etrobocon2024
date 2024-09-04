@@ -115,7 +115,7 @@ void LineTracing::recover()
   }
 
     // 復帰動作コマンド実行後の角度補正
-  int endTargetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)/1.4;  // 緑に入った角度によって回転角を変更
+  int recoveringEndTargetAngle = fabs((diffLeftMileage - diffRightMileage) / TREAD * 180 / M_PI)/1.3;  // 緑に入った角度によって回転角を変更
   int pwmForRotation = 70;
   bool isClockwise;
   if(diffLeftMileage <= diffRightMileage) {
@@ -124,22 +124,23 @@ void LineTracing::recover()
     isClockwise = false;
   }
   // 黒線に到達した後の処理
-  PwmRotation endPwmRotation(endTargetAngle, pwmForRotation, isClockwise);
+  PwmRotation recoveringEndPwmRotation(recoveringEndTargetAngle, pwmForRotation, isClockwise);
   controller.stopWheelsMotor();
   timer.sleep(200);
-  endPwmRotation.run();
+  recoveringEndPwmRotation.run();
 
-  COLOR endTargetColor = COLOR::BLACK; 
-  int endTargetSpeed = 200;
-  int endTargetBrightness = 15;
-  PidGain endPidGain(0.6,0.24,0.1);
-  bool endIsRecoveryEnabled = false;
-  ColorLineTracing endColorLineTracing(endTargetColor, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
-  endColorLineTracing.run();
+  COLOR recoveringEndTargetColor = COLOR::BLACK; 
+  int recoveringEndTargetSpeed = 200;
+  int recoveringEndTargetBrightness = 15;
+  PidGain recoveringEndPidGainForColorLineTracing(0.3,0.09,0.06);
+  bool recoveringEndIsRecoveryEnabled = false;
+  ColorLineTracing recoveringEndColorLineTracing(recoveringEndTargetColor, recoveringEndTargetSpeed, recoveringEndTargetBrightness, recoveringEndPidGainForColorLineTracing, isLeftEdge, recoveringEndIsRecoveryEnabled);
+  recoveringEndColorLineTracing.run();
 
-  int endTargetDistance = 300; 
-  DistanceLineTracing endDistanceLineTracing(endTargetDistance, endTargetSpeed, endTargetBrightness, endPidGain, isLeftEdge, endIsRecoveryEnabled);
-  endDistanceLineTracing.run();
+  int recoveringEndTargetDistance = 300; 
+  PidGain recoveringEndPidGainForDistanceLineTracing(0.3,0.06,0.1);
+  DistanceLineTracing recoveringEndDistanceLineTracing(recoveringEndTargetDistance, recoveringEndTargetSpeed, recoveringEndTargetBrightness, recoveringEndPidGainForDistanceLineTracing, isLeftEdge, recoveringEndIsRecoveryEnabled);
+  recoveringEndDistanceLineTracing.run();
 
   // モータの停止
   controller.stopWheelsMotor();
