@@ -22,8 +22,8 @@ void Straight::run()
 
   // SpeedCalculatorのオブジェクトを生成
   SpeedCalculator speedCalculator(targetSpeed);
-  Controller controller;  // Controllerクラスのオブジェクトを生成
-  int count = 0;
+  Controller controller;     // Controllerクラスのオブジェクトを生成
+  int logIntervalCount = 0;  // 走行ログを取得するタイミングを計るための変数
 
   // 継続条件を満たしている間繰り返す
   while(isMetContinuationCondition()) {
@@ -35,7 +35,8 @@ void Straight::run()
     controller.setLeftMotorPwm(currentLeftPwm);
     controller.setRightMotorPwm(currentRightPwm);
     if(shouldGetRunLogs) {
-      if(count / 10 == 0) {
+      // 10ループに1回走行ログを取得
+      if(logIntervalCount / 10 == 0) {
         // 現在の輝度値を取得
         int currentBrightness = measurer.getBrightness();
 
@@ -48,7 +49,7 @@ void Straight::run()
                             currentRgb.b);
       }
     }
-    count++;
+    logIntervalCount++;
 
     // 10ミリ秒待機
     timer.sleep(10);

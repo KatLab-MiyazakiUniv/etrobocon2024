@@ -37,7 +37,7 @@ void LineTracing::run()
 
   SpeedCalculator speedCalculator(targetSpeed);
 
-  int count = 0;
+  int logIntervalCount = 0;  // 走行ログを取得するタイミングを計るための変数
 
   // 継続条件を満たしている間ループ
   while(isMetContinuationCondition()) {
@@ -57,7 +57,8 @@ void LineTracing::run()
     controller.setLeftMotorPwm(leftPwm);
 
     if(shouldGetRunLogs) {
-      if(count / 10 == 0) {
+      // 10ループに1回走行ログを取得
+      if(logIntervalCount / 10 == 0) {
         // 現在の輝度値を取得
         int currentBrightness = measurer.getBrightness();
 
@@ -69,7 +70,7 @@ void LineTracing::run()
                             static_cast<int>(leftPwm), currentRgb.r, currentRgb.g, currentRgb.b);
       }
     }
-    count++;
+    logIntervalCount++;
 
     // 10ミリ秒待機
     timer.sleep(10);
