@@ -20,8 +20,11 @@ class RunLogger {
   /**
    * @brief 各種値を追加する
    * @param Brightness
+   * @param Brightness
+   * @param Brightness
+   * @param Brightness
    */
-  void addTolog(int _Brightness, int _RightPwm, int _leftPwm, int _r, int _g, int _b);
+  void addToLogs(int _Brightness, int _RightPwm, int _LeftPwm, int _r, int _g, int _b);
 
   /**
    * @brief 記録した走行ログをファイル出力する

@@ -7,10 +7,10 @@
 
 RunLogger::RunLogger() {}
 
-void RunLogger::addTolog(int _Brightness, int _RightPwm, int _leftPwm, int _r, int _g, int _b)
+void RunLogger::addToLogs(int _Brightness, int _RightPwm, int _LeftPwm, int _r, int _g, int _b)
 {
   // 新しい配列を追加
-  sprintf(RunLogs, "%s%d,%d,%d,%d,%d,%d\n", RunLogs, _Brightness, _RightPwm, _leftPwm, _r, _g, _b);
+  sprintf(RunLogs, "%s%d,%d,%d,%d,%d,%d\n", RunLogs, _Brightness, _RightPwm, _LeftPwm, _r, _g, _b);
 }
 
 void RunLogger::outputToFile()

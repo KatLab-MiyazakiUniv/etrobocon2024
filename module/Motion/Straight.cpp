@@ -34,7 +34,7 @@ void Straight::run()
     // モータにPWM値をセット
     controller.setLeftMotorPwm(currentLeftPwm);
     controller.setRightMotorPwm(currentRightPwm);
-    if(shouldGetRunLog) {
+    if(shouldGetRunLogs) {
       if(count / 10 == 0) {
         // 現在の輝度値を取得
         int currentBrightness = measurer.getBrightness();
@@ -43,9 +43,9 @@ void Straight::run()
         rgb_raw_t currentRgb = measurer.getRawColor();
 
         // RunLoggerにデータを追加
-        runLogger.addTolog(currentBrightness, static_cast<int>(currentRightPwm),
-                           static_cast<int>(currentLeftPwm), currentRgb.r, currentRgb.g,
-                           currentRgb.b);
+        runLogger.addToLogs(currentBrightness, static_cast<int>(currentRightPwm),
+                            static_cast<int>(currentLeftPwm), currentRgb.r, currentRgb.g,
+                            currentRgb.b);
       }
     }
     count++;
@@ -56,7 +56,7 @@ void Straight::run()
   // モータの停止
   // controller.stopWheelsMotor();
 
-  if(shouldGetRunLog) {
+  if(shouldGetRunLogs) {
     // 走行ログ書き込み
     runLogger.outputToFile();
   }

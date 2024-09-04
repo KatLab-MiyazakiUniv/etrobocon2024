@@ -53,8 +53,8 @@ void EtRobocon2024::start()
   bool isLeftEdge = true;
   Calibrator calibrator;
 
-  //　　　走行ログファイルを取得する場合
-  if(shouldGetRunLog == true) {
+  // 　　　走行ログファイルを取得する場合
+  if(shouldGetRunLogs) {
     // 現在の日付と時刻を取得
     time_t now = time(nullptr);
     tm* tm_now = localtime(&now);
