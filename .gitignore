@@ -5,7 +5,12 @@ build/
 logfiles/*
 !logfiles/.gitkeep
 image_data/
+confirmation_image
+video_data/
 debug/
+
+# 一部Pythonファイルを実行時に生成するキャッシュのディレクトリ
+__pycache__/
 
 # シミュレータ自動実行ツール関係
 .cancel-sim-test
