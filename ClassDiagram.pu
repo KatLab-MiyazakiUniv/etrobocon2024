@@ -29,7 +29,7 @@ package "etrobocon2024" {
             }
 
             class Measurer {
-                + Measurer(colorSensor(PORT_2),　sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
+                + Measurer(colorSensor(PORT_2), sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
                 + int getBrightness()
                 + rgb_raw_t getRawColor()
                 + int getLeftCount()
