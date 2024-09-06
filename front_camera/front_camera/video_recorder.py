@@ -7,7 +7,6 @@ import os
 import time
 from typing import Tuple
 from picamera2 import Picamera2
-from picamera2.encoders import H264Encoder
 
 
 class VideoRecorder:
@@ -34,7 +33,7 @@ class VideoRecorder:
             camera.configure(video_config)
             self.__camera = camera
 
-    def start_recording(self, output) -> None:
+    def recording(self, output) -> None:
         """動画の撮影を開始する
 
         Args:
@@ -42,11 +41,6 @@ class VideoRecorder:
         """
         print("Recording started")
         self.__camera.start_and_record_video(output, duration=20)
-        print("Recording stopped")
-
-    def stop_recording(self) -> None:
-        """動画の録画を停止する"""
-        self.__camera.stop_recording()
         print("Recording stopped")
 
     def close(self) -> None:
@@ -63,12 +57,9 @@ if __name__ == "__main__":
         os.makedirs("video_data", exist_ok=True)
 
         # 出力する動画ファイルの名前
-        encoder = H264Encoder(bitrate=10000000)
-        output_file_name = "video_data/recorded_video.h264"
+        output_file_name = "video_data/recorded_video.mp4"
 
-        video_recorder.start_recording(encoder, output_file_name)
-        time.sleep(10)  # テストのため10秒間録画する
-        video_recorder.stop_recording()
+        video_recorder.recording(encoder, output_file_name)
 
     finally:
         video_recorder.close()

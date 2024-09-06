@@ -8,7 +8,6 @@ import os
 import time
 from frame_timing_calculator import FrameTimingCalculator
 from video_recorder import VideoRecorder
-from picamera2.encoders import H264Encoder
 
 
 class GetPlarailImage:
@@ -66,7 +65,7 @@ if __name__ == "__main__":
         # 出力する動画ファイルの名前
         output_video_path = "video_data/recorded_video.mp4"
 
-        video_recorder.start_recording(output_video_path)
+        video_recorder.recording(output_video_path)
 
     finally:
         video_recorder.close()
