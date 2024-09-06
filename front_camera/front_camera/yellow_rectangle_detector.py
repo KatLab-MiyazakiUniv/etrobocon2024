@@ -1,20 +1,19 @@
 """
 動画中の背景下部の黄色検出クラス
-@author: bizyutyu
+@author: bizyutyu YKhm20020
 """
 
 import cv2
 
 
 
-class YellowRectangleDetecter:
+class YellowRectangleDetector:
     def __init__(self, lower_yellow = (20, 160, 160), upper_yellow = (30, 255, 255)):
         """コンストラクタ
 
         Args:
-            video_path (str): 動画の保存先パス(拡張子込み)
-            bounding_box_width (int): 注目領域とするバウンディングボックスの幅、初期値は300
-            bounding_box_height (int): 注目領域とするバウンディングボックスの高さ 初期値は600
+            lower_yellow (tuple): 黄色と認識するBGR値範囲の下限、初期値は (20, 160, 160).
+            upper_yellow (tuple): 黄色と認識するBGR値範囲の上限、初期値は (30, 255, 255).
         """
         # 受け取った黄色の範囲を保持
         self.lower_yellow = lower_yellow
@@ -23,6 +22,7 @@ class YellowRectangleDetecter:
 
     def detect_yellow_rectangle(self, frame):
         """配置エリアAにおける背景を検出するため、黄色の矩形を検出する。
+
         Args:
             frame (int): 動画の何フレーム目を検出の対象とするかを示す数値
         """
@@ -48,5 +48,6 @@ if __name__ == "__main__":
     video_path = "video_data/recorded_video.h264"
     output_path = "image_data/Pla.jpg"
 
-    frameTimingCalculator = FrameTimingCalculator(video_path)
-    frameTimingCalculator.get_target_timing()
+    # 循環インポート回避のため一旦コメントアウト
+    # frameTimingCalculator = FrameTimingCalculator(video_path)
+    # frameTimingCalculator.get_target_timing()
