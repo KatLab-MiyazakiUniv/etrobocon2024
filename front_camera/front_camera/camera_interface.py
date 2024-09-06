@@ -11,13 +11,12 @@ import cv2
 import numpy as np
 import os
 import argparse
-import time
 
 
 class CameraInterface:
     def __init__(
         self,
-        camera_id=0,
+        camera_id: int = 0,
         data_format: str = "RGB888",
         size: Tuple[int, int] = (1640, 1232),
     ) -> None:

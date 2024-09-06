@@ -105,7 +105,7 @@ if __name__ == "__main__":
                         help="保存する画像の名前を指定")
     args = parser.parse_args()
 
-    snap = CaptureSnapImage(camera_id=args.camera_num,
+    snap = CaptureImage(camera_id=args.camera_num,
                             img_name=args.save_path)
 
     snap.capture()

@@ -5,7 +5,6 @@
 
 import os
 import cv2
-import numpy as np
 
 
 class FrameTimingCalculator:
@@ -122,7 +121,7 @@ class FrameTimingCalculator:
                         cv2.imwrite(
                             "confirmation_image/base.jpeg", frame
                         )  # フレーム画像を保存
-                        print(f"Entry frame saved as 'base.jpeg'")
+                        print("Entry frame saved as 'base.jpeg'")
                     else:
                         print("Failed to retrieve the base frame.")
                 continue
@@ -169,7 +168,7 @@ class FrameTimingCalculator:
 
         if ret:
             cv2.imwrite("confirmation_image/center.jpeg", frame)  # フレーム画像を保存
-            print(f"Center frame saved as 'center.jpeg'")
+            print("Center frame saved as 'center.jpeg'")
         else:
             print("Failed to retrieve the center frame.")
 
@@ -181,7 +180,7 @@ class FrameTimingCalculator:
 
         if ret:
             cv2.imwrite("confirmation_image/entry.jpeg", frame)  # フレーム画像を保存
-            print(f"Entry frame saved as 'entry.jpeg'")
+            print("Entry frame saved as 'entry.jpeg'")
         else:
             print("Failed to retrieve the entry frame.")
 
@@ -191,7 +190,7 @@ class FrameTimingCalculator:
 
         if ret:
             cv2.imwrite("confirmation_image/exit.jpeg", frame)  # フレーム画像を保存
-            print(f"Exit frame saved as 'exit.jpeg'")
+            print("Exit frame saved as 'exit.jpeg'")
         else:
             print("Failed to retrieve the exit frame.")
 

@@ -4,7 +4,6 @@
 """
 
 import os
-import time
 from typing import Tuple
 from picamera2 import Picamera2
 
@@ -59,7 +58,7 @@ if __name__ == "__main__":
         # 出力する動画ファイルの名前
         output_file_name = "video_data/recorded_video.mp4"
 
-        video_recorder.recording(encoder, output_file_name)
+        video_recorder.recording(output_file_name)
 
     finally:
         video_recorder.close()

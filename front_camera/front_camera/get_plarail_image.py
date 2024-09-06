@@ -5,7 +5,6 @@
 
 import cv2
 import os
-import time
 from frame_timing_calculator import FrameTimingCalculator
 from video_recorder import VideoRecorder
 
