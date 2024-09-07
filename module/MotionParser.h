@@ -25,6 +25,7 @@
 #include "ResetWheelsMotorPwm.h"
 #include "CameraAction.h"
 #include "AreaACameraAction.h"
+#include "CorrectingRotation.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 

@@ -126,6 +126,10 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           atof(params[7]));  // 前進、後退の速度
 
       motionList.push_back(ac);  // 動作リストに追加
+    } else if(command == COMMAND::XR) {  // プラレール・背景撮影のための角度補正回頭の追加
+      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
+
+      motionList.push_back(xr);                                          // 動作リストに追加
     }
     // TODO: 後で作成する
 
@@ -143,13 +147,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     //     ArmDownning* ad = new ArmDownnig(atoi(params[1]), atoi(params[2]));
 
     //     motionList.push_back(ad);          // 動作リストに追加
-    //   } else if(command == COMMAND::XR) {  // 角度補正回頭の追加
-    //     CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]),   // 目標角度
-    //                                                     atoi(params[2]));  // 目標速度
-
-    //     motionList.push_back(xr);                                          // 動作リストに追加
     //   }
-
     else {  // 未定義のコマンドの場合
       snprintf(buf, LARGE_BUF_SIZE, "%s:%d: '%s' is undefined command", commandFilePath, lineNum,
                params[0]);
