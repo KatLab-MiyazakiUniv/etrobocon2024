@@ -20,7 +20,7 @@ class FrameTimingCalculator:
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
         self.bounding_box_height = bounding_box_height
-        yellow_rectangle_detecter = YellowRectangleDetecter()
+        self.yellow_rectangle_detecter = YellowRectangleDetecter()
 
     def get_target_timing(self):
         """映像から特定のフレームを画像として切り出すタイミングを取得する"""
@@ -35,7 +35,7 @@ class FrameTimingCalculator:
             return None
 
         # 黄色い長方形を検出
-        yellow_rect = yellow_rectangle_detecter.detect_yellow_rectangle(first_frame)
+        yellow_rect = self.yellow_rectangle_detecter.detect_yellow_rectangle(first_frame)
 
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
