@@ -38,6 +38,10 @@ plarail-image:
 	sudo python3 front_camera/get_plarail_image.py
 	@echo "プラレール画像を取得しましたぞ！！！！！！"
 
+correction-angle:
+	@${make} kill
+	@sudo python3 front_camera/get_correction_angle.py
+
 rm-img:
 	sudo rm -rf image_data/
 
