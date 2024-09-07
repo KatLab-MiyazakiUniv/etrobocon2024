@@ -131,6 +131,12 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
       motionList.push_back(xr);                                          // 動作リストに追加
     }
+    else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
+      CameraAction* bc = new CameraAction(
+          convertSubject(params[1]));  // フラグ確認を行うかの判断に用いる撮影対象
+
+      motionList.push_back(bc);  // 動作リストに追加
+    }
     // TODO: 後で作成する
 
     //    }else if(command == COMMAND::DT) {  // 距離指定旋回動作の生成
