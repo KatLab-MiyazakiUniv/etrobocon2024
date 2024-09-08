@@ -10,11 +10,15 @@ help:
 	@echo ビルドファイルを消してからビルドする
 	@echo " $$ make rebuild"
 	@echo 無線通信デバイスのサーバーに画像をアップロードする
-	@echo " $$ make upload"
+	@echo " $$ make upload-image"
+	@echo 無線通信デバイスのサーバーにcsvファイルをアップロードする
+	@echo " $$ make upload-csv"
 	@echo 走行を開始する\(実機限定\)
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
 	@echo " $$ make kill"
+	@echo 走行ログ取得フラグを切り替える
+	@echo " $$ make toggle-logflag"
 
 	@echo 指定ファイルをフォーマットする
 	@echo " $$ make format FILES=<ディレクトリ名>/<ファイル名>.cpp"
@@ -48,8 +52,12 @@ rebuild:
 	@${make} build
 
 # 無線通信デバイスのサーバーに画像をアップロードする
-upload:
+upload-image:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
+	
+# 無線通信デバイスのサーバーにcsvファイルをアップロードする
+upload-csv:
+	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/run-log
 
 # 実機の場合、走行を開始する 
 start:
@@ -61,6 +69,15 @@ endif
 kill:
 	@ps aux | grep make | grep -v "grep" | awk '{print $$2}' | xargs -r kill -9
 
+# etrobocon2024/module/common/SystemInfo.hのshouldGetRunLogの値をトグルする
+toggle-logflag:
+	@if grep -q 'bool shouldGetRunLog = true;' ./module/common/SystemInfo.h; then \
+		sed -i 's/bool shouldGetRunLog = true;/bool shouldGetRunLog = false;/g' ./module/common/SystemInfo.h; \
+		echo "Will not get RunLog! Need rebuild"; \
+	else \
+		sed -i 's/bool shouldGetRunLog = false;/bool shouldGetRunLog = true;/g' ./module/common/SystemInfo.h; \
+		echo "Will get RunLog! Need rebuild"; \
+	fi
 
 ## 開発関連 ##
 # ファイルにclang-formatを適用する
@@ -103,4 +120,3 @@ all-check:
 	@${make} utest
 	@${make} format-check
 	cd rear_camera_py && make format-check
-

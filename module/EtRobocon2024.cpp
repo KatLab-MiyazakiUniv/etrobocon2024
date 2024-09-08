@@ -53,6 +53,24 @@ void EtRobocon2024::start()
   bool isLeftEdge = true;
   Calibrator calibrator;
 
+  // 　　　走行ログファイルを取得する場合
+  if(shouldGetRunLogs) {
+    // 現在の日付と時刻を取得
+    time_t now = time(nullptr);
+    tm* tm_now = localtime(&now);
+
+    // UTCからJSTに変換
+    tm_now->tm_hour += 8;
+    if(tm_now->tm_hour >= 24) {
+      tm_now->tm_hour -= 24;
+      tm_now->tm_mday += 1;
+    }
+
+    // 走行ログを記録するcsvファイル名を作成
+    strftime(RunLogger::csvFileName, sizeof(RunLogger::csvFileName),
+             "etrobocon2024/logfiles/%Y-%m-%d-%H-%M.csv", tm_now);
+  }
+
   // キャリブレーションする
   calibrator.run();
   isLeftCourse = calibrator.getIsLeftCourse();

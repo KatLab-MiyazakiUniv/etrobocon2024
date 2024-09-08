@@ -10,6 +10,7 @@
 #include "Measurer.h"
 #include "Controller.h"
 #include "Logger.h"
+#include "RunLogger.h"
 
 class Motion {
  public:
@@ -30,6 +31,7 @@ class Motion {
 
  protected:
   Logger logger;
+  RunLogger runLogger;
 };
 
 #endif
