@@ -17,9 +17,11 @@ help:
 	@echo " $$ make start"
 	@echo 中断したmakeプロセスをkillする
 	@echo " $$ make kill"
+	@echo ダブルループエリアのコマンドファイルを生成する
+	@echo " $$ make double-left-%"
+	@echo " $$ make double-right-%"
 	@echo 走行ログ取得フラグを切り替える
 	@echo " $$ make toggle-logflag"
-
 	@echo 指定ファイルをフォーマットする
 	@echo " $$ make format FILES=<ディレクトリ名>/<ファイル名>.cpp"
 	@echo すべての変更ファイルをフォーマットする
@@ -54,12 +56,12 @@ rebuild:
 # 無線通信デバイスのサーバーに画像をアップロードする
 upload-image:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
-	
+
 # 無線通信デバイスのサーバーにcsvファイルをアップロードする
 upload-csv:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/run-log
 
-# 実機の場合、走行を開始する 
+# 実機の場合、走行を開始する
 start:
 ifeq ($(filter katlab%,$(HOST)), $(HOST))
 	cd $(MAKEFILE_PATH)../ && make start
@@ -68,6 +70,12 @@ endif
 # makeのプロセスIDを抽出し、キルする
 kill:
 	@ps aux | grep make | grep -v "grep" | awk '{print $$2}' | xargs -r kill -9
+
+# シェルファイルを実行し、ダブルループエリアのコマンドファイルを生成する
+double-left-%:
+	bash ./scripts/double_loop_left_merger.sh ${@:double-left-%=%}
+double-right-%:
+	bash ./scripts/double_loop_right_merger.sh ${@:double-right-%=%}
 
 # etrobocon2024/module/common/SystemInfo.hのshouldGetRunLogの値をトグルする
 toggle-logflag:
