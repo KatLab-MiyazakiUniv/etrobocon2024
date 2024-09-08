@@ -8,8 +8,8 @@
 using namespace std;
 
 AreaBCaptureAction::AreaBCaptureAction(int _milliSec1, int _targetAngle1, int _pwm1,
-                                       bool _isClockwise1, int _pwmXr, int _milliSec2, int _targetAngle2,
-                                       int _pwm2, bool _isClockwise2)
+                                       bool _isClockwise1, int _pwmXr, int _milliSec2,
+                                       int _targetAngle2, int _pwm2, bool _isClockwise2)
   : milliSec1(_milliSec1),
     targetAngle1(_targetAngle1),
     pwm1(_pwm1),
@@ -33,7 +33,7 @@ void AreaBCaptureAction::run()
   Sleeping sl_2(milliSec2);
   PwmRotation pr_2(targetAngle2, pwm2, isClockwise2);
 
-  // カメラ撮影動作の実行
+  // 配置エリアBカメラ撮影動作の実行
   sl_1.run();
   pr_1.run();
   rm.run();

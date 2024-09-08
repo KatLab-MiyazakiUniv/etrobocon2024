@@ -14,18 +14,17 @@
 #include "Sleeping.h"
 #include "CameraAction.h"
 
-
 class AreaBCaptureAction : public CompositeMotion {
  public:
   /**
    * コンストラクタ
-   * @param _milliSec1  1回目のスリープ時間(ミリ秒)
-   * @param _targetAngle1 1回目の目標回転角度(deg) 0~360
+   * @param _milliSec1  1回目の回頭前スリープ時間(ミリ秒)
+   * @param _targetAngle1 1回目の回頭目標回転角度(deg) 0~360
    * @param _pwm1　1回目の回頭PWM値 0~100
    * @param _isClockwise1 1回目の回頭方向 true:時計回り, false:反時計回り
    * @param _pwmXr 角度補正回頭用のPWM値 0~100
-   * @param _milliSec2 2回目のスリープ時間(ミリ秒)
-   * @param _targetAngle2 2回目の目標回転角度(deg) 0~360
+   * @param _milliSec2 2回目の回頭前スリープ時間(ミリ秒)
+   * @param _targetAngle2 2回目の回頭目標回転角度(deg) 0~360
    * @param _pwm2 2回目の回頭PWM値 0~100
    * @param _isClockwise2　2回目の回頭方向 true:時計回り, false:反時計回り
    */
@@ -43,15 +42,15 @@ class AreaBCaptureAction : public CompositeMotion {
   void logRunning() override;
 
  private:
-  int milliSec1;//1回目のスリープ時間(ミリ秒)
-  int targetAngle1;//1回目の目標回転角度(deg)
-  int pwm1;//1回目のPWM値
-  bool isClockwise1;//1回目のPWM値
-  int pwmXr;//角度補正回頭用のPWM値
-  int milliSec2;//2回目のスリープ時間(ミリ秒)
-  int targetAngle2;//2回目の目標回転角度(deg)
-  int pwm2;//2回目の回頭PWM値
-  bool isClockwise2;//2回目の回頭方向
+  int milliSec1;      // 1回目の回頭前スリープ時間(ミリ秒)
+  int targetAngle1;   // 1回目の回頭目標回転角度(deg)
+  int pwm1;           // 1回目の回頭PWM値
+  bool isClockwise1;  // 1回目の回頭方向
+  int pwmXr;          // 角度補正回頭用のPWM値
+  int milliSec2;      // 2回目の回頭前スリープ時間(ミリ秒)
+  int targetAngle2;   // 2回目の回頭目標回転角度(deg)
+  int pwm2;           // 2回目の回頭PWM値
+  bool isClockwise2;  // 2回目の回頭方向
 };
 
 #endif
