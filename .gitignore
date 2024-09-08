@@ -5,7 +5,12 @@ build/
 logfiles/*
 !logfiles/.gitkeep
 image_data/
+confirmation_image
+video_data/
 debug/
+
+# 一部Pythonファイルを実行時に生成するキャッシュのディレクトリ
+__pycache__/
 
 # シミュレータ自動実行ツール関係
 .cancel-sim-test
@@ -18,6 +23,9 @@ server/skip_camera_action.flag
 
 # vscode設定ファイル
 .vscode/settings.json
+
+# PlantUMLで作成したpuファイルをエクスポートするディレクトリ
+out/
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++,macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,macos,windows
