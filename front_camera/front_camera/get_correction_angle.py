@@ -3,14 +3,16 @@
 @author: bizyutyu YKhm20020 keiya121
 """
 
+import argparse
+import os
 import cv2
 import math
 from .camera_interface import CameraInterface
-from .detect_yellow_rectangle import YellowRectangleDetecter
+from .yellow_rectangle_detector import YellowRectangleDetector
 
 class GetCorrectionAngle:
     def __init__(self):
-        self.yellow_rectangle_detecter = YellowRectangleDetecter()
+        self.yellow_rectangle_detector = YellowRectangleDetector()
 
     def calculate_correction_angle(self, image_path):
         # 画像を読み込む
@@ -23,7 +25,7 @@ class GetCorrectionAngle:
         image_center_y = image.shape[0] // 2
 
         # 黄色い長方形を検出
-        yellow_rect = self.yellow_rectangle_detecter.detect_yellow_rectangle(image)
+        yellow_rect = self.yellow_rectangle_detector.detect_yellow_rectangle(image)
         if yellow_rect is None:
             raise ValueError("黄色い長方形が検出されませんでした")
 
