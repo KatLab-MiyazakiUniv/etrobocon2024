@@ -19,7 +19,7 @@ void CameraAction::run()
   // 画像のファイル名と撮影コマンドを指定
   char imageName[20];         // 画像のファイル名
   char makeImageCommand[20];  // 撮影に用いるmakeコマンド名
-  char cmd[256];              // 撮影に際してディレクトリ移動も行う
+  char cmd[256];              // 実行コマンドを格納する
   if(subject == CameraAction::Subject::FIGURE) {
     countShootFigure++;
     sprintf(imageName, "Fig_%d.jpeg", countShootFigure);
