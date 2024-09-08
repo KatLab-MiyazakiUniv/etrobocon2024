@@ -130,24 +130,13 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
 
       motionList.push_back(xr);          // 動作リストに追加
-    } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
-      CameraAction* ca = new CameraAction(CameraAction::Subject::PLARAIL);  // フラグ確認を行うかの判断に用いる撮影対象
-      Sleeping* sl_1 = new Sleeping(atoi(params[1]));  // 回頭前のスリープ時間(ミリ秒)
-      PwmRotation* pr_1 = new PwmRotation(atoi(params[2]),                     // 目標角度
-                                          atoi(params[3]),                     // 目標PWM
-                                          convertBool("PR", params[4]));  // 回頭方向
-      StopWheelsMotor* sm = new StopWheelsMotor(); 
-      Sleeping* sl_2 = new Sleeping(atoi(params[5]));  // 回頭前のスリープ時間(ミリ秒)
-      PwmRotation* pr_2 = new PwmRotation(atoi(params[6]),                      // 目標角度
-                                          atoi(params[7]),                      // 目標PWM
-                                          convertBool("PR", params[8]));  // 回頭方向
+    }  else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
+      AreaBCaptureAction* bc
+          = new AreaBCaptureAction(atoi(params[1]), atoi(params[2]), atoi(params[3]),
+                                   convertBool("PR", params[4]), atoi(params[4]), atoi(params[6]), atoi(params[7]),
+                                   atoi(params[8]), convertBool("PR", params[9]));
 
-      motionList.push_back(sl_1);  // 動作リストに追加
-      motionList.push_back(pr_1);
-      motionList.push_back(sm);
-      motionList.push_back(ca);
-      motionList.push_back(sl_2);
-      motionList.push_back(pr_2);
+      motionList.push_back(bc);  // 動作リストに追加
     }
     // TODO: 後で作成する
 
