@@ -65,6 +65,7 @@ void CorrectingRotation::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
-  snprintf(buf, LARGE_BUF_SIZE, "Run CorrectingRotation ()");
+  snprintf(buf, LARGE_BUF_SIZE, "Run CorrectingRotation (correctionAngle: %d, pwm: %d)",
+           correctionAngle, pwm);
   logger.log(buf);
 }
