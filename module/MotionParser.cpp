@@ -133,7 +133,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     }  else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
       AreaBCaptureAction* bc
           = new AreaBCaptureAction(atoi(params[1]), atoi(params[2]), atoi(params[3]),
-                                   convertBool("PR", params[4]), atoi(params[4]), atoi(params[6]), atoi(params[7]),
+                                   convertBool("PR", params[4]), atoi(params[5]), atoi(params[6]), atoi(params[7]),
                                    atoi(params[8]), convertBool("PR", params[9]));
 
       motionList.push_back(bc);  // 動作リストに追加
