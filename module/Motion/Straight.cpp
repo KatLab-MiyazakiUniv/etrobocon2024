@@ -54,13 +54,14 @@ void Straight::run()
     // 10ミリ秒待機
     timer.sleep(10);
   }
-  // モータの停止
-  // controller.stopWheelsMotor();
 
   if(shouldGetRunLogs) {
     // 走行ログ書き込み
     runLogger.outputToFile();
   }
+
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
 
 bool Straight::isMetPreCondition()
