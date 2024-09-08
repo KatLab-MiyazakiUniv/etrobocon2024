@@ -14,7 +14,7 @@
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm){};
+CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm) {};
 
 void CorrectingRotation::run()
 {
@@ -24,7 +24,6 @@ void CorrectingRotation::run()
   snprintf(cmd, 512,
            "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt && sudo "
            "chmod 644 correction_angle.txt && cd ../..");
-
 
   // コマンドを実行
   int result = system(cmd);

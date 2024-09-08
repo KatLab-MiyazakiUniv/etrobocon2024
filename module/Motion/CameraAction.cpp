@@ -11,7 +11,7 @@ using namespace std;
 // countShootFigureの初期化
 int CameraAction::countShootFigure = 0;
 
-CameraAction::CameraAction(Subject _subject) : subject(_subject){};
+CameraAction::CameraAction(Subject _subject) : subject(_subject) {};
 
 void CameraAction::run()
 {
