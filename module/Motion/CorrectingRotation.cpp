@@ -13,19 +13,20 @@
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm) : {pwm(_pwm)};
+CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm) {};
 
 void CorrectingRotation::run()
 {
-
   // 補正角度算出を行う
   // Pytnon側で算出に必要な画像取得から補正角度算出までを行う
   char cmd[256];
-  snprintf(cmd, 256, "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt  && cd ../..");
-    
+  snprintf(
+      cmd, 256,
+      "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt  && cd ../..");
+
   // コマンドを実行
   int result = system(cmd);
-  if (result != 0) {
+  if(result != 0) {
     throw std::runtime_error("コマンドの実行に失敗しました");
   }
 
@@ -36,8 +37,8 @@ void CorrectingRotation::run()
   file.close();
 
   // 改行文字を削除
-  if (!output.empty() && output[output.length()-1] == '\n') {
-    output.erase(output.length()-1);
+  if(!output.empty() && output[output.length() - 1] == '\n') {
+    output.erase(output.length() - 1);
   }
 
   // 一時ファイルを削除
@@ -54,11 +55,10 @@ void CorrectingRotation::run()
 
   PwmRotation pr(correctionAngle, pwm, isClockwise);
   Sleeping sl(500);
-  
+
   // 補正のための回頭をする
   pr.run();
   sl.run();
-
 }
 
 void CorrectingRotation::logRunning()
