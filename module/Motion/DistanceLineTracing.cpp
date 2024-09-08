@@ -11,7 +11,12 @@ DistanceLineTracing::DistanceLineTracing(double _targetDistance, double _targetS
                                          int _targetBrightness, const PidGain& _pidGain,
                                          bool& _isLeftEdge)
   : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge),
-    targetDistance(_targetDistance){};
+    targetDistance(_targetDistance) {};
+DistanceLineTracing::DistanceLineTracing(double _targetDistance, double _targetSpeed,
+                                         int _targetBrightness, const PidGain& _pidGain,
+                                         bool& _isLeftEdge, bool _isRecoveryEnabled)
+  : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge, _isRecoveryEnabled),
+    targetDistance(_targetDistance) {};
 
 bool DistanceLineTracing::isMetPreCondition(double targetSpeed)
 {
@@ -61,11 +66,12 @@ void DistanceLineTracing::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* strWhetherIsLeftEdge = isLeftEdge ? "true" : "false";
+  const char* strIsRecoveryEnabled = isRecoveryEnabled ? "true" : "false";
 
   snprintf(buf, LARGE_BUF_SIZE,
            "Run DistanceLineTracing (targetDistance: %.2f, targetSpeed: %.2f, targetBrightness: "
-           "%d, gain: (%.2f,%.2f,%.2f), isLeftEdge: %s)",
+           "%d, gain: (%.2f,%.2f,%.2f), isLeftEdge: %s, isRecoveryEnabled: %s)",
            targetDistance, targetSpeed, targetBrightness, pidGain.kp, pidGain.ki, pidGain.kd,
-           strWhetherIsLeftEdge);
+           strWhetherIsLeftEdge, strIsRecoveryEnabled);
   logger.log(buf);
 }

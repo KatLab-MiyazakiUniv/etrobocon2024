@@ -11,7 +11,13 @@ using namespace std;
 ColorLineTracing::ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
                                    const PidGain& _pidGain, bool& _isLeftEdge)
   : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge),
-    targetColor(_targetColor){};
+    targetColor(_targetColor) {};
+
+ColorLineTracing::ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness,
+                                   const PidGain& _pidGain, bool& _isLeftEdge,
+                                   bool _isRecoveryEnabled)
+  : LineTracing(_targetSpeed, _targetBrightness, _pidGain, _isLeftEdge, _isRecoveryEnabled),
+    targetColor(_targetColor) {};
 
 bool ColorLineTracing::isMetPreCondition(double targetSpeed)
 {
@@ -60,11 +66,12 @@ void ColorLineTracing::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* strWhetherIsLeftEdge = isLeftEdge ? "true" : "false";
+  const char* strIsRecoveryEnabled = isRecoveryEnabled ? "true" : "false";
 
   snprintf(buf, LARGE_BUF_SIZE,
            "Run ColorLineTracing (targetColor: %s, targetSpeed: %.2f, targetBrightness: %d, "
-           "gain: (%.2f,%.2f,%.2f), isLeftEdge: %s)",
+           "gain: (%.2f,%.2f,%.2f), isLeftEdge: %s, isRecoveryEnabled: %s)",
            ColorJudge::colorToString(targetColor), targetSpeed, targetBrightness, pidGain.kp,
-           pidGain.ki, pidGain.kd, strWhetherIsLeftEdge);
+           pidGain.ki, pidGain.kd, strWhetherIsLeftEdge, strIsRecoveryEnabled);
   logger.log(buf);
 }

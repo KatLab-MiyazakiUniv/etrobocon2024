@@ -351,7 +351,7 @@ namespace etrobocon2024_test {
     controller.resetWheelsMotorPwm();
     COLOR targetColor = COLOR::RED;
     double targetSpeed = 100.0;
-    double targetDistance = 1000.0;
+    double targetDistance = 100.0;
     double targetBrightness = 45.0;
     double basePwm = 100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -389,7 +389,7 @@ namespace etrobocon2024_test {
     controller.resetWheelsMotorPwm();
     COLOR targetColor = COLOR::RED;
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 40.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };

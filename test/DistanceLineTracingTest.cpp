@@ -36,7 +36,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
 
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -71,8 +72,8 @@ namespace etrobocon2024_test {
 
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -91,7 +92,7 @@ namespace etrobocon2024_test {
     // PWMの初期化
     controller.resetWheelsMotorPwm();
     double targetSpeed = -100.0;
-    double targetDistance = 100.0;
+    double targetDistance = 1000.0;
     double targetBrightness = 45.0;
     double basePwm = -100.0;
     PidGain gain = { 0.1, 0.05, 0.05 };
@@ -108,8 +109,8 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
-
-    dl.run();  // ライントレースを実行
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
@@ -145,8 +146,162 @@ namespace etrobocon2024_test {
     // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
     double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
                                              std::abs(basePwm * 0.05));  // 許容誤差
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
-    dl.run();  // ライントレースを実行
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_GE(expected, actual);  // ライントレース後に走行した距離が期待する走行距離以下である
+    EXPECT_LT(expected - error, actual);  // ライントレース後に走行した距離が許容誤差未満である
+  }
+
+  // 目標距離までライントレースを行うテストケース（左エッジ走行，復帰動作なし）
+  TEST(DistanceLineTracingTest, runLeftEdgeWithoutRecovery)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    double targetSpeed = 100.0;
+    double targetDistance = 1000.0;
+    double targetBrightness = 45.0;
+    double basePwm = 100.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = true;
+    bool isRecoveryEnabled = false;
+    DistanceLineTracing dl(targetDistance, targetSpeed, targetBrightness, gain, isLeftEdge,
+                           isRecoveryEnabled);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected
+    //     = Mileage::calculateMileage(initialRightCount, initialLeftCount) + targetDistance;
+    double expected = targetDistance;
+
+    // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
+    double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
+
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_LE(expected, actual);  // ライントレース後に走行した距離が期待する走行距離以上である
+    EXPECT_GT(expected + error, actual);  // ライントレース後に走行した距離が許容誤差未満である
+  }
+
+  // 目標距離までライントレースを行うテストケース（右エッジ走行，復帰動作なし）
+  TEST(DistanceLineTracingTest, runRightEdgeWithoutRecovery)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    double targetSpeed = 100.0;
+    double targetDistance = 1000.0;
+    double targetBrightness = 45.0;
+    double basePwm = 100.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = false;
+    bool isRecoveryEnabled = false;
+    DistanceLineTracing dl(targetDistance, targetSpeed, targetBrightness, gain, isLeftEdge,
+                           isRecoveryEnabled);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected
+    //     = Mileage::calculateMileage(initialRightCount, initialLeftCount) + targetDistance;
+    double expected = targetDistance;
+
+    // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
+    double error = Mileage::calculateMileage(basePwm * 0.05, basePwm * 0.05);  // 許容誤差
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
+
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_LE(expected, actual);  // ライントレース後に走行した距離が期待する走行距離以上である
+    EXPECT_GT(expected + error, actual);  // ライントレース後に走行した距離が許容誤差未満である
+  }
+
+  // 目標距離までライントレースを行うテストケース（バック，左エッジ走行，復帰動作なし）
+  TEST(DistanceLineTracingTest, runBackLeftEdgeWithoutRecovery)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    double targetSpeed = -100.0;
+    double targetDistance = 1000.0;
+    double targetBrightness = 45.0;
+    double basePwm = -100.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = true;
+    bool isRecoveryEnabled = false;
+    DistanceLineTracing dl(targetDistance, targetSpeed, targetBrightness, gain, isLeftEdge,
+                           isRecoveryEnabled);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected
+    //     = Mileage::calculateMileage(initialRightCount, initialLeftCount) - targetDistance;
+    double expected = -targetDistance;
+
+    // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
+    double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
+                                             std::abs(basePwm * 0.05));  // 許容誤差
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
+
+    // ライントレース後の走行距離
+    int rightCount = measurer.getRightCount();
+    int leftCount = measurer.getLeftCount();
+    double actual = Mileage::calculateMileage(rightCount, leftCount);
+
+    EXPECT_GE(expected, actual);  // ライントレース後に走行した距離が期待する走行距離以下である
+    EXPECT_LT(expected - error, actual);  // ライントレース後に走行した距離が許容誤差未満である
+  }
+
+  // 目標距離までライントレースを行うテストケース（バック，右エッジ走行，復帰動作なし）
+  TEST(DistanceLineTracingTest, runBackRightEdgeWithoutRecovery)
+  {
+    Controller controller;
+    Measurer measurer;
+    // PWMの初期化
+    controller.resetWheelsMotorPwm();
+    double targetSpeed = -100.0;
+    double targetDistance = 1000.0;
+    double targetBrightness = 45.0;
+    double basePwm = -100.0;
+    PidGain gain = { 0.1, 0.05, 0.05 };
+    bool isLeftEdge = false;
+    bool isRecoveryEnabled = false;
+    DistanceLineTracing dl(targetDistance, targetSpeed, targetBrightness, gain, isLeftEdge,
+                           isRecoveryEnabled);
+
+    // 初期値から期待する走行距離を求める
+    // int initialRightCount = measurer.getRightCount();
+    // int initialLeftCount = measurer.getLeftCount();
+    // double expected
+    //     = Mileage::calculateMileage(initialRightCount, initialLeftCount) - targetDistance;
+    double expected = -targetDistance;
+
+    // 一回のsetPWM()でダミーのモータカウントに加算される値はpwm * 0.05
+    double error = Mileage::calculateMileage(std::abs(basePwm * 0.05),
+                                             std::abs(basePwm * 0.05));  // 許容誤差
+    srand(130535723);  // 7回連続して緑を取得する乱数シード
+    dl.run();          // ライントレースを実行
 
     // ライントレース後の走行距離
     int rightCount = measurer.getRightCount();
