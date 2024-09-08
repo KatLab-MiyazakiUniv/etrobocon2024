@@ -12,6 +12,7 @@
 #include "Mileage.h"
 #include "Timer.h"
 #include "Pid.h"
+#include "SystemInfo.h"
 
 class LineTracing : public Motion {
  public:
