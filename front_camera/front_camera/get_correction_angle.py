@@ -22,7 +22,7 @@ class GetCorrectionAngle:
 
         # 画像の中心を計算
         image_center_x = image.shape[1] // 2
-        image_center_y = image.shape[0] // 2
+        # image_center_y = image.shape[0] // 2
 
         # 黄色い長方形を検出
         yellow_rect = self.yellow_rectangle_detector.detect_yellow_rectangle(image)
@@ -60,14 +60,14 @@ if __name__ == "__main__":
 
     # リアカメラで画像を１枚取得する
     if args.save_path is not None:
-        save_path = os.path.join(folder_path, save_path)
+        save_path = os.path.join(folder_path, args.save_path)
     else:
         save_path = os.path.join(folder_path, image_path)
 
     camera.capture_save_image(save_path)
-    
+
     #補正角度の算出
-    angle_corrector = AngleCorrector()
+    angle_corrector = GetCorrectionAngle()
     angle = angle_corrector.calculate_correction_angle(image_path)
     #四捨五入してintに変換
     angle_int = int(round(angle))
