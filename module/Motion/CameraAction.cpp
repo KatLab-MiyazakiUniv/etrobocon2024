@@ -45,7 +45,7 @@ void CameraAction::run()
     printf("%s\n", cmd);
   } else {
     snprintf(cmd, 256,
-             "cd etrobocon2024 && make upload FILE_PATH=front_camera/image_data/%s && cd ..",
+             "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd ..",
              imageName);
     system(cmd);
     printf("%s\n", cmd);
