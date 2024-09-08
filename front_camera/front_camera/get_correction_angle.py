@@ -7,8 +7,8 @@ import argparse
 import os
 import cv2
 import math
-from .camera_interface import CameraInterface
-from .yellow_rectangle_detector import YellowRectangleDetector
+from camera_interface import CameraInterface
+from yellow_rectangle_detector import YellowRectangleDetector
 
 class GetCorrectionAngle:
     def __init__(self):
@@ -58,17 +58,14 @@ if __name__ == "__main__":
     camera = CameraInterface(camera_id=args.camera_num)
     camera.start_camera()
 
-    # リアカメラで画像を１枚取得する
-    if args.save_path is not None:
-        save_path = os.path.join(folder_path, args.save_path)
-    else:
-        save_path = os.path.join(folder_path, image_path)
+    save_path = os.path.join(folder_path, image_path)
 
+    # フロントカメラで画像を１枚取得する
     camera.capture_save_image(save_path)
 
     #補正角度の算出
     angle_corrector = GetCorrectionAngle()
-    angle = angle_corrector.calculate_correction_angle(image_path)
+    angle = angle_corrector.calculate_correction_angle(save_path)
     #四捨五入してintに変換
     angle_int = int(round(angle))
     #角度だけを出力（C++側で読み取るため）

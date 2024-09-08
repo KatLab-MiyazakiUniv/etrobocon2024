@@ -12,6 +12,9 @@ debug/
 # 一部Pythonファイルを実行時に生成するキャッシュのディレクトリ
 __pycache__/
 
+# 回頭補正角度保管ファイル
+correction_angle.txt
+
 # シミュレータ自動実行ツール関係
 .cancel-sim-test
 

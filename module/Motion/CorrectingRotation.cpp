@@ -8,21 +8,23 @@
 #include <cmath>
 #include <cstdio>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <stdexcept>
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm) {};
+CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm){};
 
 void CorrectingRotation::run()
 {
   // 補正角度算出を行う
   // Pytnon側で算出に必要な画像取得から補正角度算出までを行う
-  char cmd[256];
-  snprintf(
-      cmd, 256,
-      "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt  && cd ../..");
+  char cmd[512];
+  snprintf(cmd, 512,
+           "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt && sudo "
+           "chmod 644 correction_angle.txt && cd ../..");
+
 
   // コマンドを実行
   int result = system(cmd);
@@ -31,7 +33,7 @@ void CorrectingRotation::run()
   }
 
   // 一時ファイルから出力を読み取る
-  ifstream file("correction_angle.txt");
+  ifstream file("etrobocon2024/front_camera/correction_angle.txt");
   string output;
   getline(file, output);
   file.close();
@@ -42,18 +44,27 @@ void CorrectingRotation::run()
   }
 
   // 一時ファイルを削除
-  remove("correction_angle.txt");
+  remove("etrobocon2024/front_camera/correction_angle.txt");
 
   // 出力を整数に変換
-  int calculationAngle = stoi(output);
+  int calculationAngle = 0;
+  if(!output.empty()) {
+    std::istringstream iss(output);
+    if(!(iss >> calculationAngle)) {
+      throw std::runtime_error("角度の変換に失敗しました: " + output);
+    }
+  } else {
+    throw std::runtime_error("角度の出力が空です");
+  }
 
   printf("補正角度: %d\n", calculationAngle);
 
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
   bool isClockwise = (calculationAngle >= 0);
   correctionAngle = abs(calculationAngle);
-
-  PwmRotation pr(correctionAngle, pwm, isClockwise);
+  
+  printf("ホゲータ回頭: %d\n", correctionAngle);
+  PwmRotation pr(10, pwm, isClockwise);
   Sleeping sl(500);
 
   // 補正のための回頭をする
