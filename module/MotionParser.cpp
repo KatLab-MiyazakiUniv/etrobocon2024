@@ -129,13 +129,25 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     } else if(command == COMMAND::XR) {  // プラレール・背景撮影のための角度補正回頭の追加
       CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
 
-      motionList.push_back(xr);                                          // 動作リストに追加
-    }
-    else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
-      CameraAction* bc = new CameraAction(
-          convertSubject(params[1]));  // フラグ確認を行うかの判断に用いる撮影対象
+      motionList.push_back(xr);          // 動作リストに追加
+    } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
+      CameraAction* ca = new CameraAction(CameraAction::Subject::PLARAIL);  // フラグ確認を行うかの判断に用いる撮影対象
+      Sleeping* sl_1 = new Sleeping(atoi(params[1]));  // 回頭前のスリープ時間(ミリ秒)
+      PwmRotation* pr_1 = new PwmRotation(atoi(params[2]),                     // 目標角度
+                                          atoi(params[3]),                     // 目標PWM
+                                          convertBool("PR", params[4]));  // 回頭方向
+      StopWheelsMotor* sm = new StopWheelsMotor(); 
+      Sleeping* sl_2 = new Sleeping(atoi(params[5]));  // 回頭前のスリープ時間(ミリ秒)
+      PwmRotation* pr_2 = new PwmRotation(atoi(params[6]),                      // 目標角度
+                                          atoi(params[7]),                      // 目標PWM
+                                          convertBool("PR", params[8]));  // 回頭方向
 
-      motionList.push_back(bc);  // 動作リストに追加
+      motionList.push_back(sl_1);  // 動作リストに追加
+      motionList.push_back(pr_1);
+      motionList.push_back(sm);
+      motionList.push_back(ca);
+      motionList.push_back(sl_2);
+      motionList.push_back(pr_2);
     }
     // TODO: 後で作成する
 
@@ -202,6 +214,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::CA;
   } else if(strcmp(str, "AC") == 0) {  // 文字列がACの場合
     return COMMAND::AC;
+  } else if(strcmp(str, "BC") == 0) {  // 文字列がBCの場合
+    return COMMAND::BC;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }
