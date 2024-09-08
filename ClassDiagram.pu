@@ -1,0 +1,423 @@
+@startuml ETRobocon2024
+hide empty members
+
+package "etrobocon2024" {
+    package "module" {
+        package "API" {
+            class Controller{
+                + static constexpr double MOTOR_PWM_MAX = 100.0
+                + static constexpr double MOTOR_PWM_MIN = -100.0
+                + Controller(rightWheel(PORT_B), leftWheel(PORT_C), armMortor(PORT_A))
+                + void setRightMotorPwm(const double pwm)
+                + void setLeftMotorPwm(const double pwm)
+                + void resetRightMotorPwm()
+                + void resetLeftMotorPwm()
+                + void resetWheelsMotorPwm()
+                + void stopWheelsMotor()
+                + void setArmMotorPwm(const double pwm)
+                + void resetArmMotorPwm()
+                + void stopArmMotor()
+                + double getRightMotorPwm()
+                + double getLeftMotorPwm()
+                - ev3api::Motor rightWheel
+                - ev3api::Motor leftWheel
+                - ev3api::Motor armMotor
+                - static double pwmOfRightWheel
+                - static double pwmOfLeftWheel
+                - static double pwmOfArm
+                - double limitPwmValue(const double inputPwm)
+            }
+
+            class Measurer {
+                + Measurer(colorSensor(PORT_2), sonarSensor(PORT_3), leftWheel(PORT_C), rightWheel(PORT_B), armMotor(PORT_A))
+                + int getBrightness()
+                + rgb_raw_t getRawColor()
+                + int getLeftCount()
+                + int getRightCount()
+                + int getArmMotorCount()
+                + bool getLeftButton()
+                + bool getRightButton()
+                + bool getEnterButton()
+                + int getForwardDistance()
+                + double getVoltage()
+                - ev3api::ColorSensor colorSensor
+                - ev3api::SonarSensor sonarSensor
+                - ev3api::Motor leftWheel
+                - ev3api::Motor rightWheel
+                - ev3api::Motor armMotor
+            }
+
+            class Timer {
+                + Timer()
+                + void sleep(int milliSec = 10)
+                + int now()
+                - ev3api::Clock clock
+            }
+        }
+
+        package "Calculator" {
+            enum COLOR <<int>> {
+                NONE = 0
+                BLACK = 1
+                WHITE = 2
+                BLUE = 3
+                GREEN = 4
+                YELLOW = 5
+                RED = 6
+            }
+
+            struct Hsv {
+                - int hue
+                - int saturation
+                - int value
+            }
+
+            class ColorJudge {
+                + ColorJudge() = delete
+                + static COLOR getColor(rgb_raw_t const& rgb)
+                + static COLOR stringToColor(const char* str)
+                + static const char* colorToString(COLOR color)
+                - static constexpr int SATURATION_BORDER = 27
+                - static constexpr int BLACK_LIMIT_BORDER = 10
+                - static constexpr int WHITE_LIMIT_BORDER = 250
+                - static constexpr int BLACK_BORDER = 110
+                - static constexpr int RED_BORDER = 25
+                - static constexpr int YELLOW_BORDER = 50
+                - static constexpr int GREEN_BORDER = 170
+                - static constexpr int BLUE_BORDER = 300
+                - static constexpr rgb_raw_t MAX_RGB = { 244, 245, 252 }
+                - static constexpr rgb_raw_t MIN_RGB = { 9, 10, 10 }
+                - static Hsv convertRgbToHsv(rgb_raw_t const& rgb)
+            }
+
+            class Mileage {
+                + static double calculateWheelMileage(int angle)
+                + static double calculateMileage(int rightAngle, int leftAngle)
+                - Mileage()
+            }
+
+            struct PidGain {
+                + double kp
+                + double ki
+                + double kd
+                - PidGain(double _kp, double _ki, double _kd)
+            }
+
+            class Pid {
+                + Pid(double _kp, double _ki, double _kd, double _targetValue)
+                + void setPidGain(double _kp, double _ki, double _kd)
+                + double calculatePid(double currentValue, double delta = 0.01)
+                - PidGain pidGain
+                - double prevDeviation
+                - double integral
+                - double targetValue
+            }
+
+            class SpeedCalculator {
+                + SpeedCalculator(double _targetSpeed)
+                + SpeedCalculator(double _rightTargetSpeed, double _leftTargetSpeed)
+                + double calculateRightMotorPwmFromTargetSpeed()
+                + double calculateLeftMotorPwmFromTargetSpeed()
+                - const double rightTargetSpeed
+                - const double leftTargetSpeed
+                - Pid rightPid
+                - Pid leftPid
+                - Timer timer
+                - Measurer measurer
+                - double rightMotorPwm
+                - double leftMotorPwm
+                - double prevRightMileage
+                - double prevLeftMileage
+                - int prevRightTime
+                - int prevLeftTime
+                - static constexpr double K_P = 0.004
+                - static constexpr double K_I = 0.0000005
+                - static constexpr double K_D = 0.0007
+                - static constexpr double R_K_P = 0.004
+                - static constexpr double R_K_I = 0.0000005
+                - static constexpr double R_K_D = 0.0007
+                - double calculateSpeed(double diffMileage, double diffTime)
+            }
+        }
+
+        package "common" {
+            class Logger {
+                + Logger()
+                + void log(const char* logMessage)
+                + void logWarning(const char* warningMessage)
+                + void logError(const char* errorMessage)
+                + void logHighlight(const char* highlightLog)
+                + void outputToFile()
+                + void initLogs()
+                - static char logs[65536]
+            }
+
+            class StringOperator {
+                + static char* removeEOL(const char* string)
+                - StringOperator()
+            }
+        }
+
+        package "Motion" {
+            class ColorLineTracing {
+                + ColorLineTracing(COLOR _targetColor, double _targetSpeed, int _targetBrightness, const PidGain& _gain, bool& _isLeftEdge)
+                + using LineTracing::run
+                # bool isMetPreCondition(double targetSpeed) override
+                # bool isMetContinuationCondition() override
+                # void logRunning() override
+                - static constexpr int JUDGE_COUNT = 3
+                - int colorCount = 0
+                - COLOR targetColor
+            }
+            LineTracing <|-- ColorLineTracing
+
+            class ColorStraight {
+                + ColorStraight(COLOR _targetColor, double _speed)
+                # virtual bool isMetPreCondition() override
+                # virtual bool isMetContinuationCondition() override
+                # virtual void logRunning() override
+                - static constexpr int JUDGE_COUNT = 3
+                - int colorCount = 0
+                - COLOR targetColor
+            }
+            Straight <|-- ColorStraight
+
+            class DistanceLineTraicing {
+                + DistanceLineTracing(double _targetDistance, double _targetSpeed, int _targetBrightness, const PidGain& _pidGain, bool& _isLeftEdge)
+                + using LineTracing::run
+                # bool isMetPreCondition(double targetSpeed) override
+                # bool isMetContinuationCondition() override
+                # void logRunning() override
+                - double targetDistance
+            }
+            LineTracing <|-- DistanceLineTraicing
+
+            class DistanceStraight {
+                + DistanceStraight(double _targetDiatance, double _speed)
+                # virtual bool isMetPreCondition() override
+                # virtual bool isMetContinuationCondition() override
+                # virtual void logRunning() override
+                - double targetDistance
+            }
+            Straight <|-- DistanceStraight
+
+            class EdgeChanging {
+                + EdgeChanging(bool& _isLeftEdge, bool _nextEdge)
+                # void run()
+                # void logRunning()
+                - bool& isLeftEdge
+                - bool nextEdge
+            }
+            Motion <|-- EdgeChanging
+
+            class LineTracing {
+                + LineTracing(double _targetSpeed, int _targetBrightness, const PidGain& _pidGain, bool& _isLeftEdge)
+                + void run()
+                # virtual bool isMetPreCondition(double targetSpeed) = 0
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # int targetBrightness
+                # PidGain pidGain
+                # bool& isLeftEdge
+                # double initLeftMileage
+                # double initRightMileage
+                # double initDistance
+                # Timer timer
+                # Measurer measurer
+                # Controller controller
+            }
+            Motion <|-- LineTracing
+
+            class Motion {
+                + Motion()
+                + virtual void run() = 0
+                + virtual void logRunning() = 0
+                # Logger logger
+            }
+
+            class PwmRotation {
+                + PwmRotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + using Rotation::run
+                + bool isMetPreCondition() override
+                + bool isMetContCondition(double initLeftMileage, double initRightMileage, int leftSign, int rightSign) override
+                + void logRunning() override
+            }
+            Rotation <|-- PwmRotation
+
+            class ResetWheelsMotorPwm {
+                + ResetWheelsMotorPwm()
+                + void run()
+                + void logRunning()
+                - Controller controller
+            }
+            Motion <|-- ResetWheelsMotorPwm
+
+            class Rotation {
+                + Rotation(int _targetAngle, int _pwm, bool _isClockwise)
+                + void run()
+                + virtual bool isMetPreCondition() = 0
+                + virtual bool isMetContCondition(double targetLeftDistance, double targetRightDistance, int leftSign, int rightSign) = 0
+                + virtual void logRunning() = 0
+                # int targetAngle
+                # int pwm
+                # bool isClockwise
+                # Timer timer
+                # Controller controller
+                # Measurer measurer
+            }
+            Motion <|-- Rotation
+
+            class Sleeping {
+                + Sleeping(int milliSec)
+                + void run()
+                + void logRunning()
+                - int milliSec
+                - Timer timer
+            }
+            Motion <|-- Sleeping
+
+            class StopWheelsMotor {
+                + StopWheelsMotor()
+                + void run()
+                + void logRunning()
+                - Controller controller
+            }
+            Motion <|-- StopWheelsMotor
+
+            class Straight {
+                + Straight(double _speed)
+                + void run()
+                # virtual bool isMetPreCondition()
+                # virtual bool isMetContinuationCondition() = 0
+                # virtual void logRunning()
+                # double targetSpeed
+                # double initialDistance
+                # Timer timer
+                # Measurer measurer
+            }
+            Motion <|-- Straight
+        }
+
+        enum Area <<int>> {
+            LineTrace = 0
+            DoubleLoop = 1
+            DebrisRemoval = 2
+            SmartCarry = 3
+        }
+
+        class AreaMaster {
+            - Area area
+            - bool isLeftCourse
+            - bool isLeftEdge
+            - int targetBrightness
+            - const char* basePath = "etrobocon2024/datafiles/"
+            - const char* commandFileNames[4] = { "LineTrace", "DoubleLoop", "DebrisRemoval", "SmartCarry" }
+            + AreaMaster(Area area, bool isLeftCourse, bool& isLeftEdge, int targetBrightness)
+            + void run()
+        }
+
+        class Calibrator {
+            - bool isLeftCourse
+            - int targetBrightness
+            - Timer timer
+            - Measurer measurer
+            --
+            + Calibrator(bool isLeftCourse = true, int targetBrightness = 50)
+            + void run()
+            + void waitForStart()
+            + bool getIsLeftCourse()
+            + int getTargetBrightness()
+            - void selectAndSetCourse()
+            - void measureAndSetTargetBrightness()
+        }
+
+        class EtRobocon2024 {
+            + static void start()
+            - static void sigint(int _)
+        }
+
+        enum COMMAND <<int>> {
+            DL = 0
+            CL = 1
+            DS = 2
+            CS = 3
+            PR = 4
+            DT = 5
+            EC = 6
+            SL = 7
+            AU = 8
+            AD = 9
+            XR = 10
+            RM = 11
+            SM = 12
+            NONE = 13
+        }
+
+        class MotionParser {
+            + static std::vector<Motion*> createMotions(const char* filePath, int targetBrightness, bool& isLeftEdge)
+            - MotionParser()
+            - static COMMAND convertCommand(char* str)
+            - static bool convertBool(char* command, char* stringParameter)
+        }
+    }
+
+    package "front_camera" {
+        class CameraInterface {
+            start_camera(self) -> None
+            capture_image_picamera2(self, save_path) -> None
+            capture_save_image(self, save_path) -> None
+        }
+        class CaptureImage {
+            sharpen_image(self, np.ndarray img) -> np.ndarray
+            resize_image(self, np.ndarray img) -> np.ndarray
+            capture(self) -> None
+        }
+    }
+}
+
+package "etrobocon2024-camera-system" {
+    package "src" {
+        class CameraSystem {
+            start(self) -> None
+        }
+        class CameraInterface {
+            start_record(self) -> cv2.VideoWriter, cv2.VideoWriter
+            end_record(self) -> None
+            get_frame(self) -> None
+        }
+        class Client {
+            get_robot_state(self) -> str
+            set_true_camera_action_skip(self) -> None
+        }
+        CameraSystem <-- Client
+        class DetectObject {
+            detect_object(self, str image_path, str save_path) -> List[object]
+        }
+        class ImageProcessing {
+            sharpen_image(str image_path, str save_path) -> np.ndarray
+            resize_image(str image_path, str save_path, int resize_h, int resize_w) -> np.ndarray
+        }
+        class ResponseError {
+            ResponseError(self, str message)
+        }
+        class OfficialInterface {
+            str server_ip
+            int team_id
+            upload_snap(cls, int pwm) -> bool
+        }
+        class RoboSnap {
+            RoboSnap(self, str raspike_ip) -> None
+            scp_fig_image(self) -> str, str
+            check_best_shot(self, List[object] objects) -> int
+            start_snap(self) -> None
+        }
+        class TrainTracker {
+            calibrate(self) -> None
+            observe(self) -> None
+            detect_train(self, frame, initial_frame) -> None
+        }
+        CameraInterface <|.. TrainTracker
+    }
+}
+@enduml
