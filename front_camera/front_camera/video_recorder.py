@@ -12,7 +12,7 @@ class VideoRecorder:
     """カメラモジュールで動画を撮影するクラス"""
 
     def __init__(
-        self, camera_id: int = 0, size: Tuple[int, int] = (1640, 1232)
+        self, camera_id: int = 0, size: Tuple[int, int] = (800, 600)
     ) -> None:
         """コンストラクタ
 

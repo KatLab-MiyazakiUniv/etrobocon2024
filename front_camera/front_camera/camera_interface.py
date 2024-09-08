@@ -18,7 +18,7 @@ class CameraInterface:
         self,
         camera_id: int = 0,
         data_format: str = "RGB888",
-        size: Tuple[int, int] = (1640, 1232),
+        size: Tuple[int, int] = (800, 600),
     ) -> None:
         """コンストラクタ
 
