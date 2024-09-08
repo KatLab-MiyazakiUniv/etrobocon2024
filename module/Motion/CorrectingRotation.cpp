@@ -61,10 +61,10 @@ void CorrectingRotation::run()
 
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
   bool isClockwise = (calculationAngle >= 0);
-  correctionAngle = abs(calculationAngle);
-  
+  correctionAngle = abs(calculationAngle * 0.5) <= 10 ? 0 : abs(calculationAngle * 0.5);
+
   printf("ホゲータ回頭: %d\n", correctionAngle);
-  PwmRotation pr(10, pwm, isClockwise);
+  PwmRotation pr(correctionAngle, pwm, isClockwise);
   Sleeping sl(500);
 
   // 補正のための回頭をする
