@@ -59,7 +59,8 @@ void LineTracing::run()
   }
 
   // モータの停止
-  // controller.stopWheelsMotor();
+  controller.stopWheelsMotor();
+  timer.sleep(10);
 }
 
 void LineTracing::logRunning()

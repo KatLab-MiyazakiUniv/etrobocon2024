@@ -35,7 +35,10 @@ double Pid::calculatePid(double currentValue, double delta)
   // 積分の処理を行う
   integral += (currentDeviation + prevDeviation) * delta / 2;
   // 微分の処理を行う
-  double derivative = (currentDeviation - prevDeviation) / delta;
+  double currentDerivative = (currentDeviation - prevDeviation) / delta;
+  // 微分項に低域通過フィルタを適用
+  const double alpha = 0.8;
+  filteredDerivative = alpha * currentDerivative + (1 - alpha) * filteredDerivative;
   // 前回の偏差を更新する
   prevDeviation = currentDeviation;
 
@@ -44,7 +47,8 @@ double Pid::calculatePid(double currentValue, double delta)
   // I制御の計算を行う
   double i = pidGain.ki * integral;
   // D制御の計算を行う
-  double d = pidGain.kd * derivative;
+  // double d = pidGain.kd * derivative;
+  double d = pidGain.kd * filteredDerivative;
 
   // 操作量 = P制御 + I制御 + D制御
   return (p + i + d);
