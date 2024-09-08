@@ -31,7 +31,7 @@ if [ -f "$output_file" ]; then
 fi
 
 # 撮影箇所に応じて連結するファイルを決める
-if [ "$1" -le 2 ]; then
+if [ "$1" -le 3 ]; then
     double_loop_first="$parts_directory/DoubleLoopRightFirst_$number.csv"
     double_loop_middle="$parts_directory/DoubleLoopRightMiddle.csv"
     double_loop_end="$parts_directory/DoubleLoopRightEnd.csv"
