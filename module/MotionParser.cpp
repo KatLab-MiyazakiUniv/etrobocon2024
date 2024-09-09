@@ -131,13 +131,13 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
       motionList.push_back(xr);          // 動作リストに追加
     } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
-      AreaBCaptureAction* bc
-          = new AreaBCaptureAction(atoi(params[1]),  // 1回目の回頭目標回転角度(deg)
-                                   atoi(params[2]),  // 1回目の回頭PWM値
-                                   convertBool(param[0], params[3]),  // 1回目の回頭方向
-                                   atoi(params[4]),  // 角度補正回頭用のPWM値
-                                   atoi(params[5]),  // 2回目の回頭目標回転角度
-                                   atoi(params[6]),  // 2回目の回頭PWM値
+      AreaBCameraAction* bc
+          = new AreaBCameraAction(atoi(params[1]),  // 1回目の回頭目標回転角度(deg)
+                                  atoi(params[2]),  // 1回目の回頭PWM値
+                                  convertBool(params[0], params[3]),  // 1回目の回頭方向
+                                  atoi(params[4]),  // 角度補正回頭用のPWM値
+                                  atoi(params[5]),  // 2回目の回頭目標回転角度
+                                  atoi(params[6])   // 2回目の回頭PWM値
           );
 
       motionList.push_back(bc);  // 動作リストに追加
