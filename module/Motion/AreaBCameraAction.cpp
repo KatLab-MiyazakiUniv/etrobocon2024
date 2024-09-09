@@ -21,7 +21,7 @@ AreaBCameraAction::AreaBCameraAction(int _preTargetAngle, int _prePwm, bool _isC
 void AreaBCameraAction::run()
 {
   // 事前条件を判定する
-  if(!isMetPrecpndition()) {
+  if(!isMetPrecondition()) {
     return;
   }
 
@@ -56,7 +56,7 @@ void AreaBCameraAction::run()
   }
 }
 
-bool AreaACameraAction::isMetPrecondition()
+bool AreaBCameraAction::isMetPrecondition()
 {
   char buf[LARGE_BUF_SIZE];
 
