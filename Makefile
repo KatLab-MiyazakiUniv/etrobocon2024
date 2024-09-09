@@ -11,6 +11,10 @@ help:
 	@echo " $$ make rebuild"
 	@echo 無線通信デバイスのサーバーに画像をアップロードする
 	@echo " $$ make upload-image"
+	@echo 無線通信デバイスのサーバーに画像をアップロードし、物体検出の結果を示すフラグ用ファイルを受け取る
+	@echo " $$ make upload-detect"
+	@echo フラグ管理用のファイルを全て削除する
+	@echo " $$ make flag-delete"
 	@echo 無線通信デバイスのサーバーにcsvファイルをアップロードする
 	@echo " $$ make upload-csv"
 	@echo 走行を開始する\(実機限定\)
@@ -57,12 +61,20 @@ rebuild:
 upload-image:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/images
 
+# 無線通信デバイスのサーバーに画像をアップロードし、物体検出の結果を示すフラグ用ファイルを受け取る
+upload-detect: flag-delete
+	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/detect -OJ
+
+# フラグ管理用のファイルを全て削除する
+flag-delete:
+	find ./ -type f -name "*.flag" -exec rm {} +
+
 # 無線通信デバイスのサーバーにcsvファイルをアップロードする
 upload-csv:
 	curl -X POST -F "file=@"$(FILE_PATH)"" $(SERVER_URL)/run-log
 
 # 実機の場合、走行を開始する
-start:
+start: flag-delete
 ifeq ($(filter katlab%,$(HOST)), $(HOST))
 	cd $(MAKEFILE_PATH)../ && make start
 endif
