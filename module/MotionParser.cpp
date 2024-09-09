@@ -132,15 +132,13 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(xr);          // 動作リストに追加
     } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
       AreaBCaptureAction* bc
-          = new AreaBCaptureAction(atoi(params[1]),  // 1回目の回頭前スリープ時間(ミリ秒)
-                                   atoi(params[2]),  // 1回目の回頭目標回転角度(deg)
-                                   atoi(params[3]),  // 1回目の回頭PWM値
-                                   convertBool("PR", params[4]),  // 1回目の回頭方向
-                                   atoi(params[5]),               // 角度補正回頭用のPWM値
-                                   atoi(params[6]),  // 2回目の回頭前スリープ時間
-                                   atoi(params[7]),  // 2回目の回頭目標回転角度
-                                   atoi(params[8]),  // 2回目の回頭PWM値
-                                   convertBool("PR", params[9]));  // 2回目の回頭方向
+          = new AreaBCaptureAction(atoi(params[1]),  // 1回目の回頭目標回転角度(deg)
+                                   atoi(params[2]),  // 1回目の回頭PWM値
+                                   convertBool(param[0], params[3]),  // 1回目の回頭方向
+                                   atoi(params[4]),  // 角度補正回頭用のPWM値
+                                   atoi(params[5]),  // 2回目の回頭目標回転角度
+                                   atoi(params[6]),  // 2回目の回頭PWM値
+          );
 
       motionList.push_back(bc);  // 動作リストに追加
     }
@@ -224,7 +222,8 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
   char* param = StringOperator::removeEOL(stringParameter);
 
   if((strcmp(command, "PR") == 0)
-     || (strcmp(command, "AC") == 0)) {    //  コマンドがPRもしくはACの場合
+     || (strcmp(command, "AC") == 0)
+     || (strcmp(command, "BC") == 0)) {  //  コマンドがPR・AC・BCのいずれかの場合
     if(strcmp(param, "clockwise") == 0) {  // パラメータがclockwiseの場合
       return true;
     } else if(strcmp(param, "anticlockwise") == 0) {  // パラメータがanticlockwiseの場合
