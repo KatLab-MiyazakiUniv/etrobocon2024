@@ -16,7 +16,7 @@ AreaBCameraAction::AreaBCameraAction(int _preTargetAngle, int _prePwm, bool _isC
     isClockwise(_isClockwise),
     pwmXr(_pwmXr),
     postTargetAngle(_postTargetAngle),
-    postPwm(_postPwm) {};
+    postPwm(_postPwm){};
 
 void AreaBCameraAction::run()
 {

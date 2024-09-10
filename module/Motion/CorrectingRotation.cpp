@@ -5,16 +5,14 @@
  */
 
 #include "CorrectingRotation.h"
-#include <cmath>
-#include <cstdio>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <stdexcept>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm) {};
+CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm){};
 
 void CorrectingRotation::run()
 {
@@ -24,36 +22,41 @@ void CorrectingRotation::run()
   snprintf(cmd, 512,
            "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt && sudo "
            "chmod 644 correction_angle.txt && cd ../..");
-
-  // コマンドを実行
-  int result = system(cmd);
-  if(result != 0) {
-    throw std::runtime_error("コマンドの実行に失敗しました");
-  }
+  system(cmd);
 
   // 一時ファイルから出力を読み取る
-  ifstream file("etrobocon2024/front_camera/correction_angle.txt");
-  string output;
-  getline(file, output);
-  file.close();
-
-  // 改行文字を削除
-  if(!output.empty() && output[output.length() - 1] == '\n') {
-    output.erase(output.length() - 1);
+  FILE* file = fopen("etrobocon2024/front_camera/correction_angle.txt", "r");
+  if(file == NULL) {
+    fprintf(stderr, "ファイルを開けませんでした\n");
+    return;
   }
 
-  // 一時ファイルを削除
-  remove("etrobocon2024/front_camera/correction_angle.txt");
+  char output[256];
+  if(fgets(output, sizeof(output), file) == NULL) {
+    fprintf(stderr, "ファイルの読み込みに失敗しました\n");
+    fclose(file);
+    return;
+  }
+  fclose(file);
+
+  // 改行文字を削除
+  size_t len = strlen(output);
+  if(len > 0 && output[len - 1] == '\n') {
+    output[len - 1] = '\0';
+  }
+
+// 一時ファイルを削除
+#ifdef ENABLE_FILE_DELETION
+  if(remove("etrobocon2024/front_camera/correction_angle.txt") == EOF) {
+    printf("補正角度ファイルの削除に失敗しました\n");
+  }
+#endif
 
   // 出力を整数に変換
   int calculationAngle = 0;
-  if(!output.empty()) {
-    std::istringstream iss(output);
-    if(!(iss >> calculationAngle)) {
-      throw std::runtime_error("角度の変換に失敗しました: " + output);
-    }
-  } else {
-    throw std::runtime_error("角度の出力が空です");
+  if(sscanf(output, "%d", &calculationAngle) != 1) {
+    fprintf(stderr, "角度の変換に失敗しました: %s\n", output);
+    return;
   }
 
   printf("補正角度: %d\n", calculationAngle);
