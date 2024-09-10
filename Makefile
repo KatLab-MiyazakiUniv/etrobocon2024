@@ -67,7 +67,7 @@ upload-detect: flag-delete
 
 # フラグ管理用のファイルを全て削除する
 flag-delete:
-	find ./ -type f -name "*.flag" -exec rm {} +
+	sudo find ./ -type f -name "*.flag" -exec rm {} +
 
 # 無線通信デバイスのサーバーにcsvファイルをアップロードする
 upload-csv:

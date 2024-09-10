@@ -11,13 +11,23 @@ using namespace std;
 AreaACameraAction::AreaACameraAction(int _position, bool _isClockwise, int _preTargetAngle,
                                      int _postTargetAngle, int _rotationPwm, double _targetDistance,
                                      double _speed)
-  : position(_position),
-    isClockwise(_isClockwise),
+  : isClockwise(_isClockwise),
     preTargetAngle(_preTargetAngle),
     postTargetAngle(_postTargetAngle),
     rotationPwm(_rotationPwm),
     targetDistance(_targetDistance),
-    targetSpeed(_speed) {};
+    targetSpeed(_speed)
+{
+  // ミニフィグの物体検出のラベル付けが（正面：0, 背面：1, 右向き：2, 左向き：3）となっているため、
+  // ポジション１からの撮影時はフラグが２だった場合に撮影を行う。同様に、ポジション２からの撮影はフラグが１だった場合に行われる。
+  if(_position == 1) {
+    flag = 2;
+  } else if(_position == 2) {
+    flag = 1;
+  } else {
+    flag = _position;
+  }
+};
 
 void AreaACameraAction::run()
 {
@@ -45,7 +55,7 @@ void AreaACameraAction::run()
   cameraAction.run();
 
   // 後退で黒線へ復帰
-  DistanceStraight dsToLine((targetDistance - 25), -1.0 * targetSpeed);
+  DistanceStraight dsToLine(targetDistance, -1.0 * targetSpeed);
   dsToLine.run();
 
   // 黒線復帰のための回頭をする
@@ -85,14 +95,14 @@ bool AreaACameraAction::isMetPrecondition()
 
   // フラグファイルの存在確認
   char SKIP_FLAG_PATH[LARGE_BUF_SIZE];
-  snprintf(SKIP_FLAG_PATH, LARGE_BUF_SIZE, "./%d_skip_camera_action.flag", position);
+  snprintf(SKIP_FLAG_PATH, LARGE_BUF_SIZE, "./etrobocon2024/%d_skip_camera_action.flag", flag);
   FILE* fp = fopen(SKIP_FLAG_PATH, "r");
   // ファイルが存在しないかつ、他のフラグファイルが存在する場合は撮影をスキップする
   if(fp == NULL) {
     for(int i = 0; i < 4; i++) {
-      if(i == position) continue;
+      if(i == flag) continue;
       char FLAG_PATH[LARGE_BUF_SIZE];
-      snprintf(FLAG_PATH, LARGE_BUF_SIZE, "./%d_skip_camera_action.flag", i);
+      snprintf(FLAG_PATH, LARGE_BUF_SIZE, "./etrobocon2024/%d_skip_camera_action.flag", i);
       FILE* fp2 = fopen(FLAG_PATH, "r");
       if(fp2 != NULL) {
         snprintf(buf, LARGE_BUF_SIZE, "Skip shooting because flag is %d.", i);
@@ -114,7 +124,9 @@ void AreaACameraAction::logRunning()
   const char* isClockwisestr = isClockwise ? "true" : "false";
 
   snprintf(buf, LARGE_BUF_SIZE,
-           "Run AreaACameraAction (isClockwise: %s, preTargetAngle: %d, postTargetAngle: %d)",
-           isClockwisestr, preTargetAngle, postTargetAngle);
+           "Run AreaACameraAction (flag: %d, isClockwise: %s, preTargetAngle: %d, postTargetAngle: "
+           "%d, rotationPwm: %d, targetDistance: %f, speed:%f)",
+           flag, isClockwisestr, preTargetAngle, postTargetAngle, rotationPwm, targetDistance,
+           targetSpeed);
   logger.log(buf);
 }

@@ -46,7 +46,7 @@ class AreaACameraAction : public CompositeMotion {
   void logRunning() override;
 
  private:
-  int position;  // 撮影箇所
+  int flag;  // 撮影を行うかどうかを確認するフラグ
   CameraAction::Subject subject
       = CameraAction::Subject::FIGURE;  // 配置エリアAではミニフィグの撮影を行う
   bool isClockwise;       // リアカメラをミニフィグに向けるための回頭方向
