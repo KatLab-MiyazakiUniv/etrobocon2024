@@ -12,9 +12,24 @@ from yellow_rectangle_detector import YellowRectangleDetector
 
 class GetCorrectionAngle:
     def __init__(self):
+        """コンストラクタ"""
+
         self.yellow_rectangle_detector = YellowRectangleDetector()
 
     def calculate_correction_angle(self, image_path):
+        """補正角度を算出する
+
+        Args:
+            image_path (str): 画像の保存先パス(拡張子込み)
+
+        Raises:
+            ValueError: 画像読み込みができない
+            ValueError: 黄色の矩形を検出できない
+
+        Returns:
+            int: 補正角度
+        """
+
         # 画像を読み込む
         image = cv2.imread(image_path)
         if image is None:
@@ -69,4 +84,4 @@ if __name__ == "__main__":
     #四捨五入してintに変換
     angle_int = int(round(angle))
     #角度だけを出力（C++側で読み取るため）
-    print(f"{angle_int}")
+    print(angle_int)
