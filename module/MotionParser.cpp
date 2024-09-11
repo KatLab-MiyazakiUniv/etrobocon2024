@@ -114,7 +114,18 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       CameraAction* ca = new CameraAction(
           convertSubject(params[1]));  // フラグ確認を行うかの判断に用いる撮影対象
 
-      motionList.push_back(ca);  // 動作リストに追加
+      motionList.push_back(ca);          // 動作リストに追加
+    } else if(command == COMMAND::AC) {  // 配置エリアAでのミニフィグ撮影動作の生成
+      AreaACameraAction* ac = new AreaACameraAction(
+          atoi(params[1]),  // 撮影位置(0~3)
+          convertBool(params[0], params[2]),  // フロントカメラをミニフィグに向けるための回頭方向
+          atoi(params[3]),   // 撮影のための回頭角度
+          atoi(params[4]),   // 黒線復帰のための回頭角度
+          atoi(params[5]),   // 回頭時のPWM
+          atof(params[6]),   // 前進、後退の距離
+          atof(params[7]));  // 前進、後退の速度
+
+      motionList.push_back(ac);  // 動作リストに追加
     }
     // TODO: 後で作成する
 
@@ -185,6 +196,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::SM;
   } else if(strcmp(str, "CA") == 0) {  // 文字列がCAの場合
     return COMMAND::CA;
+  } else if(strcmp(str, "AC") == 0) {  // 文字列がACの場合
+    return COMMAND::AC;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }
@@ -197,7 +210,8 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
   // 末尾の改行を削除
   char* param = StringOperator::removeEOL(stringParameter);
 
-  if(strcmp(command, "PR") == 0) {         //  コマンドがPRの場合
+  if((strcmp(command, "PR") == 0)
+     || (strcmp(command, "AC") == 0)) {    //  コマンドがPRもしくはACの場合
     if(strcmp(param, "clockwise") == 0) {  // パラメータがclockwiseの場合
       return true;
     } else if(strcmp(param, "anticlockwise") == 0) {  // パラメータがanticlockwiseの場合
