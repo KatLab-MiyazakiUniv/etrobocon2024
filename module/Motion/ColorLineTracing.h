@@ -82,7 +82,7 @@ class ColorLineTracing : public LineTracing {
 
  private:
   static constexpr int JUDGE_COUNT = 3;
-  int colorCount = 0;
+  int colorCount = 0;  // コースから外れたと判定するまでにかかる色認識の回数
   COLOR targetColor;  // 指定色
 };
 
