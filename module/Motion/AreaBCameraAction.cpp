@@ -16,12 +16,12 @@ AreaBCameraAction::AreaBCameraAction(int _preTargetAngle, int _prePwm, bool _isC
     isClockwise(_isClockwise),
     pwmXr(_pwmXr),
     postTargetAngle(_postTargetAngle),
-    postPwm(_postPwm){};
+    postPwm(_postPwm) {};
 
 void AreaBCameraAction::run()
 {
   // 事前条件を判定する
-  if(!isMetPrecondition()) {
+  if(!isMetPreCondition()) {
     return;
   }
 
@@ -56,7 +56,7 @@ void AreaBCameraAction::run()
   }
 }
 
-bool AreaBCameraAction::isMetPrecondition()
+bool AreaBCameraAction::isMetPreCondition()
 {
   char buf[LARGE_BUF_SIZE];
 
@@ -90,6 +90,11 @@ bool AreaBCameraAction::isMetPrecondition()
 void AreaBCameraAction::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
-  snprintf(buf, LARGE_BUF_SIZE, "Run AreaBCameraAction ()");
+  const char* isClockwiseStr = isClockwise ? "true" : "false";
+  snprintf(buf, LARGE_BUF_SIZE,
+           "Run AreaBCameraAction (preTargetAngle: %d, prePwm: %d"
+           "isClockwise: %d, pwmXr: %d "
+           "postTargetAngle: %d, postPwm: %d)",
+           preTargetAngle, prePwm, isClockwise, pwmXr, postTargetAngle, postPwm);
   logger.log(buf);
 }

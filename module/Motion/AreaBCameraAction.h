@@ -36,7 +36,7 @@ class AreaBCameraAction : public CompositeMotion {
   /**
    * @brief 撮影動作を行う際の事前条件判定をする
    */
-  bool isMetPrecondition();
+  bool isMetPreCondition();
 
   /**
    * @brief 実行のログを取る
