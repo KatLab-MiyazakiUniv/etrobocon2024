@@ -5,6 +5,7 @@
 
 import os
 import cv2
+from yellow_rectangle_detector import YellowRectangleDetector
 
 
 class FrameTimingCalculator:
@@ -19,6 +20,7 @@ class FrameTimingCalculator:
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
         self.bounding_box_height = bounding_box_height
+        self.yellow_rectangle_detector = YellowRectangleDetector()
 
     def get_target_timing(self):
         """映像から特定のフレームを画像として切り出すタイミングを取得する"""
@@ -33,7 +35,7 @@ class FrameTimingCalculator:
             return None
 
         # 黄色い長方形を検出
-        yellow_rect = self.detect_yellow_rectangle(first_frame)
+        yellow_rect = self.yellow_rectangle_detector.detect_yellow_rectangle(first_frame)
 
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -201,32 +203,6 @@ class FrameTimingCalculator:
         cap.release()
 
         return center_frame
-
-    def detect_yellow_rectangle(self, frame):
-        """配置エリアAにおける背景を検出するため、黄色の矩形を検出する。
-        Args:
-            frame (int): 動画の何フレーム目を検出の対象とするかを示す数値
-        """
-
-        # HSV色空間に変換
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-        # 黄色の範囲を定義
-        lower_yellow = (20, 160, 160)
-        upper_yellow = (30, 255, 255)
-
-        # 黄色のマスクを作成
-        mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-
-        # 輪郭を検出
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        # 最大の輪郭を見つける
-        if contours:
-            largest_contour = max(contours, key=cv2.contourArea)
-            return cv2.boundingRect(largest_contour)
-
-        return None
 
 
 if __name__ == "__main__":

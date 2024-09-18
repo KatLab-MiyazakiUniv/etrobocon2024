@@ -126,6 +126,21 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           atof(params[7]));  // 前進、後退の速度
 
       motionList.push_back(ac);  // 動作リストに追加
+    } else if(command == COMMAND::XR) {  // プラレール・背景撮影のための角度補正回頭の追加
+      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
+
+      motionList.push_back(xr);          // 動作リストに追加
+    } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
+      AreaBCameraAction* bc
+          = new AreaBCameraAction(atoi(params[1]),  // 1回目の回頭目標回転角度(deg)
+                                  atoi(params[2]),  // 1回目の回頭PWM値
+                                  convertBool(params[0], params[3]),  // 1回目の回頭方向
+                                  atoi(params[4]),  // 角度補正回頭用のPWM値
+                                  atoi(params[5]),  // 2回目の回頭目標回転角度
+                                  atoi(params[6])   // 2回目の回頭PWM値
+          );
+
+      motionList.push_back(bc);  // 動作リストに追加
     }
     // TODO: 後で作成する
 
@@ -143,13 +158,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
     //     ArmDownning* ad = new ArmDownnig(atoi(params[1]), atoi(params[2]));
 
     //     motionList.push_back(ad);          // 動作リストに追加
-    //   } else if(command == COMMAND::XR) {  // 角度補正回頭の追加
-    //     CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]),   // 目標角度
-    //                                                     atoi(params[2]));  // 目標速度
-
-    //     motionList.push_back(xr);                                          // 動作リストに追加
     //   }
-
     else {  // 未定義のコマンドの場合
       snprintf(buf, LARGE_BUF_SIZE, "%s:%d: '%s' is undefined command", commandFilePath, lineNum,
                params[0]);
@@ -198,6 +207,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::CA;
   } else if(strcmp(str, "AC") == 0) {  // 文字列がACの場合
     return COMMAND::AC;
+  } else if(strcmp(str, "BC") == 0) {  // 文字列がBCの場合
+    return COMMAND::BC;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }
@@ -210,8 +221,8 @@ bool MotionParser::convertBool(char* command, char* stringParameter)
   // 末尾の改行を削除
   char* param = StringOperator::removeEOL(stringParameter);
 
-  if((strcmp(command, "PR") == 0)
-     || (strcmp(command, "AC") == 0)) {    //  コマンドがPRもしくはACの場合
+  if((strcmp(command, "PR") == 0) || (strcmp(command, "AC") == 0)
+     || (strcmp(command, "BC") == 0)) {    //  コマンドがPR・AC・BCのいずれかの場合
     if(strcmp(param, "clockwise") == 0) {  // パラメータがclockwiseの場合
       return true;
     } else if(strcmp(param, "anticlockwise") == 0) {  // パラメータがanticlockwiseの場合

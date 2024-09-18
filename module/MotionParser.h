@@ -25,6 +25,8 @@
 #include "ResetWheelsMotorPwm.h"
 #include "CameraAction.h"
 #include "AreaACameraAction.h"
+#include "CorrectingRotation.h"
+#include "AreaBCameraAction.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
@@ -40,11 +42,12 @@ enum class COMMAND {
   SL,  // 自タスクスリープ
   AU,  // アームを上げる
   AD,  // アームを下げる
-  XR,  // 角度補正回頭
   RM,  // 両輪モーターリセット&停止
   SM,  // 両輪モーター停止
   CA,  // カメラ撮影動作
   AC,  // 配置エリアAでのミニフィグ撮影動作
+  BC,  // 配置エリアB撮影動作
+  XR,  // 角度補正回頭動作
   NONE
 };
 
