@@ -55,6 +55,6 @@ class AreaACameraAction : public CompositeMotion {
   int rotationPwm;      // 回頭PWM
   double targetDistance;  // 撮影前後の前進・後退のための目標距離
   double targetSpeed;     // 撮影前後の前進・後退のための目標速度
-  char ETROBO_PATH = "./etrobocon2024/"
+  const char* ETROBO_PATH = "./etrobocon2024/";
 };
 #endif
