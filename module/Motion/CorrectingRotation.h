@@ -35,8 +35,8 @@ class CorrectingRotation : public CompositeMotion {
   void logRunning() override;
 
  private:
-  int pwm;              // 指定PWM値 0~100
-  int correctionAngle;  // 補正角度 0~360
+  int pwm;                  // 指定PWM値 0~100
+  int correctionAngle = 0;  // 補正角度 0~360
   bool isClockwise;
 };
 #endif
