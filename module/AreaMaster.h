@@ -14,13 +14,14 @@
 #include "Logger.h"
 
 // エリア名を持つ列挙型変数（LineTrace = 0, DoubleLoop = 1, DebrisRemoval = 2,DebrisRemovalOver = 3,
-// DebrisRemovalUnder = 4, SmartCarry = 5）
+// DebrisRemovalUnder = 4, DebrisRemovalSpecial = 5, SmartCarry = 6）
 enum Area {
   LineTrace,
   DoubleLoop,
   DebrisRemoval,
   DebrisRemovalOver,
   DebrisRemovalUnder,
+  DebrisRemovalSpecial,
   SmartCarry
 };
 
@@ -50,8 +51,8 @@ class AreaMaster {
   const char* basePath = "etrobocon2024/datafiles/";
 
   // コマンドファイル名（各エリア名）
-  const char* commandFileNames[6] = { "LineTrace",         "DoubleLoop",         "DebrisRemoval",
-                                      "DebrisRemovalOver", "DebrisRemovalUnder", "SmartCarry" };
+  const char* commandFileNames[7] = { "LineTrace",         "DoubleLoop",         "DebrisRemoval",
+                                      "DebrisRemovalOver", "DebrisRemovalUnder", "DebrisRemovalSpecial", "SmartCarry" };
 };
 
 #endif

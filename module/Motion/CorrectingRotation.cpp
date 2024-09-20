@@ -59,7 +59,7 @@ void CorrectingRotation::run()
   printf("補正角度: %d\n", calculationAngle);
 
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
-  bool isClockwise = (calculationAngle >= 0);
+  isClockwise = (calculationAngle >= 0);
   correctionAngle = abs(calculationAngle * 0.5) <= 10 ? 0 : abs(calculationAngle * 0.5);
 
   printf("ホゲータ回頭: %d\n", correctionAngle);
@@ -69,6 +69,14 @@ void CorrectingRotation::run()
   // 補正のための回頭をする
   pr.run();
   sl.run();
+}
+
+int CorrectingRotation::getCorrectionAngle(){
+  if(isClockwise == true) {
+    return(correctionAngle);
+  }else{
+    return(-correctionAngle);
+  }
 }
 
 void CorrectingRotation::logRunning()

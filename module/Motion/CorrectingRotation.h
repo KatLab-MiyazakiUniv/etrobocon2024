@@ -25,6 +25,11 @@ class CorrectingRotation : public CompositeMotion {
   void run() override;
 
   /**
+   * @brief 補正角度を取得する
+   */
+  int getCorrectionAngle();
+
+  /**
    * @brief 実行のログを取る
    */
   void logRunning() override;
@@ -32,5 +37,6 @@ class CorrectingRotation : public CompositeMotion {
  private:
   int pwm;              // 指定PWM値 0~100
   int correctionAngle;  // 補正角度 0~360
+  bool isClockwise;
 };
 #endif
