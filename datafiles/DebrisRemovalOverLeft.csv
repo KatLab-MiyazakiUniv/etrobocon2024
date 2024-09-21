@@ -2,8 +2,7 @@ DS,250,150
 SL,200,回頭前のスリープ
 PR,65,70,clockwise
 SL,200,回頭前のスリープ
-DS,1200,300
-DS,750,250
+DS,1700,600
 CS,BLACK,200
 SL,200,回頭前のスリープ
 PR,65,70,anticlockwise
