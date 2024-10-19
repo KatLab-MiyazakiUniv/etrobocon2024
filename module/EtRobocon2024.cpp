@@ -52,6 +52,7 @@ void EtRobocon2024::start()
   bool isLeftCourse = true;
   bool isLeftEdge = true;
   Calibrator calibrator;
+  Timer timer;
 
   // 　　　走行ログファイルを取得する場合
   if(shouldGetRunLogs) {
@@ -84,6 +85,8 @@ void EtRobocon2024::start()
   // setstate("wait");
   // 合図を送るまで待機する
   while(!(calibrator.waitForStart())) {
+    timer.sleep();
+    printf("\n\nwait again\n\n");
   }
 
   AreaMaster LineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);

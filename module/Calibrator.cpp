@@ -116,12 +116,16 @@ bool Calibrator::waitForStart()
   logger.log(buf);
 
   // startDistance以内の距離に物体がない間待機する
-  while((measurer.getForwardDistance() > startDistance) && (count < 60000)) {
+  while((measurer.getForwardDistance() > startDistance) && (count < 6000)) {
     timer.sleep();  // 10ミリ秒スリープ
     count++;
+    if(count % 1000 == 0) {
+      snprintf(buf, SMALL_BUF_SIZE, "count: %d", count);
+      logger.log(buf);
+    }
   }
 
-  return count < 60000;
+  return count < 6000;
 }
 
 bool Calibrator::getIsLeftCourse()
