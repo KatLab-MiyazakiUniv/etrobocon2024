@@ -103,11 +103,12 @@ void Calibrator::measureAndSetTargetBrightness()
   logger.log(buf);
 }
 
-void Calibrator::waitForStart()
+bool Calibrator::waitForStart()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
   constexpr int startDistance = 5;  // 手などでスタート合図を出す距離[cm]
+  int count = 0;
 
   logger.log("On standby.\n");
   snprintf(buf, SMALL_BUF_SIZE, "On standby.\n\nSignal within %dcm from Sonar Sensor.",
@@ -115,9 +116,12 @@ void Calibrator::waitForStart()
   logger.log(buf);
 
   // startDistance以内の距離に物体がない間待機する
-  while(measurer.getForwardDistance() > startDistance) {
+  while((measurer.getForwardDistance() > startDistance) && (count < 60000)) {
     timer.sleep();  // 10ミリ秒スリープ
+    count++;
   }
+
+  return count < 60000;
 }
 
 bool Calibrator::getIsLeftCourse()

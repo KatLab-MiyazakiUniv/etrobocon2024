@@ -83,7 +83,8 @@ void EtRobocon2024::start()
   // 走行状態をwait(開始合図待ち)に変更
   // setstate("wait");
   // 合図を送るまで待機する
-  calibrator.waitForStart();
+  while(!(calibrator.waitForStart())) {
+  }
 
   AreaMaster LineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
   AreaMaster doubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);

@@ -26,7 +26,7 @@ class Calibrator {
   /**
    * @brief スタート合図が出るまで待機状態にする
    */
-  void waitForStart();
+  bool waitForStart();
 
   /**
    * @brief isLeftCourseのゲッター
