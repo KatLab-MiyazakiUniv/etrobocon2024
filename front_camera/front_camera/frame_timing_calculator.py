@@ -5,7 +5,7 @@
 
 import os
 import cv2
-from yellow_rectangle_detector import YellowRectangleDetector
+from color_rectangle_detector import ColorRectangleDetector
 
 
 class FrameTimingCalculator:
@@ -20,7 +20,7 @@ class FrameTimingCalculator:
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
         self.bounding_box_height = bounding_box_height
-        self.yellow_rectangle_detector = YellowRectangleDetector()
+self.yellow_rectangle_detector = ColorRectangleDetector("yellow")
 
     def get_target_timing(self):
         """映像から特定のフレームを画像として切り出すタイミングを取得する"""
@@ -35,7 +35,7 @@ class FrameTimingCalculator:
             return None
 
         # 黄色い長方形を検出
-        yellow_rect = self.yellow_rectangle_detector.detect_yellow_rectangle(first_frame)
+        yellow_rect = self.yellow_rectangle_detector.detect_rectangle(first_frame)
 
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))

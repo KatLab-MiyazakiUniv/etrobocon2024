@@ -1,7 +1,7 @@
 /**
  * @file   CorrectingRotation.cpp
  * @brief  プラレール・背景撮影のための角度補正回頭動作
- * @author bizyutyu
+ * @author bizyutyu CHIHAYATAKU
  */
 
 #include "CorrectingRotation.h"
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm) : pwm(_pwm){};
+CorrectingRotation::CorrectingRotation(int _pwm, COLOR _color) : pwm(_pwm), color(_color) {};
 
 void CorrectingRotation::run()
 {
@@ -17,8 +17,10 @@ void CorrectingRotation::run()
   // Pytnon側で算出に必要な画像取得から補正角度算出までを行う
   char cmd[512];
   snprintf(cmd, 512,
-           "cd etrobocon2024/front_camera && make correction-angle > correction_angle.txt && sudo "
-           "chmod 644 correction_angle.txt && cd ../..");
+           "cd etrobocon2024/front_camera && make correction-angle COLOR=\"--color %s\"> "
+           "correction_angle.txt && sudo "
+           "chmod 644 correction_angle.txt && cd ../..",
+           ColorJudge::colorToString(color));
   system(cmd);
 
   // 一時ファイルから出力を読み取る
@@ -83,7 +85,7 @@ void CorrectingRotation::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
-  snprintf(buf, LARGE_BUF_SIZE, "Run CorrectingRotation (correctionAngle: %d, pwm: %d)",
-           correctionAngle, pwm);
+  snprintf(buf, LARGE_BUF_SIZE, "Run CorrectingRotation (correctionAngle: %d, pwm: %d, color: %s)",
+           correctionAngle, pwm, ColorJudge::colorToString(color));
   logger.log(buf);
 }

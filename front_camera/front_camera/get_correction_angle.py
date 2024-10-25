@@ -1,6 +1,6 @@
 """
 指定画像中の背景（の黄色矩形）が中心に来るような補正角度を返す
-@author: bizyutyu YKhm20020 keiya121
+@author: bizyutyu YKhm20020 keiya121 CHIHAYATAKU
 """
 
 import argparse
@@ -8,13 +8,16 @@ import os
 import cv2
 import math
 from camera_interface import CameraInterface
-from yellow_rectangle_detector import YellowRectangleDetector
+from color_rectangle_detector import ColorRectangleDetector
 
 class GetCorrectionAngle:
-    def __init__(self):
-        """コンストラクタ"""
+    def __init__(self, color):
+        """コンストラクタ
+        Args:
+            color (str): 補正対象の色
+        """
 
-        self.yellow_rectangle_detector = YellowRectangleDetector()
+        self.rectangle_detector = ColorRectangleDetector(color)
 
     def calculate_correction_angle(self, image_path):
         """補正角度を算出する
@@ -24,7 +27,7 @@ class GetCorrectionAngle:
 
         Raises:
             ValueError: 画像読み込みができない
-            ValueError: 黄色の矩形を検出できない
+            ValueError: 対象色の矩形を検出できない
 
         Returns:
             int: 補正角度
@@ -39,13 +42,13 @@ class GetCorrectionAngle:
         image_center_x = image.shape[1] // 2
         # image_center_y = image.shape[0] // 2
 
-        # 黄色い長方形を検出
-        yellow_rect = self.yellow_rectangle_detector.detect_yellow_rectangle(image)
-        if yellow_rect is None:
-            raise ValueError("黄色い長方形が検出されませんでした")
+        # 対象色の長方形を検出
+        target_color_rect = self.rectangle_detector.detect_rectangle(image)
+        if target_color_rect is None:
+            raise ValueError(f"{self.rectangle_detector.color}色の長方形が検出されませんでした")
 
-        # 黄色い長方形の中心のx座標を計算
-        rect_center_x = yellow_rect[0] + yellow_rect[2] // 2
+        # 対象色の長方形の中心のx座標を計算
+        rect_center_x = target_color_rect[0] + target_color_rect[2] // 2
 
         # x軸方向の偏差を計算
         delta_x = rect_center_x - image_center_x
@@ -59,6 +62,7 @@ class GetCorrectionAngle:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="フロントカメラに関するプログラム")
     parser.add_argument("--camera-num", type=int, default=0, help="カメラIDを指定する")
+    parser.add_argument("--color", type=str, default="yellow", help="検出する矩形の色を指定する")
 
     args = parser.parse_args()
     camera = CameraInterface()
@@ -79,7 +83,7 @@ if __name__ == "__main__":
     camera.capture_save_image(save_path)
 
     #補正角度の算出
-    angle_corrector = GetCorrectionAngle()
+    angle_corrector = GetCorrectionAngle(args.color)
     angle = angle_corrector.calculate_correction_angle(save_path)
     #四捨五入してintに変換
     angle_int = int(round(angle))
