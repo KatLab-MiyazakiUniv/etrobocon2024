@@ -9,6 +9,7 @@ class ColorRectangleDetector:
         'YELLOW': ((20, 160, 160), (30, 255, 255)),
         'RED': ((0, 160, 160), (10, 255, 255)),    # 赤色の低色相側
     }
+
     def __init__(self, color):
         """コンストラクタ
         Args:
@@ -29,13 +30,7 @@ class ColorRectangleDetector:
         # HSV色空間に変換
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         # 対象の色のマスクを作成
-        if self.color == 'red':
-            # 赤色の場合は2つのマスクを結合
-            mask1 = cv2.inRange(hsv, self.COLOR_BOUNDS['red'][0][0], self.COLOR_BOUNDS['red'][0][1])
-            mask2 = cv2.inRange(hsv, self.COLOR_BOUNDS['red'][1][0], self.COLOR_BOUNDS['red'][1][1])
-            mask = cv2.bitwise_or(mask1, mask2)
-        else:
-            mask = cv2.inRange(hsv, self.lower_bound, self.upper_bound)
+        mask = cv2.inRange(hsv, self.lower_bound, self.upper_bound)
         # 輪郭を検出
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # 最大の輪郭を見つける

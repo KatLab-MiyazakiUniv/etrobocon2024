@@ -11,8 +11,6 @@
 #include "PwmRotation.h"
 #include "Sleeping.h"
 #include "ColorJudge.h"
-#include <algorithm>
-#include <string>
 
 class CorrectingRotation : public CompositeMotion {
  public:
