@@ -29,7 +29,6 @@ void AreaBCameraAction::run()
   Sleeping sl(200);
   ResetWheelsMotorPwm rm;
   PwmRotation prePR(preTargetAngle, prePwm, isClockwise);
-  PwmRotation postPR(postTargetAngle, postPwm, !isClockwise);
   CorrectingRotation xr(pwmXr, colorXr);
   CameraAction ca(CameraAction::Subject::PLARAIL);
 
@@ -48,6 +47,7 @@ void AreaBCameraAction::run()
   // 撮影動作を行う
   ca.run();
 
+  PwmRotation postPR(postTargetAngle + xr.getCorrectionAngle(), postPwm, !isClockwise);
   // 黒線復帰のための回頭をする
   if(postTargetAngle != 0) {
     sl.run();
@@ -92,9 +92,8 @@ void AreaBCameraAction::logRunning()
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* isClockwiseStr = isClockwise ? "true" : "false";
   snprintf(buf, LARGE_BUF_SIZE,
-           "Run AreaBCameraAction (preTargetAngle: %d, prePwm: %d"
-           "isClockwise: %d, pwmXr: %d "
+           "Run AreaBCameraAction (preTargetAngle: %d, prePwm: %d, isClockwise: %s, pwmXr: %d, "
            "postTargetAngle: %d, postPwm: %d)",
-           preTargetAngle, prePwm, isClockwise, pwmXr, postTargetAngle, postPwm);
+           preTargetAngle, prePwm, isClockwiseStr, pwmXr, postTargetAngle, postPwm);
   logger.log(buf);
 }

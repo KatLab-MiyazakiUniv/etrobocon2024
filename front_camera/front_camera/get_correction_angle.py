@@ -11,7 +11,7 @@ from camera_interface import CameraInterface
 from color_rectangle_detector import ColorRectangleDetector
 
 class GetCorrectionAngle:
-    def __init__(self, color="yellow"):
+    def __init__(self, color):
         """コンストラクタ
         Args:
             color (str): 補正対象の色
@@ -45,7 +45,7 @@ class GetCorrectionAngle:
         # 対象色の長方形を検出
         target_color_rect = self.rectangle_detector.detect_rectangle(image)
         if target_color_rect is None:
-            raise ValueError(f"{self.detector.color}色の長方形が検出されませんでした")
+            raise ValueError(f"{self.rectangle_detector.color}色の長方形が検出されませんでした")
 
         # 対象色の長方形の中心のx座標を計算
         rect_center_x = target_color_rect[0] + target_color_rect[2] // 2

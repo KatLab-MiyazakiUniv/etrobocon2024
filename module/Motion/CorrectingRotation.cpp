@@ -9,7 +9,7 @@
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm, const char* _color) : pwm(_pwm), color(_color) {};
+CorrectingRotation::CorrectingRotation(int _pwm, COLOR _color) : pwm(_pwm), color(_color) {};
 
 void CorrectingRotation::run()
 {
@@ -20,7 +20,7 @@ void CorrectingRotation::run()
            "cd etrobocon2024/front_camera && make correction-angle COLOR=\"--color %s\"> "
            "correction_angle.txt && sudo "
            "chmod 644 correction_angle.txt && cd ../..",
-           color);
+           ColorJudge::colorToString(color));
   system(cmd);
 
   // 一時ファイルから出力を読み取る
@@ -61,7 +61,7 @@ void CorrectingRotation::run()
   printf("補正角度: %d\n", calculationAngle);
 
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
-  bool isClockwise = (calculationAngle >= 0);
+  isClockwise = (calculationAngle >= 0);
   correctionAngle = abs(calculationAngle * 0.5) <= 10 ? 0 : abs(calculationAngle * 0.5);
 
   printf("ホゲータ回頭: %d\n", correctionAngle);
@@ -73,11 +73,20 @@ void CorrectingRotation::run()
   sl.run();
 }
 
+int CorrectingRotation::getCorrectionAngle()
+{
+  if(isClockwise == true) {
+    return (correctionAngle);
+  } else {
+    return (-correctionAngle);
+  }
+}
+
 void CorrectingRotation::logRunning()
 {
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
 
   snprintf(buf, LARGE_BUF_SIZE, "Run CorrectingRotation (correctionAngle: %d, pwm: %d, color: %s)",
-           correctionAngle, pwm, color);
+           correctionAngle, pwm, ColorJudge::colorToString(color));
   logger.log(buf);
 }
