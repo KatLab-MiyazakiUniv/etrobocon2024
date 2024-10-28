@@ -1,7 +1,7 @@
 /**
  * @file   AreaBCameraAction.cpp
  * @brief  配置エリアBにおけるプラレール・背景撮影動作
- * @author keiya121
+ * @author keiya121 CHIHAYATAKU
  */
 
 #include "AreaBCameraAction.h"
@@ -16,7 +16,7 @@ AreaBCameraAction::AreaBCameraAction(int _preTargetAngle, int _prePwm, bool _isC
     isClockwise(_isClockwise),
     pwmXr(_pwmXr),
     postTargetAngle(_postTargetAngle),
-    postPwm(_postPwm){};
+    postPwm(_postPwm) {};
 
 void AreaBCameraAction::run()
 {
@@ -30,7 +30,7 @@ void AreaBCameraAction::run()
   ResetWheelsMotorPwm rm;
   PwmRotation prePR(preTargetAngle, prePwm, isClockwise);
   PwmRotation postPR(postTargetAngle, postPwm, !isClockwise);
-  CorrectingRotation xr(pwmXr);
+  CorrectingRotation xr(pwmXr, colorXr);
   CameraAction ca(CameraAction::Subject::PLARAIL);
 
   // 撮影のための回頭をする

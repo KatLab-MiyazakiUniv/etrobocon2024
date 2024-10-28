@@ -40,7 +40,7 @@ plarail-image:
 
 correction-angle:
 	@${make} kill
-	@sudo python3 front_camera/get_correction_angle.py
+	@sudo python3 front_camera/get_correction_angle.py $(COLOR)
 
 rm-img:
 	sudo rm -rf image_data/

@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121 bizyutyu
+ * @author keiya121 bizyutyu CHIHAYATAKU
  */
 
 #include "MotionParser.h"
@@ -125,9 +125,10 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           atof(params[6]),   // 前進、後退の距離
           atof(params[7]));  // 前進、後退の速度
 
-      motionList.push_back(ac);  // 動作リストに追加
-    } else if(command == COMMAND::XR) {  // プラレール・背景撮影のための角度補正回頭の追加
-      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
+      motionList.push_back(ac);          // 動作リストに追加
+    } else if(command == COMMAND::XR) {  // 角度補正回頭動作の生成
+      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]),  // 目標PWM
+                                                      params[2]);       // 補正対象の色
 
       motionList.push_back(xr);          // 動作リストに追加
     } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
