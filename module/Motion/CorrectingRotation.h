@@ -11,8 +11,6 @@
 #include "PwmRotation.h"
 #include "Sleeping.h"
 #include "ColorJudge.h"
-#include <algorithm>
-#include <string>
 
 class CorrectingRotation : public CompositeMotion {
  public:
@@ -41,7 +39,7 @@ class CorrectingRotation : public CompositeMotion {
  private:
   int pwm;                  // 指定PWM値 0~100
   int correctionAngle = 0;  // 補正角度 0~360
-  COLOR color;    // 検出する矩形の色
+  COLOR color;              // 検出する矩形の色
   bool isClockwise;
 };
 #endif

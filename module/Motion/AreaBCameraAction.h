@@ -45,13 +45,13 @@ class AreaBCameraAction : public CompositeMotion {
   void logRunning() override;
 
  private:
-  int preTargetAngle;   // 1回目の回頭目標回転角度(deg)
-  int prePwm;           // 1回目の回頭PWM値
-  bool isClockwise;     // 1回目の回頭方向
-  int pwmXr;            // 角度補正回頭用のPWM値
-  int postTargetAngle;  // 2回目の回頭目標回転角度(deg)
-  int postPwm;          // 2回目の回頭PWM値
-  COLOR colorXr = COLOR::YELLOW;
+  int preTargetAngle;             // 1回目の回頭目標回転角度(deg)
+  int prePwm;                     // 1回目の回頭PWM値
+  bool isClockwise;               // 1回目の回頭方向
+  int pwmXr;                      // 角度補正回頭用のPWM値
+  int postTargetAngle;            // 2回目の回頭目標回転角度(deg)
+  int postPwm;                    // 2回目の回頭PWM値
+  COLOR colorXr = COLOR::YELLOW;  // 角度補正回頭の対象色
 };
 
 #endif

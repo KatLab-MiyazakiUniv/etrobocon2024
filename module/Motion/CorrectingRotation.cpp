@@ -73,11 +73,12 @@ void CorrectingRotation::run()
   sl.run();
 }
 
-int CorrectingRotation::getCorrectionAngle(){
+int CorrectingRotation::getCorrectionAngle()
+{
   if(isClockwise == true) {
-    return(correctionAngle);
-  }else{
-    return(-correctionAngle);
+    return (correctionAngle);
+  } else {
+    return (-correctionAngle);
   }
 }
 

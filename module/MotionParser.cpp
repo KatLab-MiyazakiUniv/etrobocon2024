@@ -127,8 +127,9 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
 
       motionList.push_back(ac);          // 動作リストに追加
     } else if(command == COMMAND::XR) {  // 角度補正回頭動作の生成
-      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]),  // 目標PWM
-                                                     ColorJudge::stringToColor(params[2]));       // 補正対象の色
+      CorrectingRotation* xr
+          = new CorrectingRotation(atoi(params[1]),                        // 目標PWM
+                                   ColorJudge::stringToColor(params[2]));  // 補正対象の色
 
       motionList.push_back(xr);          // 動作リストに追加
     } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
