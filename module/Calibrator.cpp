@@ -107,6 +107,7 @@ bool Calibrator::waitForStart()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
+  Measurer measurer; // measurerの再インスタンス化
   constexpr int startDistance = 5;  // 手などでスタート合図を出す距離[cm]
   int count = 0;
 
@@ -116,16 +117,17 @@ bool Calibrator::waitForStart()
   logger.log(buf);
 
   // startDistance以内の距離に物体がない間待機する
-  while(measurer.getForwardDistance() > startDistance && !measurer.getLeftButton() && count < 6000) {
-    timer.sleep();  // 10ミリ秒スリープ
+  while(measurer.getForwardDistance() > startDistance && !measurer.getLeftButton() && count < 600) {
+    timer.sleep(100);  // 100ミリ秒スリープ
     count++;
-    if(count % 1000 == 0) {
-      snprintf(buf, SMALL_BUF_SIZE, "count: %d", count);
+    if(count % 50 == 0) {
+      snprintf(buf, SMALL_BUF_SIZE, "count: %d\nbrightness: %d\nforwardDistance: %d", 
+      count, measurer.getBrightness(), measurer.getForwardDistance());
       logger.log(buf);
     }
   }
 
-  return count < 6000;
+  return count < 600;
 }
 
 bool Calibrator::getIsLeftCourse()

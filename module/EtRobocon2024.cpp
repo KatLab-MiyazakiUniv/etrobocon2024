@@ -84,7 +84,7 @@ void EtRobocon2024::start()
   // 走行状態をwait(開始合図待ち)に変更
   // setstate("wait");
   // 合図を送るまで待機する
-  while(!(calibrator.waitForStart())) {
+  while(!calibrator.waitForStart()) {
     timer.sleep();
     printf("\n\nwait again\n\n");
   }
