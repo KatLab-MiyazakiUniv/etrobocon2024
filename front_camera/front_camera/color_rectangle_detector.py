@@ -50,12 +50,37 @@ class ColorRectangleDetector:
         cv2.imwrite(mask_path, mask)  # マスク画像を保存
 
 
-        # 輪郭を検出
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        # 最大の輪郭を見つける
-        if contours:
-            largest_contour = max(contours, key=cv2.contourArea)
-            return cv2.boundingRect(largest_contour)
+        if self.color == 'RED':
+            # 赤色の場合、2階層構造を考慮して最大の輪郭を見つける
+            # 輪郭を検出し、2階層の階層構造を取得
+            contours, hierarchy = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+            # 最大の面積を持つ輪郭を探す
+            largest_contour_index = None
+            max_area = 0
+
+            for i in range(len(contours)):
+                #  外側の輪郭だけを対象にする
+                if hierarchy[0][i][3] == -1: # 親がいない輪郭のみ
+                    area = cv2.contourArea(contours[i])
+                    child_index = hierarchy[0][i][2]
+                    if child_index != -1:
+                        area -= cv2.contourArea(contours[child_index])
+                    
+                    if area > max_area:
+                        max_area = area
+                        largest_contour_index = i
+
+            # 最大の輪郭が見つかれば、その輪郭の矩形座標を返す
+            if largest_contour_index is not None:
+                return cv2.boundingRect(contours[largest_contour_index])
+        else:
+            # 輪郭を検出
+            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            # 最大の輪郭を見つける
+            if contours:
+                largest_contour = max(contours, key=cv2.contourArea)
+                return cv2.boundingRect(largest_contour)
+        
         return None
 
 if __name__ == "__main__":
