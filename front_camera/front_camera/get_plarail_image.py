@@ -6,7 +6,6 @@
 import cv2
 import os
 from frame_timing_calculator import FrameTimingCalculator
-from video_recorder import VideoRecorder
 
 
 class GetPlarailImage:
@@ -55,16 +54,13 @@ class GetPlarailImage:
 
 
 if __name__ == "__main__":
-    video_recorder = VideoRecorder()
-    video_recorder.start_camera()
 
     try:
         os.makedirs("video_data", exist_ok=True)
 
-        # 出力する動画ファイルの名前
+        # 画像を抽出する動画ファイルの名前
         output_video_path = "video_data/recorded_video.mp4"
 
-        video_recorder.recording(output_video_path)
 
     finally:
         video_recorder.close()
