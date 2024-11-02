@@ -3,6 +3,7 @@
 @author: bizyutyu YKhm20020 CHIHAYATAKU
 """
 import cv2
+import os
 
 class ColorRectangleDetector:
     # 色のHSV範囲を定数として定義
@@ -10,7 +11,7 @@ class ColorRectangleDetector:
         'YELLOW': ((20, 160, 160), (30, 255, 255)),
         'RED': [
             ((0, 70, 50), (10, 255, 255)),     # 赤色の低色相側
-            ((160, 70, 50), (180, 255, 255))    # 赤色の高色相側
+            ((173, 70, 50), (180, 255, 255))    # 赤色の高色相側
         ]
     }
 
@@ -41,6 +42,14 @@ class ColorRectangleDetector:
             mask = cv2.bitwise_or(mask_red_lower, mask_red_upper)
         else:
             mask = cv2.inRange(hsv, self.bounds[0], self.bounds[1])
+
+        # マスク画像を保存（確認用）
+        # 保存先パスを指定
+        save_dir = "confirmation_image"
+        mask_path = os.path.join(save_dir, "mask_image.jpeg")
+        cv2.imwrite(mask_path, mask)  # マスク画像を保存
+
+
         # 輪郭を検出
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # 最大の輪郭を見つける
