@@ -29,7 +29,7 @@ void AreaBCameraAction::run()
   Sleeping sl(200);
   ResetWheelsMotorPwm rm;
   PwmRotation prePR(preTargetAngle, prePwm, isClockwise);
-  CorrectingRotation xr(pwmXr, colorXr);
+  CorrectingRotation xr(pwmXr, correctionTolerance, colorXr);
   CameraAction ca(CameraAction::Subject::PLARAIL);
 
   // 撮影のための回頭をする

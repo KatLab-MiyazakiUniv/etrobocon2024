@@ -1,7 +1,7 @@
 /**
  * @file   CorrectingRotation.h
  * @brief  プラレール・背景撮影のための角度補正回頭動作
- * @author bizyutyu CHIHAYATAKU
+ * @author bizyutyu CHIHAYATAKU takahashitom
  */
 
 #ifndef CORRECTINGROTATION_H
@@ -17,9 +17,10 @@ class CorrectingRotation : public CompositeMotion {
   /**
    * コンストラクタ
    * @param _pwm 角度補正回頭時のPWM値
+   * @param _correctionTolerance  補正許容角度
    * @param _color 検出する矩形の色（"yellow" or "red"）
    */
-  CorrectingRotation(int _pwm = 50, COLOR _color = COLOR::YELLOW);
+  CorrectingRotation(int _pwm = 50, int _correctionTolerance = 0, COLOR _color = COLOR::YELLOW);
 
   /**
    * @brief プラレール・背景撮影のための角度補正回頭動作を行う
@@ -41,5 +42,6 @@ class CorrectingRotation : public CompositeMotion {
   int correctionAngle = 0;  // 補正角度 0~360
   COLOR color;              // 検出する矩形の色
   bool isClockwise;
+  int correctionTolerance;  // 補正許容値
 };
 #endif

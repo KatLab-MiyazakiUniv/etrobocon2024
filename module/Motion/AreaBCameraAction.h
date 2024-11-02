@@ -51,6 +51,7 @@ class AreaBCameraAction : public CompositeMotion {
   int pwmXr;                      // 角度補正回頭用のPWM値
   int postTargetAngle;            // 2回目の回頭目標回転角度(deg)
   int postPwm;                    // 2回目の回頭PWM値
+  int correctionTolerance = 10;   // 角度補正回頭の補正許容角度
   COLOR colorXr = COLOR::YELLOW;  // 角度補正回頭の対象色
 };
 

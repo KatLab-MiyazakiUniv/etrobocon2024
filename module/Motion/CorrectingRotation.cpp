@@ -1,7 +1,7 @@
 /**
  * @file   CorrectingRotation.cpp
  * @brief  プラレール・背景撮影のための角度補正回頭動作
- * @author bizyutyu CHIHAYATAKU
+ * @author bizyutyu CHIHAYATAKU takahashitpom
  */
 
 #include "CorrectingRotation.h"
@@ -9,7 +9,8 @@
 
 using namespace std;
 
-CorrectingRotation::CorrectingRotation(int _pwm, COLOR _color) : pwm(_pwm), color(_color) {};
+CorrectingRotation::CorrectingRotation(int _pwm, int _correctionTolerance, COLOR _color)
+  : pwm(_pwm), correctionTolerance(_correctionTolerance), color(_color) {};
 
 void CorrectingRotation::run()
 {
@@ -62,7 +63,8 @@ void CorrectingRotation::run()
 
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
   isClockwise = (calculationAngle >= 0);
-  correctionAngle = abs(calculationAngle * 0.5) <= 10 ? 0 : abs(calculationAngle * 0.5);
+  correctionAngle
+      = abs(calculationAngle * 0.5) <= correctionTolerance ? 0 : abs(calculationAngle * 0.5);
 
   printf("ホゲータ回頭: %d\n", correctionAngle);
   PwmRotation pr(correctionAngle, pwm, isClockwise);
