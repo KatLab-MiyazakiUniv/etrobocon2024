@@ -64,7 +64,7 @@ void CorrectingRotation::run()
   // calculationAngleの符号に基づいてisClockwiseを設定し、calculationAngleを正の値にする
   isClockwise = (calculationAngle >= 0);
   correctionAngle
-      = abs(calculationAngle * 0.5) <= correctionTolerance ? 0 : abs(calculationAngle * 0.5);
+      = abs(calculationAngle * 0.5) <= correctionTolerance * 0.5 ? 0 : abs(calculationAngle * 0.5);
 
   printf("ホゲータ回頭: %d\n", correctionAngle);
   PwmRotation pr(correctionAngle, pwm, isClockwise);
