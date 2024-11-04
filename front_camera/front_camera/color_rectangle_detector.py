@@ -3,6 +3,7 @@
 @author: bizyutyu YKhm20020 CHIHAYATAKU
 """
 import cv2
+import numpy as np
 import os
 
 class ColorRectangleDetector:
@@ -43,6 +44,14 @@ class ColorRectangleDetector:
         else:
             mask = cv2.inRange(hsv, self.bounds[0], self.bounds[1])
 
+        import cv2
+
+
+        kernel = np.ones((5, 5), np.uint8)
+        erosion = cv2.erode(mask, kernel, iterations=1)
+
+        cv2.imwrite(mask, erosion)
+
         # マスク画像を保存（確認用）
         # 保存先パスを指定
         save_dir = "confirmation_image"
@@ -65,7 +74,7 @@ class ColorRectangleDetector:
                     child_index = hierarchy[0][i][2]
                     if child_index != -1:
                         area -= cv2.contourArea(contours[child_index])
-                    
+
                     if area > max_area:
                         max_area = area
                         largest_contour_index = i
@@ -80,7 +89,7 @@ class ColorRectangleDetector:
             if contours:
                 largest_contour = max(contours, key=cv2.contourArea)
                 return cv2.boundingRect(largest_contour)
-        
+
         return None
 
 if __name__ == "__main__":
