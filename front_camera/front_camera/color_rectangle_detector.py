@@ -44,25 +44,22 @@ class ColorRectangleDetector:
         else:
             mask = cv2.inRange(hsv, self.bounds[0], self.bounds[1])
 
-        import cv2
-
-
-        kernel = np.ones((5, 5), np.uint8)
+        # 収縮処理を行う
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         erosion = cv2.erode(mask, kernel, iterations=1)
-
-        cv2.imwrite(mask, erosion)
 
         # マスク画像を保存（確認用）
         # 保存先パスを指定
         save_dir = "confirmation_image"
         mask_path = os.path.join(save_dir, "mask_image.jpeg")
+        erosion_path = os.path.join(save_dir, "erosion_image.jpeg")
         cv2.imwrite(mask_path, mask)  # マスク画像を保存
-
+        cv2.imwrite(erosion_path, erosion)  # 収縮処理画像を保存
 
         if self.color == 'RED':
             # 赤色の場合、2階層構造を考慮して最大の輪郭を見つける
             # 輪郭を検出し、2階層の階層構造を取得
-            contours, hierarchy = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+            contours, hierarchy = cv2.findContours(erosion, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
             # 最大の面積を持つ輪郭を探す
             largest_contour_index = None
             max_area = 0
