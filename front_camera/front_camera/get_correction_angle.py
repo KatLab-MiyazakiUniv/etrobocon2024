@@ -62,7 +62,7 @@ class GetCorrectionAngle:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="フロントカメラに関するプログラム")
     parser.add_argument("--camera-num", type=int, default=0, help="カメラIDを指定する")
-    parser.add_argument("--color", type=str, default="yellow", help="検出する矩形の色を指定する")
+    parser.add_argument("--color", type=str, default="YELLOW", help="検出する矩形の色を指定する")
 
     args = parser.parse_args()
     camera = CameraInterface()

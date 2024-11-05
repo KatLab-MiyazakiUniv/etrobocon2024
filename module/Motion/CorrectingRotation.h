@@ -18,7 +18,7 @@ class CorrectingRotation : public CompositeMotion {
    * コンストラクタ
    * @param _pwm 角度補正回頭時のPWM値
    * @param _correctionTolerance  補正許容角度
-   * @param _color 検出する矩形の色（"yellow" or "red"）
+   * @param _color 検出する矩形の色（"YELLOW" or "RED"）
    */
   CorrectingRotation(int _pwm = 50, int _correctionTolerance = 0, COLOR _color = COLOR::YELLOW);
 
