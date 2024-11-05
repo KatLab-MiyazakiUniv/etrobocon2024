@@ -1,7 +1,7 @@
 /**
  * @file   CorrectingRotation.cpp
  * @brief  プラレール・背景撮影のための角度補正回頭動作
- * @author bizyutyu CHIHAYATAKU takahashitpom
+ * @author bizyutyu CHIHAYATAKU takahashitom
  */
 
 #include "CorrectingRotation.h"

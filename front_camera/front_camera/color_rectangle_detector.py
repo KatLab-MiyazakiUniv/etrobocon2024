@@ -1,6 +1,6 @@
 """
 動画中の背景下部の指定色検出クラス
-@author: bizyutyu YKhm20020 CHIHAYATAKU
+@author: bizyutyu YKhm20020 CHIHAYATAKU takahashitom
 """
 import cv2
 import os
@@ -31,6 +31,15 @@ class ColorRectangleDetector:
         """対象色の矩形を検出する。
         Args:
             frame (numpy.ndarray): 処理対象の画像データ
+
+        Returns:
+            輪郭が見つかった場合:
+                int: 最大の輪郭（矩形）の左上のx座標
+                int: 最大の輪郭（矩形）の左上のy座標
+                int: 最大の輪郭（矩形）の幅
+                int: 最大の輪郭（矩形）の高さ
+
+            輪郭が見つからなかった場合: None
         """
         # HSV色空間に変換
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
