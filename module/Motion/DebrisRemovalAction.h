@@ -10,6 +10,7 @@
 #include "CompositeMotion.h"
 #include "PwmRotation.h"
 #include "ColorStraight.h"
+#include "DistanceStraight.h"
 #include "Sleeping.h"
 #include <cmath>
 
@@ -51,6 +52,6 @@ class DebrisRemovalAction : public CompositeMotion {
   Measurer measurer;
   Logger logger;
 
-  const double sideLength = 355.0;  // デブリのひと区画の一辺の長さ
+  const double sideLength = 325.0;  // デブリのひと区画の一辺の長さ
 };
 #endif

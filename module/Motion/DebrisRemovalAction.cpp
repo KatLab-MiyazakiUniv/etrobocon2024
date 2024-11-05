@@ -11,11 +11,7 @@ using namespace std;
 DebrisRemovalAction::DebrisRemovalAction(double _targetSpeed, int _pwmForRotation,
                                          double _rotationBias)
   : targetSpeed(_targetSpeed), pwmForRotation(_pwmForRotation), rotationBias(_rotationBias)
-{
-  preLeftCount = measurer.getLeftCount();
-  preRightCount = measurer.getRightCount();
-  preDistance = Mileage::calculateMileage(preRightCount, preLeftCount);
-};
+{};
 
 void DebrisRemovalAction::run()
 {
@@ -24,8 +20,15 @@ void DebrisRemovalAction::run()
   if(!isMetPreCondition()) {
     return;
   }
+
+  preLeftCount = measurer.getLeftCount();
+  preRightCount = measurer.getRightCount();
+  preDistance = Mileage::calculateMileage(preRightCount, preLeftCount);
+  
+  DistanceStraight distanceStraight(50, 150);
   ColorStraight colorStraight(targetColor, targetSpeed);
 
+  distanceStraight.run();
   colorStraight.run();
   Sleeping sleeping(200);
   sleeping.run();
@@ -42,8 +45,8 @@ void DebrisRemovalAction::run()
   PwmRotation pwmRotation(correctionAngle * rotationBias, pwmForRotation, isClockwise);
   pwmRotation.run();
 
-  snprintf(buf, LARGE_BUF_SIZE, "{correctionAngle : %d, mileage : %f}", correctionAngle, mileage);
-  logger.logWarning(buf);
+  snprintf(buf, LARGE_BUF_SIZE, "{correctionAngle : %d, mileage : %f, preD: %f, LC: %d, RC: %d}", correctionAngle, mileage, preDistance, postLeftCount - preLeftCount, postRightCount - preRightCount);
+  logger.log(buf);
 }
 
 /**
@@ -79,7 +82,7 @@ void DebrisRemovalAction::logRunning()
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* isClockwiseStr = isClockwise ? "true" : "false";
   snprintf(buf, LARGE_BUF_SIZE,
-           "Run DebrisRemovalAction (targetSpeed: %f, pwmForRotation: %d, rotationBias: %s)",
+           "Run DebrisRemovalAction (targetSpeed: %f, pwmForRotation: %d, rotationBias: %f)",
            targetSpeed, pwmForRotation, rotationBias);
   logger.log(buf);
 }
