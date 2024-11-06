@@ -85,7 +85,7 @@ void EtRobocon2024::start()
   // setstate("wait");
   // 合図を送るまで待機する
   while(!calibrator.waitForStart()) {
-    timer.sleep();
+    timer.sleep(100);
     printf("\n\nwait again\n\n");
   }
 

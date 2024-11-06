@@ -124,13 +124,14 @@ bool Calibrator::waitForStart()
   logger.log(buf);
 
   // startDistance以内の距離に物体がない間待機する
-  while(measurer->getForwardDistance() > startDistance && !measurer->getLeftButton() && count < 600) {
+  // 1分間物体を検出しなかった場合、待機状態を終える
+  while(measurer->getForwardDistance() > startDistance && count < 600) {
     timer.sleep(100);  // 100ミリ秒スリープ
     count++;
     // 確認用（コマンドラインにセンサの取得値を出力）
     if(count % 50 == 0) {
-      snprintf(buf, SMALL_BUF_SIZE, "count: %d\nbrightness: %d\nforwardDistance: %d", 
-      count, measurer->getBrightness(), measurer->getForwardDistance());
+      snprintf(buf, SMALL_BUF_SIZE, "count: %d\nbrightness: %d\nforwardDistance: %d", count,
+               measurer->getBrightness(), measurer->getForwardDistance());
       logger.log(buf);
     }
   }
