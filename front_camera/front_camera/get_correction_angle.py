@@ -17,7 +17,10 @@ class GetCorrectionAngle:
             color (str): 補正対象の色
         """
 
-        self.rectangle_detector = ColorRectangleDetector(color)
+        try:
+            self.rectangle_detector = ColorRectangleDetector(color)
+        except ValueError as e:
+            print(e)
 
     def calculate_correction_angle(self, image_path):
         """補正角度を算出する

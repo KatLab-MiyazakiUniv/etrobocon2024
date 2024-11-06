@@ -20,7 +20,10 @@ class FrameTimingCalculator:
         self.video_path = video_path
         self.bounding_box_width = bounding_box_width
         self.bounding_box_height = bounding_box_height
-        self.yellow_rectangle_detector = ColorRectangleDetector("YELLOW")
+        try:
+            self.yellow_rectangle_detector = ColorRectangleDetector("YELLOW")
+        except ValueError as e:
+            print(e)
 
     def get_target_timing(self):
         """映像から特定のフレームを画像として切り出すタイミングを取得する"""
