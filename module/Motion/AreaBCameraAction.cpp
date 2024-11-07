@@ -1,7 +1,7 @@
 /**
  * @file   AreaBCameraAction.cpp
  * @brief  配置エリアBにおけるプラレール・背景撮影動作
- * @author keiya121
+ * @author keiya121 CHIHAYATAKU
  */
 
 #include "AreaBCameraAction.h"
@@ -16,7 +16,7 @@ AreaBCameraAction::AreaBCameraAction(int _preTargetAngle, int _prePwm, bool _isC
     isClockwise(_isClockwise),
     pwmXr(_pwmXr),
     postTargetAngle(_postTargetAngle),
-    postPwm(_postPwm){};
+    postPwm(_postPwm) {};
 
 void AreaBCameraAction::run()
 {
@@ -29,8 +29,7 @@ void AreaBCameraAction::run()
   Sleeping sl(200);
   ResetWheelsMotorPwm rm;
   PwmRotation prePR(preTargetAngle, prePwm, isClockwise);
-  PwmRotation postPR(postTargetAngle, postPwm, !isClockwise);
-  CorrectingRotation xr(pwmXr);
+  CorrectingRotation xr(pwmXr, correctionTolerance, colorXr);
   CameraAction ca(CameraAction::Subject::PLARAIL);
 
   // 撮影のための回頭をする
@@ -48,6 +47,7 @@ void AreaBCameraAction::run()
   // 撮影動作を行う
   ca.run();
 
+  PwmRotation postPR(postTargetAngle + xr.getCorrectionAngle(), postPwm, !isClockwise);
   // 黒線復帰のための回頭をする
   if(postTargetAngle != 0) {
     sl.run();
@@ -92,9 +92,8 @@ void AreaBCameraAction::logRunning()
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* isClockwiseStr = isClockwise ? "true" : "false";
   snprintf(buf, LARGE_BUF_SIZE,
-           "Run AreaBCameraAction (preTargetAngle: %d, prePwm: %d"
-           "isClockwise: %d, pwmXr: %d "
+           "Run AreaBCameraAction (preTargetAngle: %d, prePwm: %d, isClockwise: %s, pwmXr: %d, "
            "postTargetAngle: %d, postPwm: %d)",
-           preTargetAngle, prePwm, isClockwise, pwmXr, postTargetAngle, postPwm);
+           preTargetAngle, prePwm, isClockwiseStr, pwmXr, postTargetAngle, postPwm);
   logger.log(buf);
 }

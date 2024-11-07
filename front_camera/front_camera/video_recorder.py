@@ -39,7 +39,7 @@ class VideoRecorder:
             output (str): 画像の保存先パス(拡張子込み)
         """
         print("Recording started")
-        self.__camera.start_and_record_video(output, duration=20)
+        self.__camera.start_and_record_video(output, duration=15)
         print("Recording stopped")
 
     def close(self) -> None:

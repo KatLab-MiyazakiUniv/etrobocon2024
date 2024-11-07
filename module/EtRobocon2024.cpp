@@ -75,7 +75,7 @@ void EtRobocon2024::start()
   calibrator.run();
   isLeftCourse = calibrator.getIsLeftCourse();
   // isLeftCourse = true;
-  // isLeftEdge = isLeftCourse;
+  isLeftEdge = isLeftCourse;
   int targetBrightness = calibrator.getTargetBrightness();
 
   // int targetBrightness = 50;
@@ -86,14 +86,16 @@ void EtRobocon2024::start()
   calibrator.waitForStart();
 
   AreaMaster LineTraceAreaMaster(Area::LineTrace, isLeftCourse, isLeftEdge, targetBrightness);
-  AreaMaster doubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
+  AreaMaster DoubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
   AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemoval, isLeftCourse, isLeftEdge,
                                      targetBrightness);
+  AreaMaster SmartCarryAreaMaster(Area::SmartCarry, isLeftCourse, isLeftEdge, targetBrightness);
 
   // LAPゲートを通過する
   LineTraceAreaMaster.run();
-  doubleLoopAreaMaster.run();
+  DoubleLoopAreaMaster.run();
   DebrisRemovalAreaMaster.run();
+  SmartCarryAreaMaster.run();
 }
 
 // void EtRobocon2024::sigint(int _)

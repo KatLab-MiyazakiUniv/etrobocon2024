@@ -1,7 +1,7 @@
 /**
  * @file   MotionParser.cpp
  * @brief  動作コマンドファイルを解析するクラス
- * @author keiya121 bizyutyu
+ * @author keiya121 bizyutyu CHIHAYATAKU
  */
 
 #include "MotionParser.h"
@@ -49,7 +49,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       PwmRotation* pr = new PwmRotation(atoi(params[1]),  // 目標角度
                                         atoi(params[2]),  // 目標PWM
                                         convertBool(params[0], params[3]));  // 回頭方向
-      motionList.push_back(pr);          // 動作リストに追加
+      motionList.push_back(pr);                                              // 動作リストに追加
     } else if(command == COMMAND::DL) {  // 指定距離ライントレース動作の生成
       DistanceLineTracing* dl = new DistanceLineTracing(
           atof(params[1]),                                             // 目標距離
@@ -76,9 +76,9 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           PidGain(atof(params[5]), atof(params[6]), atof(params[7])),  // PIDゲイン
           isLeftEdge);                                                 // エッジ
       motionList.push_back(cd);                                        // 動作リストに追加
-    } else if(command == COMMAND::DS) {  // 指定距離直進動作の生成
-      DistanceStraight* ds = new DistanceStraight(atof(params[1]),   // 目標距離
-                                                  atof(params[2]));  // 目標速度
+    } else if(command == COMMAND::DS) {                                // 指定距離直進動作の生成
+      DistanceStraight* ds = new DistanceStraight(atof(params[1]),     // 目標距離
+                                                  atof(params[2]));    // 目標速度
 
       motionList.push_back(ds);          // 動作リストに追加
     } else if(command == COMMAND::CS) {  // 指定色直進動作の生成
@@ -117,17 +117,20 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       motionList.push_back(ca);          // 動作リストに追加
     } else if(command == COMMAND::AC) {  // 配置エリアAでのミニフィグ撮影動作の生成
       AreaACameraAction* ac = new AreaACameraAction(
-          atoi(params[1]),  // 撮影位置(0~3)
+          atoi(params[1]),                    // 撮影位置(0~3)
           convertBool(params[0], params[2]),  // フロントカメラをミニフィグに向けるための回頭方向
-          atoi(params[3]),   // 撮影のための回頭角度
-          atoi(params[4]),   // 黒線復帰のための回頭角度
-          atoi(params[5]),   // 回頭時のPWM
-          atof(params[6]),   // 前進、後退の距離
-          atof(params[7]));  // 前進、後退の速度
+          atoi(params[3]),                    // 撮影のための回頭角度
+          atoi(params[4]),                    // 黒線復帰のための回頭角度
+          atoi(params[5]),                    // 回頭時のPWM
+          atof(params[6]),                    // 前進、後退の距離
+          atof(params[7]));                   // 前進、後退の速度
 
-      motionList.push_back(ac);  // 動作リストに追加
-    } else if(command == COMMAND::XR) {  // プラレール・背景撮影のための角度補正回頭の追加
-      CorrectingRotation* xr = new CorrectingRotation(atoi(params[1]));  // 目標PWM
+      motionList.push_back(ac);          // 動作リストに追加
+    } else if(command == COMMAND::XR) {  // 角度補正回頭動作の生成
+      CorrectingRotation* xr
+          = new CorrectingRotation(atoi(params[1]),                        // 目標PWM
+                                   atoi(params[2]),                        // 補正許容角度
+                                   ColorJudge::stringToColor(params[3]));  // 補正対象の色
 
       motionList.push_back(xr);          // 動作リストに追加
     } else if(command == COMMAND::BC) {  // 配置エリアB撮影動作の生成
@@ -135,9 +138,9 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
           = new AreaBCameraAction(atoi(params[1]),  // 1回目の回頭目標回転角度(deg)
                                   atoi(params[2]),  // 1回目の回頭PWM値
                                   convertBool(params[0], params[3]),  // 1回目の回頭方向
-                                  atoi(params[4]),  // 角度補正回頭用のPWM値
-                                  atoi(params[5]),  // 2回目の回頭目標回転角度
-                                  atoi(params[6])   // 2回目の回頭PWM値
+                                  atoi(params[4]),                    // 角度補正回頭用のPWM値
+                                  atoi(params[5]),                    // 2回目の回頭目標回転角度
+                                  atoi(params[6])                     // 2回目の回頭PWM値
           );
 
       motionList.push_back(bc);  // 動作リストに追加
