@@ -25,8 +25,9 @@ class Calibrator {
 
   /**
    * @brief スタート合図が出るまで待機状態にする
+   * @return true:startDistance以内の距離に物体を検出した場合, false:1分間経過した場合
    */
-  void waitForStart();
+  bool waitForStart();
 
   /**
    * @brief isLeftCourseのゲッター
@@ -44,7 +45,6 @@ class Calibrator {
   bool isLeftCourse;     // true:Lコース, false: Rコース
   int targetBrightness;  // 目標輝度
   Timer timer;
-  Measurer measurer;
 
   /**
    * @brief 左右ボタンでLRコースを選択してisLeftCourseをセットする
