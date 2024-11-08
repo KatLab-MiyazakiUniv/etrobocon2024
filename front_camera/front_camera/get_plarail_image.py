@@ -55,15 +55,10 @@ class GetPlarailImage:
 
 if __name__ == "__main__":
 
-    try:
-        os.makedirs("video_data", exist_ok=True)
+    os.makedirs("video_data", exist_ok=True)
 
-        # 画像を抽出する動画ファイルの名前
-        output_video_path = "video_data/recorded_video.mp4"
-
-
-    finally:
-        video_recorder.close()
+    # 画像を抽出する動画ファイルの名前
+    output_video_path = "video_data/recorded_video.mp4"
 
     os.makedirs("image_data", exist_ok=True)
     output_image_path = "image_data/Pla.jpeg"
