@@ -13,16 +13,8 @@
 #include "MotionParser.h"
 #include "Logger.h"
 
-// エリア名を持つ列挙型変数（LineTrace = 0, DoubleLoop = 1, DebrisRemoval = 2,DebrisRemovalOver = 3,
-// DebrisRemovalUnder = 4, SmartCarry = 5）
-enum Area {
-  LineTrace,
-  DoubleLoop,
-  DebrisRemoval,
-  DebrisRemovalOver,
-  DebrisRemovalUnder,
-  SmartCarry
-};
+// エリア名を持つ列挙型変数（LineTrace = 0, DoubleLoop = 1, DebrisRemoval = 2, SmartCarry = 3）
+enum Area { LineTrace, DoubleLoop, DebrisRemoval, SmartCarry };
 
 class AreaMaster {
  public:
@@ -50,8 +42,7 @@ class AreaMaster {
   const char* basePath = "etrobocon2024/datafiles/";
 
   // コマンドファイル名（各エリア名）
-  const char* commandFileNames[6] = { "LineTrace",         "DoubleLoop",         "DebrisRemoval",
-                                      "DebrisRemovalOver", "DebrisRemovalUnder", "SmartCarry" };
+  const char* commandFileNames[4] = { "LineTrace", "DoubleLoop", "DebrisRemoval", "SmartCarry" };
 };
 
 #endif

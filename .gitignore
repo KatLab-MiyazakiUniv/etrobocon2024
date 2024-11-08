@@ -8,6 +8,7 @@ image_data/
 confirmation_image
 video_data/
 debug/
+**/RasPike
 
 # 一部Pythonファイルを実行時に生成するキャッシュのディレクトリ
 __pycache__/

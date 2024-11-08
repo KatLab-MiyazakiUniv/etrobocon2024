@@ -1,7 +1,7 @@
 /**
  * @file   AreaBCameraAction.h
  * @brief  配置エリアBにおけるプラレール・背景撮影動作
- * @author keiya121
+ * @author keiya121 CHIHAYATAKU
  */
 
 #ifndef AREABCAMERAACTION_H
@@ -13,6 +13,7 @@
 #include "ResetWheelsMotorPwm.h"
 #include "Sleeping.h"
 #include "CameraAction.h"
+#include "ColorJudge.h"
 
 class AreaBCameraAction : public CompositeMotion {
  public:
@@ -44,12 +45,14 @@ class AreaBCameraAction : public CompositeMotion {
   void logRunning() override;
 
  private:
-  int preTargetAngle;   // 1回目の回頭目標回転角度(deg)
-  int prePwm;           // 1回目の回頭PWM値
-  bool isClockwise;     // 1回目の回頭方向
-  int pwmXr;            // 角度補正回頭用のPWM値
-  int postTargetAngle;  // 2回目の回頭目標回転角度(deg)
-  int postPwm;          // 2回目の回頭PWM値
+  int preTargetAngle;             // 1回目の回頭目標回転角度(deg)
+  int prePwm;                     // 1回目の回頭PWM値
+  bool isClockwise;               // 1回目の回頭方向
+  int pwmXr;                      // 角度補正回頭用のPWM値
+  int postTargetAngle;            // 2回目の回頭目標回転角度(deg)
+  int postPwm;                    // 2回目の回頭PWM値
+  int correctionTolerance = 10;   // 角度補正回頭の補正許容角度
+  COLOR colorXr = COLOR::YELLOW;  // 角度補正回頭の対象色
 };
 
 #endif
