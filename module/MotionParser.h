@@ -28,6 +28,7 @@
 #include "CorrectingRotation.h"
 #include "AreaBCameraAction.h"
 #include "DebrisRemovalAction.h"
+#include "DebrisRemovalFirst.h"
 
 #define READ_BUF_SIZE 256  // コマンドのパラメータ読み込み用の領域
 
@@ -50,6 +51,7 @@ enum class COMMAND {
   BC,  // 配置エリアB撮影動作
   XR,  // 角度補正回頭動作
   DA,  // デブリリムーバル直進補正動作
+  DF,  // 回頭込みデブリリムーバル直進補正動作
   NONE
 };
 
