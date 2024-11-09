@@ -108,14 +108,13 @@ void Calibrator::measureAndSetTargetBrightness()
   delete measurer;
 }
 
-bool Calibrator::waitForStart()
+void Calibrator::waitForStart()
 {
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
   constexpr int startDistance = 5;  // 手などでスタート合図を出す距離[cm]
   int count = 0;
 
-  // Measurerの再インスタンス化
   Measurer* measurer = new Measurer();
 
   logger.log("On standby.\n");
@@ -124,20 +123,31 @@ bool Calibrator::waitForStart()
   logger.log(buf);
 
   // startDistance以内の距離に物体がない間待機する
-  // 1分間物体を検出しなかった場合、待機状態を終える
-  while(measurer->getForwardDistance() > startDistance && count < 600) {
-    timer.sleep(100);  // 100ミリ秒スリープ
-    count++;
-    // 確認用（コマンドラインにセンサの取得値を出力）
-    if(count % 50 == 0) {
-      snprintf(buf, SMALL_BUF_SIZE, "count: %d\nbrightness: %d\nforwardDistance: %d", count,
-               measurer->getBrightness(), measurer->getForwardDistance());
-      logger.log(buf);
+  // 1分毎にMeasurerインスタンスを再生する
+  while(1) {
+    while(measurer->getForwardDistance() > startDistance && count < 600) {
+      timer.sleep(100);  // 100ミリ秒スリープ
+      count++;
+      // 確認用（コマンドラインにセンサの取得値を出力）
+      if(count % 50 == 0) {
+        snprintf(buf, SMALL_BUF_SIZE, "count: %d\nbrightness: %d\nforwardDistance: %d", count,
+                 measurer->getBrightness(), measurer->getForwardDistance());
+        logger.log(buf);
+      }
+    }
+
+    if(count >= 600) {
+      // Measurerの再インスタンス化
+      delete measurer;
+      Measurer* measurer = new Measurer();
+      count = 0;
+      logger.log("\n\nwait again!!\n\n");
+    } else {
+      break;
     }
   }
 
   delete measurer;
-  return count < 600;
 }
 
 bool Calibrator::getIsLeftCourse()
