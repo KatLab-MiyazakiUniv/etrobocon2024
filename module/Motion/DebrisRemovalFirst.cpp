@@ -61,11 +61,11 @@ void DebrisRemovalFirst::run()
   // 0: 黒線に対して垂直, -1: 黒線に対して回頭不足,
   // 1: 黒線に対して回頭しすぎ
   int directionFlag = 0;
-  if(-10 <= rotationDistanceDiff && rotationDistanceDiff <= 10) {
+  if(-4 <= rotationDistanceDiff && rotationDistanceDiff <= 4) {
     directionFlag = 0;
-  } else if(rotationDistanceDiff < -10) {
+  } else if(rotationDistanceDiff < -4) {
     directionFlag = -1;
-  } else if(10 < rotationDistanceDiff) {
+  } else if(4 < rotationDistanceDiff) {
     directionFlag = 1;
   }
 
@@ -95,7 +95,7 @@ void DebrisRemovalFirst::run()
                         ? 0
                         : (int(acos(sideLength / mileage) * 180 / M_PI) * rotationBias);
 
-  if(abs(rightCountDiff - leftCountDiff) <= 10) {
+  if(abs(rightCountDiff - leftCountDiff) <= 35) {
     if(directionFlag = 0) {
       correctionAngle = 0;
     } else if(directionFlag = -1) {
@@ -110,8 +110,8 @@ void DebrisRemovalFirst::run()
   pwmRotation.run();
 
   snprintf(buf, LARGE_BUF_SIZE, "{correctionAngle : %d, mileage : %f, preD: %f, LC: %d, RC: %d}",
-           correctionAngle, mileage, preDistance, postLeftCount - preLeftCount,
-           postRightCount - preRightCount);
+           correctionAngle, mileage, preDistance, leftCountDiff,
+           rightCountDiff);
   logger.log(buf);
 }
 

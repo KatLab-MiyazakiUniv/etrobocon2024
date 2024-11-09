@@ -155,7 +155,7 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       DebrisRemovalFirst* df = new DebrisRemovalFirst(atof(params[1]),  // 直進時の速度
                                                       atoi(params[2]),  // 回頭時のPWM
                                                       atof(params[3]),  // 回頭角度のバイアス
-                                                      convertBool(params[0], params[3])  // 回頭方向
+                                                      convertBool(params[0], params[4])  // 回頭方向
       );
 
       motionList.push_back(df);
