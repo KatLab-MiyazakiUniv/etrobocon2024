@@ -151,6 +151,13 @@ vector<Motion*> MotionParser::createMotions(const char* commandFilePath, int tar
       );
 
       motionList.push_back(da);
+    }else if(command == COMMAND::SA) {  // スマートキャリーエリアの動作
+      SmartCarryAction* sa = new SmartCarryAction(atof(params[1]),  // 第一直線速度
+                                                        atof(params[2]),  // 第二直線速度
+                                                        atoi(params[3])  // 回頭pwm
+      );
+
+      motionList.push_back(sa);
     }
     // TODO: 後で作成する
 
@@ -221,6 +228,8 @@ COMMAND MotionParser::convertCommand(char* str)
     return COMMAND::BC;
   } else if(strcmp(str, "DA") == 0) {  // 文字列がDAの場合
     return COMMAND::DA;
+  } else if(strcmp(str, "SA") == 0) {  // 文字列がSAの場合
+    return COMMAND::SA;
   } else {  // 想定していない文字列が来た場合
     return COMMAND::NONE;
   }

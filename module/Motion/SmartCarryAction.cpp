@@ -30,7 +30,7 @@ void SmartCarryAction::run()
   if(correctedAngle >= 0) {
     runToLowwerCourse();
   } else {
-    if(correctedAngle >= 0) runToUpperCourse();
+    runToUpperCourse();
   }
 }
 
@@ -63,8 +63,44 @@ void SmartCarryAction::runToUpperCourse()
 {
   char buf[LARGE_BUF_SIZE];
 
-  firstStraightDistance = baseLength / cos(abs(correctedAngle) * 2 * M_PI / 180);
-  secondStraightDistance = sin(abs(correctedAngle) * 2 * M_PI / 180) * firstStraightDistance;
+  firstStraightDistance = baseLength / cos(abs(correctedAngle* 2) * M_PI / 180);
+  secondStraightDistance = sqrt(firstStraightDistance*firstStraightDistance - baseLength*baseLength) + 750.0;
+  secondRotationAngle = int((90 + abs(correctedAngle*2)) * rotationBias);
+
+  if (abs(correctedAngle) > 17) {
+    firstStraightDistance = 650;
+    secondStraightDistance = secondStraightDistance - 250;
+  }
+  DistanceStraight firstDistanceStraight(firstStraightDistance, firstTargetSpeed);
+  firstDistanceStraight.run();
+  Sleeping sleeping(200);
+  sleeping.run();
+
+
+  snprintf(buf, LARGE_BUF_SIZE,
+           "{firstStraightDistance : %f, secondStraightDistance : %f, secondホゲータ : %d}",
+           firstStraightDistance, secondStraightDistance,
+           secondRotationAngle);
+  logger.log(buf);
+  PwmRotation pwmRotation(secondRotationAngle, 65, isClockwise);
+  pwmRotation.run();
+
+  DistanceStraight secondDistanceStraight(secondStraightDistance, secondTargetSpeed);
+  secondDistanceStraight.run();
+
+  snprintf(buf, LARGE_BUF_SIZE,
+           "{firstStraightDistance : %f, secondStraightDistance : %f, secondホゲータ : %d}",
+           firstStraightDistance, secondStraightDistance,
+           secondRotationAngle);
+  logger.log(buf);
+}
+
+void SmartCarryAction::runToLowwerCourse()
+{
+  char buf[LARGE_BUF_SIZE];
+
+  firstStraightDistance = baseLength / cos(abs(correctedAngle* 2)  * M_PI / 180);
+  secondStraightDistance = 750.0 - sqrt(firstStraightDistance*firstStraightDistance - baseLength*baseLength);
 
   DistanceStraight firstDistanceStraight(firstStraightDistance, firstTargetSpeed);
 
@@ -74,44 +110,16 @@ void SmartCarryAction::runToUpperCourse()
 
   sleeping.run();
 
-  secondRotationAngle = int(90 + abs(correctedAngle)) * rotationBias;
-  PwmRotation pwmRotation(secondRotationAngle, pwmForRotation, isClockwise);
+  secondRotationAngle = int((90 - abs(correctedAngle*2))*secondRotationBias);
+  PwmRotation pwmRotation(secondRotationAngle, 65, isClockwise);
   pwmRotation.run();
 
   DistanceStraight secondDistanceStraight(secondStraightDistance, secondTargetSpeed);
+  secondDistanceStraight.run();
 
   snprintf(buf, LARGE_BUF_SIZE,
-           "{firstStraightDistance : %f, secondStraightDistance : %f, secondホゲータ : %d}",
-           firstDistanceStraight, secondStraightDistance,
-           int((90 - abs(correctedAngle)) * rotationBias));
-  logger.log(buf);
-}
-
-void SmartCarryAction::runToLowwerCourse()
-{
-  char buf[LARGE_BUF_SIZE];
-
-  firstStraightDistance = baseLength / cos(abs(correctedAngle) * 2 * M_PI / 180);
-  secondStraightDistance
-      = secondStraightDistance - sin(abs(correctedAngle) * 2 * M_PI / 180) * firstStraightDistance;
-
-  DistanceStraight firstDistanceStraight(firstStraightDistance, 150);
-
-  firstDistanceStraight.run();
-  Sleeping sleeping(200);
-  sleeping.run();
-
-  sleeping.run();
-
-  secondRotationAngle = int((90 - abs(correctedAngle)) * rotationBias);
-  PwmRotation pwmRotation(secondRotationAngle, pwmForRotation, isClockwise);
-  pwmRotation.run();
-
-  DistanceStraight secondDistanceStraight(secondStraightDistance, 150);
-
-  snprintf(buf, LARGE_BUF_SIZE,
-           "{firstStraightDistance : %f, secondStraightDistance : %f, secondホゲータ : %d}",
-           firstDistanceStraight, secondStraightDistance, secondRotationAngle);
+           "{runToLowerCourse : firstStraightDistance : %f, secondStraightDistance : %f, secondホゲータ : %d}",
+           firstStraightDistance, secondStraightDistance, secondRotationAngle);
   logger.log(buf);
 }
 
@@ -123,7 +131,7 @@ void SmartCarryAction::logRunning()
   char buf[LARGE_BUF_SIZE];  // log用にメッセージを一時保持する領域
   const char* isClockwiseStr = isClockwise ? "true" : "false";
   snprintf(buf, LARGE_BUF_SIZE,
-           "{firstTargetSpeed : %f, secondStraightDistance : %f, pwmForRotation : %d}",
-           firstTargetSpeed, secondStraightDistance, pwmForRotation);
+           "{firstTargetSpeed : %f, secondTargetSpeed : %f, pwmForRotation : %d}",
+           firstTargetSpeed, secondTargetSpeed, pwmForRotation);
   logger.log(buf);
 }

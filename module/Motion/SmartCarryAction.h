@@ -54,15 +54,16 @@ class SmartCarryAction : public CompositeMotion {
   double secondTargetSpeed;  // 直進時の速度
   int pwmForRotation;        // 回頭時のPWM
   int correctedAngle;
-  double rotationBias = 0.5;            // 初期距離
+  double rotationBias = 0.7;            // 初期距離
+  double secondRotationBias = 0.75;
   bool isClockwise = true;              // 回頭方向
   double firstStraightDistance;         // ボトルを持つための最初の直進
-  double secondStraightDistance = 900;  // ボトルを置くまでの直進
+  double secondStraightDistance;  // ボトルを置くまでの直進
   int secondRotationAngle;
   COLOR targetColor = COLOR::RED;  // 色指定距離の目標色
   int tolerance = 2;
   Logger logger;
 
-  const double baseLength = 670.0;  // デブリ最後の黒線からスマートキャリーの一番奥の青端までの距離
+  const double baseLength = 640.0;  // デブリ最後の黒線からスマートキャリーの一番奥の青端までの距離
 };
 #endif
