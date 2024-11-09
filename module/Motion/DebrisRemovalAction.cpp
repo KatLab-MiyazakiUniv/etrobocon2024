@@ -10,8 +10,7 @@ using namespace std;
 
 DebrisRemovalAction::DebrisRemovalAction(double _targetSpeed, int _pwmForRotation,
                                          double _rotationBias)
-  : targetSpeed(_targetSpeed), pwmForRotation(_pwmForRotation), rotationBias(_rotationBias)
-{};
+  : targetSpeed(_targetSpeed), pwmForRotation(_pwmForRotation), rotationBias(_rotationBias) {};
 
 void DebrisRemovalAction::run()
 {
@@ -24,8 +23,8 @@ void DebrisRemovalAction::run()
   preLeftCount = measurer.getLeftCount();
   preRightCount = measurer.getRightCount();
   preDistance = Mileage::calculateMileage(preRightCount, preLeftCount);
-  
-  DistanceStraight distanceStraight(50, 150);
+
+  DistanceStraight distanceStraight(600, targetSpeed);
   ColorStraight colorStraight(targetColor, targetSpeed);
 
   distanceStraight.run();
@@ -45,7 +44,9 @@ void DebrisRemovalAction::run()
   PwmRotation pwmRotation(correctionAngle * rotationBias, pwmForRotation, isClockwise);
   pwmRotation.run();
 
-  snprintf(buf, LARGE_BUF_SIZE, "{correctionAngle : %d, mileage : %f, preD: %f, LC: %d, RC: %d}", correctionAngle, mileage, preDistance, postLeftCount - preLeftCount, postRightCount - preRightCount);
+  snprintf(buf, LARGE_BUF_SIZE, "{correctionAngle : %d, mileage : %f, preD: %f, LC: %d, RC: %d}",
+           correctionAngle, mileage, preDistance, postLeftCount - preLeftCount,
+           postRightCount - preRightCount);
   logger.log(buf);
 }
 

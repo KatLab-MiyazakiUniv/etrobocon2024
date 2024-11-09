@@ -52,6 +52,6 @@ class DebrisRemovalAction : public CompositeMotion {
   Measurer measurer;
   Logger logger;
 
-  const double sideLength = 325.0;  // デブリのひと区画の一辺の長さ
+  const double sideLength = 650.0;  // デブリの二区画の一辺の長さ
 };
 #endif
