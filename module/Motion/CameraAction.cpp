@@ -1,7 +1,7 @@
 /**
  * @file   CameraAction.cpp
  * @brief  カメラ撮影動作
- * @author bizyutyu takahashitom
+ * @author bizyutyu takahashitom keiya121
  */
 
 #include "CameraAction.h"
@@ -28,7 +28,7 @@ void CameraAction::run()
              makeImageCommand, imageName);
   } else if(subject == CameraAction::Subject::PLARAIL) {
     sprintf(imageName, "Pla.jpeg");
-    sprintf(makeImageCommand, "plarail-image");
+    sprintf(makeImageCommand, "record");
     snprintf(cmd, 256, "cd etrobocon2024/front_camera && make %s && cd ../..", makeImageCommand);
   }
 
@@ -37,19 +37,31 @@ void CameraAction::run()
 
   // Fig_1の場合、物体検出を行うエンドポイントに画像をアップロードする
   char uploadImageName[20] = "Fig_1.jpeg";
-  if(strcmp(imageName, uploadImageName) == 0) {
+  if(subject == CameraAction::Subject::FIGURE && strcmp(imageName, uploadImageName) == 0) {
     snprintf(cmd, 256,
              "cd etrobocon2024 && make upload-detect FILE_PATH=front_camera/image_data/%s && cd ..",
              imageName);
     system(cmd);
     printf("%s\n", cmd);
-  } else {
-    snprintf(cmd, 256,
-             "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd ..",
-             imageName);
-    system(cmd);
-    printf("%s\n", cmd);
+  } else if(subject == CameraAction::Subject::FIGURE){
+  snprintf(cmd, 256,
+            "(cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd ..) &",
+            imageName);
+  system(cmd);
+  printf("%s\n", cmd);
   }
+
+  // PLARAILが指定された場合には、画像の切り出し処理を行い無線通信デバイスに送信する処理を順番に行う
+  if(subject == CameraAction::Subject::PLARAIL) {
+    sprintf(makeImageCommand, "plarail-image");
+    snprintf(cmd, 256,
+            "(cd etrobocon2024/front_camera && make %s && cd ../.. &&"
+            "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd .., makeImageCommand) &",
+            makeImageCommand, imageName);
+    system(cmd);
+    printf("%s\n", cmd);  
+  }
+
 }
 
 void CameraAction::logRunning()
