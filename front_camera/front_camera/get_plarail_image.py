@@ -52,15 +52,22 @@ class GetPlarailImage:
         # キャプチャを解放
         cap.release()
 
-
 if __name__ == "__main__":
+    try:
+        os.makedirs("video_data", exist_ok=True)
 
-    os.makedirs("video_data", exist_ok=True)
+        # 画像を抽出するための入力動画ファイルのパス
+        input_video_path = "video_data/recorded_video.mp4"
 
-    # 画像を抽出する動画ファイルの名前
-    output_video_path = "video_data/recorded_video.mp4"
+        # 動画ファイルの存在チェック
+        if not os.path.exists(input_video_path):
+            raise FileNotFoundError(f" '{input_video_path}' is Not Found")
 
-    os.makedirs("image_data", exist_ok=True)
-    output_image_path = "image_data/Pla.jpeg"
-    extractor = GetPlarailImage(output_video_path)
-    extractor.extract_target_frame(output_image_path)
+        # 画像をPla.jpegとして保存
+        os.makedirs("image_data", exist_ok=True)
+        output_image_path = "image_data/Pla.jpeg"
+        extractor = GetPlarailImage(input_video_path)
+        extractor.extract_target_frame(output_image_path)
+
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
