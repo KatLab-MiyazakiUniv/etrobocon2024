@@ -11,7 +11,7 @@ using namespace std;
 // countShootFigureの初期化
 int CameraAction::countShootFigure = 0;
 
-CameraAction::CameraAction(Subject _subject) : subject(_subject){};
+CameraAction::CameraAction(Subject _subject) : subject(_subject) {};
 
 void CameraAction::run()
 {
@@ -36,6 +36,9 @@ void CameraAction::run()
   printf("%s\n", cmd);
 
   // Fig_1の場合、物体検出を行うエンドポイントに画像をアップロードする
+  // それ以外の場合、画像をアップロードする処理をバックグラウンドで行う
+  // 実行コマンドの最後に「&」をつけることでバックグラウンドで実行する
+  // 参考：https://qiita.com/inosy22/items/341cfc589494b8211844
   char uploadImageName[20] = "Fig_1.jpeg";
   if(subject == CameraAction::Subject::FIGURE && strcmp(imageName, uploadImageName) == 0) {
     snprintf(cmd, 256,
@@ -43,25 +46,26 @@ void CameraAction::run()
              imageName);
     system(cmd);
     printf("%s\n", cmd);
-  } else if(subject == CameraAction::Subject::FIGURE){
-  snprintf(cmd, 256,
-            "(cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd ..) &",
-            imageName);
-  system(cmd);
-  printf("%s\n", cmd);
+  } else if(subject == CameraAction::Subject::FIGURE) {
+    snprintf(
+        cmd, 256,
+        "(cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd ..) &",
+        imageName);
+    system(cmd);
+    printf("%s\n", cmd);
   }
 
-  // PLARAILが指定された場合には、画像の切り出し処理を行い無線通信デバイスに送信する処理を順番に行う
+  // PLARAILが指定された場合には、画像の切り出し処理を行い無線通信デバイスに送信する処理をバックグラウンドで行う
   if(subject == CameraAction::Subject::PLARAIL) {
     sprintf(makeImageCommand, "plarail-image");
     snprintf(cmd, 256,
-            "(cd etrobocon2024/front_camera && make %s && cd ../.. &&"
-            "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd .., makeImageCommand) &",
-            makeImageCommand, imageName);
+             "(cd etrobocon2024/front_camera && make %s && cd ../.. &&"
+             "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd .., "
+             "makeImageCommand) &",
+             makeImageCommand, imageName);
     system(cmd);
-    printf("%s\n", cmd);  
+    printf("%s\n", cmd);
   }
-
 }
 
 void CameraAction::logRunning()
