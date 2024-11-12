@@ -6,7 +6,10 @@
 
 #include "Calibrator.h"
 
-Calibrator::Calibrator() : isLeftCourse(true), targetBrightness(50) {}
+Calibrator::Calibrator() : isLeftCourse(true), targetBrightness(50)
+{
+  delete measurer;
+}
 
 void Calibrator::run()
 {
@@ -28,7 +31,7 @@ void Calibrator::selectAndSetCourse()
   char buf[SMALL_BUF_SIZE];  // log用にメッセージを一時保持する領域
   Logger logger;
   bool _isLeftCourse = true;
-  Measurer* measurer = new Measurer();
+  measurer = new Measurer();
 
   logger.log("Select a Course");
   logger.log(">> Set Left Course");
@@ -65,7 +68,7 @@ void Calibrator::measureAndSetTargetBrightness()
   int whiteBrightness = -1;
   int blackBrightness = -1;
   targetBrightness = -1;
-  Measurer* measurer = new Measurer();
+  measurer = new Measurer();
 
   // 黒線上で左ボタンを押して黒の輝度を取得し、右ボタンで決定する
   logger.log("Press the Left Button on the Black");
@@ -115,7 +118,7 @@ void Calibrator::waitForStart()
   constexpr int startDistance = 5;  // 手などでスタート合図を出す距離[cm]
   int count = 0;
 
-  Measurer* measurer = new Measurer();
+  measurer = new Measurer();
 
   logger.log("On standby.\n");
   snprintf(buf, SMALL_BUF_SIZE, "On standby.\n\nSignal within %dcm from Sonar Sensor.",
@@ -139,7 +142,7 @@ void Calibrator::waitForStart()
     if(count >= 600) {
       // Measurerの再インスタンス化
       delete measurer;
-      Measurer* measurer = new Measurer();
+      measurer = new Measurer();
       count = 0;
       logger.log("\n\nwait again!!\n\n");
     } else {
