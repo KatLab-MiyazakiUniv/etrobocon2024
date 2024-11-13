@@ -6,10 +6,7 @@
 
 #include "Calibrator.h"
 
-Calibrator::Calibrator() : isLeftCourse(true), targetBrightness(50)
-{
-  delete measurer;
-}
+Calibrator::Calibrator() : isLeftCourse(true), targetBrightness(50) {}
 
 void Calibrator::run()
 {
