@@ -7,7 +7,7 @@ PR,25,70,anticlockwise,左に60度回頭
 DS,177,150,ブロックの中心まで指定距離直進
 SL,200,回頭前スリープ
 PR,63,70,clockwise,右に90度回頭
-DS,1700,400
+DS,1750,500
 CS,BLACK,200
 SL,200,回頭前のスリープ
 PR,65,70,anticlockwise

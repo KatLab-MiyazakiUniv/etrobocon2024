@@ -89,13 +89,13 @@ void EtRobocon2024::start()
   AreaMaster DoubleLoopAreaMaster(Area::DoubleLoop, isLeftCourse, isLeftEdge, targetBrightness);
   AreaMaster DebrisRemovalAreaMaster(Area::DebrisRemoval, isLeftCourse, isLeftEdge,
                                      targetBrightness);
-  AreaMaster SmartCarryAreaMaster(Area::SmartCarry, isLeftCourse, isLeftEdge, targetBrightness);
+  // AreaMaster SmartCarryAreaMaster(Area::SmartCarry, isLeftCourse, isLeftEdge, targetBrightness);
 
   // LAPゲートを通過する
   LineTraceAreaMaster.run();
   DoubleLoopAreaMaster.run();
   DebrisRemovalAreaMaster.run();
-  SmartCarryAreaMaster.run();
+  // SmartCarryAreaMaster.run();
 }
 
 // void EtRobocon2024::sigint(int _)
