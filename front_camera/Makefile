@@ -44,6 +44,7 @@ correction-angle:
 
 rm-img:
 	sudo rm -rf image_data/
+	sudo rm -rf video_data/
 
 kill:
 	@ps aux | grep "python -m src --server --server-port 10338" | grep -v "grep" | awk '{print $$2}' | sudo xargs -r kill -9

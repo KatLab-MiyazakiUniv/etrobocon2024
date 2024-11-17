@@ -210,7 +210,6 @@ class FrameTimingCalculator:
 
 if __name__ == "__main__":
     video_path = "video_data/recorded_video.h264"
-    output_path = "image_data/Pla.jpg"
 
     frameTimingCalculator = FrameTimingCalculator(video_path)
     frameTimingCalculator.get_target_timing()
