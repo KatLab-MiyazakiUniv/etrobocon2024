@@ -6,7 +6,6 @@
 import cv2
 import os
 from frame_timing_calculator import FrameTimingCalculator
-from video_recorder import VideoRecorder
 
 
 class GetPlarailImage:
@@ -53,23 +52,22 @@ class GetPlarailImage:
         # キャプチャを解放
         cap.release()
 
-
 if __name__ == "__main__":
-    video_recorder = VideoRecorder()
-    video_recorder.start_camera()
-
     try:
         os.makedirs("video_data", exist_ok=True)
 
-        # 出力する動画ファイルの名前
-        output_video_path = "video_data/recorded_video.mp4"
+        # 画像を抽出するための入力動画ファイルのパス
+        input_video_path = "video_data/recorded_video.mp4"
 
-        video_recorder.recording(output_video_path)
+        # 動画ファイルの存在チェック
+        if not os.path.exists(input_video_path):
+            raise FileNotFoundError(f" '{input_video_path}' is Not Found")
 
-    finally:
-        video_recorder.close()
+        # 画像をPla.jpegとして保存
+        os.makedirs("image_data", exist_ok=True)
+        output_image_path = "image_data/Pla.jpeg"
+        extractor = GetPlarailImage(input_video_path)
+        extractor.extract_target_frame(output_image_path)
 
-    os.makedirs("image_data", exist_ok=True)
-    output_image_path = "image_data/Pla.jpeg"
-    extractor = GetPlarailImage(output_video_path)
-    extractor.extract_target_frame(output_image_path)
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
