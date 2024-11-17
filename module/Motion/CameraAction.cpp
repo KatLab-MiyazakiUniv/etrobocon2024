@@ -60,7 +60,7 @@ void CameraAction::run()
     sprintf(makeImageCommand, "plarail-image");
     snprintf(cmd, 256,
              "(cd etrobocon2024/front_camera && make %s && cd ../.. &&"
-             "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd .., "
+             "cd etrobocon2024 && make upload-image FILE_PATH=front_camera/image_data/%s && cd .. "
              ") &",
              makeImageCommand, imageName);
     system(cmd);
