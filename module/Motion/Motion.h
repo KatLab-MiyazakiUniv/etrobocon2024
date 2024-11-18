@@ -11,6 +11,7 @@
 #include "Controller.h"
 #include "Logger.h"
 #include "RunLogger.h"
+#include "SystemInfo.h"
 
 class Motion {
  public:

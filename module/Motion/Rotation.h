@@ -56,7 +56,7 @@ class Rotation : public Motion {
   int pwm;           // PWM値
   bool isClockwise;  // 回頭方向 true:時計回り, false:反時計回り
   Timer timer;
-  Controller controller;
-  Measurer measurer;
+  // Controller controller;
+  // Measurer measurer;
 };
 #endif

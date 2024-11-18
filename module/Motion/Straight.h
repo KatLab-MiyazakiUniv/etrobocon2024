@@ -49,7 +49,7 @@ class Straight : public Motion {
   double targetSpeed;      // 目標速度[mm/s]
   double initialDistance;  // 初期走行距離
   Timer timer;
-  Measurer measurer;
+  // Measurer measurer;
 };
 
 #endif

@@ -26,8 +26,8 @@ void Rotation::run()
   int rightSign = isClockwise ? -1 : 1;
 
   // 呼び出し時の走行距離
-  double initLeftMileage = Mileage::calculateWheelMileage(measurer.getLeftCount());
-  double initRightMileage = Mileage::calculateWheelMileage(measurer.getRightCount());
+  double initLeftMileage = Mileage::calculateWheelMileage(measurer->getLeftCount());
+  double initRightMileage = Mileage::calculateWheelMileage(measurer->getRightCount());
 
   // 指定した角度に対する目標の走行距離(弧の長さ)
   double targetDistance = M_PI * TREAD * targetAngle / 360;
@@ -39,14 +39,14 @@ void Rotation::run()
   // 継続条件を満たしている間ループ
   while(isMetContCondition(targetLeftDistance, targetRightDistance, leftSign, rightSign)) {
     // モータにPWM値をセット
-    controller.setLeftMotorPwm(pwm * leftSign);
-    controller.setRightMotorPwm(pwm * rightSign);
+    controller->setLeftMotorPwm(pwm * leftSign);
+    controller->setRightMotorPwm(pwm * rightSign);
 
     // 10ミリ秒待機
     timer.sleep();
   }
 
   // モータの停止
-  controller.stopWheelsMotor();
+  controller->stopWheelsMotor();
   timer.sleep(10);
 }

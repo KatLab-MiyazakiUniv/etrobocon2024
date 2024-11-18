@@ -60,8 +60,8 @@ class LineTracing : public Motion {
   double initRightMileage;  // クラス呼び出し時の右車輪の走行距離
   double initDistance;      // 実行前の走行距離
   Timer timer;
-  Measurer measurer;
-  Controller controller;
+  // Measurer measurer;
+  // Controller controller;
 };
 
 #endif

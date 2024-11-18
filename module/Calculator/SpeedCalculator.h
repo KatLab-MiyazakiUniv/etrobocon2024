@@ -12,6 +12,7 @@
 #include "Mileage.h"
 #include "Pid.h"
 #include "Timer.h"
+#include "SystemInfo.h"
 
 class SpeedCalculator {
  public:
@@ -46,7 +47,7 @@ class SpeedCalculator {
   Pid rightPid;
   Pid leftPid;
   Timer timer;
-  Measurer measurer;
+  // Measurer measurer;
   double rightMotorPwm;
   double leftMotorPwm;
   double prevRightMileage;

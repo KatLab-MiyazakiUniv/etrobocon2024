@@ -30,7 +30,7 @@ bool ColorStraight::isMetPreCondition()
 
 bool ColorStraight::isMetContinuationCondition()
 {
-  if(ColorJudge::getColor(measurer.getRawColor()) == targetColor) {
+  if(ColorJudge::getColor(measurer->getRawColor()) == targetColor) {
     colorCount++;
   } else {
     colorCount = 0;
