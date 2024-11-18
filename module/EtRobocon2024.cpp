@@ -52,7 +52,6 @@ void EtRobocon2024::start()
   bool isLeftCourse = true;
   bool isLeftEdge = true;
   Calibrator calibrator;
-  Timer timer;
 
   // 　　　走行ログファイルを取得する場合
   if(shouldGetRunLogs) {
