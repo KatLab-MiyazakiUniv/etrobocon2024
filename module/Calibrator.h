@@ -44,7 +44,7 @@ class Calibrator {
   bool isLeftCourse;     // true:Lコース, false: Rコース
   int targetBrightness;  // 目標輝度
   Timer timer;
-  Measurer measurer;
+  Measurer* measurer;
 
   /**
    * @brief 左右ボタンでLRコースを選択してisLeftCourseをセットする
