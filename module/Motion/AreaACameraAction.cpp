@@ -38,7 +38,7 @@ void AreaACameraAction::run()
 
   PwmRotation prePR(preTargetAngle, rotationPwm, isClockwise);
   PwmRotation postPR(postTargetAngle, rotationPwm, !isClockwise);
-  Sleeping sl(200);  // 回頭前用のsleep
+  Sleeping sl(600);  // 回頭前用のsleep
 
   // 撮影のための回頭をする
   if(preTargetAngle != 0) {

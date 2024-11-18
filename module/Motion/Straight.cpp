@@ -16,8 +16,8 @@ void Straight::run()
     return;
   }
   // 呼び出し時の走行距離を取得する
-  double initialRightMotorCount = measurer->getRightCount();
-  double initialLeftMotorCount = measurer->getLeftCount();
+  double initialRightMotorCount = measurer.getRightCount();
+  double initialLeftMotorCount = measurer.getLeftCount();
   initialDistance = Mileage::calculateMileage(initialRightMotorCount, initialLeftMotorCount);
 
   // SpeedCalculatorのオブジェクトを生成
@@ -32,16 +32,16 @@ void Straight::run()
     double currentRightPwm = speedCalculator.calculateRightMotorPwmFromTargetSpeed();
 
     // モータにPWM値をセット
-    controller->setLeftMotorPwm(currentLeftPwm);
-    controller->setRightMotorPwm(currentRightPwm);
+    controller.setLeftMotorPwm(currentLeftPwm);
+    controller.setRightMotorPwm(currentRightPwm);
     if(shouldGetRunLogs) {
       // 10ループに1回走行ログを取得
       if(logIntervalCount / 10 == 0) {
         // 現在の輝度値を取得
-        int currentBrightness = measurer->getBrightness();
+        int currentBrightness = measurer.getBrightness();
 
         // 現在のRGB値を取得
-        rgb_raw_t currentRgb = measurer->getRawColor();
+        rgb_raw_t currentRgb = measurer.getRawColor();
 
         // RunLoggerにデータを追加
         runLogger.addToLogs(currentBrightness, static_cast<int>(currentRightPwm),
@@ -60,7 +60,7 @@ void Straight::run()
     runLogger.outputToFile();
   }
 
-  controller->stopWheelsMotor();
+  controller.stopWheelsMotor();
   timer.sleep(10);
 }
 

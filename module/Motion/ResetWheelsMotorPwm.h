@@ -8,7 +8,7 @@
 #define RESET_WHEELS_MOTOR_PWM_H
 
 #include "Motion.h"
-#include "Controller.h"
+#include "SystemInfo.h"
 
 class ResetWheelsMotorPwm : public Motion {
  public:
@@ -28,7 +28,7 @@ class ResetWheelsMotorPwm : public Motion {
   void logRunning();
 
  private:
-  Controller controller;
+  // Controller controller;
 };
 
 #endif

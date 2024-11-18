@@ -39,9 +39,9 @@ bool PwmRotation::isMetContCondition(double targetLeftDistance, double targetRig
 {
   // 残りの移動距離を算出
   double diffLeftDistance
-      = (targetLeftDistance - Mileage::calculateWheelMileage(measurer->getLeftCount())) * leftSign;
+      = (targetLeftDistance - Mileage::calculateWheelMileage(measurer.getLeftCount())) * leftSign;
   double diffRightDistance
-      = (targetRightDistance - Mileage::calculateWheelMileage(measurer->getRightCount()))
+      = (targetRightDistance - Mileage::calculateWheelMileage(measurer.getRightCount()))
         * rightSign;
 
   // 目標距離に到達した場合

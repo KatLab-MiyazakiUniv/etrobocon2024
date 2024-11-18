@@ -45,7 +45,7 @@ bool ColorLineTracing::isMetPreCondition(double targetSpeed)
 
 bool ColorLineTracing::isMetContinuationCondition()
 {
-  if(ColorJudge::getColor(measurer->getRawColor()) == targetColor) {
+  if(ColorJudge::getColor(measurer.getRawColor()) == targetColor) {
     colorCount++;
   } else {
     colorCount = 0;

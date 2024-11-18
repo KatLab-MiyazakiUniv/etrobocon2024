@@ -49,7 +49,7 @@ bool DistanceLineTracing::isMetPreCondition(double targetSpeed)
 bool DistanceLineTracing::isMetContinuationCondition()
 {
   // 走行距離が目標距離に到達
-  if(fabs(Mileage::calculateMileage(measurer->getRightCount(), measurer->getLeftCount())
+  if(fabs(Mileage::calculateMileage(measurer.getRightCount(), measurer.getLeftCount())
           - initDistance)
      >= targetDistance)
     return false;

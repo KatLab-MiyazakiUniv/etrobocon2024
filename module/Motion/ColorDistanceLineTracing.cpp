@@ -64,14 +64,14 @@ bool ColorDistanceLineTracing::isMetPreCondition(double targetSpeed)
 
 bool ColorDistanceLineTracing::isMetContinuationCondition()
 {
-  if(ColorJudge::getColor(measurer->getRawColor()) == targetColor) {
+  if(ColorJudge::getColor(measurer.getRawColor()) == targetColor) {
     colorCount++;
   } else {
     colorCount = 0;
   }
 
   // (走行距離が目標距離に到達)||(指定された色をJUDGE_COUNT回連続で取得したとき)モータが止まる
-  if((fabs(Mileage::calculateMileage(measurer->getRightCount(), measurer->getLeftCount())
+  if((fabs(Mileage::calculateMileage(measurer.getRightCount(), measurer.getLeftCount())
            - initDistance)
       >= targetDistance)
      || (colorCount >= JUDGE_COUNT))

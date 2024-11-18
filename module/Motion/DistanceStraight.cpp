@@ -34,8 +34,8 @@ bool DistanceStraight::isMetPreCondition()
 bool DistanceStraight::isMetContinuationCondition()
 {
   // 現在の走行距離を取得する
-  double currentRightMotorCount = measurer->getRightCount();
-  double currentLeftMotorCount = measurer->getLeftCount();
+  double currentRightMotorCount = measurer.getRightCount();
+  double currentLeftMotorCount = measurer.getLeftCount();
   double currentDistance = Mileage::calculateMileage(currentRightMotorCount, currentLeftMotorCount);
 
   // 現在の走行距離が目標走行距離に達した場合falseを返す

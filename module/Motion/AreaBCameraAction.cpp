@@ -26,7 +26,7 @@ void AreaBCameraAction::run()
   }
 
   // 撮影に必要な動作をインスタンス化する
-  Sleeping sl(200);
+  Sleeping sl(600);
   ResetWheelsMotorPwm rm;
   PwmRotation prePR(preTargetAngle, prePwm, isClockwise);
   CorrectingRotation xr(pwmXr, correctionTolerance, colorXr);

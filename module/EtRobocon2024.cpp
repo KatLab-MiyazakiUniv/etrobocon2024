@@ -92,9 +92,9 @@ void EtRobocon2024::start()
   // AreaMaster SmartCarryAreaMaster(Area::SmartCarry, isLeftCourse, isLeftEdge, targetBrightness);
 
   // LAPゲートを通過する
-  LineTraceAreaMaster.run();
+  // LineTraceAreaMaster.run();
   DoubleLoopAreaMaster.run();
-  DebrisRemovalAreaMaster.run();
+  // DebrisRemovalAreaMaster.run();
   // SmartCarryAreaMaster.run();
 }
 
